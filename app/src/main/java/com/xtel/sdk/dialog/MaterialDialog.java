@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xtel.basicsample.R;
+import com.xtel.ivipbusiness.R;
 import com.xtel.sdk.callback.DialogListener;
 
 /**

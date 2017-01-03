@@ -3,7 +3,7 @@ package com.xtel.sdk.dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 
-import com.xtel.basicsample.R;
+import com.xtel.ivipbusiness.R;
 
 /**
  * Created by Lê Công Long Vũ on 11/10/2016

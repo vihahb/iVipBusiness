@@ -3,8 +3,8 @@ package com.xtel.sdk.callback;
 import java.io.IOException;
 
 import com.xtel.sdk.utils.JsonHelper;
-import com.xtel.basicsample.model.entity.RESP_Basic;
-import com.xtel.basicsample.model.entity.Error;
+import com.xtel.ivipbusiness.model.entity.RESP_Basic;
+import com.xtel.ivipbusiness.model.entity.Error;
 
 /**
  * Created by Lê Công Long Vũ on 12/4/2016
