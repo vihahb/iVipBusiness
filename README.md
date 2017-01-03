@@ -1,2 +1,0 @@
-# iVipBusiness
-iVip for Business
