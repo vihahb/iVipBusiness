@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -24,13 +23,10 @@ import java.io.Serializable;
  * Created by Lê Công Long Vũ on 12/2/2016
  */
 
-public abstract class BasicActivity extends AppCompatActivity {
+public abstract class BasicActivity extends IActivity {
     private ProgressDialog progressDialog;
     private Dialog dialog;
     boolean isWaitingForExit = false;
-
-    public BasicActivity() {
-    }
 
     protected void initToolbar(int id, String title) {
         Toolbar toolbar = (Toolbar) findViewById(id);

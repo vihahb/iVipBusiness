@@ -39,10 +39,12 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     }
 
     private void initView() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer = findDrawerLayout(R.id.drawer_layout);
+//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findNavigationView(R.id.nav_view);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findFloatingActionButton(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +56,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     @SuppressWarnings("deprecation")
     private void initNavigationView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findToolbar(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

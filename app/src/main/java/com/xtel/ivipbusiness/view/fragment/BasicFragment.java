@@ -19,12 +19,9 @@ import java.io.Serializable;
  * Created by Lê Công Long Vũ on 12/29/2016
  */
 
-public class BasicFragment extends Fragment {
+public class BasicFragment extends IFragment {
     private ProgressDialog progressDialog;
     private Dialog dialog;
-
-    public BasicFragment() {
-    }
 
     protected void showLongToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
