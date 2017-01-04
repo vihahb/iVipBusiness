@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
@@ -23,7 +24,7 @@ import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
  */
 
 public class HomeActivity extends BasicActivity implements NavigationView.OnNavigationItemSelectedListener, IHomeView {
-    HomePresenter presenter;
+    private HomePresenter presenter;
 
     private DrawerLayout drawer;
     private NavigationView navigationView;

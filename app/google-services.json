@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "186392832842",
+    "firebase_url": "https://xtel-5c0c5.firebaseio.com",
+    "project_id": "xtel-5c0c5",
+    "storage_bucket": "xtel-5c0c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186392832842:android:0409ded1e94f67c3",
+        "android_client_info": {
+          "package_name": "com.xtel.ivipbusiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186392832842-g4d4nvmio760tmltf2nhm8o5g91o6q5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xtel.ivipbusiness",
+            "certificate_hash": "54875B6B5AA8089DC16C333209C79EEEA26C3244"
+          }
+        },
+        {
+          "client_id": "186392832842-m1ns7dthpa0bksmu89bsi6i6mmvp0pqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdFLagcy-uAhVKjdzJxNWMNCKe7XQ81ZE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186392832842-m1ns7dthpa0bksmu89bsi6i6mmvp0pqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

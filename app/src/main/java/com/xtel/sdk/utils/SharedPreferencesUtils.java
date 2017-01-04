@@ -18,7 +18,7 @@ public class SharedPreferencesUtils {
     private SharedPreferences.Editor editor;
 
     private SharedPreferencesUtils() {
-        sharedPreferences = MyApplication.context.getSharedPreferences(Constants.SHARED_USER_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = MyApplication.context.getSharedPreferences(Constants.SHARED_NAME, Context.MODE_PRIVATE);
     }
 
     public static SharedPreferencesUtils getInstance() {

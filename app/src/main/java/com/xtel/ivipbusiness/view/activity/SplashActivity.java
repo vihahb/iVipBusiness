@@ -16,11 +16,15 @@ public class SplashActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivityAndFinish(HomeActivity.class);
-            }
-        }, 500);
+//        if (SharedPreferencesUtils.getInstance().getStringValue(Constants.FCM_TOKEN, null) != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivityAndFinish(HomeActivity.class);
+                }
+            }, 500);
+//        } else {
+//            FirebaseInstanceId.getInstance().getToken();
+//        }
     }
 }

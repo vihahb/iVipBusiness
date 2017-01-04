@@ -18,14 +18,14 @@ import java.security.NoSuchAlgorithmException;
 
 public class MyApplication extends Application {
     public static Context context;
-    public static String PACKAGE_NAME;
+//    public static String PACKAGE_NAME;
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
-        PACKAGE_NAME = context.getPackageName();
-        getKeyHash(PACKAGE_NAME);
+//        PACKAGE_NAME = context.getPackageName();
+//        getKeyHash(PACKAGE_NAME);
     }
 
     private void getKeyHash(String pkg_name) {
