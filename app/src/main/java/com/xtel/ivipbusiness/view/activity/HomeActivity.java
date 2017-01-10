@@ -37,6 +37,13 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         presenter = new HomePresenter(this);
         initView();
         initNavigationView();
+
+
+
+
+
+
+
     }
 
     private void initView() {

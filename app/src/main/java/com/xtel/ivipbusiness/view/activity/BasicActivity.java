@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -40,6 +41,10 @@ public abstract class BasicActivity extends IActivity {
 
         if (title != null)
             actionBar.setTitle(title);
+    }
+
+    protected void debug(String message) {
+        Log.d(this.getClass().getSimpleName(), message);
     }
 
     protected void showLongToast(String message) {
@@ -105,7 +110,7 @@ public abstract class BasicActivity extends IActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                dialogListener.onClicked(null);
+                dialogListener.onCancel();
             }
         });
 
@@ -113,7 +118,7 @@ public abstract class BasicActivity extends IActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                dialogListener.onCancel();
+                dialogListener.onClicked(null);
             }
         });
 

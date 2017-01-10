@@ -9,6 +9,10 @@ import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.xtel.nipservicesdk.LoginManager;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -23,9 +27,12 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+        LoginManager.sdkInitialize(this);
+
         context = this;
-//        PACKAGE_NAME = context.getPackageName();
-//        getKeyHash(PACKAGE_NAME);
+        getKeyHash(context.getPackageName());
     }
 
     private void getKeyHash(String pkg_name) {
