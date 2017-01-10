@@ -23,7 +23,7 @@ import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 
 /**
- * Created by Lê Công Long Vũ on 12/2/2016
+ * Created by Lê Công Long Vũ on 12/2/2016.
  */
 
 public class LoginActivity extends BasicActivity implements View.OnClickListener, ILoginView {
