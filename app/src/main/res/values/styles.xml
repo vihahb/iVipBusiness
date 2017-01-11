@@ -5,24 +5,25 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@android:color/white</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
     <style name="AppLoginTheme" parent="Theme.AccountKit">
-        <item name="com_accountkit_title_text_color">#ffffff</item>
-        <item name="com_accountkit_primary_text_color">#ffffff</item>
-        <item name="com_accountkit_primary_color">#ffffff</item>
-        <item name="com_accountkit_status_bar_color">#5c5ca7</item>
-        <item name="com_accountkit_header_text_color">#ffffff</item>
-        <item name="com_accountkit_text_color">#ffffff</item>
+        <item name="com_accountkit_title_text_color">@android:color/white</item>
+        <item name="com_accountkit_primary_text_color">@android:color/white</item>
+        <item name="com_accountkit_primary_color">@android:color/white</item>
+        <item name="com_accountkit_status_bar_color">@android:color/white</item>
+        <item name="com_accountkit_header_text_color">@android:color/white</item>
+        <item name="com_accountkit_text_color">@android:color/white</item>
         <item name="com_accountkit_background_color">@android:color/transparent</item>
         <item name="com_accountkit_input_background_color">@android:color/transparent</item>
-        <item name="com_accountkit_input_text_color">#FFFFFF</item>
-        <item name="com_accountkit_input_border_color">#FFFFFF</item>
+        <item name="com_accountkit_input_text_color">@android:color/white</item>
+        <item name="com_accountkit_input_border_color">@android:color/white</item>
         <item name="com_accountkit_button_background_color">@android:color/transparent</item>
-        <item name="com_accountkit_button_border_color">#ffffff</item>
-        <item name="com_accountkit_header_background_color">#5c5ca7</item>
-        <item name="com_accountkit_background">@color/colorPrimary</item>
+        <item name="com_accountkit_button_border_color">@android:color/white</item>
+        <item name="com_accountkit_header_background_color">@android:color/transparent</item>
+        <item name="com_accountkit_background">@mipmap/background_2</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
@@ -47,9 +48,38 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Login -->
+    <style name="button_login">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_13</item>
+    </style>
+
+    <style name="edittext_login">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <!--<item name="android:background">@drawable/edittext_border</item>-->
+        <!--<item name="android:padding">@dimen/size_8</item>-->
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+        <item name="android:paddingBottom">@dimen/size_12</item>
+    </style>
+
+    <style name="Theme_Edittext" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+    </style>
 </resources>

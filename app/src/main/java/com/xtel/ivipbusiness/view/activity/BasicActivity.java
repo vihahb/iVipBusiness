@@ -44,7 +44,7 @@ public abstract class BasicActivity extends IActivity {
     }
 
     protected void debug(String message) {
-        Log.d(this.getClass().getSimpleName(), message);
+        Log.e(this.getClass().getSimpleName(), message);
     }
 
     protected void showLongToast(String message) {

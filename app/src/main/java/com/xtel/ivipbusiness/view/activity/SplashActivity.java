@@ -20,6 +20,6 @@ public class SplashActivity extends BasicActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        startActivity(LoginActivity.class);
+        startActivity(ChooseLoginActivity.class);
     }
 }

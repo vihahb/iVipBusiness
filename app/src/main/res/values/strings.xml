@@ -7,6 +7,7 @@
     <string name="text_back_press_to_exit">Nhấn back lần nữa để thoát app</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Đăng nhập</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -14,15 +15,19 @@
     <string name="action_settings">Settings</string>
     <string name="service_code_key">XTEL-SDK</string>
 
+    <string name="type_phone">PHONE-NUMBER</string>
+
     <!-- Dialog -->
     <string name="ask_active_now">Tài khoản của bạn chưa được kích hoạt. Kích hoạt ngay bây giờ?</string>
     <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy bỏ</string>
 
-    <string name="registering" tools:ignore="TypographyEllipsis">Đang tạo tài khoản...</string>
+    <string name="doing_register" tools:ignore="TypographyEllipsis">Đang tạo tài khoản...</string>
+    <string name="doing_active">Đang kích hoạt tài khoản</string>
 
     <!-- Thành công -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
+    <string name="success_active">Kích hoạt tài khoản thành công</string>
 
     <!-- Lỗi -->
     <string name="error_validate_phone">Số điện thoại không hợp lệ</string>
@@ -31,5 +36,18 @@
     <string name="error_input_password">Vui lòng nhập mật khẩu</string>
     <string name="error_input_re_password">Vui lòng nhập lại mật khẩu</string>
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
+
     <string name="error_register_phone">Đăng ký thất bại</string>
+    <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
+
+    <!-- Choose login -->
+    <string name="login_by">Đăng nhập bằng</string>
+    <string name="phone_number">Số điện thoại</string>
+
+    <!-- Choose Login -->
+    <string name="ivip_for_business">IVIP For Business</string>
+    <string name="shopping_world_in_your_hand">Tận hưởng thế giới mua sắm trong tay</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="active_account">Kích hoạt tài khoản</string>
+    <string name="have_not_account">Bạn chưa có tài khoản?</string>
 </resources>

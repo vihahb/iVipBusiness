@@ -55,7 +55,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onRegisterAccount(String phone, String password) {
-        showProgressBar(false, false, null, getString(R.string.registering));
+        showProgressBar(false, false, null, getString(R.string.doing_register));
 
         callbackManager.registerNipService(phone, password, "", true, new CallbackLisenerRegister() {
             @Override
