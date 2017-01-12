@@ -1,8 +1,8 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
@@ -13,10 +13,12 @@ import com.xtel.ivipbusiness.presenter.RegisterPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbackLisenerRegister;
+import com.xtel.nipservicesdk.callback.CallbackListenerActive;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Register;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.callback.DialogListener;
 
 public class RegisterActivity extends BasicActivity implements View.OnClickListener, IRegisterView {
     private RegisterPresenter presenter;
@@ -33,11 +35,11 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
     }
 
     private void initView() {
-        edt_username = (EditText) findViewById(R.id.register_edt_username);
-        edt_pass = (EditText) findViewById(R.id.register_edt_pass);
-        edt_re_pass = (EditText) findViewById(R.id.register_edt_re_pass);
+        edt_username = findEditText(R.id.register_edt_username);
+        edt_pass = findEditText(R.id.register_edt_pass);
+        edt_re_pass = findEditText(R.id.register_edt_re_pass);
 
-        Button button = (Button) findViewById(R.id.register_btn_register);
+        Button button = findButton(R.id.register_btn_register);
         button.setOnClickListener(this);
     }
 
@@ -60,28 +62,49 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         callbackManager.registerNipService(phone, password, "", true, new CallbackLisenerRegister() {
             @Override
             public void onSuccess(final RESP_Register register) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        closeProgressBar();
-                        debug(JsonHelper.toJson(register));
-                        showShortToast(getString(R.string.success_register));
-                    }
-                }, 500);
+                closeProgressBar();
+                debug(JsonHelper.toJson(register));
+//                showShortToast(getString(R.string.success_register));
+                presenter.startValidatePhone();
             }
 
             @Override
             public void onError(final Error error) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        closeProgressBar();
-                        debug(JsonHelper.toJson(error));
-                        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_register_phone)));
-                    }
-                }, 500);
+                closeProgressBar();
+                debug(JsonHelper.toJson(error));
+                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_register_phone)));
             }
         });
+    }
+
+    @Override
+    public void onRegisterAccountSuccess() {
+        showShortToast(getString(R.string.success_register));
+        startActivityAndFinish(LoginActivity.class);
+    }
+
+    @Override
+    public void onValidatePhoneToActiveSuccess(String auth_id) {
+        debug("active now");
+        callbackManager.activeNipAccount(auth_id, getString(R.string.type_phone), new CallbackListenerActive() {
+            @Override
+            public void onSuccess() {
+                closeProgressBar();
+                showShortToast(getString(R.string.success_active));
+                startActivityAndFinish(LoginActivity.class);
+            }
+
+            @Override
+            public void onError(Error error) {
+                closeProgressBar();
+                showShortToast(getString(R.string.error_active_account));
+            }
+        });
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -99,5 +122,11 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,6 +1,5 @@
 package com.xtel.ivipbusiness.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +17,7 @@ public class ChooseLoginActivity extends BasicActivity implements View.OnClickLi
     }
 
     private void initView() {
-        Button button = (Button) findViewById(R.id.choose_btn_phone_number);
+        Button button = findButton(R.id.choose_btn_phone_number);
         button.setOnClickListener(this);
     }
 

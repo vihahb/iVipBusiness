@@ -6,10 +6,6 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.facebook.accountkit.Account;
-import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitCallback;
-import com.facebook.accountkit.AccountKitError;
 import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
@@ -17,7 +13,7 @@ import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.RegisterActivity;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
-import com.xtel.sdk.utils.PermissionHelper;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 
 /**
  * Created by VULCL on 1/10/2017
@@ -28,6 +24,7 @@ public class LoginPresenter extends BasicPresenter {
     private final int ACCOUNT_KIT_REQUEST_CODE = 99, PERMISSION_REQUEST_CODE = 10001;
     private String[] PermissionListAccKit = {Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE};
     private String phone;
+    private int type_action;
 
     //
     public LoginPresenter(ILoginView view) {
@@ -67,21 +64,8 @@ public class LoginPresenter extends BasicPresenter {
         return true;
     }
 
-    public void reactiveAccount(String phone, String password) {
-        if (!validateData(phone, password))
-            return;
-
-        if (isPhone(phone) == -1) {
-            debug("6");
-            view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
-            return;
-        }
-
-        if (!validatePhone(phone)) {
-            view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
-            return;
-        }
-
+    public void validatePhoneToReset() {
+        type_action = 0;
         startValidatePhone();
     }
 
@@ -106,6 +90,7 @@ public class LoginPresenter extends BasicPresenter {
             return;
         }
 
+        type_action = 1;
         startValidatePhone();
     }
 
@@ -151,7 +136,10 @@ public class LoginPresenter extends BasicPresenter {
                     String authorization_code = loginResult.getAuthorizationCode();
                     Log.e("Authorization Id: ", authorization_code);
 
-                    view.onValidatePhoneToActiveSuccess(authorization_code);
+                    if (type_action == 1)
+                        view.onValidatePhoneToActiveSuccess(authorization_code);
+                    else if (type_action == 0)
+                        view.onValidatePhoneToResetSuccess(authorization_code);
                 }
                 // Success! Start your next activity...
             }

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
     android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="com.xtel.ivipbusiness.view.activity.LoginActivity">
 
@@ -20,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
+            app:titleTextAppearance="@style/Toolbar_TitleText"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
@@ -71,7 +73,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/login.btn_forgot"
+                    android:id="@+id/login.btn_forget"
                     style="@style/button_login"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/size_36"

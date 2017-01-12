@@ -17,6 +17,8 @@ import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.CallbackListenerActive;
 import com.xtel.nipservicesdk.callback.CallbackListenerReactive;
+import com.xtel.nipservicesdk.callback.CallbackListenerReset;
+import com.xtel.nipservicesdk.commons.Constants;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.model.entity.RESP_Reactive;
@@ -46,16 +48,18 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initView() {
-        edt_username = (EditText) findViewById(R.id.login_edt_username);
-        edt_password = (EditText) findViewById(R.id.login_edt_pass);
+        edt_username = findEditText(R.id.login_edt_username);
+        edt_password = findEditText(R.id.login_edt_pass);
 
-        Button btn_login = (Button) findViewById(R.id.login_btn_login);
-        Button btn_active = (Button) findViewById(R.id.login_btn_active);
-        Button btn_register = (Button) findViewById(R.id.login_btn_register);
+        Button btn_login = findButton(R.id.login_btn_login);
+        Button btn_active = findButton(R.id.login_btn_active);
+        Button btn_register = findButton(R.id.login_btn_register);
+        Button btn_forget = findButton(R.id.login_btn_forget);
 
         btn_login.setOnClickListener(this);
         btn_active.setOnClickListener(this);
         btn_register.setOnClickListener(this);
+        btn_forget.setOnClickListener(this);
     }
 
     private void reActiveAccount(final String auth_id) {
@@ -80,18 +84,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
             @Override
             public void onSuccess() {
                 closeProgressBar();
-
-                showMaterialDialog(false, false, null, getString(R.string.success_active), null, getString(R.string.ok), new DialogListener() {
-                    @Override
-                    public void onClicked(Object object) {
-                        closeDialog();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        closeDialog();
-                    }
-                });
+                showShortToast(getString(R.string.success_active));
             }
 
             @Override
@@ -109,16 +102,19 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
 
     @Override
     public void loginAccount(final String phone, final String password) {
+        showProgressBar(false, false, null, getString(R.string.doing_login));
         debug("login");
         callbackManager.LoginNipAcc(phone, password, true, new CallbacListener() {
             @Override
             public void onSuccess(RESP_Login success) {
+                closeProgressBar();
                 debug(JsonHelper.toJson(success));
-                startActivity(HomeActivity.class);
+                startActivityAndFinish(HomeActivity.class);
             }
 
             @Override
             public void onError(Error error) {
+                closeProgressBar();
                 debug(JsonHelper.toJson(error));
                 showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
             }
@@ -133,7 +129,10 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
 
     @Override
     public void onValidatePhoneToResetSuccess(String auth_id) {
-
+        Intent intent = new Intent(this, EnterPasswordActivity.class);
+        intent.putExtra(Constants.USER_AUTH_ID, auth_id);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -161,6 +160,8 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
             presenter.registerAccount();
         } else if (id == R.id.login_btn_active) {
             presenter.validatePhoneToActive(edt_username.getText().toString());
+        } else if (id == R.id.login_btn_forget) {
+            presenter.validatePhoneToReset();
         }
     }
 

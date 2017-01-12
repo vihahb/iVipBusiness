@@ -1,7 +1,14 @@
 package com.xtel.ivipbusiness.presenter;
 
+import android.Manifest;
+import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.ui.AccountKitActivity;
+import com.facebook.accountkit.ui.AccountKitConfiguration;
+import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
 
@@ -11,6 +18,7 @@ import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
 
 public class RegisterPresenter extends BasicPresenter {
     private IRegisterView view;
+    private final int ACCOUNT_KIT_REQUEST_CODE = 99;
 
     public RegisterPresenter(IRegisterView view) {
         this.view = view;
@@ -48,5 +56,36 @@ public class RegisterPresenter extends BasicPresenter {
         }
 
         return true;
+    }
+
+    public void startValidatePhone() {
+        Intent intent = new Intent(view.getActivity(), AccountKitActivity.class);
+        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.CODE);
+        configurationBuilder.setDefaultCountryCode("VN");
+        configurationBuilder.setTitleType(AccountKitActivity.TitleType.LOGIN);
+        configurationBuilder.setReadPhoneStateEnabled(true);
+        configurationBuilder.setReceiveSMS(true);
+        intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
+        view.startActivityForResult(intent, ACCOUNT_KIT_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ACCOUNT_KIT_REQUEST_CODE) { // confirm that this response matches your request
+            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+            if (loginResult.getError() != null) {
+                view.onRegisterAccountSuccess();
+            } else if (loginResult.wasCancelled()) {
+                view.onRegisterAccountSuccess();
+            } else {
+                debug("vao chưa");
+                if (loginResult.getAccessToken() == null) {
+                    String authorization_code = loginResult.getAuthorizationCode();
+                    Log.e("Authorization Id: ", authorization_code);
+
+                    view.onValidatePhoneToActiveSuccess(authorization_code);
+                }
+                // Success! Start your next activity...
+            }
+        }
     }
 }

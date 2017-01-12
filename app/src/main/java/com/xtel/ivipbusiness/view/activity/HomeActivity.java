@@ -37,29 +37,20 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         presenter = new HomePresenter(this);
         initView();
         initNavigationView();
-
-
-
-
-
-
-
     }
 
     private void initView() {
         drawer = findDrawerLayout(R.id.drawer_layout);
-//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView = findNavigationView(R.id.nav_view);
 
-        FloatingActionButton fab = findFloatingActionButton(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = findFloatingActionButton(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
     @SuppressWarnings("deprecation")
@@ -80,7 +71,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finishAffinity();
         }
     }
 
@@ -101,6 +92,8 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == android.R.id.home) {
+            finishAffinity();
         }
 
         return super.onOptionsItemSelected(item);

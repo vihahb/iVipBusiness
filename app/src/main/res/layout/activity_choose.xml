@@ -47,9 +47,10 @@
 
     <Button
         android:id="@+id/choose.btn_phone_number"
+        style="@style/button_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_48"
+        android:layout_height="@dimen/size_36"
         android:layout_marginTop="@dimen/size_16"
-        android:text="@string/phone_number"
-        android:textAllCaps="false" />
+        android:background="@drawable/button_border"
+        android:text="Số điện thoại" />
 </LinearLayout>

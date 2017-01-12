@@ -1,5 +1,7 @@
 package com.xtel.ivipbusiness.model;
 
+import com.xtel.nipservicesdk.model.BasicModel;
+
 /**
  * Created by Lê Công Long Vũ on 12/28/2016
  */
