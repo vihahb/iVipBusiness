@@ -23,4 +23,8 @@ public class HomePresenter {
         if (SharedPreferencesUtils.getInstance().getStringValue(Constants.FCM_TOKEN) == null)
             FirebaseInstanceId.getInstance().getToken();
     }
+
+    private void getUserData() {
+
+    }
 }

@@ -57,4 +57,7 @@
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="active_account">Kích hoạt tài khoản</string>
     <string name="have_not_account">Bạn chưa có tài khoản?</string>
+
+    <!-- Menu -->
+    <string name="log_out">Đăng xuất</string>
 </resources>

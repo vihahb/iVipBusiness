@@ -17,7 +17,7 @@
         <item name="com_accountkit_header_text_color">@android:color/white</item>
         <item name="com_accountkit_text_color">@android:color/white</item>
         <item name="com_accountkit_background_color">@android:color/transparent</item>
-        <item name="com_accountkit_input_backgrou         nd_color">@android:color/transparent</item>
+        <item name="com_accountkit_input_background_color">@android:color/transparent</item>
         <item name="com_accountkit_input_text_color">@android:color/white</item>
         <item name="com_accountkit_input_border_color">@android:color/white</item>
         <item name="com_accountkit_button_background_color">@android:color/transparent</item>

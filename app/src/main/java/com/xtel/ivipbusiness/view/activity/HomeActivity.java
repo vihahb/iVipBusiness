@@ -13,11 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
+import com.xtel.nipservicesdk.LoginManager;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -28,6 +31,8 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    private ImageView img_avatar;
+    private TextView txt_fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +48,9 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         drawer = findDrawerLayout(R.id.drawer_layout);
         navigationView = findNavigationView(R.id.nav_view);
 
-//        FloatingActionButton fab = findFloatingActionButton(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        View headerView = navigationView.getHeaderView(0);
+        img_avatar = (ImageView) headerView.findViewById(R.id.header_img_avatar);
+        txt_fullname = (TextView) headerView.findViewById(R.id.header_txt_fullname);
     }
 
     @SuppressWarnings("deprecation")
@@ -104,8 +104,9 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_exit) {
+            LoginManager.logOut();
+            startActivityAndFinish(LoginActivity.class);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
