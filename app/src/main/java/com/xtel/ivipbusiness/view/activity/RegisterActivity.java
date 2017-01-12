@@ -31,7 +31,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         callbackManager = CallbackManager.create(this);
         presenter = new RegisterPresenter(this);
 
-        initToolbar(R.id.register_toolbar, null);
+//        initToolbar(R.id.register_toolbar, null);
         initView();
     }
 

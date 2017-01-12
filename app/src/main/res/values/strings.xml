@@ -48,11 +48,13 @@
 
     <!-- Choose Login -->
     <string name="ivip_for_business">IVIP For Business</string>
-    <string name="shopping_world_in_your_hand">Tận hưởng thế giới mua sắm trong tay</string>
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="active_account">Kích hoạt tài khoản</string>
-    <string name="have_not_account">Bạn chưa có tài khoản?</string>
+    <string name="join_now">Tham gia ngay</string>
 
     <!-- Menu -->
     <string name="log_out">Đăng xuất</string>
+
+    <!-- Layout -->
+    <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
 </resources>

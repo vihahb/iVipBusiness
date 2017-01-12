@@ -28,7 +28,7 @@ public class EnterPasswordActivity extends BasicActivity implements View.OnClick
         callbackManager = CallbackManager.create(this);
 
         presenter = new EnterPassPresenter(this);
-        initToolbar(R.id.enter_pass_toolbar, null);
+//        initToolbar(R.id.enter_pass_toolbar, null);
         initView();
         presenter.getData();
     }

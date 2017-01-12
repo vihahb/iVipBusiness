@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_shopping"
+        android:title="Check in" />
+    <item
+        android:enabled="true"
+        android:icon="@drawable/ic_action_shopping"
+        android:title="History" />
+    <item
+        android:enabled="true"
+        android:icon="@drawable/ic_action_shopping"
+        android:title="History" />
+    <item
+        android:enabled="true"
+        android:icon="@drawable/ic_action_shopping"
+        android:title="History" />
+    <!--<item-->
+        <!--android:enabled="true"-->
+        <!--android:icon="@drawable/ic_action_shopping"-->
+        <!--android:title="History" />-->
+</menu>

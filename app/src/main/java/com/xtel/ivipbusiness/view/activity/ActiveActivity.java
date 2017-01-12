@@ -31,7 +31,7 @@ public class ActiveActivity extends BasicActivity implements View.OnClickListene
         callbackManager = CallbackManager.create(this);
 
         presenter = new ActivePresenter(this);
-        initToolbar(R.id.active_toolbar, null);
+//        initToolbar(R.id.active_toolbar, null);
         initView();
     }
 

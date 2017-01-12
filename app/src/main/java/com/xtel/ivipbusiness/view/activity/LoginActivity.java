@@ -43,7 +43,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         callbackManager = CallbackManager.create(this);
 
         presenter = new LoginPresenter(this);
-        initToolbar(R.id.login_toolbar, null);
+//        initToolbar(R.id.login_toolbar, null);
         initView();
     }
 
