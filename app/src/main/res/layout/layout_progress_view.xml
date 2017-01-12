@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/layout_progress_view_pro"
+        android:layout_toRightOf="@+id/layout_progress_view_pro"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"

@@ -17,7 +17,6 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
 public class EnterPasswordActivity extends BasicActivity implements View.OnClickListener, IEnterPassView {
-    private String auth_id;
     private EditText edt_new_pass, edt_re_passs;
     private EnterPassPresenter presenter;
     private CallbackManager callbackManager;

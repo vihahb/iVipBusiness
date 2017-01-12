@@ -9,6 +9,7 @@
     <string name="title_activity_register">Register</string>
     <string name="title_activity_login">Đăng nhập</string>
     <string name="title_activity_reset_password">Quên mật khẩu</string>
+    <string name="title_activity_active_account">Kích hoạt tài khoản</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -19,9 +20,6 @@
     <string name="type_phone">PHONE-NUMBER</string>
 
     <!-- Dialog -->
-    <string name="ask_active_now">Tài khoản của bạn chưa được kích hoạt. Kích hoạt ngay bây giờ?</string>
-    <string name="ok">Đồng ý</string>
-    <string name="cancel">Hủy bỏ</string>
 
     <string name="doing_register" tools:ignore="TypographyEllipsis">Đang tạo tài khoản...</string>
     <string name="doing_active" tools:ignore="TypographyEllipsis">Đang kích hoạt tài khoản...</string>
@@ -35,7 +33,6 @@
 
     <!-- Lỗi -->
     <string name="error_validate_phone">Số điện thoại không hợp lệ</string>
-    <string name="error_validate_email">Email không hợp lệ</string>
     <string name="error_input_username">Vui lòng nhập số điện thoại</string>
     <string name="error_input_password">Vui lòng nhập mật khẩu</string>
     <string name="error_input_new_password">Vui lòng nhập mật khẩu mới</string>
@@ -44,12 +41,10 @@
 
     <string name="error_register_phone">Đăng ký thất bại</string>
     <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
-    <string name="error_resett">Đổi mật khẩu thất bại</string>
     <string name="error_can_not_resett">Không thể đổi mật khẩu</string>
 
     <!-- Choose login -->
     <string name="login_by">Đăng nhập bằng</string>
-    <string name="phone_number">Số điện thoại</string>
 
     <!-- Choose Login -->
     <string name="ivip_for_business">IVIP For Business</string>

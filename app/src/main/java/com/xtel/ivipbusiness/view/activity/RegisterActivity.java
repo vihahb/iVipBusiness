@@ -18,7 +18,6 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Register;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.sdk.callback.DialogListener;
 
 public class RegisterActivity extends BasicActivity implements View.OnClickListener, IRegisterView {
     private RegisterPresenter presenter;
@@ -31,6 +30,8 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         setContentView(R.layout.activity_register);
         callbackManager = CallbackManager.create(this);
         presenter = new RegisterPresenter(this);
+
+        initToolbar(R.id.register_toolbar, null);
         initView();
     }
 
@@ -40,14 +41,19 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         edt_re_pass = findEditText(R.id.register_edt_re_pass);
 
         Button button = findButton(R.id.register_btn_register);
+        Button btn_exists = findButton(R.id.register_btn_exists);
         button.setOnClickListener(this);
+        btn_exists.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.register_btn_register) {
+        int id = view.getId();
+
+        if (id == R.id.register_btn_register) {
             presenter.registerAccount(edt_username.getText().toString(), edt_pass.getText().toString(), edt_re_pass.getText().toString());
-        }
+        } else if (id == R.id.register_btn_exists)
+            startActivityAndFinish(LoginActivity.class);
     }
 
     @Override

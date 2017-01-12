@@ -2,7 +2,6 @@ package com.xtel.ivipbusiness.presenter;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -11,33 +10,29 @@ import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.view.activity.RegisterActivity;
-import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
+import com.xtel.ivipbusiness.view.activity.inf.IActiveView;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 
 /**
- * Created by VULCL on 1/10/2017
+ * Created by Mr. M.2 on 1/12/2017
  */
 
-public class LoginPresenter extends BasicPresenter {
-    private ILoginView view;
+public class ActivePresenter extends BasicPresenter {
+    private IActiveView view;
     private final int ACCOUNT_KIT_REQUEST_CODE = 99, PERMISSION_REQUEST_CODE = 10001;
     private String[] PermissionListAccKit = {Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE};
 
-    public LoginPresenter(ILoginView view) {
+    public ActivePresenter(IActiveView view) {
         this.view = view;
     }
 
-    public void registerAccount() {
-        view.startActivityAndFinish(RegisterActivity.class);
-    }
-
-    public void loginAccount(String phone, String password) {
-        if (!validateData(phone, password))
+    public void validatePhoneToActive(String phone) {
+        if (!validateText(phone)) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_username));
             return;
+        }
 
         if (isPhone(phone) == -1) {
-            debug("6");
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }
@@ -47,25 +42,14 @@ public class LoginPresenter extends BasicPresenter {
             return;
         }
 
-        view.loginAccount(phone, password);
-    }
-
-    private boolean validateData(String username, String password) {
-        if (!validateText(username)) {
-            view.onValidateError(view.getActivity().getString(R.string.error_input_username));
-            return false;
-        } else if (!validateText(password)) {
-            view.onValidateError(view.getActivity().getString(R.string.error_input_password));
-            return false;
-        }
-        return true;
-    }
-
-    public void startValidatePhone() {
         if (!PermissionHelper.checkListPermission(PermissionListAccKit, view.getActivity(), PERMISSION_REQUEST_CODE)) {
             return;
         }
 
+        startValidatePhone();
+    }
+
+    private void startValidatePhone() {
         Intent intent = new Intent(view.getActivity(), AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.CODE);
         configurationBuilder.setDefaultCountryCode("VN");
@@ -95,7 +79,7 @@ public class LoginPresenter extends BasicPresenter {
                     String authorization_code = loginResult.getAuthorizationCode();
                     Log.e("Authorization Id: ", authorization_code);
 
-                    view.onValidatePhoneToResetSuccess(authorization_code);
+                    view.onValidatePhoneToActiveSuccess(authorization_code);
                 }
                 // Success! Start your next activity...
             }

@@ -1,8 +1,6 @@
 package com.xtel.ivipbusiness.presenter;
 
-import android.Manifest;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.accountkit.AccountKitLoginResult;

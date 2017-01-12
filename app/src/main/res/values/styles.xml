@@ -12,7 +12,7 @@
     <style name="AppLoginTheme" parent="Theme.AccountKit">
         <item name="com_accountkit_title_text_color">@android:color/white</item>
         <item name="com_accountkit_primary_text_color">@android:color/white</item>
-        <item name="com_accountkit_primary_color">@color/colorPrimary</item>
+        <item name="com_accountkit_primary_color">@android:color/white</item>
         <item name="com_accountkit_status_bar_color">@color/colorPrimary</item>
         <item name="com_accountkit_header_text_color">@android:color/white</item>
         <item name="com_accountkit_text_color">@android:color/white</item>
