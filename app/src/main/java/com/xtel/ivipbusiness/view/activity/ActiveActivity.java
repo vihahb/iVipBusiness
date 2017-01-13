@@ -65,7 +65,7 @@ public class ActiveActivity extends BasicActivity implements View.OnClickListene
             public void onSuccess() {
                 closeProgressBar();
                 showShortToast(getString(R.string.success_active));
-                startActivityAndFinish(LoginActivity.class);
+                finish();
             }
 
             @Override
@@ -112,7 +112,7 @@ public class ActiveActivity extends BasicActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        startActivityAndFinish(LoginActivity.class);
+        finish();
     }
 
     @Override
@@ -131,7 +131,7 @@ public class ActiveActivity extends BasicActivity implements View.OnClickListene
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
-            startActivityAndFinish(LoginActivity.class);
+            finish();
         return super.onOptionsItemSelected(item);
     }
 }

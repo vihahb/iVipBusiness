@@ -15,16 +15,11 @@ import com.xtel.ivipbusiness.presenter.LoginPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
-import com.xtel.nipservicesdk.callback.CallbackListenerActive;
-import com.xtel.nipservicesdk.callback.CallbackListenerReactive;
-import com.xtel.nipservicesdk.callback.CallbackListenerReset;
 import com.xtel.nipservicesdk.commons.Constants;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
-import com.xtel.nipservicesdk.model.entity.RESP_Reactive;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.sdk.callback.DialogListener;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -62,38 +57,38 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         btn_forget.setOnClickListener(this);
     }
 
-    private void reActiveAccount(final String auth_id) {
-        debug("reactive");
-        callbackManager.reactiveNipAccount(edt_username.getText().toString(), true, new CallbackListenerReactive() {
-            @Override
-            public void onSuccess(RESP_Reactive reactive) {
-                activeAccount(auth_id);
-            }
+//    private void reActiveAccount(final String auth_id) {
+//        debug("reactive");
+//        callbackManager.reactiveNipAccount(edt_username.getText().toString(), true, new CallbackListenerReactive() {
+//            @Override
+//            public void onSuccess(RESP_Reactive reactive) {
+//                activeAccount(auth_id);
+//            }
+//
+//            @Override
+//            public void onError(Error error) {
+//                closeProgressBar();
+//                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
+//            }
+//        });
+//    }
 
-            @Override
-            public void onError(Error error) {
-                closeProgressBar();
-                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
-            }
-        });
-    }
-
-    private void activeAccount(String auth_id) {
-        debug("active now");
-        callbackManager.activeNipAccount(auth_id, getString(R.string.type_phone), new CallbackListenerActive() {
-            @Override
-            public void onSuccess() {
-                closeProgressBar();
-                showShortToast(getString(R.string.success_active));
-            }
-
-            @Override
-            public void onError(Error error) {
-                closeProgressBar();
-                showShortToast(getString(R.string.error_active_account));
-            }
-        });
-    }
+//    private void activeAccount(String auth_id) {
+//        debug("active now");
+//        callbackManager.activeNipAccount(auth_id, getString(R.string.type_phone), new CallbackListenerActive() {
+//            @Override
+//            public void onSuccess() {
+//                closeProgressBar();
+//                showShortToast(getString(R.string.success_active));
+//            }
+//
+//            @Override
+//            public void onError(Error error) {
+//                closeProgressBar();
+//                showShortToast(getString(R.string.error_active_account));
+//            }
+//        });
+//    }
 
     @Override
     public void onValidateError(String error) {
@@ -101,10 +96,10 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
     }
 
     @Override
-    public void loginAccount(final String phone, final String password) {
+    public void loginAccount() {
         showProgressBar(false, false, null, getString(R.string.doing_login));
         debug("login");
-        callbackManager.LoginNipAcc(phone, password, true, new CallbacListener() {
+        callbackManager.LoginNipAcc(edt_username.getText().toString(), edt_password.getText().toString(), true, new CallbacListener() {
             @Override
             public void onSuccess(RESP_Login success) {
                 closeProgressBar();
@@ -121,23 +116,22 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         });
     }
 
-    @Override
-    public void onValidatePhoneToActiveSuccess(String auth_id) {
-        showProgressBar(false, false, null, getString(R.string.doing_active));
-        reActiveAccount(auth_id);
-    }
+//    @Override
+//    public void onValidatePhoneToActiveSuccess(String auth_id) {
+//        showProgressBar(false, false, null, getString(R.string.doing_active));
+//        reActiveAccount(auth_id);
+//    }
 
     @Override
     public void onValidatePhoneToResetSuccess(String auth_id) {
         Intent intent = new Intent(this, EnterPasswordActivity.class);
         intent.putExtra(Constants.USER_AUTH_ID, auth_id);
         startActivity(intent);
-        finish();
     }
 
     @Override
-    public void startActivityAndFinish(Class clazz) {
-        super.startActivityAndFinish(clazz);
+    public void startActivity(Class clazz) {
+        super.startActivity(clazz);
     }
 
     @Override
@@ -159,7 +153,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         } else if (id == R.id.login_btn_register) {
             presenter.registerAccount();
         } else if (id == R.id.login_btn_active) {
-            startActivityAndFinish(ActiveActivity.class);
+            startActivity(ActiveActivity.class);
         } else if (id == R.id.login_btn_forget) {
             presenter.startValidatePhone();
         }

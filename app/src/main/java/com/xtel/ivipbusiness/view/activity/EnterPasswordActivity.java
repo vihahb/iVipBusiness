@@ -85,6 +85,12 @@ public class EnterPasswordActivity extends BasicActivity implements View.OnClick
     }
 
     @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);

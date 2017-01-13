@@ -21,7 +21,7 @@ import com.xtel.nipservicesdk.utils.PermissionHelper;
 
 public class LoginPresenter extends BasicPresenter {
     private ILoginView view;
-    private final int ACCOUNT_KIT_REQUEST_CODE = 99, PERMISSION_REQUEST_CODE = 10001;
+    private final int ACCOUNT_KIT_REQUEST_CODE = 99, PERMISSION_REQUEST_CODE = 10001, LOGIN_REQUEST_CODE = 111;
     private String[] PermissionListAccKit = {Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE};
 
     public LoginPresenter(ILoginView view) {
@@ -29,7 +29,7 @@ public class LoginPresenter extends BasicPresenter {
     }
 
     public void registerAccount() {
-        view.startActivityAndFinish(RegisterActivity.class);
+        view.startActivity(RegisterActivity.class);
     }
 
     public void loginAccount(String phone, String password) {
@@ -47,7 +47,10 @@ public class LoginPresenter extends BasicPresenter {
             return;
         }
 
-        view.loginAccount(phone, password);
+        if (!PermissionHelper.checkOnlyPermission(Manifest.permission.READ_PHONE_STATE, view.getActivity(), LOGIN_REQUEST_CODE))
+            return;
+
+        view.loginAccount();
     }
 
     private boolean validateData(String username, String password) {
@@ -66,6 +69,10 @@ public class LoginPresenter extends BasicPresenter {
             return;
         }
 
+        resetPhone();
+    }
+
+    private void resetPhone() {
         Intent intent = new Intent(view.getActivity(), AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.CODE);
         configurationBuilder.setDefaultCountryCode("VN");
@@ -77,7 +84,14 @@ public class LoginPresenter extends BasicPresenter {
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        startValidatePhone();
+        if (requestCode == PERMISSION_REQUEST_CODE)
+            resetPhone();
+        else if (requestCode == LOGIN_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                view.loginAccount();
+            else
+                view.onValidateError(view.getActivity().getString(R.string.error_not_alllow_permission));
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

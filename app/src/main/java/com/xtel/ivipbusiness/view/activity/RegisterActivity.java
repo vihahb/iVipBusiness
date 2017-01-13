@@ -53,7 +53,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         if (id == R.id.register_btn_register) {
             presenter.registerAccount(edt_username.getText().toString(), edt_pass.getText().toString(), edt_re_pass.getText().toString());
         } else if (id == R.id.register_btn_exists)
-            startActivityAndFinish(LoginActivity.class);
+            finish();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
     @Override
     public void onRegisterAccountSuccess() {
         showShortToast(getString(R.string.success_register));
-        startActivityAndFinish(LoginActivity.class);
+        finish();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
             public void onSuccess() {
                 closeProgressBar();
                 showShortToast(getString(R.string.success_active));
-                startActivityAndFinish(LoginActivity.class);
+                finish();
             }
 
             @Override
@@ -121,7 +121,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        startActivityAndFinish(LoginActivity.class);
+        finish();
     }
 
     @Override

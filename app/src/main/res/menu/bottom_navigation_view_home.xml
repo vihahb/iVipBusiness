@@ -4,21 +4,21 @@
         android:checkable="true"
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
-        android:title="Check in" />
+        android:title="@null" />
     <item
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
-        android:title="History 1" />
+        android:title="@null" />
     <item
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
-        android:title="History 2" />
+        android:title="@null" />
     <item
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
-        android:title="History 3" />
+        android:title="@null" />
     <item
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
-        android:title="History 4" />
+        android:title="@null" />
 </menu>

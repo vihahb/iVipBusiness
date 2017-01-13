@@ -10,11 +10,10 @@ import android.content.Intent;
 public interface ILoginView {
 
     void onValidateError(String error);
-    void loginAccount(String phone, String password);
-    void onValidatePhoneToActiveSuccess(String auth_id);
+    void loginAccount();
     void onValidatePhoneToResetSuccess(String auth_id);
 
-    void startActivityAndFinish(Class clazz);
+    void startActivity(Class clazz);
     void startActivityForResult(Intent intent, int request);
     Activity getActivity();
 }
