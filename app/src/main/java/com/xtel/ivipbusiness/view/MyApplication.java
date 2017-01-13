@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.FirebaseApp;
 import com.xtel.nipservicesdk.LoginManager;
 
 import java.security.MessageDigest;
@@ -30,6 +31,7 @@ public class MyApplication extends Application {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         LoginManager.sdkInitialize(this);
+        FirebaseApp.initializeApp(this);
 
         context = this;
         getKeyHash(context.getPackageName());

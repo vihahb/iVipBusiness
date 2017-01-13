@@ -30,12 +30,12 @@
     <string name="doing_login" tools:ignore="TypographyEllipsis">Đang đăng nhập ...</string>
     <string name="doing_reset" tools:ignore="TypographyEllipsis">Đang lấy lại mật khẩu ...</string>
 
-    <!-- Thành công -->
+    <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
     <string name="success_active">Kích hoạt tài khoản thành công</string>
     <string name="success_reset">Lấy lại mật khẩu thành công</string>
 
-    <!-- Lỗi -->
+    <!-- Error -->
     <string name="error_validate_phone">Số điện thoại không hợp lệ</string>
     <string name="error_input_username">Vui lòng nhập số điện thoại</string>
     <string name="error_input_password">Vui lòng nhập mật khẩu</string>
@@ -43,6 +43,7 @@
     <string name="error_input_re_password">Vui lòng nhập lại mật khẩu</string>
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
+    <string name="error_no_internet">Không có kết nối interner</string>
 
     <string name="error_register_phone">Đăng ký thất bại</string>
     <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
@@ -62,6 +63,10 @@
     <string name="phone">Số điện thoại</string>
     <string name="email">Email</string>
     <string name="address">Địa chỉ liên lạc</string>
+
+    <string name="no_stores">Không có cửa hàng nào</string>
+    <string name="click_to_try_again">Click để thử lại</string>
+    <string name="loading_data">Đang tải dữ liệu</string>
 
     <!-- Menu -->
     <string name="store">Cửa hàng</string>

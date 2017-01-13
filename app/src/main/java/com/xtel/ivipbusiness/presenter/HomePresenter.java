@@ -1,5 +1,7 @@
 package com.xtel.ivipbusiness.presenter;
 
+import android.util.Log;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.sdk.commons.Constants;
@@ -20,8 +22,10 @@ public class HomePresenter {
     }
 
     private void checkFCM() {
-        if (SharedPreferencesUtils.getInstance().getStringValue(Constants.FCM_TOKEN) == null)
+        if (SharedPreferencesUtils.getInstance().getStringValue(Constants.FCM_TOKEN) == null) {
+            Log.e("co_roi", "ok");
             FirebaseInstanceId.getInstance().getToken();
+        }
     }
 
     private void getUserData() {

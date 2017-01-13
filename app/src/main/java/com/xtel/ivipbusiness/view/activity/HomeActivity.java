@@ -11,10 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.firebase.FirebaseApp;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
+import com.xtel.ivipbusiness.view.fragment.ListStoresFragment;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -28,17 +28,20 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 //    private ImageView img_avatar;
 //    private TextView txt_fullname;
 
+    private final String LIST_STORE = "list_store";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        FirebaseApp.initializeApp(this);
 
 //        startActivityAndFinish(ProfileActivity.class);
 
         presenter = new HomePresenter(this);
         initView();
         initNavigationView();
+
+        replaceFragment(R.id.home_container, ListStoresFragment.newInstance(), LIST_STORE);
     }
 
     private void initView() {
