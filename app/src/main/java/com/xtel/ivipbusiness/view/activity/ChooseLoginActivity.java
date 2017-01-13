@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.nipservicesdk.LoginManager;
 
 public class ChooseLoginActivity extends BasicActivity implements View.OnClickListener {
 
@@ -13,7 +14,14 @@ public class ChooseLoginActivity extends BasicActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
 
-        initView();
+        checkLoged();
+    }
+
+    private void checkLoged() {
+        if (LoginManager.getCurrentAuthenticationId() != null)
+            startActivityAndFinish(HomeActivity.class);
+        else
+            initView();
     }
 
     private void initView() {

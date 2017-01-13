@@ -102,7 +102,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.nav_store) {
-
+            replaceFragment(R.id.home_container, ListStoresFragment.newInstance(), LIST_STORE);
         } else if (id == R.id.nav_policy) {
 
         } else if (id == R.id.nav_app_info) {

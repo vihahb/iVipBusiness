@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/profile.txt_total_store"
+        style="@style/profile_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_16"
+        android:layout_marginRight="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="right|end"
+        android:text="Tong so cua hang: 1001" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_8"
+        android:padding="@dimen/size_16">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/size_16"
+            android:paddingRight="@dimen/size_16">
+
+            <TextView
+                android:id="@+id/profile.txt_fullname"
+                style="@style/profile_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Le Cong Long Vu" />
+
+            <TextView
+                android:id="@+id/profile.txt_date_create"
+                style="@style/profile_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_8"
+                android:text="Ngay tao: 01/01/2017" />
+        </LinearLayout>
+
+        <com.xtel.ivipbusiness.view.widget.RoundImage
+            android:layout_width="@dimen/size_48"
+            android:layout_height="@dimen/size_48"
+            android:contentDescription="@null"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:background="@android:color/white" />
+</LinearLayout>

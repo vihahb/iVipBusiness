@@ -73,7 +73,7 @@
             android:id="@+id/login.btn_active"
             style="@style/button_login"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_24"
+            android:layout_height="@dimen/size_36"
             android:background="@android:color/transparent"
             android:text="@string/active_account" />
 
@@ -81,7 +81,7 @@
             android:id="@+id/login.btn_forget"
             style="@style/button_login"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_24"
+            android:layout_height="@dimen/size_36"
             android:background="@android:color/transparent"
             android:text="@string/forgot_password" />
 
@@ -89,7 +89,7 @@
             android:id="@+id/login.btn_register"
             style="@style/button_login"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_24"
+            android:layout_height="@dimen/size_36"
             android:background="@android:color/transparent"
             android:text="@string/join_now" />
     </LinearLayout>

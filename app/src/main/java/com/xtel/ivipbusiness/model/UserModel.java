@@ -21,9 +21,9 @@ public class UserModel extends BasicModel {
     public ArrayList<Stores> getListStore() {
         ArrayList<Stores> arrayList = new ArrayList<>();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 1; i <= 30; i++) {
             Stores stores = new Stores();
-            stores.setImage("http://www.iconsplace.com/icons/preview/orange/coffee-256.png");
+            stores.setImage("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
             stores.setName("Store " + i);
 
             arrayList.add(stores);

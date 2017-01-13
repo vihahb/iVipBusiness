@@ -63,6 +63,7 @@
     <string name="phone">Số điện thoại</string>
     <string name="email">Email</string>
     <string name="address">Địa chỉ liên lạc</string>
+    <string name="logout">Đăng xuất</string>
 
     <string name="no_stores">Không có cửa hàng nào</string>
     <string name="click_to_try_again">Click để thử lại</string>

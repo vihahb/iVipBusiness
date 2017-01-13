@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme"
         tools:node="replace">
         <activity
-            android:name=".view.activity.SplashActivity"
+            android:name=".view.activity.ChooseLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,10 +45,10 @@
             android:name=".view.activity.LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".view.activity.ChooseLoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_register" />
+        <!--<activity-->
+            <!--android:name=".view.activity.ChooseLoginActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"-->
+            <!--android:label="@string/title_activity_register" />-->
         <activity
             android:name=".view.activity.EnterPasswordActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
