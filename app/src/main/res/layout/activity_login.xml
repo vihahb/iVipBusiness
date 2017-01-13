@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
+    android:fillViewport="true"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
     tools:context="com.xtel.ivipbusiness.view.activity.LoginActivity">
 
     <!--<android.support.design.widget.AppBarLayout-->
@@ -25,80 +25,75 @@
     <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
     <!--</android.support.design.widget.AppBarLayout>-->
 
-    <ScrollView
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:fillViewport="true"-->
+    <!--android:fitsSystemWindows="false">-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/size_16"
+        android:paddingLeft="@dimen/size_36"
+        android:paddingRight="@dimen/size_36"
+        android:paddingTop="@dimen/size_24">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/login.edt_username"
+            style="@style/edittext_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/size_16"
-            android:paddingLeft="@dimen/size_36"
-            android:paddingRight="@dimen/size_36"
-            android:paddingTop="@dimen/size_24">
+            android:layout_height="@dimen/size_40"
+            android:hint="Nhập số điện thoại"
+            android:inputType="phone"
+            tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/login.edt_username"
-                style="@style/edittext_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40"
-                android:hint="Nhập số điện thoại"
-                android:inputType="phone"
-                tools:ignore="LabelFor" />
+        <EditText
+            android:id="@+id/login.edt_pass"
+            style="@style/edittext_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginTop="@dimen/size_8"
+            android:hint="Nhập mật khẩu"
+            android:inputType="textPassword"
+            tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/login.edt_pass"
-                style="@style/edittext_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40"
-                android:layout_marginTop="@dimen/size_8"
-                android:hint="Nhập mật khẩu"
-                android:inputType="textPassword"
-                tools:ignore="LabelFor" />
+        <Button
+            android:id="@+id/login.btn_login"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_36"
+            android:layout_marginBottom="@dimen/size_8"
+            android:layout_marginTop="@dimen/size_16"
+            android:background="@drawable/button_border"
+            android:text="Đăng nhập" />
 
-            <Button
-                android:id="@+id/login.btn_login"
-                style="@style/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_36"
-                android:layout_marginBottom="@dimen/size_8"
-                android:layout_marginTop="@dimen/size_16"
-                android:background="@drawable/button_border"
-                android:text="Đăng nhập" />
+        <Button
+            android:id="@+id/login.btn_active"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_24"
+            android:background="@android:color/transparent"
+            android:text="@string/active_account" />
 
-            <Button
-                android:id="@+id/login.btn_active"
-                style="@style/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_36"
-                android:layout_marginLeft="@dimen/size_4"
-                android:layout_marginStart="@dimen/size_4"
-                android:background="@android:color/transparent"
-                android:text="@string/active_account" />
+        <Button
+            android:id="@+id/login.btn_forget"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_24"
+            android:background="@android:color/transparent"
+            android:text="@string/forgot_password" />
 
-            <Button
-                android:id="@+id/login.btn_forget"
-                style="@style/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_36"
-                android:layout_marginEnd="@dimen/size_4"
-                android:layout_marginRight="@dimen/size_4"
-                android:background="@android:color/transparent"
-                android:text="@string/forgot_password" />
-
-            <Button
-                android:id="@+id/login.btn_register"
-                style="@style/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_36"
-                android:layout_marginEnd="@dimen/size_8"
-                android:layout_marginRight="@dimen/size_8"
-                android:background="@android:color/transparent"
-                android:text="@string/join_now" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        <Button
+            android:id="@+id/login.btn_register"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_24"
+            android:background="@android:color/transparent"
+            android:text="@string/join_now" />
+    </LinearLayout>
+    <!--</ScrollView>-->
+</ScrollView>

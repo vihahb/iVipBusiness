@@ -6,6 +6,8 @@
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@android:color/white</item>
+        <item name="android:windowBackground">@mipmap/background_2</item>
+        <item name="android:windowAnimationStyle">@null</item>
         <!--<item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
@@ -86,5 +88,12 @@
         <item name="colorControlNormal">#c5c5c5</item>
         <item name="colorControlActivated">@android:color/white</item>
         <item name="colorControlHighlight">@android:color/white</item>
+    </style>
+
+    <style name="profile_textview">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
     </style>
 </resources>

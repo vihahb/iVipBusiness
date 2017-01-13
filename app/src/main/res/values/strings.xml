@@ -10,6 +10,7 @@
     <string name="title_activity_login">Đăng nhập</string>
     <string name="title_activity_reset_password">Quên mật khẩu</string>
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
+    <string name="title_activity_profile">Profile</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -46,15 +47,21 @@
     <!-- Choose login -->
     <string name="login_by">Đăng nhập bằng</string>
 
-    <!-- Choose Login -->
+    <!-- Layout -->
+    <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
     <string name="ivip_for_business">IVIP For Business</string>
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="active_account">Kích hoạt tài khoản</string>
     <string name="join_now">Tham gia ngay</string>
+    <string name="birth_day">Ngày sinh</string>
+    <string name="gender">Giới tính</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="email">Email</string>
+    <string name="address">Địa chỉ liên lạc</string>
 
     <!-- Menu -->
-    <string name="log_out">Đăng xuất</string>
-
-    <!-- Layout -->
-    <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
+    <string name="store">Cửa hàng</string>
+    <string name="policy">Chính sách</string>
+    <string name="app_info">Thông tin ứng dụng</string>
+    <string name="faq">FAQ</string>
 </resources>

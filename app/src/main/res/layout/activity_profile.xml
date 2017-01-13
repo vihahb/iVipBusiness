@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.xtel.ivipbusiness.view.activity.ProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="false"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/profile.toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:titleTextAppearance="@style/Toolbar_TitleText" />
+            </android.support.design.widget.AppBarLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:alpha="0.3"
+                android:background="@android:color/black" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/profile.txt_total_store"
+            style="@style/profile_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_16"
+            android:layout_marginRight="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_16"
+            android:gravity="right|end"
+            android:text="@string/birth_day"
+            tools:ignore="LabelFor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_16">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/size_16"
+                android:paddingRight="@dimen/size_16">
+
+                <TextView
+                    android:id="@+id/profile.txt_fullname"
+                    style="@style/profile_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birth_day"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:id="@+id/profile.txt_date_create"
+                    style="@style/profile_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:text="@string/birth_day"
+                    tools:ignore="LabelFor" />
+            </LinearLayout>
+
+            <com.xtel.ivipbusiness.view.widget.RoundImage
+                android:layout_width="@dimen/size_50"
+                android:layout_height="@dimen/size_50"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1"
+            android:background="@android:color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/size_16">
+
+                <EditText
+                    android:id="@+id/profile.edt_birth_day"
+                    style="@style/edittext_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40"
+                    android:hint="@string/birth_day"
+                    android:inputType="date"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/profile.edt_gender"
+                    style="@style/edittext_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:hint="@string/gender"
+                    android:inputType="text"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/profile.edt_phone"
+                    style="@style/edittext_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:hint="@string/phone"
+                    android:inputType="phone"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/profile.edt_email"
+                    style="@style/edittext_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/profile.edt_address"
+                    style="@style/edittext_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:hint="@string/address"
+                    android:inputType="text"
+                    tools:ignore="LabelFor" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
+    android:fillViewport="true"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
     tools:context="com.xtel.ivipbusiness.view.activity.RegisterActivity">
 
     <!--<android.support.design.widget.AppBarLayout-->
@@ -25,66 +25,67 @@
     <!--app:titleTextAppearance="@style/Toolbar_TitleText" />-->
     <!--</android.support.design.widget.AppBarLayout>-->
 
-    <ScrollView
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:fillViewport="true">-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/size_16"
+        android:paddingLeft="@dimen/size_36"
+        android:paddingRight="@dimen/size_36"
+        android:paddingTop="@dimen/size_24">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/register.edt_username"
+            style="@style/edittext_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/size_16"
-            android:paddingLeft="@dimen/size_36"
-            android:paddingRight="@dimen/size_36"
-            android:paddingTop="@dimen/size_24">
+            android:layout_height="@dimen/size_40"
+            android:hint="Nhập số điện thoại"
+            android:inputType="phone"
+            tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/register.edt_username"
-                style="@style/edittext_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40"
-                android:hint="Nhập số điện thoại"
-                android:inputType="phone"
-                tools:ignore="LabelFor" />
+        <EditText
+            android:id="@+id/register.edt_pass"
+            style="@style/edittext_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:hint="Nhập mật khẩu"
+            android:inputType="textPassword"
+            tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/register.edt_pass"
-                style="@style/edittext_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40"
-                android:hint="Nhập mật khẩu"
-                android:inputType="textPassword"
-                tools:ignore="LabelFor" />
+        <EditText
+            android:id="@+id/register.edt_re_pass"
+            style="@style/edittext_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:hint="Nhập lại mật khẩu"
+            android:inputType="textPassword"
+            tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/register.edt_re_pass"
-                style="@style/edittext_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40"
-                android:hint="Nhập lại mật khẩu"
-                android:inputType="textPassword"
-                tools:ignore="LabelFor" />
+        <Button
+            android:id="@+id/register.btn_register"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_36"
+            android:layout_marginTop="@dimen/size_16"
+            android:text="Tạo tài khoản" />
 
-            <Button
-                android:id="@+id/register.btn_register"
-                style="@style/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_36"
-                android:layout_marginTop="@dimen/size_16"
-                android:text="Tạo tài khoản" />
-
-            <Button
-                android:id="@+id/register.btn_exists"
-                style="@style/button_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_36"
-                android:layout_marginLeft="@dimen/size_4"
-                android:layout_marginStart="@dimen/size_4"
-                android:layout_marginTop="@dimen/size_8"
-                android:background="@android:color/transparent"
-                android:text="Đã có tài khoản" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        <Button
+            android:id="@+id/register.btn_exists"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_36"
+            android:layout_marginLeft="@dimen/size_4"
+            android:layout_marginStart="@dimen/size_4"
+            android:layout_marginTop="@dimen/size_8"
+            android:background="@android:color/transparent"
+            android:text="Đã có tài khoản" />
+    </LinearLayout>
+    <!--</ScrollView>-->
+</ScrollView>

@@ -13,8 +13,8 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--<android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <application
         android:name=".view.MyApplication"
@@ -36,33 +36,31 @@
         <activity
             android:name=".view.activity.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme_Activity_Transparent" />
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".view.activity.RegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_register"
-            android:theme="@style/Theme_Activity_Transparent" />
+            android:label="@string/title_activity_register" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme_Activity_Transparent" />
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".view.activity.ChooseLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_register"
-            android:theme="@style/Theme_Activity_Transparent" />
+            android:label="@string/title_activity_register" />
         <activity
             android:name=".view.activity.EnterPasswordActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_reset_password"
-            android:theme="@style/Theme_Activity_Transparent" />
+            android:label="@string/title_activity_reset_password" />
         <activity
             android:name=".view.activity.ActiveActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_active_account"
-            android:theme="@style/Theme_Activity_Transparent" />
+            android:label="@string/title_activity_active_account" />
+        <activity
+            android:name=".view.activity.ProfileActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_profile" />
 
         <meta-data
             android:name="xtel_service_code"

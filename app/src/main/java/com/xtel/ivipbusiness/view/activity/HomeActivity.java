@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
@@ -31,13 +32,16 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    private ImageView img_avatar;
-    private TextView txt_fullname;
+//    private ImageView img_avatar;
+//    private TextView txt_fullname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        FirebaseApp.initializeApp(this);
+
+//        startActivityAndFinish(ProfileActivity.class);
 
         presenter = new HomePresenter(this);
         initView();
@@ -48,9 +52,9 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         drawer = findDrawerLayout(R.id.drawer_layout);
         navigationView = findNavigationView(R.id.nav_view);
 
-        View headerView = navigationView.getHeaderView(0);
-        img_avatar = (ImageView) headerView.findViewById(R.id.header_img_avatar);
-        txt_fullname = (TextView) headerView.findViewById(R.id.header_txt_fullname);
+//        View headerView = navigationView.getHeaderView(0);
+//        img_avatar = (ImageView) headerView.findViewById(R.id.header_img_avatar);
+//        txt_fullname = (TextView) headerView.findViewById(R.id.header_txt_fullname);
     }
 
     @SuppressWarnings("deprecation")
@@ -104,16 +108,13 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_exit) {
-            LoginManager.logOut();
-            startActivityAndFinish(LoginActivity.class);
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_store) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_policy) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_app_info) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_faq) {
 
         }
 
