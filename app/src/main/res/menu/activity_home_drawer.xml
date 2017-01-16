@@ -4,23 +4,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_store"
-            android:icon="@android:drawable/ic_menu_camera"
+            android:checked="true"
             android:title="@string/store" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@android:drawable/ic_menu_camera"
-            android:title="Gallery" />
+            android:title="@string/statistic" />
         <item
             android:id="@+id/nav_policy"
-            android:icon="@android:drawable/ic_menu_camera"
             android:title="@string/policy" />
         <item
             android:id="@+id/nav_app_info"
-            android:icon="@android:drawable/ic_menu_camera"
             android:title="@string/app_info" />
         <item
             android:id="@+id/nav_faq"
-            android:icon="@android:drawable/ic_menu_camera"
             android:title="@string/faq" />
     </group>
 </menu>

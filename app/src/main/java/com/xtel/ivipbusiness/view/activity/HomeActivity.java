@@ -25,8 +25,6 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
-//    private ImageView img_avatar;
-//    private TextView txt_fullname;
 
     private final String LIST_STORE = "list_store";
 
@@ -35,8 +33,6 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//        startActivityAndFinish(ProfileActivity.class);
-
         presenter = new HomePresenter(this);
         initView();
         initNavigationView();
@@ -44,15 +40,13 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         replaceFragment(R.id.home_container, ListStoresFragment.newInstance(), LIST_STORE);
     }
 
+//     Khởi tạo view
     private void initView() {
         drawer = findDrawerLayout(R.id.drawer_layout);
         navigationView = findNavigationView(R.id.nav_view);
-
-//        View headerView = navigationView.getHeaderView(0);
-//        img_avatar = (ImageView) headerView.findViewById(R.id.header_img_avatar);
-//        txt_fullname = (TextView) headerView.findViewById(R.id.header_txt_fullname);
     }
 
+//    Khởi tạo navigation
     @SuppressWarnings("deprecation")
     private void initNavigationView() {
         Toolbar toolbar = findToolbar(R.id.toolbar);

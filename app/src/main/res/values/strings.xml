@@ -11,6 +11,7 @@
     <string name="title_activity_reset_password">Quên mật khẩu</string>
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_add_store">Thêm cửa hàng</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -65,6 +66,8 @@
     <string name="address">Địa chỉ liên lạc</string>
     <string name="logout">Đăng xuất</string>
 
+    <!-- Activity -->
+    <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>
     <string name="click_to_try_again">Click để thử lại</string>
     <string name="loading_data">Đang tải dữ liệu</string>
@@ -72,6 +75,7 @@
     <!-- Menu -->
     <string name="store">Cửa hàng</string>
     <string name="policy">Chính sách</string>
+    <string name="statistic">Thống kê</string>
     <string name="app_info">Thông tin ứng dụng</string>
     <string name="faq">FAQ</string>
 </resources>

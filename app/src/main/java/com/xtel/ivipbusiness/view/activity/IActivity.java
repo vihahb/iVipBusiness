@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -72,5 +73,9 @@ public abstract class IActivity extends AppCompatActivity {
 
     protected RatingBar findRatingBar(int id) {
         return (RatingBar) findViewById(id);
+    }
+
+    protected ImageView findImageView(int id) {
+        return (ImageView) findViewById(id);
     }
 }

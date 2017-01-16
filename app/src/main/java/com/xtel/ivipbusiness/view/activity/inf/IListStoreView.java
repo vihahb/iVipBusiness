@@ -2,6 +2,7 @@ package com.xtel.ivipbusiness.view.activity.inf;
 
 import android.app.Activity;
 
+import com.xtel.ivipbusiness.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.Stores;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public interface IListStoreView {
 
     void onGetStoresSuccess(ArrayList<Stores> arrayList);
+    void onGetStoresError(Error error);
     void onNoNetwork();
     Activity getActivity();
 }
