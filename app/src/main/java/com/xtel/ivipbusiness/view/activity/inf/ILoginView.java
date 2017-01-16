@@ -12,6 +12,7 @@ public interface ILoginView {
     void onValidateError(String error);
     void loginAccount();
     void onValidatePhoneToResetSuccess(String auth_id);
+    void onNoInternet();
 
     void startActivity(Class clazz);
     void startActivityForResult(Intent intent, int request);

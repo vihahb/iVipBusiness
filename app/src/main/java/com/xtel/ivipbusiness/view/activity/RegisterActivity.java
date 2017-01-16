@@ -109,6 +109,11 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
     }
 
     @Override
+    public void onNoInternet() {
+        showShortToast(getString(R.string.error_no_internet));
+    }
+
+    @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
     }

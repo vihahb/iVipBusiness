@@ -9,6 +9,7 @@ import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
  * Created by VULCL on 1/10/2017
@@ -29,6 +30,11 @@ public class RegisterPresenter extends BasicPresenter {
         if (isPhone(username) != -1) {
             if (!validatePhone(username)) {
                 view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
+                return;
+            }
+
+            if (!NetWorkInfo.isOnline(view.getActivity())) {
+                view.onNoInternet();
                 return;
             }
 

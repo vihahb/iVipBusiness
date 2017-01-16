@@ -11,6 +11,8 @@ public interface IActiveView {
 
     void onValidateError(String error);
     void onValidatePhoneToActiveSuccess(String auth_id);
+    void onNoInternet();
+
     void startActivityAndFinish(Class clazz);
     void startActivityForResult(Intent intent, int request);
     Activity getActivity();

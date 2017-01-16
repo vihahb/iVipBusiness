@@ -14,6 +14,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.RegisterActivity;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
  * Created by VULCL on 1/10/2017
@@ -50,6 +51,11 @@ public class LoginPresenter extends BasicPresenter {
         if (!PermissionHelper.checkOnlyPermission(Manifest.permission.READ_PHONE_STATE, view.getActivity(), LOGIN_REQUEST_CODE))
             return;
 
+        if (!NetWorkInfo.isOnline(view.getActivity())) {
+            view.onNoInternet();
+            return;
+        }
+
         view.loginAccount();
     }
 
@@ -69,6 +75,11 @@ public class LoginPresenter extends BasicPresenter {
             return;
         }
 
+        if (!NetWorkInfo.isOnline(view.getActivity())) {
+            view.onNoInternet();
+            return;
+        }
+
         resetPhone();
     }
 
@@ -84,12 +95,22 @@ public class LoginPresenter extends BasicPresenter {
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST_CODE)
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (!NetWorkInfo.isOnline(view.getActivity())) {
+                view.onNoInternet();
+                return;
+            }
+
             resetPhone();
-        else if (requestCode == LOGIN_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        } else if (requestCode == LOGIN_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (!NetWorkInfo.isOnline(view.getActivity())) {
+                    view.onNoInternet();
+                    return;
+                }
+
                 view.loginAccount();
-            else
+            } else
                 view.onValidateError(view.getActivity().getString(R.string.error_not_alllow_permission));
         }
     }

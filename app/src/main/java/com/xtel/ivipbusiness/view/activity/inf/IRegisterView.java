@@ -13,6 +13,7 @@ public interface IRegisterView {
     void onRegisterAccount(String phone, String password);
     void onRegisterAccountSuccess();
     void onValidatePhoneToActiveSuccess(String auth_id);
+    void onNoInternet();
     void startActivityForResult(Intent intent, int request);
     Activity getActivity();
 }

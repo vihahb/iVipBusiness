@@ -12,6 +12,7 @@ import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IActiveView;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
  * Created by Mr. M.2 on 1/12/2017
@@ -46,6 +47,11 @@ public class ActivePresenter extends BasicPresenter {
             return;
         }
 
+        if (!NetWorkInfo.isOnline(view.getActivity())) {
+            view.onNoInternet();
+            return;
+        }
+
         startValidatePhone();
     }
 
@@ -61,6 +67,11 @@ public class ActivePresenter extends BasicPresenter {
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (!NetWorkInfo.isOnline(view.getActivity())) {
+            view.onNoInternet();
+            return;
+        }
+        
         startValidatePhone();
     }
 

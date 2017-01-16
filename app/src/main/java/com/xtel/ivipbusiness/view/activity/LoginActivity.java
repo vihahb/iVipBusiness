@@ -57,39 +57,6 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         btn_forget.setOnClickListener(this);
     }
 
-//    private void reActiveAccount(final String auth_id) {
-//        debug("reactive");
-//        callbackManager.reactiveNipAccount(edt_username.getText().toString(), true, new CallbackListenerReactive() {
-//            @Override
-//            public void onSuccess(RESP_Reactive reactive) {
-//                activeAccount(auth_id);
-//            }
-//
-//            @Override
-//            public void onError(Error error) {
-//                closeProgressBar();
-//                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
-//            }
-//        });
-//    }
-
-//    private void activeAccount(String auth_id) {
-//        debug("active now");
-//        callbackManager.activeNipAccount(auth_id, getString(R.string.type_phone), new CallbackListenerActive() {
-//            @Override
-//            public void onSuccess() {
-//                closeProgressBar();
-//                showShortToast(getString(R.string.success_active));
-//            }
-//
-//            @Override
-//            public void onError(Error error) {
-//                closeProgressBar();
-//                showShortToast(getString(R.string.error_active_account));
-//            }
-//        });
-//    }
-
     @Override
     public void onValidateError(String error) {
         showShortToast(error);
@@ -116,17 +83,16 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         });
     }
 
-//    @Override
-//    public void onValidatePhoneToActiveSuccess(String auth_id) {
-//        showProgressBar(false, false, null, getString(R.string.doing_active));
-//        reActiveAccount(auth_id);
-//    }
-
     @Override
     public void onValidatePhoneToResetSuccess(String auth_id) {
         Intent intent = new Intent(this, EnterPasswordActivity.class);
         intent.putExtra(Constants.USER_AUTH_ID, auth_id);
         startActivity(intent);
+    }
+
+    @Override
+    public void onNoInternet() {
+        showShortToast(getString(R.string.error_no_internet));
     }
 
     @Override

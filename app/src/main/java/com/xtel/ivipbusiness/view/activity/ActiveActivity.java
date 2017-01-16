@@ -95,6 +95,11 @@ public class ActiveActivity extends BasicActivity implements View.OnClickListene
     }
 
     @Override
+    public void onNoInternet() {
+        showShortToast(getString(R.string.error_no_internet));
+    }
+
+    @Override
     public void startActivityAndFinish(Class clazz) {
         super.startActivityAndFinish(clazz);
     }

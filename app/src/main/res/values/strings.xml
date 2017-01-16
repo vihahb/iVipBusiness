@@ -54,7 +54,7 @@
     <string name="error_input_re_password">Vui lòng nhập lại mật khẩu</string>
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
-    <string name="error_no_internet">Không có kết nối interner</string>
+    <string name="error_no_internet">Không có kết nối internet</string>
 
     <string name="error_register_phone">Đăng ký thất bại</string>
     <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
