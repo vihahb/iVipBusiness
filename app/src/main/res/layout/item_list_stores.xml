@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/item.list_store.txt_name"
-            style="@style/profile_textview"
+            style="@style/textview_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/birth_day" />

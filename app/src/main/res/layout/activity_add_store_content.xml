@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/size_16"
-    android:paddingRight="@dimen/size_16"
-    android:orientation="vertical">
+    android:paddingRight="@dimen/size_16">
 
     <EditText
         android:id="@+id/add_store.edt_type"
@@ -13,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_40"
         android:layout_marginTop="@dimen/size_8"
-        android:hint="Tên cửa hàng"
-        android:inputType="textCapSentences"
-        tools:ignore="LabelFor" />
+        android:hint="@string/store_name"
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/add_store.edt_address"
@@ -23,9 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_40"
         android:layout_marginTop="@dimen/size_8"
-        android:hint="Địa chỉ cửa hàng"
-        android:inputType="textCapSentences"
-        tools:ignore="LabelFor" />
+        android:hint="@string/store_address"
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/add_store.edt_phone"
@@ -33,20 +30,17 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_40"
         android:layout_marginTop="@dimen/size_8"
-        android:hint="Số điện thoại"
-        android:inputType="phone"
-        tools:ignore="LabelFor" />
+        android:hint="@string/phone"
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/add_store.edt_des"
         style="@style/edittext_des"
-        android:lines="3"
-        android:maxLines="4"
-        android:minLines="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
-        android:hint="Mô tả cửa hàng"
-        android:inputType="textCapSentences"
-        tools:ignore="LabelFor" />
+        android:hint="@string/store_des"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLines="5"
+        android:minLines="4" />
 </LinearLayout>

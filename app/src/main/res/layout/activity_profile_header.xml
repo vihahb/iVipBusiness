@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/profile.txt_total_store"
-        style="@style/profile_textview"
+        style="@style/textview_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/size_16"
@@ -33,14 +33,14 @@
 
             <TextView
                 android:id="@+id/profile.txt_fullname"
-                style="@style/profile_textview"
+                style="@style/textview_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Le Cong Long Vu" />
 
             <TextView
                 android:id="@+id/profile.txt_date_create"
-                style="@style/profile_textview"
+                style="@style/textview_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_8"

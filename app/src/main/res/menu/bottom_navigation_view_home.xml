@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/nav.view_store.info"
         android:checkable="true"
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
         android:title="@null" />
     <item
+        android:id="@+id/nav.view_store.list_store"
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
         android:title="@null" />
     <item
+        android:id="@+id/nav.view_store.member"
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
         android:title="@null" />
     <item
+        android:id="@+id/nav.view_store.news"
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
         android:title="@null" />
     <item
+        android:id="@+id/nav.view_store.near_news"
         android:enabled="true"
         android:icon="@drawable/ic_action_shopping"
         android:title="@null" />

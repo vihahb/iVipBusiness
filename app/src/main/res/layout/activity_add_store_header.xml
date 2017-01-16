@@ -28,7 +28,7 @@
             android:layout_marginEnd="@dimen/size_16"
             android:layout_marginRight="@dimen/size_16"
             android:layout_weight="1"
-            android:hint="Nhập số điện thoại"
+            android:hint="@string/input_phone"
             android:inputType="phone"
             tools:ignore="LabelFor" />
 

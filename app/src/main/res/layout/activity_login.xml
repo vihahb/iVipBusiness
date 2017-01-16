@@ -47,7 +47,7 @@
             style="@style/edittext_login"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_40"
-            android:hint="Nhập số điện thoại"
+            android:hint="@string/input_phone"
             android:inputType="phone"
             tools:ignore="LabelFor" />
 
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_40"
             android:layout_marginTop="@dimen/size_8"
-            android:hint="Nhập mật khẩu"
+            android:hint="@string/input_pass"
             android:inputType="textPassword"
             tools:ignore="LabelFor" />
 
@@ -69,7 +69,7 @@
             android:layout_marginBottom="@dimen/size_8"
             android:layout_marginTop="@dimen/size_16"
             android:background="@drawable/button_border"
-            android:text="Đăng nhập" />
+            android:text="@string/login" />
 
         <Button
             android:id="@+id/login.btn_active"

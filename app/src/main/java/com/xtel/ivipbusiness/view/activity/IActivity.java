@@ -1,6 +1,7 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +34,10 @@ public abstract class IActivity extends AppCompatActivity {
 
     protected NavigationView findNavigationView(int id) {
         return (NavigationView) findViewById(id);
+    }
+
+    protected BottomNavigationView findBottomNavigationView(int id) {
+        return (BottomNavigationView) findViewById(id);
     }
 
     protected FloatingActionButton findFloatingActionButton(int id) {

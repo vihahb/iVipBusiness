@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_180">
+
+    <ImageView
+        android:id="@+id/view_store.img_banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_180"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_16">
+
+        <TextView
+            android:id="@+id/view_store.txt_name"
+            style="@style/textview_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Le Cong Long Vu" />
+    </LinearLayout>
+</FrameLayout>

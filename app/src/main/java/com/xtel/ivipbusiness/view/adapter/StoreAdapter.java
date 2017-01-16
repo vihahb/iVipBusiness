@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Stores;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
+import com.xtel.ivipbusiness.view.activity.inf.IStoreView;
 
 import java.util.ArrayList;
 
@@ -20,11 +20,11 @@ import java.util.ArrayList;
  * Created by Mr. M.2 on 1/13/2017
  */
 
-public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.ViewHolder> {
+public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
     private ArrayList<Stores> arrayList;
-    private IListStoreView _view;
+    private IStoreView _view;
 
-    public ListStoreAdapter(IListStoreView view, ArrayList<Stores> arrayList) {
+    public StoreAdapter(IStoreView view, ArrayList<Stores> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
     }
@@ -45,6 +45,10 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.View
                     .fit().centerCrop().into(holder.img_avatar);
 
         holder.txt_name.setText(stores.getName());
+
+        holder.itemView.setOnClickListener(v -> {
+            _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
+        });
     }
 
     @Override

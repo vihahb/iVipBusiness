@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
-import com.xtel.ivipbusiness.view.fragment.ListStoresFragment;
+import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -37,7 +37,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         initView();
         initNavigationView();
 
-        replaceFragment(R.id.home_container, ListStoresFragment.newInstance(), LIST_STORE);
+        replaceFragment(R.id.home_container, StoresFragment.newInstance(), LIST_STORE);
     }
 
 //     Khởi tạo view
@@ -96,7 +96,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.nav_store) {
-            replaceFragment(R.id.home_container, ListStoresFragment.newInstance(), LIST_STORE);
+            replaceFragment(R.id.home_container, StoresFragment.newInstance(), LIST_STORE);
         } else if (id == R.id.nav_policy) {
 
         } else if (id == R.id.nav_app_info) {

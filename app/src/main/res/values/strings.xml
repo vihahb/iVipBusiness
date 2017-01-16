@@ -12,6 +12,11 @@
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_add_store">Thêm cửa hàng</string>
+    <string name="title_activity_view_store">Thông tin cửa hàng</string>
+    <string name="title_activity_list_store">Danh sách cửa hàng</string>
+    <string name="title_activity_list_member">Danh sách thành viên</string>
+    <string name="title_activity_list_news">Bản tin</string>
+    <string name="title_activity_list_near_news">Bản tin gần đây</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -59,12 +64,24 @@
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="active_account">Kích hoạt tài khoản</string>
     <string name="join_now">Tham gia ngay</string>
+    <string name="input_phone">Nhập số điện thoại</string>
+    <string name="input_new_pass">Nhập mật khẩu mới</string>
+    <string name="input_pass">Nhập mật khẩu</string>
+    <string name="input_re_pass">Nhập lại mật khẩu</string>
+    <string name="change_pass">Đổi mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="had_account">Đã có tài khoản</string>
+    
     <string name="birth_day">Ngày sinh</string>
     <string name="gender">Giới tính</string>
     <string name="phone">Số điện thoại</string>
     <string name="email">Email</string>
     <string name="address">Địa chỉ liên lạc</string>
     <string name="logout">Đăng xuất</string>
+    <string name="store_name">Tên cửa hàng</string>
+    <string name="store_address">Địa chỉ cửa hàng</string>
+    <string name="store_des">Mô tả cửa hàng</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>

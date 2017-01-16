@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="beforeDescendants"
     android:fitsSystemWindows="true"
-    android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context="com.xtel.ivipbusiness.view.activity.AddStoreActivity">
+    tools:context="com.xtel.ivipbusiness.view.activity.ViewStoreActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -28,7 +26,7 @@
                 android:theme="@style/AppTheme.AppBarOverlay">
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/add_store.toolbar"
+                    android:id="@+id/view_store.toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -43,31 +41,32 @@
                 android:background="@android:color/black" />
         </FrameLayout>
 
-        <ScrollView
+        <FrameLayout
+            android:id="@+id/view_store.container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <LinearLayout
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_56">
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:alpha="0.3"
+                android:background="@android:color/black" />
 
-                <include
-                    layout="@layout/activity_add_store_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_1"
-                    android:background="@android:color/white" />
-
-                <include
-                    layout="@layout/activity_add_store_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </ScrollView>
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/view_store.bnv_tab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:background="@android:color/transparent"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:itemIconTint="@drawable/bottom_navigation_view"
+                app:itemTextColor="@drawable/bottom_navigation_view"
+                design:menu="@menu/bottom_navigation_view_home" />
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

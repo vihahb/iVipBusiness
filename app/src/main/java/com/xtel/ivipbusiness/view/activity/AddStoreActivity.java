@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.AddStorePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IAddStoreView;
+
+import java.io.IOException;
 
 public class AddStoreActivity extends BasicActivity implements View.OnClickListener, IAddStoreView {
     private AddStorePresenter presenter;
@@ -48,13 +50,22 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     }
 
 
-
     @Override
     public void onTakePictureGallary(int type, Uri uri) {
-        if (type == 0)
-            img_banner.setImageURI(uri);
-        else
-            img_avatar.setImageURI(uri);
+        Bitmap bitmap = null;
+
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (bitmap != null) {
+            if (type == 0)
+                img_banner.setImageBitmap(bitmap);
+            else
+                img_avatar.setImageBitmap(bitmap);
+        }
     }
 
     @Override

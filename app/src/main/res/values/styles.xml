@@ -86,7 +86,7 @@
         <item name="android:textSize">@dimen/font_12</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:gravity">top</item>
         <item name="android:theme">@style/Theme_Edittext</item>
         <item name="android:paddingBottom">@dimen/size_12</item>
     </style>
@@ -97,8 +97,15 @@
         <item name="colorControlHighlight">@android:color/white</item>
     </style>
 
-    <style name="profile_textview">
+    <style name="textview_profile">
         <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="textview_des">
+        <item name="android:maxLines">4</item>
         <item name="android:textSize">@dimen/font_13</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:ellipsize">end</item>
