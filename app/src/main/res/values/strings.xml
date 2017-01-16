@@ -100,4 +100,6 @@
     <string name="statistic">Thống kê</string>
     <string name="app_info">Thông tin ứng dụng</string>
     <string name="faq">FAQ</string>
+    <string name="create_new_store">Tạo cửa hàng mới</string>
+    <string name="add_exists_store">Thêm cửa hàng đã có</string>
 </resources>
