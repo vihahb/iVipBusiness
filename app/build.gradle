@@ -46,6 +46,8 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.facebook.android:account-kit-sdk:4.18.0'
     //    End Account Kit
+    //    Floating action button slide
+    compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile project(':NIPmodule')
 }
 

@@ -48,6 +48,7 @@
             android:layout_weight="1" />
 
         <FrameLayout
+            android:id="@+id/view_store.layout_bnv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_56">
 

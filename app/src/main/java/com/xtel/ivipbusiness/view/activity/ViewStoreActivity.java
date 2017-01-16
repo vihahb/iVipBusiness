@@ -50,9 +50,9 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), STORE_INFO);
     }
 
-    //    hiển thị fratment danh sách store
+    //    hiển thị fratment danh sách chuỗi store
     private void replaceListStore() {
-        actionBar.setTitle(getString(R.string.title_activity_list_store));
+        actionBar.setTitle(getString(R.string.title_activity_chain_store));
         replaceFragment(R.id.view_store_container, ListStoresFragment.newInstance(), LIST_STORE);
     }
 

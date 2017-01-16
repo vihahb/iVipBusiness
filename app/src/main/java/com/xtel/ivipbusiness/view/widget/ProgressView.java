@@ -42,6 +42,10 @@ public class ProgressView {
         recyclerView.setAdapter(adapter);
     }
 
+    public void onScrollRecyclerview(RecyclerView.OnScrollListener onScrollListener) {
+        recyclerView.addOnScrollListener(onScrollListener);
+    }
+
     public void initData(int imageView, String textViewData, String button, String textViewPro, int color) {
         if (imageView == -1)
             this.imageView.setVisibility(View.GONE);

@@ -70,20 +70,20 @@ public class StoresFragment extends BasicFragment implements IStoreView {
 
         progressView.onLayoutClicked(view1 -> {
             progressView.setRefreshing(true);
-            progressView.hideData();
+            progressView.showData();
             presenter.getStores();
         });
 
         progressView.onRefreshListener(() -> {
             isClearData = true;
             progressView.setRefreshing(true);
-            progressView.hideData();
+            progressView.showData();
             presenter.getStores();
         });
 
         progressView.onSwipeLayoutPost(() -> {
             progressView.setRefreshing(true);
-            progressView.hideData();
+            progressView.showData();
             presenter.getStores();
         });
     }
@@ -111,7 +111,8 @@ public class StoresFragment extends BasicFragment implements IStoreView {
 
     @Override
     public void onNoNetwork() {
+        progressView.setRefreshing(false);
         progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
-        progressView.showData();
+        progressView.hideData();
     }
 }

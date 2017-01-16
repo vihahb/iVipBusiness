@@ -13,10 +13,15 @@
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_add_store">Thêm cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
+    <string name="title_activity_chain_store">Chuỗi cửa hàng</string>
     <string name="title_activity_list_store">Danh sách cửa hàng</string>
     <string name="title_activity_list_member">Danh sách thành viên</string>
     <string name="title_activity_list_news">Bản tin</string>
     <string name="title_activity_list_near_news">Bản tin gần đây</string>
+    <string name="title_activity_statistic">Thống kê</string>
+    <string name="title_activity_policy">Chính sách</string>
+    <string name="title_activity_app_info">Thông tin ứng dụng</string>
+    <string name="title_activity_faq">FAQ</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
