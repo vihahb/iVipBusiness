@@ -15,6 +15,7 @@ import com.xtel.ivipbusiness.view.activity.inf.IAddStoreView;
 
 public class AddStorePresenter extends BasicPresenter {
     private IAddStoreView view;
+
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101;
 

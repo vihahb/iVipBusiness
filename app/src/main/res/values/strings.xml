@@ -13,7 +13,7 @@
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_add_store">Thêm cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
-    <string name="title_activity_list_store">Thông tin cửa hàng</string>
+    <string name="title_activity_list_store">Danh sách cửa hàng</string>
     <string name="title_activity_chain_store">Chuỗi cửa hàng</string>
     <string name="title_activity_list_member">Danh sách thành viên</string>
     <string name="title_activity_list_news">Bản tin</string>
@@ -36,10 +36,12 @@
     <string name="action_settings">Settings</string>
 
     <!-- Dialog -->
-    <string name="doing_register" tools:ignore="TypographyEllipsis">Đang tạo tài khoản...</string>
-    <string name="doing_active" tools:ignore="TypographyEllipsis">Đang kích hoạt tài khoản...</string>
-    <string name="doing_login" tools:ignore="TypographyEllipsis">Đang đăng nhập ...</string>
-    <string name="doing_reset" tools:ignore="TypographyEllipsis">Đang lấy lại mật khẩu ...</string>
+    <string name="doing_register">Đang tạo tài khoản…</string>
+    <string name="doing_active">Đang kích hoạt tài khoản…</string>
+    <string name="doing_login">Đang đăng nhập…</string>
+    <string name="doing_reset">Đang lấy lại mật khẩu…</string>
+    <string name="can_not_load_data">Không thể tải dữ liệu</string>
+    <string name="back">Quay lại</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -52,6 +54,13 @@
     <string name="error_input_password">Vui lòng nhập mật khẩu</string>
     <string name="error_input_new_password">Vui lòng nhập mật khẩu mới</string>
     <string name="error_input_re_password">Vui lòng nhập lại mật khẩu</string>
+    <string name="error_input_fullname">Vui lòng nhập tên</string>
+    <string name="error_input_avatar">Vui lòng chọn ảnh đại diện</string>
+    <string name="error_input_gender">Vui lòng chọn giới tính</string>
+    <string name="error_input_birthday">Vui lòng chọn ngày sinh</string>
+    <string name="error_input_email">Vui lòng nhập email</string>
+    <string name="error_input_address">Vui lòng nhập địa chỉ</string>
+
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
     <string name="error_no_internet">Không có kết nối internet</string>
@@ -94,6 +103,11 @@
     <string name="click_to_try_again">Click để thử lại</string>
     <string name="loading_data">Đang tải dữ liệu</string>
 
+    <string name="updating">Đang cập nhật</string>
+    <string name="loading">Đang tải dữ liệu…</string>
+    <string name="day_create">Ngày tạo: </string>
+    <string name="store_number">Số cửa hàng</string>
+
     <!-- Menu -->
     <string name="store">Cửa hàng</string>
     <string name="policy">Chính sách</string>
@@ -102,4 +116,12 @@
     <string name="faq">FAQ</string>
     <string name="create_new_store">Tạo cửa hàng mới</string>
     <string name="add_exists_store">Thêm cửa hàng đã có</string>
+
+    <!-- Spinner -->
+    <string-array name="gender">
+        <item>Giới tính</item>
+        <item>Nam</item>
+        <item>Nữ</item>
+        <item>Free</item>
+    </string-array>
 </resources>

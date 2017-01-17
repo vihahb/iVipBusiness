@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
@@ -47,38 +49,50 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
         adapter = new ListStoreAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
-        progressView.onLayoutClicked(view1 -> {
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getListStores();
+        progressView.onLayoutClicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getListStores();
+            }
         });
 
-        progressView.onRefreshListener(() -> {
-            isClearData = true;
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getListStores();
+        progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isClearData = true;
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getListStores();
+            }
         });
 
-        progressView.onSwipeLayoutPost(() -> {
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getListStores();
+        progressView.onSwipeLayoutPost(new Runnable() {
+            @Override
+            public void run() {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getListStores();
+            }
         });
     }
 
     @Override
-    public void onGetListStoresSuccess(ArrayList<SortStore> arrayList) {
-        new Handler().postDelayed(() -> {
-            progressView.showData();
-            progressView.setRefreshing(false);
+    public void onGetListStoresSuccess(final ArrayList<SortStore> arrayList) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressView.showData();
+                progressView.setRefreshing(false);
 
-            if (isClearData) {
-                listData.clear();
-                isClearData = false;
+                if (isClearData) {
+                    listData.clear();
+                    isClearData = false;
+                }
+                listData.addAll(arrayList);
+                adapter.notifyDataSetChanged();
             }
-            listData.addAll(arrayList);
-            adapter.notifyDataSetChanged();
         }, 1000);
     }
 

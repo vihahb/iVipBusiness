@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -40,7 +42,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     private StoresAdapter adapter;
     private ArrayList<SortStore> listData;
     private ProgressView progressView;
-    private FrameLayout bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     private boolean isClearData = false;
     private final int REQUEST_CODE_ADD = 8, REQUEST_CODE_CREATE = 9;
@@ -60,7 +62,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new StoresPresenter(this);
-        bottomNavigationView = (FrameLayout) getActivity().findViewById(R.id.view_store_layout_bnv);
+        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bnv_tab);
         initFloatingActionButton(view);
         initProgressView(view);
     }
@@ -96,23 +98,32 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         adapter = new StoresAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
-        progressView.onLayoutClicked(view1 -> {
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getStores();
+        progressView.onLayoutClicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getStores();
+            }
         });
 
-        progressView.onRefreshListener(() -> {
-            isClearData = true;
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getStores();
+        progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isClearData = true;
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getStores();
+            }
         });
 
-        progressView.onSwipeLayoutPost(() -> {
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getStores();
+        progressView.onSwipeLayoutPost(new Runnable() {
+            @Override
+            public void run() {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getStores();
+            }
         });
 
         progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
@@ -143,17 +154,20 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
     //    Sự kiện load danh sách store thành công
     @Override
-    public void onGetStoresSuccess(ArrayList<SortStore> arrayList) {
-        new Handler().postDelayed(() -> {
-            progressView.showData();
-            progressView.setRefreshing(false);
+    public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressView.showData();
+                progressView.setRefreshing(false);
 
-            if (isClearData) {
-                listData.clear();
-                isClearData = false;
+                if (isClearData) {
+                    listData.clear();
+                    isClearData = false;
+                }
+                listData.addAll(arrayList);
+                adapter.notifyDataSetChanged();
             }
-            listData.addAll(arrayList);
-            adapter.notifyDataSetChanged();
         }, 1000);
     }
 

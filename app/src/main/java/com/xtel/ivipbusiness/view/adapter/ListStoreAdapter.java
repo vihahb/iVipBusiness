@@ -47,8 +47,11 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.View
 
         holder.txt_name.setText(stores.getName());
 
-        holder.itemView.setOnClickListener(v -> {
-            _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
+            }
         });
     }
 

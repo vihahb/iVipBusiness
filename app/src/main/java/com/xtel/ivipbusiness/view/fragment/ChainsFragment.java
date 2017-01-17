@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.SortStore;
-import com.xtel.ivipbusiness.model.entity.Stores;
 import com.xtel.ivipbusiness.presenter.ChainsPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
@@ -57,7 +57,12 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
     private void initFloatingActionButton() {
         FloatingActionButton fab = findFloatingActionButton(R.id.chain_fab_add);
-        fab.setOnClickListener(v -> startActivity(AddStoreActivity.class));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(AddStoreActivity.class);
+            }
+        });
     }
 
     //    Khởi tạo layout và recyclerview
@@ -70,40 +75,52 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         adapter = new ChainsAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
-        progressView.onLayoutClicked(view1 -> {
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getStores();
+        progressView.onLayoutClicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getStores();
+            }
         });
 
-        progressView.onRefreshListener(() -> {
-            isClearData = true;
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getStores();
+        progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isClearData = true;
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getStores();
+            }
         });
 
-        progressView.onSwipeLayoutPost(() -> {
-            progressView.setRefreshing(true);
-            progressView.showData();
-            presenter.getStores();
+        progressView.onSwipeLayoutPost(new Runnable() {
+            @Override
+            public void run() {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getStores();
+            }
         });
     }
 
     //    Sự kiện load danh sách store thành công
     @Override
-    public void onGetStoresSuccess(ArrayList<SortStore> arrayList) {
-        new Handler().postDelayed(() -> {
-            progressView.showData();
-            progressView.setRefreshing(false);
+    public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressView.showData();
+                progressView.setRefreshing(false);
 
-            if (isClearData) {
-                listData.clear();
-                isClearData = false;
+                if (isClearData) {
+                    listData.clear();
+                    isClearData = false;
+                }
+
+                listData.addAll(arrayList);
+                adapter.notifyDataSetChanged();
             }
-
-            listData.addAll(arrayList);
-            adapter.notifyDataSetChanged();
         }, 1000);
     }
 

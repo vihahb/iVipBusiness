@@ -172,7 +172,7 @@ public abstract class BasicActivity extends IActivity {
 
     protected void showConfirmExitApp() {
         if (isWaitingForExit) {
-            System.exit(0);
+            finish();
         } else {
             new AsyncTask<Object, Object, Object>() {
 

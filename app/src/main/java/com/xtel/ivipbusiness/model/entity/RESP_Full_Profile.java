@@ -1,6 +1,7 @@
 package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
+import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 
 /**
  * Created by Vulcl on 1/17/2017
