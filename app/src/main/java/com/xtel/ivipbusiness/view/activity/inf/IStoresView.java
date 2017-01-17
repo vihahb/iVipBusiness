@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by Mr. M.2 on 1/13/2017
  */
 
-public interface IStoreView {
+public interface IStoresView {
 
     void onGetStoresSuccess(ArrayList<Stores> arrayList);
     void onGetStoresError(Error error);

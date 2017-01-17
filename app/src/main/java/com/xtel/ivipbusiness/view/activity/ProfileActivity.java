@@ -1,5 +1,6 @@
 package com.xtel.ivipbusiness.view.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,9 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
+import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
 import com.xtel.nipservicesdk.LoginManager;
+import com.xtel.nipservicesdk.model.entity.Error;
 
-public class ProfileActivity extends BasicActivity {
+public class ProfileActivity extends BasicActivity implements IProfileView {
     private TextView txt_total_stores, txt_name, txt_date_create;
 
     @Override
@@ -57,5 +61,20 @@ public class ProfileActivity extends BasicActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onGetProfileSuccess(RESP_Full_Profile obj) {
+
+    }
+
+    @Override
+    public void onGetProfileError(Error error) {
+
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 }

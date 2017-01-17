@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
-import com.xtel.ivipbusiness.view.fragment.StoresFragment;
+import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -65,31 +65,31 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     //    Hiển thị danh sách cửa hàng
     private void replaceListStore() {
         actionBar.setTitle(getString(R.string.title_activity_list_store));
-        replaceFragment(R.id.home_container, StoresFragment.newInstance(), LIST_STORE);
+        replaceFragment(R.id.home_container, ChainsFragment.newInstance(), LIST_STORE);
     }
 
     //    Hiển thị thống kê
     private void replaceStatistic() {
         actionBar.setTitle(getString(R.string.title_activity_statistic));
-        replaceFragment(R.id.home_container, StoresFragment.newInstance(), STATISTIC);
+        replaceFragment(R.id.home_container, ChainsFragment.newInstance(), STATISTIC);
     }
 
     //    Hiển thị chính sách
     private void replacePolicy() {
         actionBar.setTitle(getString(R.string.title_activity_policy));
-        replaceFragment(R.id.home_container, StoresFragment.newInstance(), POLICY);
+        replaceFragment(R.id.home_container, ChainsFragment.newInstance(), POLICY);
     }
 
     //    Hiển thị thông tin ứng dụng
     private void replaceAppInfo() {
         actionBar.setTitle(getString(R.string.title_activity_app_info));
-        replaceFragment(R.id.home_container, StoresFragment.newInstance(), APP_INFO);
+        replaceFragment(R.id.home_container, ChainsFragment.newInstance(), APP_INFO);
     }
 
     //    Hiển thị faq
     private void replaceFaq() {
         actionBar.setTitle(getString(R.string.title_activity_faq));
-        replaceFragment(R.id.home_container, StoresFragment.newInstance(), FAQ);
+        replaceFragment(R.id.home_container, ChainsFragment.newInstance(), FAQ);
     }
 
 

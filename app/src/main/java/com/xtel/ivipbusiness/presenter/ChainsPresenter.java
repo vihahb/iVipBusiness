@@ -2,7 +2,7 @@ package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.UserModel;
 import com.xtel.ivipbusiness.model.entity.Stores;
-import com.xtel.ivipbusiness.view.activity.inf.IStoreView;
+import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * Created by Mr. M.2 on 1/13/2017
  */
 
-public class StorePresenter {
-    private IStoreView view;
+public class ChainsPresenter {
+    private IChainsView view;
 
-    public StorePresenter(IStoreView view) {
+    public ChainsPresenter(IChainsView view) {
         this.view = view;
     }
 

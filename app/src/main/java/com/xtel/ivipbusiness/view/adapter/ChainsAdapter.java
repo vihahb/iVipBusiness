@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Stores;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IStoreView;
+import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
 
 import java.util.ArrayList;
 
@@ -20,11 +20,11 @@ import java.util.ArrayList;
  * Created by Mr. M.2 on 1/13/2017
  */
 
-public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
+public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ViewHolder> {
     private ArrayList<Stores> arrayList;
-    private IStoreView _view;
+    private IChainsView _view;
 
-    public StoreAdapter(IStoreView view, ArrayList<Stores> arrayList) {
+    public ChainsAdapter(IChainsView view, ArrayList<Stores> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
     }

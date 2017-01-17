@@ -51,9 +51,9 @@
             android:name=".view.activity.EnterPasswordActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_reset_password" />
-        <activity android:name=".view.activity.ActiveActivity" />
-        android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-        android:label="@string/title_activity_active_account" />
+        <activity android:name=".view.activity.ActiveActivity"
+			android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+			android:label="@string/title_activity_active_account" />
         <activity
             android:name=".view.activity.ProfileActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"

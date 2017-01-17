@@ -5,21 +5,27 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <include
-        layout="@layout/layout_progress_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/store.fab_add"
+        <include
+            layout="@layout/layout_progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <io.github.yavski.fabspeeddial.FabSpeedDial
+        android:id="@+id/list_store.fab_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:fitsSystemWindows="false"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:backgroundTint="@drawable/floating_action_button_home"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_white_36dp" />
+        app:fabBackgroundTint="@drawable/floating_action_button_home"
+        app:fabGravity="bottom_end"
+        app:fabMenu="@menu/slide_floating_action_button"
+        app:miniFabBackgroundTint="@drawable/floating_action_button_home"
+        app:miniFabDrawableTint="@android:color/white"
+        app:miniFabTitleTextColor="@drawable/floating_action_button_home"
+        app:touchGuardDrawable="@android:color/transparent" />
 </android.support.design.widget.CoordinatorLayout>

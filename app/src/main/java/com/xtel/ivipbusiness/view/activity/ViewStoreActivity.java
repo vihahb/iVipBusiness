@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.view.fragment.ListStoresFragment;
+import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 
 public class ViewStoreActivity extends BasicActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -53,7 +53,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     //    hiển thị fratment danh sách chuỗi store
     private void replaceListStore() {
         actionBar.setTitle(getString(R.string.title_activity_chain_store));
-        replaceFragment(R.id.view_store_container, ListStoresFragment.newInstance(), LIST_STORE);
+        replaceFragment(R.id.view_store_container, StoresFragment.newInstance(), LIST_STORE);
     }
 
     //    hiển thị fratment member
