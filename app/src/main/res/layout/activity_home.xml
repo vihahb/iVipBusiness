@@ -28,7 +28,6 @@
                 android:id="@+id/home.toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/toolbar_background"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:titleTextAppearance="@style/Toolbar_TitleText" />
         </android.support.design.widget.AppBarLayout>

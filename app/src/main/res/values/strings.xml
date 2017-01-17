@@ -13,8 +13,8 @@
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_add_store">Thêm cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
+    <string name="title_activity_list_store">Thông tin cửa hàng</string>
     <string name="title_activity_chain_store">Chuỗi cửa hàng</string>
-    <string name="title_activity_list_store">Danh sách cửa hàng</string>
     <string name="title_activity_list_member">Danh sách thành viên</string>
     <string name="title_activity_list_news">Bản tin</string>
     <string name="title_activity_list_near_news">Bản tin gần đây</string>
@@ -77,7 +77,7 @@
     <string name="login">Đăng nhập</string>
     <string name="create_account">Tạo tài khoản</string>
     <string name="had_account">Đã có tài khoản</string>
-    
+
     <string name="birth_day">Ngày sinh</string>
     <string name="gender">Giới tính</string>
     <string name="phone">Số điện thoại</string>

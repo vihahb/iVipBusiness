@@ -3,7 +3,7 @@ package com.xtel.ivipbusiness.view.activity.inf;
 import android.app.Activity;
 
 import com.xtel.ivipbusiness.model.entity.Error;
-import com.xtel.ivipbusiness.model.entity.Stores;
+import com.xtel.ivipbusiness.model.entity.SortStore;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public interface IChainsView {
 
-    void onGetStoresSuccess(ArrayList<Stores> arrayList);
+    void onGetStoresSuccess(ArrayList<SortStore> arrayList);
     void onGetStoresError(Error error);
     void onNoNetwork();
     Activity getActivity();

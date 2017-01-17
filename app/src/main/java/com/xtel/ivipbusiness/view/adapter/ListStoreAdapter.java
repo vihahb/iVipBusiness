@@ -11,8 +11,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
+import com.xtel.ivipbusiness.model.entity.Stores;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
+import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
 
 import java.util.ArrayList;
 
@@ -20,11 +21,11 @@ import java.util.ArrayList;
  * Created by Mr. M.2 on 1/13/2017
  */
 
-public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ViewHolder> {
+public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.ViewHolder> {
     private ArrayList<SortStore> arrayList;
-    private IChainsView _view;
+    private IListStoreView _view;
 
-    public ChainsAdapter(IChainsView view, ArrayList<SortStore> arrayList) {
+    public ListStoreAdapter(IListStoreView view, ArrayList<SortStore> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
     }

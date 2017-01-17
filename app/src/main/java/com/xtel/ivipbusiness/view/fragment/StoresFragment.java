@@ -15,13 +15,15 @@ import android.widget.FrameLayout;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Error;
-import com.xtel.ivipbusiness.model.entity.Stores;
+import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
+import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
 import com.xtel.ivipbusiness.view.activity.inf.IStoresView;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
 
@@ -36,10 +38,12 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     private StoresPresenter presenter;
 
     private StoresAdapter adapter;
-    private ArrayList<Stores> listData;
+    private ArrayList<SortStore> listData;
     private ProgressView progressView;
     private FrameLayout bottomNavigationView;
+
     private boolean isClearData = false;
+    private final int REQUEST_CODE_ADD = 8, REQUEST_CODE_CREATE = 9;
 
     public static StoresFragment newInstance() {
         return new StoresFragment();
@@ -62,17 +66,17 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     }
 
     private void initFloatingActionButton(View view) {
-        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.list_store_fab_show);
+        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.store_fab_show);
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
                 //TODO: Start some activity
                 switch (menuItem.getItemId()) {
                     case R.id.nav_floating_create_store:
-                        startActivity(AddStoreActivity.class);
+                        startActivityForResult(AddStoreActivity.class, REQUEST_CODE_CREATE);
                         break;
                     case R.id.nav_floating_add_store:
-
+                        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
                         break;
                     default:
                         break;
@@ -139,7 +143,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
     //    Sự kiện load danh sách store thành công
     @Override
-    public void onGetStoresSuccess(ArrayList<Stores> arrayList) {
+    public void onGetStoresSuccess(ArrayList<SortStore> arrayList) {
         new Handler().postDelayed(() -> {
             progressView.showData();
             progressView.setRefreshing(false);
@@ -155,7 +159,18 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
     @Override
     public void onGetStoresError(Error error) {
+        if (listData.size() > 0)
+            showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
+        else {
+            progressView.setRefreshing(false);
+            progressView.updateData(-1, JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)), getString(R.string.click_to_try_again));
+            progressView.hideData();
 
+            listData.clear();
+            adapter.notifyDataSetChanged();
+            if (isClearData)
+                isClearData = false;
+        }
     }
 
     @Override

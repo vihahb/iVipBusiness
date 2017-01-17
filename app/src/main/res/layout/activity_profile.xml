@@ -18,31 +18,19 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <FrameLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_background"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:theme="@style/AppTheme.AppBarOverlay">
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/profile.toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:titleTextAppearance="@style/Toolbar_TitleText" />
-            </android.support.design.widget.AppBarLayout>
-
-            <View
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/profile.toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:alpha="0.3"
-                android:background="@android:color/black" />
-        </FrameLayout>
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextAppearance="@style/Toolbar_TitleText" />
+        </android.support.design.widget.AppBarLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -62,8 +50,8 @@
                 <include
                     layout="@layout/activity_profile_content"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <View
                     android:layout_width="match_parent"

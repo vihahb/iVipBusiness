@@ -3,5 +3,5 @@
     <color name="colorPrimary">#3F51B5</color>
 
     <color name="edttext_background">#665c5ca7</color>
-    <color name="toolbar_background">#66000000</color>
+    <color name="toolbar_background">#4D000000</color>
 </resources>

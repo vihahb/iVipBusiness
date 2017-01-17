@@ -1,7 +1,7 @@
 package com.xtel.ivipbusiness.presenter;
 
-import com.xtel.ivipbusiness.model.UserModel;
-import com.xtel.ivipbusiness.model.entity.Stores;
+import com.xtel.ivipbusiness.model.entity.SortStore;
+import com.xtel.ivipbusiness.model.entity.StoresModel;
 import com.xtel.ivipbusiness.view.activity.inf.IStoresView;
 import com.xtel.sdk.utils.NetWorkInfo;
 
@@ -24,7 +24,7 @@ public class StoresPresenter {
             return;
         }
 
-        ArrayList<Stores> arrayList = UserModel.getIntances().getListStore();
+        ArrayList<SortStore> arrayList = StoresModel.getInstance().getListStore();
         view.onGetStoresSuccess(arrayList);
     }
 }

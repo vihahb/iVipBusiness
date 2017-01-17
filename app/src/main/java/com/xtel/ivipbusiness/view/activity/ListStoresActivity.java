@@ -1,98 +1,74 @@
-package com.xtel.ivipbusiness.view.fragment;
+package com.xtel.ivipbusiness.view.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.MenuItem;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.SortStore;
-import com.xtel.ivipbusiness.model.entity.Stores;
-import com.xtel.ivipbusiness.presenter.ChainsPresenter;
-import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
-import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
+import com.xtel.ivipbusiness.presenter.ListStoresPresenter;
+import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
+import com.xtel.ivipbusiness.view.adapter.ListStoreAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
 
-/**
- * Created by Mr. M.2 on 1/13/2017
- */
+public class ListStoresActivity extends BasicActivity implements IListStoreView {
+    private ListStoresPresenter presenter;
 
-public class ChainsFragment extends BasicFragment implements IChainsView {
-    private ChainsPresenter presenter;
-
-    private ChainsAdapter adapter;
-    private ArrayList<SortStore> listData;
     private ProgressView progressView;
+    private ArrayList<SortStore> listData;
+    private ListStoreAdapter adapter;
     private boolean isClearData = false;
 
-    public static ChainsFragment newInstance() {
-        return new ChainsFragment();
-    }
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chains, container, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_stores);
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter = new ChainsPresenter(this);
-        initFloatingActionButton();
-        initProgressView(view);
-    }
-
-    private void initFloatingActionButton() {
-        FloatingActionButton fab = findFloatingActionButton(R.id.chain_fab_add);
-        fab.setOnClickListener(v -> startActivity(AddStoreActivity.class));
+        presenter = new ListStoresPresenter(this);
+        initToolbar(R.id.list_store_toolbar, null);
+        initProgressView();
     }
 
     //    Khởi tạo layout và recyclerview
-    private void initProgressView(View view) {
-        progressView = new ProgressView(null, view);
+    private void initProgressView() {
+        progressView = new ProgressView(this, null);
         progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         listData = new ArrayList<>();
-        adapter = new ChainsAdapter(this, listData);
+        adapter = new ListStoreAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
         progressView.onLayoutClicked(view1 -> {
             progressView.setRefreshing(true);
             progressView.showData();
-            presenter.getStores();
+            presenter.getListStores();
         });
 
         progressView.onRefreshListener(() -> {
             isClearData = true;
             progressView.setRefreshing(true);
             progressView.showData();
-            presenter.getStores();
+            presenter.getListStores();
         });
 
         progressView.onSwipeLayoutPost(() -> {
             progressView.setRefreshing(true);
             progressView.showData();
-            presenter.getStores();
+            presenter.getListStores();
         });
     }
 
-    //    Sự kiện load danh sách store thành công
     @Override
-    public void onGetStoresSuccess(ArrayList<SortStore> arrayList) {
+    public void onGetListStoresSuccess(ArrayList<SortStore> arrayList) {
         new Handler().postDelayed(() -> {
             progressView.showData();
             progressView.setRefreshing(false);
@@ -101,14 +77,13 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
                 listData.clear();
                 isClearData = false;
             }
-
             listData.addAll(arrayList);
             adapter.notifyDataSetChanged();
         }, 1000);
     }
 
     @Override
-    public void onGetStoresError(Error error) {
+    public void onGetListStoresError(Error error) {
         if (listData.size() > 0)
             showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
         else {
@@ -128,5 +103,17 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         progressView.setRefreshing(false);
         progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
         progressView.hideData();
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 }

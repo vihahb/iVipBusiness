@@ -18,17 +18,7 @@ public class UserModel extends BasicModel {
         return intances;
     }
 
-    public ArrayList<Stores> getListStore() {
-        ArrayList<Stores> arrayList = new ArrayList<>();
+    public void getUserInfo() {
 
-        for (int i = 1; i <= 30; i++) {
-            Stores stores = new Stores();
-            stores.setImage("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
-            stores.setName("Store " + i);
-
-            arrayList.add(stores);
-        }
-
-        return arrayList;
     }
 }

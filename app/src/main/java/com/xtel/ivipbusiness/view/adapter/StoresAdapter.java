@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.Stores;
+import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.inf.IStoresView;
 
 import java.util.ArrayList;
@@ -19,26 +19,26 @@ import java.util.ArrayList;
  */
 
 public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder> {
-    private ArrayList<Stores> arrayList;
+    private ArrayList<SortStore> arrayList;
     private IStoresView _view;
 
-    public StoresAdapter(IStoresView view, ArrayList<Stores> arrayList) {
+    public StoresAdapter(IStoresView view, ArrayList<SortStore> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_stores, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chain, parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Stores stores = arrayList.get(position);
+        SortStore stores = arrayList.get(position);
 
-        if (stores.getImage() != null && !stores.getImage().isEmpty())
+        if (stores.getLogo() != null && !stores.getLogo().isEmpty())
             Picasso.with(_view.getActivity())
-                    .load(stores.getImage())
+                    .load(stores.getLogo())
                     .noPlaceholder()
                     .fit().centerCrop().into(holder.img_avatar);
 
@@ -57,8 +57,8 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
         ViewHolder(View itemView) {
             super(itemView);
 
-            img_avatar = (ImageView) itemView.findViewById(R.id.item_list_store_img_avatar);
-            txt_name = (TextView) itemView.findViewById(R.id.item_list_store_txt_name);
+            img_avatar = (ImageView) itemView.findViewById(R.id.item_chain_img_avatar);
+            txt_name = (TextView) itemView.findViewById(R.id.item_chain_txt_name);
         }
     }
 }
