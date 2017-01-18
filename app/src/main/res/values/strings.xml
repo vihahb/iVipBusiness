@@ -74,7 +74,8 @@
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
-    <string name="ivip_for_business">IVIP For Business</string>
+    <string name="ivip_for_business">IVIP FOR BUSINESS</string>
+    <string name="ivip_for_business_not_cap">Ivip For Business</string>
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="active_account">Kích hoạt tài khoản</string>
     <string name="join_now">Tham gia ngay</string>

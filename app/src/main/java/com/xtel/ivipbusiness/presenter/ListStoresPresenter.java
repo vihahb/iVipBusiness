@@ -1,7 +1,11 @@
 package com.xtel.ivipbusiness.presenter;
 
-import com.xtel.ivipbusiness.model.entity.StoresModel;
+import com.xtel.ivipbusiness.model.StoresModel;
+import com.xtel.ivipbusiness.model.entity.RESP_List_Sort_Store;
 import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
@@ -21,6 +25,16 @@ public class ListStoresPresenter {
             return;
         }
 
-        view.onGetListStoresSuccess(StoresModel.getInstance().getListStoreNotInChain());
+        StoresModel.getInstance().getListStoreNotInChain(new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
+            @Override
+            public void onSuccess(RESP_List_Sort_Store obj) {
+                view.onGetListStoresSuccess(obj.getData());
+            }
+
+            @Override
+            public void onError(Error error) {
+                view.onGetListStoresError(error);
+            }
+        });
     }
 }

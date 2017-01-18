@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
@@ -25,6 +23,7 @@ import com.xtel.ivipbusiness.view.activity.inf.IStoresView;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
+import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
@@ -139,7 +138,8 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
             @Override
             public void onLoadMore() {
-
+                showShortToast("load");
+                presenter.getStores();
             }
         });
     }
@@ -152,21 +152,31 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         bottomNavigationView.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
 
+    private void checkListData() {
+        progressView.setRefreshing(false);
+
+        if (listData.size() > 0) {
+            adapter.notifyDataSetChanged();
+            progressView.showData();
+        } else {
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.hideData();
+        }
+    }
+
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                progressView.showData();
-                progressView.setRefreshing(false);
-
                 if (isClearData) {
                     listData.clear();
                     isClearData = false;
                 }
                 listData.addAll(arrayList);
-                adapter.notifyDataSetChanged();
+
+                checkListData();
             }
         }, 1000);
     }

@@ -42,7 +42,7 @@ public class ProgressView {
         recyclerView.setAdapter(adapter);
     }
 
-    public void onScrollRecyclerview(RecyclerView.OnScrollListener onScrollListener) {
+    public void onScrollRecyclerview(RecyclerOnScrollListener onScrollListener) {
         recyclerView.addOnScrollListener(onScrollListener);
     }
 

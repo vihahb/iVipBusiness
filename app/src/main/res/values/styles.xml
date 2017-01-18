@@ -6,7 +6,7 @@
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@android:color/white</item>
-        <item name="android:windowBackground">@mipmap/background_2</item>
+        <item name="android:windowBackground">@mipmap/background_app</item>
         <item name="android:windowAnimationStyle">@null</item>
         <!--<item name="colorAccent">@color/colorAccent</item>-->
     </style>
@@ -25,7 +25,7 @@
         <item name="com_accountkit_button_background_color">@android:color/transparent</item>
         <item name="com_accountkit_button_border_color">@android:color/white</item>
         <item name="com_accountkit_header_background_color">@android:color/transparent</item>
-        <item name="com_accountkit_background">@mipmap/background_2</item>
+        <item name="com_accountkit_background">@mipmap/background_app</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">

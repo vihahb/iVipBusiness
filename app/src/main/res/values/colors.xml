@@ -2,6 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
 
+    <color name="button_color">#33000000</color>
+    <color name="border_color">#33FFFFFF</color>
     <color name="edttext_background">#665c5ca7</color>
     <color name="toolbar_background">#4D000000</color>
 </resources>

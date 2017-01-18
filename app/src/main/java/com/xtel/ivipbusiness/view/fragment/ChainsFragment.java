@@ -13,19 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ChainsPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
 import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
+import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
 
 /**
- * Created by Mr. M.2 on 1/13/2017
+ * Created by Vulcl on 1/13/2017
  */
 
 public class ChainsFragment extends BasicFragment implements IChainsView {
@@ -70,7 +71,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         progressView = new ProgressView(null, view);
         progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
         adapter = new ChainsAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
@@ -99,6 +100,24 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
+                presenter.getStores();
+            }
+        });
+
+        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onScrollUp() {
+//                hideBottomView();
+            }
+
+            @Override
+            public void onScrollDown() {
+//                showBottomView();
+            }
+
+            @Override
+            public void onLoadMore() {
+                showShortToast("load");
                 presenter.getStores();
             }
         });

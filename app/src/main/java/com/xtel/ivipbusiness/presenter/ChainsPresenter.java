@@ -1,10 +1,12 @@
 package com.xtel.ivipbusiness.presenter;
 
-import com.xtel.ivipbusiness.model.UserModel;
+import com.xtel.ivipbusiness.model.entity.RESP_List_Sort_Store;
 import com.xtel.ivipbusiness.model.entity.SortStore;
-import com.xtel.ivipbusiness.model.entity.Stores;
-import com.xtel.ivipbusiness.model.entity.StoresModel;
+import com.xtel.ivipbusiness.model.StoresModel;
 import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
@@ -26,7 +28,16 @@ public class ChainsPresenter {
             return;
         }
 
-        ArrayList<SortStore> arrayList = StoresModel.getInstance().getListStore();
-        view.onGetStoresSuccess(arrayList);
+        StoresModel.getInstance().getListChains(new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
+            @Override
+            public void onSuccess(RESP_List_Sort_Store obj) {
+                view.onGetStoresSuccess(obj.getData());
+            }
+
+            @Override
+            public void onError(Error error) {
+                view.onGetStoresError(error);
+            }
+        });
     }
 }
