@@ -152,6 +152,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         bottomNavigationView.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
 
+//    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
 

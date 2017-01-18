@@ -1,12 +1,9 @@
 package com.xtel.ivipbusiness.model;
 
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
-import com.xtel.ivipbusiness.model.entity.Stores;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.BasicModel;
 import com.xtel.nipservicesdk.utils.JsonHelper;
-
-import java.util.ArrayList;
 
 /**
  * Created by Mr. M.2 on 1/12/2017

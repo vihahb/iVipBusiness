@@ -1,6 +1,5 @@
 package com.xtel.sdk.utils;
 
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -21,7 +20,6 @@ public class WidgetHelper {
 
     public static WidgetHelper getInstance() {
         if (instance == null) {
-            Log.e("WidgetHelper", "create");
             instance = new WidgetHelper();
         }
         return instance;
@@ -35,6 +33,10 @@ public class WidgetHelper {
                 .load(url)
                 .noPlaceholder()
                 .into(view);
+    }
+
+    public void setImageResource(ImageView view, int resource) {
+        view.setImageResource(resource);
     }
 
     public void setEditTextNoResult(EditText view, String content) {

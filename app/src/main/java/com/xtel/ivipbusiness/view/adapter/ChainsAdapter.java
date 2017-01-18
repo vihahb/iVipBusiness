@@ -10,11 +10,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
+import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.WidgetHelper;
 
 import java.util.ArrayList;
 
@@ -26,12 +27,16 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private ArrayList<SortStore> arrayList;
     private IChainsView _view;
 
+    private int[] background_item;
+
     private boolean isLoadMore = true;
     private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
 
     public ChainsAdapter(IChainsView view, ArrayList<SortStore> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
+        background_item = new int[]{R.mipmap.background_item_1, R.mipmap.background_item_2, R.mipmap.background_item_3, R.mipmap.background_item_4, R.mipmap.background_item_5,
+                R.mipmap.background_item_6, R.mipmap.background_item_7, R.mipmap.background_item_8};
     }
 
     @Override
@@ -50,13 +55,12 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ViewHolder viewHolder = (ViewHolder) holder;
             SortStore stores = arrayList.get(position);
 
-            if (stores.getLogo() != null && !stores.getLogo().isEmpty())
-                Picasso.with(_view.getActivity())
-                        .load(stores.getLogo())
-                        .noPlaceholder()
-                        .fit().centerCrop().into(viewHolder.img_avatar);
+            WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, stores.getBanner());
+            WidgetHelper.getInstance().setImageURL(viewHolder.img_avatar, stores.getLogo());
+            WidgetHelper.getInstance().setImageResource(viewHolder.img_background, background_item[Constants.randInt(0, 7)]);
 
-            viewHolder.txt_name.setText(stores.getName());
+            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
+            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,14 +91,17 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView img_avatar;
-        private TextView txt_name;
+        private ImageView img_banner, img_avatar, img_background;
+        private TextView txt_name, txt_address;
 
         ViewHolder(View itemView) {
             super(itemView);
 
+            img_background = (ImageView) itemView.findViewById(R.id.item_chain_img_background);
+            img_banner = (ImageView) itemView.findViewById(R.id.item_chain_img_banner);
             img_avatar = (ImageView) itemView.findViewById(R.id.item_chain_img_avatar);
             txt_name = (TextView) itemView.findViewById(R.id.item_chain_txt_name);
+            txt_address = (TextView) itemView.findViewById(R.id.item_chain_txt_address);
         }
     }
 

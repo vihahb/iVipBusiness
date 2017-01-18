@@ -22,12 +22,10 @@
     <string name="title_activity_policy">Chính sách</string>
     <string name="title_activity_app_info">Thông tin ứng dụng</string>
     <string name="title_activity_faq">FAQ</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="service_code_key">XTL-IVIP-B</string>
-
     <string name="type_phone">PHONE-NUMBER</string>
 
     <!-- Action -->
@@ -64,13 +62,12 @@
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
     <string name="error_no_internet">Không có kết nối internet</string>
+    <string name="error_get_image">Không thể tải hình ảnh</string>
+    <string name="error_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
 
     <string name="error_register_phone">Đăng ký thất bại</string>
     <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
     <string name="error_can_not_resett">Không thể đổi mật khẩu</string>
-
-    <!-- Choose login -->
-    <string name="login_by">Đăng nhập bằng</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -87,6 +84,7 @@
     <string name="login">Đăng nhập</string>
     <string name="create_account">Tạo tài khoản</string>
     <string name="had_account">Đã có tài khoản</string>
+    <string name="login_by">Đăng nhập bằng</string>
 
     <string name="birth_day">Ngày sinh</string>
     <string name="gender">Giới tính</string>
@@ -108,6 +106,9 @@
     <string name="loading">Đang tải dữ liệu…</string>
     <string name="day_create">Ngày tạo: </string>
     <string name="store_number">Số cửa hàng</string>
+
+    <string name="not_update_name">Chưa cập nhật tên</string>
+    <string name="not_update_address">Chưa cập nhật địa chỉ</string>
 
     <!-- Menu -->
     <string name="store">Cửa hàng</string>

@@ -1,10 +1,13 @@
 package com.xtel.ivipbusiness.presenter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.xtel.ivipbusiness.R;
@@ -14,6 +17,7 @@ import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
@@ -24,8 +28,9 @@ import com.xtel.sdk.utils.NetWorkInfo;
 public class ProfilePresenter extends BasicPresenter {
     private IProfileView view;
 
+    private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private int TAKE_PICTURE_TYPE = 0;
-    private final int REQUEST_CODE_CAMERA = 101;
+    private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
     public ProfilePresenter(IProfileView view) {
         this.view = view;
@@ -47,7 +52,13 @@ public class ProfilePresenter extends BasicPresenter {
 
     public void takePicture(int type) {
         TAKE_PICTURE_TYPE = type;
+        if (!PermissionHelper.checkListPermission(permission, view.getActivity(), REQUEST_CAMERA))
+            return;
 
+        takePictureNow();
+    }
+
+    private void takePictureNow() {
         final Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryIntent.setType("image/*");
 
@@ -109,6 +120,23 @@ public class ProfilePresenter extends BasicPresenter {
         }
 
         return true;
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CAMERA) {
+            boolean check = true;
+            for (int grantresults : grantResults) {
+                if (grantresults == PackageManager.PERMISSION_DENIED) {
+                    check = false;
+                    break;
+                }
+            }
+
+            if (check)
+                takePictureNow();
+            else
+                view.onValidateError(view.getActivity().getString(R.string.error_permission));
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

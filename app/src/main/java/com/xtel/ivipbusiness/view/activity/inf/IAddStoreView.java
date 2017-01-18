@@ -13,6 +13,7 @@ public interface IAddStoreView {
 
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
+    void showShortToast(String message);
     void startActivityForResult(Intent intent, int requestCode);
     Activity getActivity();
 }

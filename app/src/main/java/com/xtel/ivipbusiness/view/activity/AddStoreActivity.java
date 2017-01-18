@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -52,6 +53,11 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onTakePictureGallary(int type, Uri uri) {
+        if (uri == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
         Bitmap bitmap = null;
 
         try {
@@ -70,10 +76,20 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onTakePictureCamera(int type, Bitmap bitmap) {
+        if (bitmap == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
         if (type == 0)
             img_banner.setImageBitmap(bitmap);
         else
             img_avatar.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void showShortToast(String message) {
+        super.showShortToast(message);
     }
 
     @Override
@@ -96,6 +112,12 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override

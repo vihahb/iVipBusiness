@@ -15,7 +15,7 @@ import com.xtel.ivipbusiness.presenter.LoginPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
-import com.xtel.nipservicesdk.commons.Constants;
+import com.xtel.nipservicesdk.commons.Cts;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonHelper;
@@ -38,7 +38,6 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         callbackManager = CallbackManager.create(this);
 
         presenter = new LoginPresenter(this);
-//        initToolbar(R.id.login_toolbar, null);
         initView();
     }
 
@@ -86,7 +85,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
     @Override
     public void onValidatePhoneToResetSuccess(String auth_id) {
         Intent intent = new Intent(this, EnterPasswordActivity.class);
-        intent.putExtra(Constants.USER_AUTH_ID, auth_id);
+        intent.putExtra(Cts.USER_AUTH_ID, auth_id);
         startActivity(intent);
     }
 

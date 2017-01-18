@@ -4,7 +4,6 @@
     <group android:checkableBehavior="single">
         <item
             android:checkable="false"
-            android:icon="@drawable/ic_menu_white_48dp"
             android:title="@string/ivip_for_business_not_cap" />
         <item
             android:id="@+id/nav.home.store"

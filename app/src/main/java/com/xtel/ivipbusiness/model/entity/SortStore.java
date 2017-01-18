@@ -17,6 +17,8 @@ public class SortStore {
     private String name;
     @Expose
     private String store_type;
+    @Expose
+    private String address;
 
     public int getId() {
         return id;
@@ -56,5 +58,13 @@ public class SortStore {
 
     public void setStore_type(String store_type) {
         this.store_type = store_type;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

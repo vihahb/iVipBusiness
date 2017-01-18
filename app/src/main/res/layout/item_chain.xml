@@ -1,36 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/size_8"
+    android:layout_height="@dimen/size_180"
     android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingLeft="@dimen/size_16"
-    android:paddingRight="@dimen/size_16">
+    android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
-        android:id="@+id/item.chain.img_avatar"
-        android:layout_width="@dimen/size_40"
-        android:layout_height="@dimen/size_40"
-        android:layout_marginBottom="@dimen/size_4"
+        android:id="@+id/item.chain.img_banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:contentDescription="@null"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/item.chain.img_background"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_100"
+        android:layout_gravity="bottom"
+        android:alpha="0.4"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@mipmap/background_item_1" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_16"
-        android:layout_marginStart="@dimen/size_16"
+        android:layout_height="match_parent"
         android:gravity="bottom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/size_16">
 
-        <TextView
-            android:id="@+id/item.chain.txt_name"
-            style="@style/textview_profile"
+        <ImageView
+            android:id="@+id/item.chain.img_avatar"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/birth_day" />
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginStart="@dimen/size_16"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item.chain.txt_name"
+                style="@style/textview_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/birth_day" />
+
+            <TextView
+                android:id="@+id/item.chain.txt_address"
+                style="@style/textview_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/birth_day" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

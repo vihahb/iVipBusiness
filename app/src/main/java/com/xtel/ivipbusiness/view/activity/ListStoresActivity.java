@@ -16,6 +16,7 @@ import com.xtel.ivipbusiness.presenter.ListStoresPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
 import com.xtel.ivipbusiness.view.adapter.ListStoreAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
@@ -44,7 +45,7 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
         progressView = new ProgressView(this, null);
         progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         listData = new ArrayList<>();
         adapter = new ListStoreAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
@@ -76,6 +77,37 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
                 presenter.getListStores();
             }
         });
+
+        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onScrollUp() {
+//                hideBottomView();
+            }
+
+            @Override
+            public void onScrollDown() {
+//                showBottomView();
+            }
+
+            @Override
+            public void onLoadMore() {
+                showShortToast("load");
+                presenter.getListStores();
+            }
+        });
+    }
+
+//    Kiểm tra xem danh sách cửa hàng có trống không
+    private void checkListData() {
+        progressView.setRefreshing(false);
+
+        if (listData.size() > 0) {
+            adapter.notifyDataSetChanged();
+            progressView.showData();
+        } else {
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.hideData();
+        }
     }
 
     @Override
@@ -83,15 +115,13 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                progressView.showData();
-                progressView.setRefreshing(false);
-
                 if (isClearData) {
                     listData.clear();
                     isClearData = false;
                 }
                 listData.addAll(arrayList);
-                adapter.notifyDataSetChanged();
+
+                checkListData();
             }
         }, 1000);
     }

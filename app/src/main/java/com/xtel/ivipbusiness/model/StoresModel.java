@@ -31,6 +31,7 @@ public class StoresModel {
             stores.setLogo("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
             stores.setName("Store " + i);
             stores.setStore_type("STYPE");
+            stores.setAddress("Tòa nhà Phương Nga, ngõ 84 Trần Thái Tông, Hà Nội");
 
             arrayList.add(stores);
         }
@@ -50,6 +51,7 @@ public class StoresModel {
             stores.setLogo("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
             stores.setName("Store " + i);
             stores.setStore_type("STYPE");
+            stores.setAddress("Tòa nhà Phương Nga, ngõ 84 Trần Thái Tông, Hà Nội");
 
             arrayList.add(stores);
         }

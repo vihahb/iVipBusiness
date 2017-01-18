@@ -2,7 +2,7 @@ package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IEnterPassView;
-import com.xtel.nipservicesdk.commons.Constants;
+import com.xtel.nipservicesdk.commons.Cts;
 
 /**
  * Created by Mr. M.2 on 1/12/2017.
@@ -18,7 +18,7 @@ public class EnterPassPresenter extends BasicPresenter {
 
     public void getData() {
         try {
-            auth_id = view.getActivity().getIntent().getExtras().getString(Constants.USER_AUTH_ID);
+            auth_id = view.getActivity().getIntent().getExtras().getString(Cts.USER_AUTH_ID);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -34,58 +34,79 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="false"
-        android:gravity="bottom"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/size_16"
-        android:paddingLeft="@dimen/size_36"
-        android:paddingRight="@dimen/size_36"
-        android:paddingTop="@dimen/size_24">
+        android:paddingBottom="@dimen/size_60"
+        android:paddingTop="@dimen/size_48">
 
-        <EditText
-            android:id="@+id/register.edt_username"
-            style="@style/edittext_login"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40"
-            android:hint="@string/input_phone"
-            android:inputType="phone"
-            tools:ignore="LabelFor" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <EditText
-            android:id="@+id/register.edt_pass"
-            style="@style/edittext_login"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40"
-            android:hint="@string/input_pass"
-            android:inputType="textPassword"
-            tools:ignore="LabelFor" />
+            <com.xtel.ivipbusiness.view.widget.SquareImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/register.edt_re_pass"
-            style="@style/edittext_login"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40"
-            android:hint="@string/input_re_pass"
-            android:inputType="textPassword"
-            tools:ignore="LabelFor" />
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:paddingTop="@dimen/size_24"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/size_60"
+            android:paddingLeft="@dimen/size_48"
+            android:paddingRight="@dimen/size_48">
 
-        <Button
-            android:id="@+id/register.btn_register"
-            style="@style/button_login"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_48"
-            android:layout_marginTop="@dimen/size_16"
-            android:text="@string/create_account" />
+            <EditText
+                android:id="@+id/register.edt_username"
+                style="@style/edittext_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40"
+                android:hint="@string/input_phone"
+                android:inputType="phone"
+                tools:ignore="LabelFor" />
 
-        <Button
-            android:id="@+id/register.btn_exists"
-            style="@style/button_login"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_36"
-            android:layout_marginLeft="@dimen/size_4"
-            android:layout_marginStart="@dimen/size_4"
-            android:layout_marginTop="@dimen/size_8"
-            android:background="@android:color/transparent"
-            android:text="@string/had_account" />
+            <EditText
+                android:id="@+id/register.edt_pass"
+                style="@style/edittext_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40"
+                android:hint="@string/input_pass"
+                android:inputType="textPassword"
+                tools:ignore="LabelFor" />
+
+            <EditText
+                android:id="@+id/register.edt_re_pass"
+                style="@style/edittext_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40"
+                android:hint="@string/input_re_pass"
+                android:inputType="textPassword"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/register.btn_register"
+                style="@style/button_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_48"
+                android:layout_marginTop="@dimen/size_16"
+                android:text="@string/create_account" />
+
+            <Button
+                android:id="@+id/register.btn_exists"
+                style="@style/button_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_48"
+                android:layout_marginTop="@dimen/size_16"
+                android:background="@drawable/button_border_transparent"
+                android:text="@string/had_account" />
+        </LinearLayout>
     </LinearLayout>
     <!--</ScrollView>-->
 </ScrollView>

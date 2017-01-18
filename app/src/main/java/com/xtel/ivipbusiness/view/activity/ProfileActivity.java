@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -157,6 +158,11 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     @Override
     public void onTakePictureGallary(int type, Uri uri) {
+        if (uri == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
         Bitmap bitmap = null;
 
         try {
@@ -175,6 +181,11 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     @Override
     public void onTakePictureCamera(int type, Bitmap bitmap) {
+        if (bitmap == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
         if (type == 0)
             img_banner.setImageBitmap(bitmap);
         else
@@ -218,6 +229,12 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override

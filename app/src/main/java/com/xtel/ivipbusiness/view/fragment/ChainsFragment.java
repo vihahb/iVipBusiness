@@ -117,10 +117,22 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
             @Override
             public void onLoadMore() {
-                showShortToast("load");
                 presenter.getStores();
             }
         });
+    }
+
+//    Kiểm tra xem danh sách cửa hàng có trống không
+    private void checkListData() {
+        progressView.setRefreshing(false);
+
+        if (listData.size() > 0) {
+            adapter.notifyDataSetChanged();
+            progressView.showData();
+        } else {
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.hideData();
+        }
     }
 
     //    Sự kiện load danh sách store thành công
@@ -129,16 +141,13 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                progressView.showData();
-                progressView.setRefreshing(false);
-
                 if (isClearData) {
                     listData.clear();
                     isClearData = false;
                 }
-
                 listData.addAll(arrayList);
-                adapter.notifyDataSetChanged();
+
+                checkListData();
             }
         }, 1000);
     }
