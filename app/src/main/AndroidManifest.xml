@@ -72,6 +72,10 @@
             android:name=".view.activity.ListStoresActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_list_store" />
+        <activity
+            android:name=".view.activity.HistoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_history" />
 
         <meta-data
             android:name="xtel_service_code"

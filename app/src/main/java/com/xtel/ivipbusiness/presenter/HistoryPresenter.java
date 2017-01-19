@@ -1,8 +1,9 @@
 package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.MemberModel;
+import com.xtel.ivipbusiness.model.entity.RESP_History;
 import com.xtel.ivipbusiness.model.entity.RESP_Member;
-import com.xtel.ivipbusiness.view.activity.inf.IMemberView;
+import com.xtel.ivipbusiness.view.activity.inf.IHistoryView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.sdk.utils.NetWorkInfo;
@@ -11,10 +12,10 @@ import com.xtel.sdk.utils.NetWorkInfo;
  * Created by Vulcl on 1/19/2017
  */
 
-public class MemberPresenter {
-    private IMemberView view;
+public class HistoryPresenter {
+    private IHistoryView view;
 
-    public MemberPresenter(IMemberView view) {
+    public HistoryPresenter(IHistoryView view) {
         this.view = view;
     }
 
@@ -24,15 +25,15 @@ public class MemberPresenter {
             return;
         }
 
-        MemberModel.getInstance().getListMember(new ResponseHandle<RESP_Member>(RESP_Member.class) {
+        MemberModel.getInstance().getHistoryById(new ResponseHandle<RESP_History>(RESP_History.class) {
             @Override
-            public void onSuccess(RESP_Member obj) {
-                view.onGetMemberSuccess(obj.getData());
+            public void onSuccess(RESP_History obj) {
+                view.onGetHistorySuccess(obj.getData());
             }
 
             @Override
             public void onError(Error error) {
-                view.onGetMemberError(error);
+                view.onGetHistoryError(error);
             }
         });
     }

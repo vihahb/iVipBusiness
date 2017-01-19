@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
+import com.xtel.ivipbusiness.view.activity.HistoryActivity;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
 import com.xtel.ivipbusiness.view.activity.inf.IMemberView;
@@ -23,7 +24,7 @@ import com.xtel.sdk.utils.WidgetHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Mr. M.2 on 1/13/2017
+ * Created by Mr. M.2 on 1/19/2017
  */
 
 public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -61,6 +62,13 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_shopping, _view.getActivity().getString(R.string.total_shopping), String.valueOf(member.getTotal_shopping()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getTotal_shopping_in_store()));
             WidgetHelper.getInstance().setTextViewBirthday(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin), member.getLast_checkin());
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    _view.getActivity().startActivity(new Intent(_view.getActivity(), HistoryActivity.class));
+                }
+            });
         } else {
             ViewProgressBar viewProgressBar = (ViewProgressBar) holder;
             viewProgressBar.progressBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);

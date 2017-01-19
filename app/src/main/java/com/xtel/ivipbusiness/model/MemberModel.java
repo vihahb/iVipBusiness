@@ -1,5 +1,8 @@
-package com.xtel.ivipbusiness.model.entity;
+package com.xtel.ivipbusiness.model;
 
+import com.xtel.ivipbusiness.model.entity.History;
+import com.xtel.ivipbusiness.model.entity.RESP_History;
+import com.xtel.ivipbusiness.model.entity.RESP_Member;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Member;
 import com.xtel.nipservicesdk.utils.JsonHelper;
@@ -23,7 +26,7 @@ public class MemberModel {
         RESP_Member resp_member = new RESP_Member();
         ArrayList<Member> arrayList = new ArrayList<>();
 
-        for (int i = 1; i < 31; i++) {
+        for (int i = 1; i < 21; i++) {
             Member member = new Member();
             member.setId(i);
             member.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
@@ -40,5 +43,23 @@ public class MemberModel {
 
         resp_member.setData(arrayList);
         responseHandle.onSuccess(JsonHelper.toJson(resp_member));
+    }
+
+    public void getHistoryById(ResponseHandle responseHandle) {
+        RESP_History resp_history = new RESP_History();
+        ArrayList<History> arrayList = new ArrayList<>();
+
+        for (int i = 1; i < 21; i++) {
+            History history = new History();
+
+            history.setId(i);
+            history.setDate(1483981200000L);
+            history.setContent("Checkin lan: " + i);
+
+            arrayList.add(history);
+        }
+
+        resp_history.setData(arrayList);
+        responseHandle.onSuccess(JsonHelper.toJson(resp_history));
     }
 }
