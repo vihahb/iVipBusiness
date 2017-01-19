@@ -13,6 +13,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.util.ArrayList;
@@ -90,18 +91,18 @@ public class ListStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return arrayList.size();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends ViewHolderHelper {
         private ImageView img_banner, img_avatar, img_background;
         private TextView txt_name, txt_address;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            img_background = (ImageView) itemView.findViewById(R.id.item_chain_img_background);
-            img_banner = (ImageView) itemView.findViewById(R.id.item_chain_img_banner);
-            img_avatar = (ImageView) itemView.findViewById(R.id.item_chain_img_avatar);
-            txt_name = (TextView) itemView.findViewById(R.id.item_chain_txt_name);
-            txt_address = (TextView) itemView.findViewById(R.id.item_chain_txt_address);
+            img_background = findImageView(R.id.item_chain_img_background);
+            img_banner = findImageView(R.id.item_chain_img_banner);
+            img_avatar = findImageView(R.id.item_chain_img_avatar);
+            txt_name = findTextView(R.id.item_chain_txt_name);
+            txt_address = findTextView(R.id.item_chain_txt_address);
         }
     }
 

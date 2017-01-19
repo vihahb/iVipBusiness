@@ -76,6 +76,10 @@ public class WidgetHelper {
         view.setText(content);
     }
 
+    public void setTextViewNoResult(TextView view, String title, String content) {
+        view.setText((title + ": " + content));
+    }
+
     public void setTextViewWithResult(TextView view, String content, String result) {
         if (content == null || content.isEmpty())
             view.setText(result);
@@ -85,9 +89,9 @@ public class WidgetHelper {
 
     public void setTextViewBirthday(TextView view, String content, long milliseconds) {
         if (milliseconds == 0)
-            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            view.setText((content + ": " + MyApplication.context.getString(R.string.updating)));
         else
-            view.setText((content + getBirthday(milliseconds)));
+            view.setText((content + ": " + getBirthday(milliseconds)));
     }
 
     private String getBirthday(long milliseconds) {

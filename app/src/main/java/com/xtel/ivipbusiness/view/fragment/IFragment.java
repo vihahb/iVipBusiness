@@ -1,5 +1,6 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -31,6 +33,10 @@ public abstract class IFragment extends Fragment {
 
     protected NavigationView findNavigationView(int id) {
         return (NavigationView) getView().findViewById(id);
+    }
+
+    protected BottomNavigationView findBottomNavigationView(int id) {
+        return (BottomNavigationView) getView().findViewById(id);
     }
 
     protected FloatingActionButton findFloatingActionButton(int id) {
@@ -71,5 +77,9 @@ public abstract class IFragment extends Fragment {
 
     protected RatingBar findRatingBar(int id) {
         return (RatingBar) getView().findViewById(id);
+    }
+
+    protected ImageView findImageView(int id) {
+        return (ImageView) getView().findViewById(id);
     }
 }

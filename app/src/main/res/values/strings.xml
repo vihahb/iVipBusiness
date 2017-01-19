@@ -96,6 +96,13 @@
     <string name="store_address">Địa chỉ cửa hàng</string>
     <string name="store_des">Mô tả cửa hàng</string>
 
+    <string name="total_point">Tổng điểm</string>
+    <string name="remaining_point">Điểm còn lại</string>
+    <string name="total_checkin">Số lần checkin</string>
+    <string name="total_shopping">Số lần mua hàng</string>
+    <string name="total_shopping_in_store">Số lần mua hàng tại store</string>
+    <string name="last_checkin">Thồi gian checkin cuối</string>
+
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>
@@ -104,7 +111,7 @@
 
     <string name="updating">Đang cập nhật</string>
     <string name="loading">Đang tải dữ liệu…</string>
-    <string name="day_create">Ngày tạo: </string>
+    <string name="day_create">Ngày tạo</string>
     <string name="store_number">Số cửa hàng</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
