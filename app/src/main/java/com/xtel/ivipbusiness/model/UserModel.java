@@ -1,6 +1,7 @@
 package com.xtel.ivipbusiness.model;
 
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
+import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.BasicModel;
 import com.xtel.nipservicesdk.utils.JsonHelper;
@@ -16,6 +17,15 @@ public class UserModel extends BasicModel {
         if (intances == null)
             intances = new UserModel();
         return intances;
+    }
+
+    public void getShortUserInfo(ResponseHandle responseHandle) {
+        RESP_Short_Profile resp_short_profile = new RESP_Short_Profile();
+
+        resp_short_profile.setFullname("Le Cong Long Vu");
+        resp_short_profile.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
+
+        responseHandle.onSuccess(JsonHelper.toJson(resp_short_profile));
     }
 
     public void getUserInfo(ResponseHandle responseHandle) {

@@ -1,6 +1,10 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,11 +15,23 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
+import com.xtel.ivipbusiness.view.widget.CircleTransform;
+import com.xtel.nipservicesdk.model.entity.Error;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -27,6 +43,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBar actionBar;
+    private MenuItem menuItem;
 
     private final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
 
@@ -39,6 +56,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         initView();
         initNavigationView();
         replaceListStore();
+        presenter.getShortUserData();
     }
 
     //     Khởi tạo view
@@ -105,6 +123,40 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
 
 
+    @Override
+    public void onGetShortUserDataSuccess(RESP_Short_Profile obj) {
+        showShortToast("ok get data");
+        ImageView imageView = new ImageView(this);
+        imageView.setVisibility(View.GONE);
+
+        Picasso.with(getApplicationContext())
+                .load(obj.getAvatar())
+                .noPlaceholder()
+                .transform(new CircleTransform())
+                .error(R.mipmap.ic_launcher)
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        menuItem.setIcon(imageView.getDrawable());
+                        imageView.destroyDrawingCache();
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onGetShortUserDataError(Error error) {
+
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
 
     @Override
     public void onBackPressed() {
@@ -119,7 +171,16 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
+        menuItem = menu.findItem(R.id.action_home_user_info);
+
+//        MenuItem item = menu.findItem(R.id.action_home_user_info);
+//        MenuItemCompat.setActionView(item, R.layout.action_view_home);
+//        FrameLayout layout = (FrameLayout) MenuItemCompat.getActionView(item);
+//        img_avatar = (ImageView) layout.findViewById(R.id.action_home_img_avatar);
+//        img_avatar.setImageResource(R.mipmap.background_app);
+//        menu.findItem(R.id.action_home_user_info).setIcon(getUserImage(""));
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -130,7 +191,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.home_action_user_info) {
+        if (id == R.id.action_home_user_info) {
             startActivity(ProfileActivity.class);
         }
         return super.onOptionsItemSelected(item);
@@ -155,10 +216,5 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public Activity getActivity() {
-        return this;
     }
 }

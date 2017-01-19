@@ -8,18 +8,23 @@
         <item
             android:id="@+id/nav.home.store"
             android:checked="true"
+            android:icon="@mipmap/ic_shopping"
             android:title="@string/store" />
         <item
             android:id="@+id/nav.home.statistic"
+            android:icon="@mipmap/ic_statistic"
             android:title="@string/statistic" />
         <item
             android:id="@+id/nav.home.policy"
+            android:icon="@mipmap/ic_policy"
             android:title="@string/policy" />
         <item
             android:id="@+id/nav.home.app_info"
+            android:icon="@mipmap/ic_infomation"
             android:title="@string/app_info" />
         <item
             android:id="@+id/nav.home.faq"
+            android:icon="@mipmap/ic_faq"
             android:title="@string/faq" />
     </group>
 </menu>

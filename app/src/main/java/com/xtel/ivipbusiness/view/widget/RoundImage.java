@@ -20,6 +20,10 @@ import android.widget.ImageView;
 
 public class RoundImage extends ImageView {
 
+    public RoundImage(Context context) {
+        super(context);
+    }
+
     public RoundImage(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
     }

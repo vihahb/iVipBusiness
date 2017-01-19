@@ -1,10 +1,12 @@
 package com.xtel.sdk.utils;
 
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.MyApplication;
@@ -32,7 +34,17 @@ public class WidgetHelper {
         Picasso.with(MyApplication.context)
                 .load(url)
                 .noPlaceholder()
-                .into(view);
+                .into(view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("WidgetHelper", "load ok");
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("WidgetHelper", "load error");
+                    }
+                });
     }
 
     public void setImageResource(ImageView view, int resource) {

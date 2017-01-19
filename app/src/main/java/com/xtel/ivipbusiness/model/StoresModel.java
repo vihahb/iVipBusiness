@@ -32,6 +32,7 @@ public class StoresModel {
             stores.setName("Store " + i);
             stores.setStore_type("STYPE");
             stores.setAddress("Tòa nhà Phương Nga, ngõ 84 Trần Thái Tông, Hà Nội");
+            stores.setBg_id(0);
 
             arrayList.add(stores);
         }
@@ -52,6 +53,7 @@ public class StoresModel {
             stores.setName("Store " + i);
             stores.setStore_type("STYPE");
             stores.setAddress("Tòa nhà Phương Nga, ngõ 84 Trần Thái Tông, Hà Nội");
+            stores.setBg_id(0);
 
             arrayList.add(stores);
         }

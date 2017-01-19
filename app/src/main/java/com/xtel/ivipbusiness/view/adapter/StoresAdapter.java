@@ -50,12 +50,15 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
+            if (arrayList.get(position).getBg_id() == 0)
+                arrayList.get(position).setBg_id(background_item[Constants.randInt(1, 7)]);
+
             ViewHolder viewHolder = (ViewHolder) holder;
             SortStore stores = arrayList.get(position);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, stores.getBanner());
             WidgetHelper.getInstance().setImageURL(viewHolder.img_avatar, stores.getLogo());
-            WidgetHelper.getInstance().setImageResource(viewHolder.img_background, background_item[Constants.randInt(0, 7)]);
+            WidgetHelper.getInstance().setImageResource(viewHolder.img_background, stores.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));

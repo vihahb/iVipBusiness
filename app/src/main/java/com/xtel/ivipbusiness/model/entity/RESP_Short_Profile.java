@@ -7,7 +7,7 @@ import com.xtel.nipservicesdk.model.entity.RESP_Basic;
  * Created by Vulcl on 1/17/2017
  */
 
-public class RESP_Sort_Profile extends RESP_Basic {
+public class RESP_Short_Profile extends RESP_Basic {
     @Expose
     private String fullname;
     @Expose

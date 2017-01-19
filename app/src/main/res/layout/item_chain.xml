@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_100"
         android:layout_gravity="bottom"
-        android:alpha="0.4"
+        android:alpha="0.6"
         android:contentDescription="@null"
         android:scaleType="fitXY"
         android:src="@mipmap/background_item_1" />
