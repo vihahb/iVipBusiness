@@ -1,9 +1,9 @@
-package com.xtel.ivipbusiness.view.activity.inf;
+package com.xtel.ivipbusiness.view.fragment.inf;
 
 import android.app.Activity;
 
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.Member;
+import com.xtel.ivipbusiness.model.entity.Member;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public interface IMemberView {
 
+    void onLoadMore();
     void onGetMemberSuccess(ArrayList<Member> arrayList);
     void onGetMemberError(Error error);
     void onNoNetwork();

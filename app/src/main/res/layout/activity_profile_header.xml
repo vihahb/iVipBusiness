@@ -1,63 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_180">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_110">
 
     <ImageView
         android:id="@+id/profile.img_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_180"
+        android:layout_alignBottom="@+id/profile.layout_header_content"
+        android:layout_alignTop="@+id/profile.layout_header_content"
+        android:alpha="0.9"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/demo_banner" />
 
     <LinearLayout
+        android:id="@+id/profile.layout_header_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/profile.txt_total_store"
-            style="@style/textview_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_16"
-            android:layout_marginTop="@dimen/size_16"
-            android:gravity="right|end"
-            android:text="@string/loading" />
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/size_36"
+        android:paddingLeft="@dimen/size_16"
+        android:paddingRight="@dimen/size_16"
+        android:paddingTop="@dimen/size_36">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/size_8"
-            android:gravity="bottom"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/size_16">
+            android:paddingBottom="@dimen/size_16"
+            android:paddingTop="@dimen/size_16">
+
+            <TextView
+                android:id="@+id/profile.txt_date_create"
+                style="@style/textview_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loading" />
+
+            <TextView
+                android:id="@+id/profile.txt_total_store"
+                style="@style/textview_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginStart="@dimen/size_16"
+                android:layout_weight="1"
+                android:gravity="right|end"
+                android:text="@string/loading" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1"
+            android:background="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/size_16"
+            android:paddingTop="@dimen/size_16">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/size_16"
+                android:layout_marginRight="@dimen/size_16"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingEnd="@dimen/size_16"
-                android:paddingRight="@dimen/size_16">
-
-                <EditText
-                    android:id="@+id/profile.edt_fullname"
-                    style="@style/edittext_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
-                    android:layout_marginTop="@dimen/size_8"
-                    android:hint="@string/phone"
-                    android:inputType="textCapWords" />
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/profile.txt_date_create"
-                    style="@style/textview_profile"
-                    android:layout_width="match_parent"
+                    android:id="@+id/profile.txt_fullname"
+                    style="@style/textview_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_8"
+                    android:text="@string/loading" />
+
+                <TextView
+                    android:id="@+id/profile.txt_email"
+                    style="@style/textview_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_2"
                     android:text="@string/loading" />
             </LinearLayout>
 
@@ -69,4 +97,4 @@
                 android:src="@mipmap/ic_launcher" />
         </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+</RelativeLayout>

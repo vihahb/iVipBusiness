@@ -45,11 +45,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position == arrayList.size())
+            _view.onLoadMore();
+
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
             History history = arrayList.get(position);
 
-            WidgetHelper.getInstance().setTextViewBirthday(viewHolder.txt_date, "", history.getDate());
+            WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date, "", history.getDate());
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_content, history.getContent());
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

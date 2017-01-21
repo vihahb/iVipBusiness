@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
-import com.xtel.sdk.commons.Constants;
+import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -28,6 +28,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private ArrayList<SortStore> arrayList;
     private IChainsView _view;
 
+    private int bg_pos = 0 ;
     private int[] background_item;
 
     private boolean isLoadMore = true;
@@ -52,9 +53,14 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position == arrayList.size())
+            _view.onLoadMore();
         if (holder instanceof ViewHolder) {
+            if (bg_pos == 8)
+                bg_pos = 0;
+
             if (arrayList.get(position).getBg_id() == 0)
-                arrayList.get(position).setBg_id(background_item[Constants.randInt(1, 7)]);
+                arrayList.get(position).setBg_id(background_item[bg_pos]);
 
             ViewHolder viewHolder = (ViewHolder) holder;
             SortStore stores = arrayList.get(position);
@@ -66,9 +72,15 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));
 
+            bg_pos++;
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (!NetWorkInfo.isOnline(_view.getActivity())) {
+                        _view.onNoNetwork();
+                        return;
+                    }
+
                     _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
                 }
             });
@@ -119,6 +131,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void setLoadMore(boolean isLoadMore) {
+        bg_pos = 0;
         this.isLoadMore = isLoadMore;
     }
 }

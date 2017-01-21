@@ -36,9 +36,9 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private ProfilePresenter presenter;
 
     private ImageView img_avatar, img_banner;
-    private TextView txt_total_stores, txt_date_create;
-    private EditText edt_fullname, edt_birthday, edt_phone, edt_email, edt_address;
-    private Spinner sp_gender;
+    private TextView txt_fullname, txt_email, txt_total_stores, txt_date_create;
+    private EditText edt_birthday, edt_phone, edt_address, edt_gender;
+//    private Spinner sp_gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         initToolbar(R.id.profile_toolbar, null);
 
         initView();
-        initSpinner();
+//        initSpinner();
         initListener();
         initLogout();
 
@@ -60,22 +60,24 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private void initView() {
         img_avatar = findImageView(R.id.profile_img_avatar);
         img_banner = findImageView(R.id.profile_img_banner);
+
         txt_total_stores = findTextView(R.id.profile_txt_total_store);
         txt_date_create = findTextView(R.id.profile_txt_date_create);
+        txt_fullname = findTextView(R.id.profile_txt_fullname);
+        txt_email = findTextView(R.id.profile_txt_email);
 
-        edt_fullname = findEditText(R.id.profile_edt_fullname);
         edt_birthday = findEditText(R.id.profile_edt_birth_day);
         edt_phone = findEditText(R.id.profile_edt_phone);
-        edt_email = findEditText(R.id.profile_edt_email);
         edt_address = findEditText(R.id.profile_edt_address);
+        edt_gender = findEditText(R.id.profile_edt_gender);
     }
 
-    private void initSpinner() {
-        sp_gender = findSpinner(R.id.profile_sp_gender);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_spinner_normal, getResources().getStringArray(R.array.gender));
-        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown_item);
-        sp_gender.setAdapter(adapter);
-    }
+//    private void initSpinner() {
+//        sp_gender = findSpinner(R.id.profile_sp_gender);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_spinner_normal, getResources().getStringArray(R.array.gender));
+//        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown_item);
+//        sp_gender.setAdapter(adapter);
+//    }
 
     private void initListener() {
         edt_birthday.setOnClickListener(this);
@@ -101,7 +103,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         new DatePickerDialog(this, R.style.AppCompatAlertDialogStyle, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                WidgetHelper.getInstance().setEditTextBirthday(edt_birthday, dayOfMonth, month, year);
+                WidgetHelper.getInstance().setEditTextDate(edt_birthday, dayOfMonth, month, year);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -129,15 +131,14 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         WidgetHelper.getInstance().setImageURL(img_avatar, obj.getAvatar());
 
         WidgetHelper.getInstance().setTextViewNoResult(txt_total_stores, getString(R.string.store_number) + " " + obj.getStore_number());
-        WidgetHelper.getInstance().setTextViewBirthday(txt_date_create, getString(R.string.day_create), obj.getJoin_date());
+        WidgetHelper.getInstance().setTextViewDate(txt_date_create, getString(R.string.day_create) + ": ", obj.getJoin_date());
+        WidgetHelper.getInstance().setTextViewWithResult(txt_fullname, obj.getFullname(), getString(R.string.not_update_name));
+        WidgetHelper.getInstance().setTextViewWithResult(txt_email, obj.getEmail(), getString(R.string.not_update_namemaile));
 
-        WidgetHelper.getInstance().setEditTextNoResult(edt_fullname, obj.getFullname());
-        WidgetHelper.getInstance().setEditTextBirthday(edt_birthday, obj.getBirthday());
+        WidgetHelper.getInstance().setEditTextDate(edt_birthday, obj.getBirthday());
         WidgetHelper.getInstance().setEditTextNoResult(edt_phone, obj.getPhonenumber());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_email, obj.getEmail());
         WidgetHelper.getInstance().setEditTextNoResult(edt_address, obj.getAddress());
-        WidgetHelper.getInstance().setSpinnerGender(sp_gender, obj.getGender());
-
+        WidgetHelper.getInstance().setEditTextGemder(edt_gender, obj.getGender());
     }
 
     @Override
@@ -222,8 +223,9 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.profile_action_edit:
-                presenter.updateUser("abc", edt_fullname.getText().toString(), sp_gender.getSelectedItemPosition(), edt_birthday.getText().toString(),
-                        edt_phone.getText().toString(), edt_email.getText().toString(), edt_address.getText().toString());
+                showShortToast("Dang xay dung");
+//                presenter.updateUser("abc", txt.getText().toString(), sp_gender.getSelectedItemPosition(), edt_birthday.getText().toString(),
+//                        edt_phone.getText().toString(), edt_email.getText().toString(), edt_address.getText().toString());
                 break;
             default:
                 break;

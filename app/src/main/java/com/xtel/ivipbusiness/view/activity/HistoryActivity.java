@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.History;
+import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.presenter.HistoryPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHistoryView;
 import com.xtel.ivipbusiness.view.adapter.HistoryAdapter;
@@ -22,6 +25,8 @@ import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.utils.WidgetHelper;
 
 import java.util.ArrayList;
 
@@ -44,7 +49,6 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
         presenter = new HistoryPresenter(this);
         initToolbar(R.id.history_toolbar, null);
-        initProgressView();
     }
 
     //    Khởi tạo layout và recyclerview
@@ -62,7 +66,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMember();
+                presenter.getMemberHistory();
             }
         });
 
@@ -70,9 +74,11 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             @Override
             public void onRefresh() {
                 isClearData = true;
+                adapter.setLoadMore(false);
+                adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMember();
+                presenter.getMemberHistory();
             }
         });
 
@@ -81,7 +87,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMember();
+                presenter.getMemberHistory();
             }
         });
 
@@ -98,7 +104,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
             @Override
             public void onLoadMore() {
-                presenter.getMember();
+//                presenter.getMember();
             }
         });
     }
@@ -108,6 +114,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
+            if (listData.size() < 20)
+                adapter.setLoadMore(false);
+
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
@@ -116,7 +125,39 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         }
     }
 
-//    Sự kiện load danh sách member thành công
+    @Override
+    public void onGetMemberSuccess(Member member) {
+        ImageView imageView = (ImageView) findImageView(R.id.history_img_avatar);
+        TextView textView = findTextView(R.id.history_txt_fullname);
+
+        WidgetHelper.getInstance().setImageURL(imageView, member.getAvatar());
+        WidgetHelper.getInstance().setTextViewWithResult(textView, member.getFullname(), getString(R.string.not_update_name));
+
+        initProgressView();
+    }
+
+    @Override
+    public void onGetMemberError() {
+        showMaterialDialog(false, false, null, "", null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+    }
+
+    @Override
+    public void onLoadMore() {
+        presenter.getMemberHistory();
+    }
+
+    //    Sự kiện load danh sách member thành công
     @Override
     public void onGetHistorySuccess(ArrayList<History> arrayList) {
         new Handler().postDelayed(new Runnable() {
@@ -124,6 +165,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             public void run() {
                 if (isClearData) {
                     listData.clear();
+                    adapter.setLoadMore(true);
                     isClearData = false;
                 }
                 listData.addAll(arrayList);

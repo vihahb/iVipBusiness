@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.fragment.MemberFragment;
+import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 
@@ -53,7 +54,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    hiển thị fratment danh sách chuỗi store
     private void replaceListStore() {
-        actionBar.setTitle(getString(R.string.title_activity_chain_store));
+        actionBar.setTitle(getString(R.string.title_activity_list_store));
         replaceFragment(R.id.view_store_container, StoresFragment.newInstance(), LIST_STORE);
     }
 
@@ -66,12 +67,12 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     //    hiển thị fratment bản tin
     private void replaceListNews() {
         actionBar.setTitle(getString(R.string.title_activity_list_news));
-        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), LIST_NEWS);
+        replaceFragment(R.id.view_store_container, NewsFragment.newInstance(), LIST_NEWS);
     }
 
     //    hiển thị fratment bản tin gần đây
     private void replaceListNearNews() {
-        actionBar.setTitle(getString(R.string.title_activity_list_near_news));
+        actionBar.setTitle(getString(R.string.title_activity_list_fcm_news));
         replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), LIST_NEAR_NEWS);
     }
 

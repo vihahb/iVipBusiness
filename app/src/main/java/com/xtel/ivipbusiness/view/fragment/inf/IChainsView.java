@@ -1,4 +1,4 @@
-package com.xtel.ivipbusiness.view.activity.inf;
+package com.xtel.ivipbusiness.view.fragment.inf;
 
 import android.app.Activity;
 
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public interface IChainsView {
 
+    void onLoadMore();
     void onGetStoresSuccess(ArrayList<SortStore> arrayList);
     void onGetStoresError(Error error);
     void onNoNetwork();

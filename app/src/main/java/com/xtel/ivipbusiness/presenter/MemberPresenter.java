@@ -2,7 +2,7 @@ package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.MemberModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Member;
-import com.xtel.ivipbusiness.view.activity.inf.IMemberView;
+import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.sdk.utils.NetWorkInfo;

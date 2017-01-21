@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public interface IListStoreView {
 
+    void onLoadMore();
     void onGetListStoresSuccess(ArrayList<SortStore> arrayList);
     void onGetListStoresError(Error error);
     void onNoNetwork();

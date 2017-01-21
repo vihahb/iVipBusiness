@@ -55,13 +55,24 @@ public class WidgetHelper {
         view.setText(content);
     }
 
-    public void setEditTextBirthday(EditText view, long milliseconds) {
-        if (milliseconds != 0)
-            view.setText(getBirthday(milliseconds));
+    public void setEditTextGemder(EditText view, int gender) {
+        String mGender[] = MyApplication.context.getResources().getStringArray(R.array.gender);
+        mGender[0] = MyApplication.context.getString(R.string.not_update_gender);
+        view.setText(mGender[gender]);
     }
 
-    public void setEditTextBirthday(EditText view, int day, int month, int year) {
-        String mMonth;
+    public void setEditTextDate(EditText view, long milliseconds) {
+        if (milliseconds != 0)
+            view.setText(getDate(milliseconds));
+    }
+
+    public void setEditTextDate(EditText view, int day, int month, int year) {
+        String mDate, mMonth;
+
+        if (day < 10)
+            mDate = "0" + day;
+        else
+            mDate = String.valueOf(day);
 
         month = month + 1;
         if (month < 10)
@@ -87,14 +98,15 @@ public class WidgetHelper {
             view.setText(content);
     }
 
-    public void setTextViewBirthday(TextView view, String content, long milliseconds) {
+    public void setTextViewDate(TextView view, String content, long milliseconds) {
         if (milliseconds == 0)
-            view.setText((content + ": " + MyApplication.context.getString(R.string.updating)));
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
         else
-            view.setText((content + ": " + getBirthday(milliseconds)));
+            view.setText((content + getDate(milliseconds)));
     }
 
-    private String getBirthday(long milliseconds) {
+
+    private String getDate(long milliseconds) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliseconds);
 
@@ -102,13 +114,19 @@ public class WidgetHelper {
         int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
+        String day;
+        if (mDay < 10)
+            day = "0" + mDay;
+        else
+            day = String.valueOf(mDay);
+
         String month;
         if (mMonth < 10)
             month = "0" + mMonth;
         else
             month = String.valueOf(mMonth);
 
-        return mDay + "-" + month + "-" + mYear;
+        return day + "-" + month + "-" + mYear;
     }
 
     public void setSpinnerGender(Spinner view, int type) {

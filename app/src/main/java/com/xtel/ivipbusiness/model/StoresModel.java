@@ -24,7 +24,7 @@ public class StoresModel {
         RESP_List_Sort_Store resp_list_sort_store = new RESP_List_Sort_Store();
 
         ArrayList<SortStore> arrayList = new ArrayList<>();
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 1; i <= 21; i++) {
             SortStore stores = new SortStore();
             stores.setId(i);
             stores.setBanner("http://3.bp.blogspot.com/-fGedPqEK7VA/USrzhrrrPAI/AAAAAAAAGrw/aywfic1mJYY/s1600/mobile_game_banner_jp.naver.lineplay.android.jpeg");
@@ -45,7 +45,7 @@ public class StoresModel {
         RESP_List_Sort_Store resp_list_sort_store = new RESP_List_Sort_Store();
 
         ArrayList<SortStore> arrayList = new ArrayList<>();
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 1; i <= 21; i++) {
             SortStore stores = new SortStore();
             stores.setId(i);
             stores.setBanner("http://3.bp.blogspot.com/-fGedPqEK7VA/USrzhrrrPAI/AAAAAAAAGrw/aywfic1mJYY/s1600/mobile_game_banner_jp.naver.lineplay.android.jpeg");

@@ -19,7 +19,7 @@ import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IStoresView;
+import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
@@ -110,6 +110,8 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             @Override
             public void onRefresh() {
                 isClearData = true;
+                adapter.setLoadMore(false);
+                adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
                 presenter.getStores();
@@ -138,8 +140,8 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
             @Override
             public void onLoadMore() {
-                showShortToast("load");
-                presenter.getStores();
+//                showShortToast("load");
+//                presenter.getStores();
             }
         });
     }
@@ -157,12 +159,20 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
+            if (listData.size() < 20)
+                adapter.setLoadMore(false);
+
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
             progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
             progressView.hideData();
         }
+    }
+
+    @Override
+    public void onLoadMore() {
+        presenter.getStores();
     }
 
     //    Sự kiện load danh sách store thành công
@@ -173,6 +183,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             public void run() {
                 if (isClearData) {
                     listData.clear();
+                    adapter.setLoadMore(true);
                     isClearData = false;
                 }
                 listData.addAll(arrayList);

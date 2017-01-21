@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
-import com.xtel.ivipbusiness.view.activity.inf.IStoresView;
+import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
@@ -50,6 +50,9 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position == arrayList.size())
+            _view.onLoadMore();
+
         if (holder instanceof ViewHolder) {
             if (arrayList.get(position).getBg_id() == 0)
                 arrayList.get(position).setBg_id(background_item[Constants.randInt(1, 7)]);
@@ -63,12 +66,6 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));
-
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
         } else {
             ViewProgressBar viewProgressBar = (ViewProgressBar) holder;
             viewProgressBar.progressBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);

@@ -1,15 +1,11 @@
 package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.entity.RESP_List_Sort_Store;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.model.StoresModel;
-import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
+import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.sdk.utils.NetWorkInfo;
-
-import java.util.ArrayList;
 
 /**
  * Created by Mr. M.2 on 1/13/2017
@@ -22,7 +18,7 @@ public class ChainsPresenter {
         this.view = view;
     }
 
-    public void getStores() {
+    public void getChains() {
         if (!NetWorkInfo.isOnline(view.getActivity())) {
             view.onNoNetwork();
             return;

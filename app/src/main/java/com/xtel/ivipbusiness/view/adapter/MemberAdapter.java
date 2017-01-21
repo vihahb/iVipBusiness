@@ -11,13 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.HistoryActivity;
-import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
-import com.xtel.ivipbusiness.view.activity.inf.IMemberView;
-import com.xtel.nipservicesdk.model.entity.Member;
-import com.xtel.sdk.commons.Constants;
+import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
+import com.xtel.ivipbusiness.model.entity.Member;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -50,6 +47,9 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position == arrayList.size())
+            _view.onLoadMore();
+
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
             Member member = arrayList.get(position);
@@ -61,11 +61,16 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_checkin, _view.getActivity().getString(R.string.total_checkin), String.valueOf(member.getTotal_checkin()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_shopping, _view.getActivity().getString(R.string.total_shopping), String.valueOf(member.getTotal_shopping()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getTotal_shopping_in_store()));
-            WidgetHelper.getInstance().setTextViewBirthday(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin), member.getLast_checkin());
+            WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin) + ": ", member.getLast_checkin());
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (!NetWorkInfo.isOnline(_view.getActivity())) {
+                        _view.onNoNetwork();
+                        return;
+                    }
+
                     _view.getActivity().startActivity(new Intent(_view.getActivity(), HistoryActivity.class));
                 }
             });

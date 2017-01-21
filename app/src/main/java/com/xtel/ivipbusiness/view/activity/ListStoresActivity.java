@@ -63,6 +63,8 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
             @Override
             public void onRefresh() {
                 isClearData = true;
+                adapter.setLoadMore(false);
+                adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
                 presenter.getListStores();
@@ -91,8 +93,8 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
 
             @Override
             public void onLoadMore() {
-                showShortToast("load");
-                presenter.getListStores();
+//                showShortToast("load");
+//                presenter.getListStores();
             }
         });
     }
@@ -102,6 +104,9 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
+            if (listData.size() < 20)
+                adapter.setLoadMore(false);
+
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
@@ -111,12 +116,18 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
     }
 
     @Override
+    public void onLoadMore() {
+        presenter.getListStores();
+    }
+
+    @Override
     public void onGetListStoresSuccess(final ArrayList<SortStore> arrayList) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (isClearData) {
                     listData.clear();
+                    adapter.setLoadMore(true);
                     isClearData = false;
                 }
                 listData.addAll(arrayList);

@@ -11,15 +11,10 @@ import java.util.Random;
  */
 
 public class Constants {
-    public static final String SHARED_NAME = "share_name";
-    public static final String SESSION = "session";
-    public static final String CODE = "code";
-    public static final String TYPE = "type";
-    public static final String MESSAGE = "message";
-    public static final String ERROR = "error";
-    public static final String SERVER_UPLOAD = "replace to server upload image";
-
+    public static final String SHARED_NAME = "share_business";
     public static final String FCM_TOKEN = "fcm_token";
+
+    public static final String MODEL = "model";
 
     public static int randInt(int min, int max) {
 

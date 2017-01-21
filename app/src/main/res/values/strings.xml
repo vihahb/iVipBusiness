@@ -11,14 +11,14 @@
     <string name="title_activity_reset_password">Quên mật khẩu</string>
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
     <string name="title_activity_profile">Profile</string>
-    <string name="title_activity_add_store">Thêm cửa hàng</string>
+    <string name="title_activity_add_store">Tạo cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
     <string name="title_activity_list_store">Danh sách cửa hàng</string>
+    <string name="title_activity_list_chain">Chuỗi cửa hàng</string>
     <string name="title_activity_history">Lịch sử giao dịch</string>
-    <string name="title_activity_chain_store">Chuỗi cửa hàng</string>
     <string name="title_activity_list_member">Danh sách thành viên</string>
     <string name="title_activity_list_news">Bản tin</string>
-    <string name="title_activity_list_near_news">Bản tin gần đây</string>
+    <string name="title_activity_list_fcm_news">Bản tin fcm</string>
     <string name="title_activity_statistic">Thống kê</string>
     <string name="title_activity_policy">Chính sách</string>
     <string name="title_activity_app_info">Thông tin ứng dụng</string>
@@ -102,7 +102,7 @@
     <string name="total_checkin">Số lần checkin</string>
     <string name="total_shopping">Số lần mua hàng</string>
     <string name="total_shopping_in_store">Số lần mua hàng tại store</string>
-    <string name="last_checkin">Thồi gian checkin cuối</string>
+    <string name="last_checkin">Thồi gian checkin cuối: </string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
@@ -110,13 +110,18 @@
     <string name="click_to_try_again">Click để thử lại</string>
     <string name="loading_data">Đang tải dữ liệu</string>
 
+    <string name="can_not_get_member_info">Không thể lấy thông tin của khác hàng</string>
+
     <string name="updating">Đang cập nhật</string>
     <string name="loading">Đang tải dữ liệu…</string>
     <string name="day_create">Ngày tạo</string>
     <string name="store_number">Số cửa hàng</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
+    <string name="not_update_title">Chưa cập tiêu đề</string>
+    <string name="not_update_namemaile">Chưa cập nhật email</string>
     <string name="not_update_address">Chưa cập nhật địa chỉ</string>
+    <string name="not_update_gender">Chưa cập nhật giới tính</string>
 
     <!-- Menu -->
     <string name="store">Cửa hàng</string>

@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -13,13 +12,12 @@ import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.MemberPresenter;
-import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IMemberView;
+import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.ivipbusiness.view.adapter.MemberAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.Member;
+import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
@@ -77,6 +75,8 @@ public class MemberFragment extends BasicFragment implements IMemberView {
             @Override
             public void onRefresh() {
                 isClearData = true;
+                adapter.setLoadMore(false);
+                adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
                 presenter.getMember();
@@ -105,7 +105,7 @@ public class MemberFragment extends BasicFragment implements IMemberView {
 
             @Override
             public void onLoadMore() {
-                presenter.getMember();
+//                presenter.getMember();
             }
         });
     }
@@ -115,6 +115,9 @@ public class MemberFragment extends BasicFragment implements IMemberView {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
+            if (listData.size() < 20)
+                adapter.setLoadMore(false);
+
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
@@ -123,7 +126,12 @@ public class MemberFragment extends BasicFragment implements IMemberView {
         }
     }
 
-//    Sự kiện load danh sách member thành công
+    @Override
+    public void onLoadMore() {
+        presenter.getMember();
+    }
+
+    //    Sự kiện load danh sách member thành công
     @Override
     public void onGetMemberSuccess(ArrayList<Member> arrayList) {
         new Handler().postDelayed(new Runnable() {
@@ -131,6 +139,7 @@ public class MemberFragment extends BasicFragment implements IMemberView {
             public void run() {
                 if (isClearData) {
                     listData.clear();
+                    adapter.setLoadMore(true);
                     isClearData = false;
                 }
                 listData.addAll(arrayList);
@@ -160,7 +169,12 @@ public class MemberFragment extends BasicFragment implements IMemberView {
     @Override
     public void onNoNetwork() {
         progressView.setRefreshing(false);
-        progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
-        progressView.hideData();
+
+        if (listData.size() > 0)
+            showShortToast(getString(R.string.error_no_internet));
+        else {
+            progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
+            progressView.hideData();
+        }
     }
 }

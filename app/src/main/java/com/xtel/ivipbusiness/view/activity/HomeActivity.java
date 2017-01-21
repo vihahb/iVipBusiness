@@ -82,7 +82,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     //    Hiển thị danh sách cửa hàng
     private void replaceListStore() {
-        actionBar.setTitle(getString(R.string.title_activity_list_store));
+        actionBar.setTitle(getString(R.string.title_activity_list_chain));
         replaceFragment(R.id.home_container, ChainsFragment.newInstance(), LIST_STORE);
     }
 

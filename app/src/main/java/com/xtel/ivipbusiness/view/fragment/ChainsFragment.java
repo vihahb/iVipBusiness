@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ChainsPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
-import com.xtel.ivipbusiness.view.activity.inf.IChainsView;
+import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
 import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
@@ -81,7 +80,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores();
+                presenter.getChains();
             }
         });
 
@@ -89,9 +88,11 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             @Override
             public void onRefresh() {
                 isClearData = true;
+                adapter.setLoadMore(false);
+                adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores();
+                presenter.getChains();
             }
         });
 
@@ -100,7 +101,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores();
+                presenter.getChains();
             }
         });
 
@@ -117,22 +118,30 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
             @Override
             public void onLoadMore() {
-                presenter.getStores();
+//                presenter.getChains();
             }
         });
     }
 
-//    Kiểm tra xem danh sách cửa hàng có trống không
+    //    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
-            adapter.notifyDataSetChanged();
+            if (listData.size() < 20)
+                adapter.setLoadMore(false);
+
             progressView.showData();
+            adapter.notifyDataSetChanged();
         } else {
             progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
             progressView.hideData();
         }
+    }
+
+    @Override
+    public void onLoadMore() {
+        presenter.getChains();
     }
 
     //    Sự kiện load danh sách store thành công
@@ -143,6 +152,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             public void run() {
                 if (isClearData) {
                     listData.clear();
+                    adapter.setLoadMore(true);
                     isClearData = false;
                 }
                 listData.addAll(arrayList);
@@ -171,7 +181,12 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     @Override
     public void onNoNetwork() {
         progressView.setRefreshing(false);
-        progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
-        progressView.hideData();
+
+        if (listData.size() > 0)
+            showShortToast(getString(R.string.error_no_internet));
+        else {
+            progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
+            progressView.hideData();
+        }
     }
 }

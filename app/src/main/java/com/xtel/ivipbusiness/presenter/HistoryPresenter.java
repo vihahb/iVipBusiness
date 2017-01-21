@@ -2,10 +2,11 @@ package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.MemberModel;
 import com.xtel.ivipbusiness.model.entity.RESP_History;
-import com.xtel.ivipbusiness.model.entity.RESP_Member;
 import com.xtel.ivipbusiness.view.activity.inf.IHistoryView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.ivipbusiness.model.entity.Member;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
@@ -19,7 +20,21 @@ public class HistoryPresenter {
         this.view = view;
     }
 
-    public void getMember() {
+    public void getMemberInfo() {
+        Member member = null;
+
+        try {
+            member = (Member) view.getActivity().getIntent().getExtras().getSerializable(Constants.MODEL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (member != null) {
+
+        }
+    }
+
+    public void getMemberHistory() {
         if (!NetWorkInfo.isOnline(view.getActivity())) {
             view.onNoNetwork();
             return;

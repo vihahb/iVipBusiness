@@ -15,13 +15,14 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbar_background"
+            android:background="@android:color/transparent"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/home.toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorPrimaryKey_90"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:titleTextAppearance="@style/Toolbar_TitleText" />
         </android.support.design.widget.AppBarLayout>
@@ -38,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@mipmap/background_menu"
+        android:background="@color/colorPrimaryKey_90"
         android:fitsSystemWindows="true"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"

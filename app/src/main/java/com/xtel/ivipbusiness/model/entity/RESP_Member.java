@@ -1,7 +1,6 @@
 package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
-import com.xtel.nipservicesdk.model.entity.Member;
 import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 
 import java.util.ArrayList;
