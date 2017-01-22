@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/size_16"
-    android:paddingRight="@dimen/size_16">
+    android:padding="@dimen/size_16">
 
     <TextView
         android:id="@+id/store_info.txt_address"
         style="@style/textview_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_16"
         android:text="@string/store_address" />
 
     <TextView
@@ -33,23 +32,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_100"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16"
-        android:gravity="right|bottom"
-        android:orientation="horizontal">
+        android:gravity="right|end|bottom|center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-        <ImageView
+        <com.xtel.ivipbusiness.view.widget.SquareImageView
             android:id="@+id/store_info.img_qrCode"
-            android:layout_width="@dimen/size_100"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher" />
 
         <ImageView
-            android:id="@+id/store_info.img_barCode"
-            android:layout_width="@dimen/size_100"
+            android:id="@+id/store_info.img_bar_code"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.35"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher" />

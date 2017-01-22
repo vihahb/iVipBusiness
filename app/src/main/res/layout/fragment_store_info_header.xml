@@ -4,7 +4,7 @@
     android:layout_height="@dimen/size_180">
 
     <ImageView
-        android:id="@+id/view_store.img_banner"
+        android:id="@+id/store_info.img_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_180"
         android:contentDescription="@null"
@@ -20,7 +20,7 @@
         android:padding="@dimen/size_16">
 
         <TextView
-            android:id="@+id/view_store.txt_name"
+            android:id="@+id/store_info.txt_fullname"
             style="@style/textview_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

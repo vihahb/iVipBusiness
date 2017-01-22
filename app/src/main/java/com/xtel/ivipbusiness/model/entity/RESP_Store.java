@@ -23,7 +23,7 @@ public class RESP_Store extends RESP_Basic {
     @Expose
     private int news_number;
     @Expose
-    private int address;
+    private String address;
     @Expose
     private double location_lat;
     @Expose
@@ -93,11 +93,11 @@ public class RESP_Store extends RESP_Basic {
         this.news_number = news_number;
     }
 
-    public int getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(int address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

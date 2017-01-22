@@ -118,10 +118,12 @@
     <string name="store_number">Số cửa hàng</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
+    <string name="not_update_phone">Chưa cập nhật số điện thoại</string>
     <string name="not_update_title">Chưa cập tiêu đề</string>
     <string name="not_update_namemaile">Chưa cập nhật email</string>
     <string name="not_update_address">Chưa cập nhật địa chỉ</string>
     <string name="not_update_gender">Chưa cập nhật giới tính</string>
+    <string name="not_update_des">Không có mô tả</string>
 
     <!-- Menu -->
     <string name="store">Cửa hàng</string>
