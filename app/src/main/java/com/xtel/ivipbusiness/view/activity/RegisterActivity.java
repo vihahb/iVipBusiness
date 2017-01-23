@@ -11,13 +11,13 @@ import android.widget.EditText;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.RegisterPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
-import com.xtel.nipservicesdk.CallbackManager;
-import com.xtel.nipservicesdk.callback.CallbackLisenerRegister;
-import com.xtel.nipservicesdk.callback.CallbackListenerActive;
-import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Register;
-import com.xtel.nipservicesdk.utils.JsonHelper;
-import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.nipservice.CallbackManager;
+import com.xtel.nipservice.callback.CallbackLisenerRegister;
+import com.xtel.nipservice.callback.CallbackListenerActive;
+import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservice.model.entity.RESP_Register;
+import com.xtel.nipservice.utils.JsonHelper;
+import com.xtel.nipservice.utils.JsonParse;
 
 public class RegisterActivity extends BasicActivity implements View.OnClickListener, IRegisterView {
     private RegisterPresenter presenter;

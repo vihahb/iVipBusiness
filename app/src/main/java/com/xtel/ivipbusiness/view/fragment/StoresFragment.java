@@ -23,8 +23,8 @@ import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
-import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservice.utils.JsonParse;
 
 import java.util.ArrayList;
 

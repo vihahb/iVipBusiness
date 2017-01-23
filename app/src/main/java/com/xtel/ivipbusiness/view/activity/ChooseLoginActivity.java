@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.nipservicesdk.LoginManager;
+import com.xtel.nipservice.LoginManager;
 
 public class ChooseLoginActivity extends BasicActivity implements View.OnClickListener {
 

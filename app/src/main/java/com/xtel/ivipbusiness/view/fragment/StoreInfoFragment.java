@@ -12,7 +12,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
 import com.xtel.ivipbusiness.presenter.StoreInfoPresenter;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
-import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservice.model.entity.Error;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.WidgetHelper;
 

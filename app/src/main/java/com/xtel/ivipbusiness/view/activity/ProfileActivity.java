@@ -24,8 +24,8 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.ProfilePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
-import com.xtel.nipservicesdk.LoginManager;
-import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservice.LoginManager;
+import com.xtel.nipservice.model.entity.Error;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.WidgetHelper;
 

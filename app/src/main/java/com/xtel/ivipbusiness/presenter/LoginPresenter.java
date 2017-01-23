@@ -13,7 +13,7 @@ import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.RegisterActivity;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
-import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.nipservice.utils.PermissionHelper;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 /**

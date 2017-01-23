@@ -20,8 +20,8 @@ import com.xtel.ivipbusiness.view.adapter.NewsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
-import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservice.utils.JsonParse;
 
 import java.util.ArrayList;
 
@@ -146,7 +146,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
     }
 
     @Override
-    public void onGetNewsSuccess(ArrayList<News> arrayList) {
+    public void onGetNewsSuccess(final ArrayList<News> arrayList) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

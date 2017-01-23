@@ -2,9 +2,9 @@ package com.xtel.ivipbusiness.model;
 
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
-import com.xtel.nipservicesdk.callback.ResponseHandle;
-import com.xtel.nipservicesdk.model.BasicModel;
-import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservice.callback.ResponseHandle;
+import com.xtel.nipservice.model.BasicModel;
+import com.xtel.nipservice.utils.JsonHelper;
 
 /**
  * Created by Mr. M.2 on 1/12/2017

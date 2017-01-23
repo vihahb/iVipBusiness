@@ -2,8 +2,8 @@ package com.xtel.ivipbusiness.model;
 
 import com.xtel.ivipbusiness.model.entity.News;
 import com.xtel.ivipbusiness.model.entity.RESP_News;
-import com.xtel.nipservicesdk.callback.ResponseHandle;
-import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservice.callback.ResponseHandle;
+import com.xtel.nipservice.utils.JsonHelper;
 
 import java.util.ArrayList;
 

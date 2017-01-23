@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,11 +17,10 @@ import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.presenter.HistoryPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHistoryView;
 import com.xtel.ivipbusiness.view.adapter.HistoryAdapter;
-import com.xtel.ivipbusiness.view.fragment.BasicFragment;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
-import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservice.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -159,7 +155,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
     //    Sự kiện load danh sách member thành công
     @Override
-    public void onGetHistorySuccess(ArrayList<History> arrayList) {
+    public void onGetHistorySuccess(final ArrayList<History> arrayList) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

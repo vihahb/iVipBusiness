@@ -12,7 +12,7 @@ import android.util.Log;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.FirebaseApp;
-import com.xtel.nipservicesdk.LoginManager;
+import com.xtel.nipservice.LoginManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

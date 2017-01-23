@@ -1,10 +1,6 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -26,12 +22,7 @@ import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
 import com.xtel.ivipbusiness.view.widget.CircleTransform;
-import com.xtel.nipservicesdk.model.entity.Error;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.xtel.nipservice.model.entity.Error;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -126,7 +117,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     @Override
     public void onGetShortUserDataSuccess(RESP_Short_Profile obj) {
         showShortToast("ok get data");
-        ImageView imageView = new ImageView(this);
+        final ImageView imageView = new ImageView(this);
         imageView.setVisibility(View.GONE);
 
         Picasso.with(getApplicationContext())

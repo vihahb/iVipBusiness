@@ -11,10 +11,10 @@ import android.widget.EditText;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.EnterPassPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IEnterPassView;
-import com.xtel.nipservicesdk.CallbackManager;
-import com.xtel.nipservicesdk.callback.CallbackListenerReset;
-import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.nipservice.CallbackManager;
+import com.xtel.nipservice.callback.CallbackListenerReset;
+import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservice.utils.JsonParse;
 
 public class EnterPasswordActivity extends BasicActivity implements View.OnClickListener, IEnterPassView {
     private EditText edt_new_pass, edt_re_passs;

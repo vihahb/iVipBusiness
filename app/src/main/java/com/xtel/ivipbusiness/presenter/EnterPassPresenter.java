@@ -2,7 +2,7 @@ package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IEnterPassView;
-import com.xtel.nipservicesdk.commons.Cts;
+import com.xtel.nipservice.commons.Cts;
 
 /**
  * Created by Mr. M.2 on 1/12/2017.
