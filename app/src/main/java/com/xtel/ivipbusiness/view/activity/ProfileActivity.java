@@ -72,13 +72,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         edt_gender = findEditText(R.id.profile_edt_gender);
     }
 
-//    private void initSpinner() {
-//        sp_gender = findSpinner(R.id.profile_sp_gender);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_spinner_normal, getResources().getStringArray(R.array.gender));
-//        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown_item);
-//        sp_gender.setAdapter(adapter);
-//    }
-
     private void initListener() {
         edt_birthday.setOnClickListener(this);
         img_banner.setOnClickListener(this);
@@ -135,10 +128,10 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         WidgetHelper.getInstance().setTextViewWithResult(txt_fullname, obj.getFullname(), getString(R.string.not_update_name));
         WidgetHelper.getInstance().setTextViewWithResult(txt_email, obj.getEmail(), getString(R.string.not_update_namemaile));
 
-        WidgetHelper.getInstance().setEditTextDate(edt_birthday, obj.getBirthday());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_phone, obj.getPhonenumber());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_address, obj.getAddress());
-        WidgetHelper.getInstance().setEditTextGemder(edt_gender, obj.getGender());
+        WidgetHelper.getInstance().setEditTextDate(edt_birthday, (getString(R.string.birth_day) + ": "), obj.getBirthday());
+        WidgetHelper.getInstance().setEditTextWithResult(edt_phone, (getString(R.string.phone) + ": "), obj.getPhonenumber(), getString(R.string.not_update_phone));
+        WidgetHelper.getInstance().setEditTextWithResult(edt_address, (getString(R.string.address) + ": "), obj.getAddress(), getString(R.string.not_update_address));
+        WidgetHelper.getInstance().setEditTextGemder(edt_gender, (getString(R.string.gender) + ": "), obj.getGender());
     }
 
     @Override

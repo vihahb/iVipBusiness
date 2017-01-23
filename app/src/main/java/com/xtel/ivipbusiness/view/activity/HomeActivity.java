@@ -9,10 +9,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -31,6 +35,7 @@ import com.xtel.nipservice.model.entity.Error;
 public class HomeActivity extends BasicActivity implements NavigationView.OnNavigationItemSelectedListener, IHomeView {
     private HomePresenter presenter;
 
+    private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBar actionBar;
@@ -59,7 +64,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     //    Khởi tạo navigation
     @SuppressWarnings("deprecation")
     private void initNavigationView() {
-        Toolbar toolbar = findToolbar(R.id.home_toolbar);
+        toolbar = findToolbar(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
@@ -173,6 +178,18 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         return super.onCreateOptionsMenu(menu);
     }
+
+//    private void showPopup(MenuItem parent) {
+//        final PopupWindow popUpWindow = new PopupWindow(this);
+//
+//        LayoutInflater mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+//        View view =  mInflater.inflate(R.layout.demo, null);
+//
+//        popUpWindow.setContentView(view);
+//        popUpWindow.setOutsideTouchable(true);
+//
+//        popUpWindow.showAtLocation(toolbar, Gravity.RIGHT, 0, 0);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

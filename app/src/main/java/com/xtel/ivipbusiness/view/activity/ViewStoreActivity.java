@@ -3,9 +3,11 @@ package com.xtel.ivipbusiness.view.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.fragment.MemberFragment;
@@ -26,6 +28,25 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         initToolbar();
         initView();
         replaceStoreInfo();
+        initTablayout();
+    }
+
+    private void initTablayout() {
+        int[] icon = new int[] {R.drawable.ic_action_account, R.drawable.ic_action_account, R.drawable.ic_action_account, R.drawable.ic_action_account, R.drawable.ic_action_account};
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
+
+        for (int i = 0; i < 5; i++) {
+            tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.ic_launcher));
+        }
+
+        for (int i = 0; i < 5; i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(R.layout.item_tablayout);
+        }
+    }
+
+    private void setUpView(TabLayout tabLayout) {
+//        ImageButton imageButton1 = tabLayout.getTabAt(0);
     }
 
     //    Khởi tạo toolbar

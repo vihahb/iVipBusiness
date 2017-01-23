@@ -4,27 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/store_info.app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:cardElevation="@dimen/size_16"
+        app:elevation="@dimen/size_16">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/store_info.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|snap">
+
+            <include
+                layout="@layout/fragment_store_info_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include
-            android:id="@+id/store_info.layout_header"
-            layout="@layout/fragment_store_info_header"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryKey_80"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_1"
-            android:background="@android:color/white" />
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0.1mm"
+                app:cardBackgroundColor="@color/colorPrimaryKey_90"
+                app:cardElevation="@dimen/size_8" />
 
-        <include
-            layout="@layout/fragment_store_info_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            <include
+                layout="@layout/fragment_store_info_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <com.xtel.ivipbusiness.view.widget.RoundImage
         android:contentDescription="@null"
@@ -33,6 +60,6 @@
         android:layout_height="@dimen/size_48"
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_launcher"
-        app:layout_anchor="@id/store_info.layout_header"
+        app:layout_anchor="@id/store_info.app_bar"
         app:layout_anchorGravity="bottom|right|end" />
 </android.support.design.widget.CoordinatorLayout>

@@ -1,6 +1,7 @@
 package com.xtel.sdk.utils;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -51,8 +52,26 @@ public class WidgetHelper {
         view.setImageResource(resource);
     }
 
+    public void setViewBackground(View view, int resource) {
+        view.setBackgroundResource(resource);
+    }
+
     public void setEditTextNoResult(EditText view, String content) {
         view.setText(content);
+    }
+
+    public void setEditTextWithResult(EditText view, String content, String result) {
+        if (content == null || content.isEmpty())
+            view.setText(result);
+        else
+            view.setText(content);
+    }
+
+    public void setEditTextWithResult(EditText view, String title, String content, String result) {
+        if (content == null || content.isEmpty())
+            view.setText((title + result));
+        else
+            view.setText((title + content));
     }
 
     public void setEditTextGemder(EditText view, int gender) {
@@ -61,9 +80,20 @@ public class WidgetHelper {
         view.setText(mGender[gender]);
     }
 
+    public void setEditTextGemder(EditText view, String title, int gender) {
+        String mGender[] = MyApplication.context.getResources().getStringArray(R.array.gender);
+        mGender[0] = MyApplication.context.getString(R.string.not_update_gender);
+        view.setText((title + mGender[gender]));
+    }
+
     public void setEditTextDate(EditText view, long milliseconds) {
         if (milliseconds != 0)
             view.setText(getDate(milliseconds));
+    }
+
+    public void setEditTextDate(EditText view, String title, long milliseconds) {
+        if (milliseconds != 0)
+            view.setText((title + getDate(milliseconds)));
     }
 
     public void setEditTextDate(EditText view, int day, int month, int year) {
@@ -96,6 +126,13 @@ public class WidgetHelper {
             view.setText(result);
         else
             view.setText(content);
+    }
+
+    public void setTextViewWithResult(TextView view, String title, String content, String result) {
+        if (content == null || content.isEmpty())
+            view.setText((title + result));
+        else
+            view.setText((title + content));
     }
 
     public void setTextViewDate(TextView view, String content, long milliseconds) {

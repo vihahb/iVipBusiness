@@ -87,6 +87,7 @@
     <string name="had_account">Đã có tài khoản</string>
     <string name="login_by">Đăng nhập bằng</string>
 
+    <string name="fullname">Họ và tên</string>
     <string name="birth_day">Ngày sinh</string>
     <string name="gender">Giới tính</string>
     <string name="phone">Số điện thoại</string>
@@ -124,6 +125,7 @@
     <string name="not_update_address">Chưa cập nhật địa chỉ</string>
     <string name="not_update_gender">Chưa cập nhật giới tính</string>
     <string name="not_update_des">Không có mô tả</string>
+    <string name="not_update_store_name">Chưa cập nhật tên</string>
 
     <!-- Menu -->
     <string name="store">Cửa hàng</string>

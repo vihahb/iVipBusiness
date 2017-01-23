@@ -7,6 +7,7 @@
         android:id="@+id/store_info.img_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_180"
+        android:alpha="0.9"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
@@ -19,11 +20,12 @@
         android:orientation="horizontal"
         android:padding="@dimen/size_16">
 
-        <TextView
-            android:id="@+id/store_info.txt_fullname"
-            style="@style/textview_profile"
+        <EditText
+            android:id="@+id/store_info.edt_fullname"
+            style="@style/edittext_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Le Cong Long Vu" />
+            android:layout_height="@dimen/size_40"
+            android:hint="@string/fullname"
+            android:inputType="textCapWords" />
     </LinearLayout>
 </FrameLayout>

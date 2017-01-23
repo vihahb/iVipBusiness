@@ -78,7 +78,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:drawablePadding">@dimen/size_16</item>
+        <item name="android:drawablePadding">@dimen/size_12</item>
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
@@ -88,7 +88,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:drawablePadding">@dimen/size_16</item>
+        <item name="android:drawablePadding">@dimen/size_12</item>
         <item name="android:enabled">false</item>
         <item name="android:background">@drawable/edittext_disable</item>
     </style>
@@ -98,7 +98,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">top</item>
-        <item name="android:drawablePadding">@dimen/size_16</item>
+        <item name="android:drawablePadding">@dimen/size_12</item>
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 

@@ -57,4 +57,8 @@ public abstract class ViewHolderHelper extends RecyclerView.ViewHolder {
     protected ImageView findImageView(int id) {
         return (ImageView) itemView.findViewById(id);
     }
+
+    protected View findView(int id) {
+        return itemView.findViewById(id);
+    }
 }

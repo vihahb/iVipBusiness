@@ -37,8 +37,8 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public ChainsAdapter(IChainsView view, ArrayList<SortStore> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
-        background_item = new int[]{R.mipmap.background_item_1, R.mipmap.background_item_2, R.mipmap.background_item_3, R.mipmap.background_item_4, R.mipmap.background_item_5,
-                R.mipmap.background_item_6, R.mipmap.background_item_7, R.mipmap.background_item_8};
+        background_item = new int[]{R.drawable.item_background_1, R.drawable.item_background_2, R.drawable.item_background_3, R.drawable.item_background_4, R.drawable.item_background_5,
+                R.drawable.item_background_6, R.drawable.item_background_7, R.drawable.item_background_8};
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, stores.getBanner());
             WidgetHelper.getInstance().setImageURL(viewHolder.img_avatar, stores.getLogo());
-            WidgetHelper.getInstance().setImageResource(viewHolder.img_background, stores.getBg_id());
+            WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, stores.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));
@@ -107,13 +107,14 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private class ViewHolder extends ViewHolderHelper {
-        private ImageView img_banner, img_avatar, img_background;
+        private ImageView img_banner, img_avatar;
+        private View img_background;
         private TextView txt_name, txt_address;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            img_background = findImageView(R.id.item_chain_img_background);
+            img_background = findView(R.id.item_chain_img_background);
             img_banner = findImageView(R.id.item_chain_img_banner);
             img_avatar = findImageView(R.id.item_chain_img_avatar);
             txt_name = findTextView(R.id.item_chain_txt_name);

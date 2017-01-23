@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,6 +23,10 @@ import java.io.Serializable;
 public class BasicFragment extends IFragment {
     private ProgressDialog progressDialog;
     private Dialog dialog;
+
+    protected void debug(String message) {
+        Log.e(this.getClass().getSimpleName(), message);
+    }
 
     protected void showLongToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
