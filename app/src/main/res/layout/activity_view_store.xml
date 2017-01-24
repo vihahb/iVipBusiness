@@ -41,18 +41,20 @@
             android:id="@+id/view_store.tablayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:tabMode="scrollable"
-            app:tabGravity="fill"/>
+            app:tabBackground="@drawable/item_tablayout"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabMode="scrollable" />
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/view_store.bnv_tab"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_56"
-            android:layout_gravity="bottom"
-            android:background="@color/colorPrimaryKey_90"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:itemIconTint="@drawable/bottom_navigation_view"
-            app:itemTextColor="@drawable/bottom_navigation_view"
-            design:menu="@menu/bottom_navigation_view_home" />
+        <!--<android.support.design.widget.BottomNavigationView-->
+            <!--android:id="@+id/view_store.bnv_tab"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/size_56"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:background="@color/colorPrimaryKey_90"-->
+            <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+            <!--app:itemIconTint="@drawable/bottom_navigation_view"-->
+            <!--app:itemTextColor="@drawable/bottom_navigation_view"-->
+            <!--design:menu="@menu/bottom_navigation_view_home" />-->
     </LinearLayout>
 </LinearLayout>

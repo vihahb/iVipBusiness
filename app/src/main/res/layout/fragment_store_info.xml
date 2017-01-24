@@ -56,8 +56,8 @@
     <com.xtel.ivipbusiness.view.widget.RoundImage
         android:contentDescription="@null"
         android:id="@+id/store_info.img_logo"
-        android:layout_width="@dimen/size_48"
-        android:layout_height="@dimen/size_48"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_launcher"
         app:layout_anchor="@id/store_info.app_bar"

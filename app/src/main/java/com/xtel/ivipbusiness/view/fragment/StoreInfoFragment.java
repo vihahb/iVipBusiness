@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
@@ -30,8 +29,7 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
     private StoreInfoPresenter presenter;
 
     private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
-    private TextView txt_address, txt_phone, txt_des;
-    private EditText edt_name;
+    private EditText edt_name, edt_address, edt_phone, edt_des;
 
     public static StoreInfoFragment newInstance() {
         return new StoreInfoFragment();
@@ -60,9 +58,9 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
         img_bar_code = findImageView(R.id.store_info_img_bar_code);
 
         edt_name = findEditText(R.id.store_info_edt_fullname);
-        txt_address = findTextView(R.id.store_info_txt_address);
-        txt_phone = findTextView(R.id.store_info_txt_phone);
-        txt_des = findTextView(R.id.store_info_txt_des);
+        edt_address = findEditText(R.id.store_info_edt_address);
+        edt_phone = findEditText(R.id.store_info_edt_phone);
+        edt_des = findEditText(R.id.store_info_edt_des);
     }
 
     private boolean isShow = true;
@@ -127,10 +125,10 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
         WidgetHelper.getInstance().setImageURL(img_qr_code, resp_store.getQr_code());
         WidgetHelper.getInstance().setImageURL(img_bar_code, resp_store.getBar_code());
 
-        WidgetHelper.getInstance().setEditTextWithResult(edt_name, resp_store.getName(), getString(R.string.not_update_store_name));
-        WidgetHelper.getInstance().setTextViewWithResult(txt_address, resp_store.getAddress(), getString(R.string.not_update_address));
-        WidgetHelper.getInstance().setTextViewWithResult(txt_phone, resp_store.getPhonenumber(), getString(R.string.not_update_phone));
-        WidgetHelper.getInstance().setTextViewWithResult(txt_des, resp_store.getDescription(), getString(R.string.not_update_des));
+        WidgetHelper.getInstance().setEditTextNoResult(edt_name, resp_store.getName());
+        WidgetHelper.getInstance().setEditTextNoResult(edt_address, resp_store.getAddress());
+        WidgetHelper.getInstance().setEditTextNoResult(edt_phone, resp_store.getPhonenumber());
+        WidgetHelper.getInstance().setEditTextNoResult(edt_des, resp_store.getDescription());
     }
 
     @Override

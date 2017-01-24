@@ -1,13 +1,19 @@
 package com.xtel.ivipbusiness.view.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.fragment.MemberFragment;
@@ -15,7 +21,7 @@ import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 
-public class ViewStoreActivity extends BasicActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class ViewStoreActivity extends BasicActivity {
     private ActionBar actionBar;
 
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", LIST_NEAR_NEWS = "list_near_news";
@@ -26,27 +32,8 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         setContentView(R.layout.activity_view_store);
 
         initToolbar();
-        initView();
-        replaceStoreInfo();
         initTablayout();
-    }
-
-    private void initTablayout() {
-        int[] icon = new int[] {R.drawable.ic_action_account, R.drawable.ic_action_account, R.drawable.ic_action_account, R.drawable.ic_action_account, R.drawable.ic_action_account};
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
-
-        for (int i = 0; i < 5; i++) {
-            tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.ic_launcher));
-        }
-
-        for (int i = 0; i < 5; i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(R.layout.item_tablayout);
-        }
-    }
-
-    private void setUpView(TabLayout tabLayout) {
-//        ImageButton imageButton1 = tabLayout.getTabAt(0);
+        replaceStoreInfo();
     }
 
     //    Khởi tạo toolbar
@@ -61,10 +48,31 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    //    Khởi tạo toàn bọ Widget
-    private void initView() {
-        BottomNavigationView bottomNavigationView = findBottomNavigationView(R.id.view_store_bnv_tab);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+    //    Khởi tạo tab layout phía dưới
+    private void initTablayout() {
+        int[] icon = new int[] {R.drawable.ic_action_store_info, R.drawable.ic_action_list_store, R.drawable.ic_action_member, R.drawable.ic_action_news, R.drawable.ic_action_news_fcm};
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
+
+        for (int i = 0; i < 5; i++) {
+            tabLayout.addTab(tabLayout.newTab().setIcon(icon[i]));
+        }
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                checkTabSelected(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     //    hiển thị fratment thông tin store
@@ -97,34 +105,31 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), LIST_NEAR_NEWS);
     }
 
-
-
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.nav_view_store_info:
+    private void checkTabSelected(int position) {
+        switch (position) {
+            case 0:
                 replaceStoreInfo();
                 break;
-            case R.id.nav_view_store_list_store:
+            case 1:
                 replaceListStore();
                 break;
-            case R.id.nav_view_store_member:
+            case 2:
                 replaceListMember();
                 break;
-            case R.id.nav_view_store_news:
+            case 3:
                 replaceListNews();
                 break;
-            case R.id.nav_view_store_near_news:
+            case 4:
                 replaceListNearNews();
                 break;
             default:
                 break;
         }
-        return true;
     }
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

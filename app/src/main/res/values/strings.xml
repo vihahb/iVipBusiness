@@ -87,6 +87,7 @@
     <string name="had_account">Đã có tài khoản</string>
     <string name="login_by">Đăng nhập bằng</string>
 
+    <string name="qr_code">Mã QR Code</string>
     <string name="fullname">Họ và tên</string>
     <string name="birth_day">Ngày sinh</string>
     <string name="gender">Giới tính</string>

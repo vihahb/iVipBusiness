@@ -41,7 +41,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     private StoresAdapter adapter;
     private ArrayList<SortStore> listData;
     private ProgressView progressView;
-    private BottomNavigationView bottomNavigationView;
 
     private boolean isClearData = false;
     private final int REQUEST_CODE_ADD = 8, REQUEST_CODE_CREATE = 9;
@@ -61,7 +60,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new StoresPresenter(this);
-        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bnv_tab);
         initFloatingActionButton(view);
         initProgressView(view);
     }
@@ -126,32 +124,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 presenter.getStores();
             }
         });
-
-        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
-            @Override
-            public void onScrollUp() {
-//                hideBottomView();
-            }
-
-            @Override
-            public void onScrollDown() {
-//                showBottomView();
-            }
-
-            @Override
-            public void onLoadMore() {
-//                showShortToast("load");
-//                presenter.getStores();
-            }
-        });
-    }
-
-    private void hideBottomView() {
-        bottomNavigationView.animate().translationY(bottomNavigationView.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start();
-    }
-
-    private void showBottomView() {
-        bottomNavigationView.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
 
 //    Kiểm tra xem danh sách cửa hàng có trống không

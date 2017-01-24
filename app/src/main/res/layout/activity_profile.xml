@@ -81,11 +81,11 @@
         android:layout_height="@dimen/size_36"
         android:background="@drawable/button_transparent"
         android:drawableLeft="@drawable/ic_action_log_out"
-        android:drawablePadding="@dimen/size_16"
+        android:drawablePadding="@dimen/size_12"
         android:drawableStart="@drawable/ic_action_log_out"
         android:fitsSystemWindows="false"
         android:gravity="center_vertical|left|start"
-        android:paddingLeft="@dimen/size_16"
-        android:paddingStart="@dimen/size_16"
+        android:paddingLeft="@dimen/size_12"
+        android:paddingStart="@dimen/size_12"
         android:text="@string/logout" />
 </LinearLayout>
