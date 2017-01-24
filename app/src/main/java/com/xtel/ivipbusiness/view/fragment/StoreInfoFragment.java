@@ -66,17 +66,6 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
     private boolean isShow = true;
 
     private void initAnimationHideImage(View view) {
-//        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.store_info_collapsing);
-//        collapsingToolbarLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-//            @Override
-//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//                if (top <= 0) {
-//                    hideFloatingActionButton(img_logo);
-//                } else
-//                    showFloatingActionButton(img_logo);
-//            }
-//        });
-
         AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.store_info_app_bar);
         appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override

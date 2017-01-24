@@ -3,12 +3,12 @@ package com.xtel.ivipbusiness.view.widget;
 import android.support.design.widget.AppBarLayout;
 
 /**
- * Created by Vulcl on 1/23/2017.
+ * Created by Vulcl on 1/23/2017
  */
 
 public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
 
-    public enum State {
+    private enum State {
         EXPANDED,
         COLLAPSED,
         IDLE
