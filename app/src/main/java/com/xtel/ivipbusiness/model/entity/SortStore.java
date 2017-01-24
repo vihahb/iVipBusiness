@@ -21,6 +21,8 @@ public class SortStore {
     private String address;
     @Expose
     private int bg_id;
+    @Expose
+    private long date_create;
 
     public int getId() {
         return id;
@@ -76,5 +78,13 @@ public class SortStore {
 
     public void setBg_id(int bg_id) {
         this.bg_id = bg_id;
+    }
+
+    public long getDate_create() {
+        return date_create;
+    }
+
+    public void setDate_create(long date_create) {
+        this.date_create = date_create;
     }
 }

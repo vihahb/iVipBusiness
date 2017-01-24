@@ -11,13 +11,13 @@
         android:layout_alignTop="@+id/profile.layout_header_content"
         android:alpha="0.9"
         android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/demo_banner" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:id="@+id/profile.layout_header_content"
         android:layout_width="match_parent"
         android:layout_height="210dp"
+        android:background="@color/colorPrimaryKey_90"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="@dimen/size_16"

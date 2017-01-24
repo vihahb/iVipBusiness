@@ -122,6 +122,13 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="textview_small">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_10</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="textview_des">
         <item name="android:maxLines">4</item>
         <item name="android:textSize">@dimen/font_13</item>

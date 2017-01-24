@@ -41,7 +41,7 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_VIEW)
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chain, parent, false));
+            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_store, parent, false));
         else if (viewType == TYPE_LOAD)
             return new ViewProgressBar(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progressbar, parent, false));
 
@@ -66,6 +66,7 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));
+            WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, (_view.getActivity().getString(R.string.day_create) + ": "), stores.getDate_create());
         } else {
             ViewProgressBar viewProgressBar = (ViewProgressBar) holder;
             viewProgressBar.progressBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -91,16 +92,17 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private class ViewHolder extends ViewHolderHelper {
         private ImageView img_banner, img_avatar;
         private View img_background;
-        private TextView txt_name, txt_address;
+        private TextView txt_name, txt_address, txt_date_create;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            img_background = findView(R.id.item_chain_img_background);
-            img_banner = findImageView(R.id.item_chain_img_banner);
-            img_avatar = findImageView(R.id.item_chain_img_avatar);
-            txt_name = findTextView(R.id.item_chain_txt_name);
-            txt_address = findTextView(R.id.item_chain_txt_address);
+            img_background = findView(R.id.item_store_img_background);
+            img_banner = findImageView(R.id.item_store_img_banner);
+            img_avatar = findImageView(R.id.item_store_img_avatar);
+            txt_name = findTextView(R.id.item_store_txt_name);
+            txt_address = findTextView(R.id.item_store_txt_address);
+            txt_date_create = findTextView(R.id.item_store_txt_date_create);
         }
     }
 

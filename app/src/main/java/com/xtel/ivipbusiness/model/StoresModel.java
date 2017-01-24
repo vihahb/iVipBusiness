@@ -55,6 +55,7 @@ public class StoresModel {
             stores.setStore_type("STYPE");
             stores.setAddress("Toa nha Phuong Nga, ngo 84 Tran Thai Tong, Ha Noi");
             stores.setBg_id(0);
+            stores.setDate_create(1456765200000L);
 
             arrayList.add(stores);
         }
@@ -76,6 +77,7 @@ public class StoresModel {
             stores.setStore_type("STYPE");
             stores.setAddress("Toa nha Phuong Nga, ngo 84 Tran Thai Tong, Ha Noi");
             stores.setBg_id(0);
+            stores.setDate_create(1456765200000L);
 
             arrayList.add(stores);
         }

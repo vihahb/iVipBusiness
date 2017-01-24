@@ -6,9 +6,9 @@
         android:bottom="0dp"
         android:left="-100dp"
         android:right="-10dp"
-        android:top="80dp">
+        android:top="70dp">
         <rotate
-            android:fromDegrees="8"
+            android:fromDegrees="7"
             android:pivotX="0%"
             android:pivotY="100%">
             <shape android:shape="rectangle">
