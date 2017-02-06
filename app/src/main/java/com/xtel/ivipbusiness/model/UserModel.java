@@ -42,6 +42,7 @@ public class UserModel extends BasicModel {
         resp_full_profile.setStatus("new");
         resp_full_profile.setStore_number(30);
         resp_full_profile.setJoin_date(1262278800000L);
+        resp_full_profile.setBanner("http://3.bp.blogspot.com/-fGedPqEK7VA/USrzhrrrPAI/AAAAAAAAGrw/aywfic1mJYY/s1600/mobile_game_banner_jp.naver.lineplay.android.jpeg");
 
         responseHandle.onSuccess(JsonHelper.toJson(resp_full_profile));
     }

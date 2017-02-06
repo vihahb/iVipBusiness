@@ -35,6 +35,7 @@ public class WidgetHelper {
         Picasso.with(MyApplication.context)
                 .load(url)
                 .noPlaceholder()
+                .error(R.drawable.color_primarykey)
                 .into(view, new Callback() {
                     @Override
                     public void onSuccess() {

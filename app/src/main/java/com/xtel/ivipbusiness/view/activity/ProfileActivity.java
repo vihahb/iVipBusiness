@@ -122,6 +122,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     @Override
     public void onGetProfileSuccess(RESP_Full_Profile obj) {
         WidgetHelper.getInstance().setImageURL(img_avatar, obj.getAvatar());
+        WidgetHelper.getInstance().setImageURL(img_banner, obj.getBanner());
 
         WidgetHelper.getInstance().setTextViewNoResult(txt_total_stores, getString(R.string.store_number) + " " + obj.getStore_number());
         WidgetHelper.getInstance().setTextViewDate(txt_date_create, getString(R.string.day_create) + ": ", obj.getJoin_date());

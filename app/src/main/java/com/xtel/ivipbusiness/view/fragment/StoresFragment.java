@@ -4,25 +4,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
-import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
+import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservice.model.entity.Error;
 import com.xtel.nipservice.utils.JsonParse;
 
@@ -60,30 +56,30 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new StoresPresenter(this);
-        initFloatingActionButton(view);
+//        initFloatingActionButton(view);
         initProgressView(view);
     }
 
-    private void initFloatingActionButton(View view) {
-        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.store_fab_show);
-        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
-            @Override
-            public boolean onMenuItemSelected(MenuItem menuItem) {
-                //TODO: Start some activity
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_floating_create_store:
-                        startActivityForResult(AddStoreActivity.class, REQUEST_CODE_CREATE);
-                        break;
-                    case R.id.nav_floating_add_store:
-                        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
-                        break;
-                    default:
-                        break;
-                }
-                return false;
-            }
-        });
-    }
+//    private void initFloatingActionButton(View view) {
+//        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.store_fab_show);
+//        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
+//            @Override
+//            public boolean onMenuItemSelected(MenuItem menuItem) {
+//                //TODO: Start some activity
+//                switch (menuItem.getItemId()) {
+//                    case R.id.nav_floating_create_store:
+//                        startActivityForResult(AddStoreActivity.class, REQUEST_CODE_CREATE);
+//                        break;
+//                    case R.id.nav_floating_add_store:
+//                        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+//    }
 
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
@@ -141,6 +137,30 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             progressView.hideData();
         }
     }
+
+    public void createNewStore() {
+        startActivityForResult(AddStoreActivity.class, REQUEST_CODE_CREATE);
+    }
+
+    public void chooseExistsStore() {
+        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onLoadMore() {

@@ -15,16 +15,16 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <io.github.yavski.fabspeeddial.FabSpeedDial
-        android:id="@+id/store.fab_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:fabBackgroundTint="@drawable/floating_action_button_home"
-        app:fabGravity="bottom_end"
-        app:fabMenu="@menu/slide_floating_action_button"
-        app:miniFabBackgroundTint="@drawable/floating_action_button_home"
-        app:miniFabDrawableTint="@android:color/white"
-        app:miniFabTitleTextColor="@drawable/floating_action_button_home"
-        app:touchGuardDrawable="@android:color/transparent" />
+    <!--<io.github.yavski.fabspeeddial.FabSpeedDial-->
+        <!--android:id="@+id/store.fab_show"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--app:fabBackgroundTint="@drawable/floating_action_button_home"-->
+        <!--app:fabGravity="bottom_end"-->
+        <!--app:fabMenu="@menu/slide_floating_action_button"-->
+        <!--app:miniFabBackgroundTint="@drawable/floating_action_button_home"-->
+        <!--app:miniFabDrawableTint="@android:color/white"-->
+        <!--app:miniFabTitleTextColor="@drawable/floating_action_button_home"-->
+        <!--app:touchGuardDrawable="@android:color/transparent" />-->
 </android.support.design.widget.CoordinatorLayout>
