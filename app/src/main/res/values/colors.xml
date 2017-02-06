@@ -11,4 +11,5 @@
     <color name="black_40">#66000000</color>
 
     <color name="tablayout">#146535</color>
+    <color name="text_color_member">#FFF202</color>
 </resources>
