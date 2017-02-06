@@ -30,7 +30,9 @@ public class HistoryPresenter {
         }
 
         if (member != null) {
-
+            view.onGetMemberSuccess(member);
+        } else {
+            view.onGetMemberError();
         }
     }
 

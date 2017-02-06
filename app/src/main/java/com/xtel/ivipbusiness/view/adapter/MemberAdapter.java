@@ -14,6 +14,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.HistoryActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.ivipbusiness.model.entity.Member;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
@@ -52,7 +53,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
-            Member member = arrayList.get(position);
+            final Member member = arrayList.get(position);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_avatar, member.getAvatar());
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_fullname, member.getFullname(), _view.getActivity().getString(R.string.not_update_name));
@@ -71,7 +72,9 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         return;
                     }
 
-                    _view.getActivity().startActivity(new Intent(_view.getActivity(), HistoryActivity.class));
+                    Intent intent = new Intent(_view.getActivity(), HistoryActivity.class);
+                    intent.putExtra(Constants.MODEL, member);
+                    _view.getActivity().startActivity(intent);
                 }
             });
         } else {

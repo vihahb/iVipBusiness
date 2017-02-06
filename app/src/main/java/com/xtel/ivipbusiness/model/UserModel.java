@@ -37,7 +37,7 @@ public class UserModel extends BasicModel {
         resp_full_profile.setPhonenumber("0986495949");
         resp_full_profile.setAddress("Ha Noi, Viet Nam");
         resp_full_profile.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
-        resp_full_profile.setQr_code("http://teammagento.com/images.png");
+        resp_full_profile.setQr_code("https://www.google.com.vn/search?q=qr+code&rlz=1C1CHZL_viVN727VN727&espv=2&biw=1745&bih=885&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj9t5nzpdrRAhWFtpQKHYbqBigQ_AUIBigB#tbs=simg%3Am00&tbnid=P8CGc_XpSHMFKM%3A&docid=09_DNSxKkwquqM&tbm=isch&imgrc=P8CGc_XpSHMFKM%3A");
         resp_full_profile.setBar_code("https://lh3.googleusercontent.com/-hJ48FJsv_Jc/TXe5XDFnHBI/AAAAAAAAAEs/0wQowx8hpGE/s1600/ab.bmp");
         resp_full_profile.setStatus("new");
         resp_full_profile.setStore_number(30);

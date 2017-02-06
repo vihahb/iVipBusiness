@@ -2,27 +2,30 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_180">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryKey_90">
 
     <ImageView
         android:id="@+id/add_store.img_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
+        android:layout_height="@dimen/size_210"
         android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:padding="@dimen/size_16">
+        android:paddingBottom="@dimen/size_16"
+        android:paddingLeft="@dimen/size_18"
+        android:paddingRight="@dimen/size_18"
+        android:paddingTop="@dimen/size_16">
 
         <EditText
             android:id="@+id/add_store.edt_name"
-            style="@style/edittext_login"
+            style="@style/edittext_no_drawable"
             android:layout_width="0dp"
             android:layout_height="@dimen/size_40"
             android:layout_marginEnd="@dimen/size_16"

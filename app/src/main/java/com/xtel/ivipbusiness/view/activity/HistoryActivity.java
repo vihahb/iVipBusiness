@@ -45,6 +45,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
         presenter = new HistoryPresenter(this);
         initToolbar(R.id.history_toolbar, null);
+        presenter.getMemberInfo();
     }
 
     //    Khởi tạo layout và recyclerview
@@ -134,7 +135,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
     @Override
     public void onGetMemberError() {
-        showMaterialDialog(false, false, null, "", null, getString(R.string.back), new DialogListener() {
+        showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
             public void onClicked(Object object) {
                 closeDialog();

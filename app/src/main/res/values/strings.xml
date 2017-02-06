@@ -69,6 +69,7 @@
     <string name="error_register_phone">Đăng ký thất bại</string>
     <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
     <string name="error_can_not_resett">Không thể đổi mật khẩu</string>
+    <string name="error_try_again">Có lỗi xảy ra. Vui lòng thử lại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>

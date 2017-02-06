@@ -9,26 +9,22 @@
         android:id="@+id/store_info.edt_address"
         style="@style/edittext_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_48"
+        android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_action_location"
         android:drawableStart="@drawable/ic_action_location"
         android:hint="@string/address"
-        android:inputType="text"
-        android:paddingLeft="-4dp"
-        android:paddingStart="-4dp" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/store_info.edt_phone"
         style="@style/edittext_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_48"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
         android:drawableLeft="@drawable/ic_action_phone"
         android:drawableStart="@drawable/ic_action_phone"
         android:hint="@string/phone"
-        android:inputType="text"
-        android:paddingLeft="-4dp"
-        android:paddingStart="-4dp" />
+        android:inputType="phone" />
 
     <TextView
         style="@style/textview_profile"
@@ -39,8 +35,6 @@
         android:drawablePadding="@dimen/size_12"
         android:drawableStart="@drawable/ic_action_note"
         android:gravity="center_vertical"
-        android:paddingLeft="-4dp"
-        android:paddingStart="-4dp"
         android:text="@string/store_des" />
 
     <EditText
@@ -48,13 +42,12 @@
         style="@style/edittext_des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_18"
+        android:layout_marginTop="@dimen/size_10"
         android:background="@drawable/edittext_border_0_5"
         android:inputType="textMultiLine"
         android:minLines="4"
         android:padding="@dimen/size_8"
-        android:paddingBottom="@dimen/size_8"
-        android:text="fdsf sdfdfd jfkl;dsf jdkjf kfl;djf kdslfjadsf;i jfasoifjflksdj flksdjf klsdjflkdsjf jsdkfslfk dfjls fkjds lflsdf jdskfj dsj flskj dlkdjfsldkfjl" />
+        android:paddingBottom="@dimen/size_8" />
 
     <View
         android:layout_width="match_parent"
@@ -75,8 +68,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginTop="@dimen/size_16"
             android:layout_weight="1"
+            android:paddingEnd="@dimen/size_16"
+            android:paddingRight="@dimen/size_16"
             android:text="@string/qr_code" />
 
         <com.xtel.ivipbusiness.view.widget.SquareImageView

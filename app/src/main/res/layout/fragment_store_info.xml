@@ -54,11 +54,12 @@
     </android.support.v4.widget.NestedScrollView>
 
     <com.xtel.ivipbusiness.view.widget.RoundImage
-        android:contentDescription="@null"
         android:id="@+id/store_info.img_logo"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
         android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:contentDescription="@null"
         android:src="@mipmap/ic_launcher"
         app:layout_anchor="@id/store_info.app_bar"
         app:layout_anchorGravity="bottom|right|end" />

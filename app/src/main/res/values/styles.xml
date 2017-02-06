@@ -6,6 +6,7 @@
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@android:color/white</item>
+
         <item name="android:windowBackground">@mipmap/background_window</item>
         <item name="android:windowAnimationStyle">@null</item>
         <!--<item name="colorAccent">@color/colorAccent</item>-->
@@ -72,6 +73,17 @@
         <item name="android:background">@drawable/button_border</item>
     </style>
 
+    <style name="edittext_no_drawable">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <!--<item name="android:background">@drawable/edittext_disable</item>-->
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
     <style name="edittext_login">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_12</item>
@@ -79,7 +91,10 @@
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:drawablePadding">@dimen/size_12</item>
-        <item name="android:background">@drawable/edittext_disable</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingLeft">-2dp</item>
+        <!--<item name="android:background">@drawable/edittext_disable</item>-->
+        <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
     <style name="edittext_disable">
@@ -89,8 +104,11 @@
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:drawablePadding">@dimen/size_12</item>
-        <item name="android:enabled">false</item>
-        <item name="android:background">@drawable/edittext_disable</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:focusable">false</item>
+        <item name="android:paddingLeft">-2dp</item>
+        <!--<item name="android:background">@drawable/edittext_disable</item>-->
+        <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
     <style name="edittext_des">
@@ -99,6 +117,8 @@
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">top</item>
         <item name="android:drawablePadding">@dimen/size_12</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingLeft">-2dp</item>
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
