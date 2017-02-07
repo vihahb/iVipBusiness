@@ -64,6 +64,11 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getTotal_shopping_in_store()));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin) + ": ", member.getLast_checkin());
 
+            viewHolder.txt_total_checkin.setSelected(true);
+            viewHolder.txt_total_shopping.setSelected(true);
+            viewHolder.txt_shopping_in_store.setSelected(true);
+            viewHolder.txt_last_checkin.setSelected(true);
+
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

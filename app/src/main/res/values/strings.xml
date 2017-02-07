@@ -108,7 +108,7 @@
     <string name="total_checkin">Số lần checkin</string>
     <string name="total_shopping">Số lần mua hàng</string>
     <string name="total_shopping_in_store">Số lần mua hàng tại store</string>
-    <string name="last_checkin">Thồi gian checkin cuối: </string>
+    <string name="last_checkin">Thồi gian checkin cuối</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>

@@ -146,6 +146,16 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="textview_horizontal">
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+
     <style name="textview_small">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_10</item>

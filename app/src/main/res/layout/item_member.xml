@@ -93,14 +93,14 @@
 
             <TextView
                 android:id="@+id/item.member.txt_total_checkin"
-                style="@style/textview_profile"
+                style="@style/textview_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/total_checkin" />
 
             <TextView
                 android:id="@+id/item.member.txt_total_shopping"
-                style="@style/textview_profile"
+                style="@style/textview_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
@@ -108,7 +108,7 @@
 
             <TextView
                 android:id="@+id/item.member.txt_total_shopping_in_store"
-                style="@style/textview_profile"
+                style="@style/textview_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
@@ -116,7 +116,7 @@
 
             <TextView
                 android:id="@+id/item.member.txt_last_checkin"
-                style="@style/textview_profile"
+                style="@style/textview_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
