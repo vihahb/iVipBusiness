@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/size_60"
             android:paddingTop="@dimen/size_48">
 
             <LinearLayout
@@ -43,36 +42,39 @@
                 android:layout_height="match_parent"
                 android:gravity="bottom"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/size_60"
-                android:paddingLeft="@dimen/size_48"
-                android:paddingRight="@dimen/size_48"
-                android:paddingTop="@dimen/size_24">
+                android:padding="@dimen/size_48">
 
                 <EditText
                     android:id="@+id/register.edt_username"
-                    style="@style/edittext_login"
+                    style="@style/edittext_no_drawable"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
+                    android:layout_height="@dimen/size_48"
                     android:hint="@string/input_phone"
                     android:inputType="phone"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
                     tools:ignore="LabelFor" />
 
                 <EditText
                     android:id="@+id/register.edt_pass"
-                    style="@style/edittext_login"
+                    style="@style/edittext_no_drawable"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
+                    android:layout_height="@dimen/size_48"
                     android:hint="@string/input_pass"
                     android:inputType="textPassword"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
                     tools:ignore="LabelFor" />
 
                 <EditText
                     android:id="@+id/register.edt_re_pass"
-                    style="@style/edittext_login"
+                    style="@style/edittext_no_drawable"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
+                    android:layout_height="@dimen/size_48"
                     android:hint="@string/input_re_pass"
                     android:inputType="textPassword"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
                     tools:ignore="LabelFor" />
 
                 <Button

@@ -71,7 +71,7 @@ public class StoresModel {
         for (int i = 1; i <= 21; i++) {
             SortStore stores = new SortStore();
             stores.setId(i);
-            stores.setBanner("http://3.bp.blogspot.com/-fGedPqEK7VA/USrzhrrrPAI/AAAAAAAAGrw/aywfic1mJYY/s1600/mobile_game_banner_jp.naver.lineplay.android.jpeg");
+            stores.setBanner("http://cuonghungthinh.com/imagesup/banner%20coffee.png");
             stores.setLogo("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
             stores.setName("Store " + i);
             stores.setStore_type("STYPE");

@@ -52,7 +52,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         initView();
         initNavigationView();
         replaceListStore();
-        presenter.getShortUserData();
+//        presenter.getShortUserData();
     }
 
     //     Khởi tạo view
@@ -169,39 +169,17 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         getMenuInflater().inflate(R.menu.menu_home, menu);
         menuItem = menu.findItem(R.id.action_home_user_info);
 
-//        MenuItem item = menu.findItem(R.id.action_home_user_info);
-//        MenuItemCompat.setActionView(item, R.layout.action_view_home);
-//        FrameLayout layout = (FrameLayout) MenuItemCompat.getActionView(item);
-//        img_avatar = (ImageView) layout.findViewById(R.id.action_home_img_avatar);
-//        img_avatar.setImageResource(R.mipmap.background_app);
-//        menu.findItem(R.id.action_home_user_info).setIcon(getUserImage(""));
-
-        return super.onCreateOptionsMenu(menu);
+        presenter.getShortUserData();
+        return true;
     }
-
-//    private void showPopup(MenuItem parent) {
-//        final PopupWindow popUpWindow = new PopupWindow(this);
-//
-//        LayoutInflater mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//        View view =  mInflater.inflate(R.layout.demo, null);
-//
-//        popUpWindow.setContentView(view);
-//        popUpWindow.setOutsideTouchable(true);
-//
-//        popUpWindow.showAtLocation(toolbar, Gravity.RIGHT, 0, 0);
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_home_user_info) {
+        if (id == R.id.action_home_user_info)
             startActivity(ProfileActivity.class);
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

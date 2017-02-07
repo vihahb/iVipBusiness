@@ -5,14 +5,44 @@
     <item
         android:bottom="-100dp"
         android:left="0dp"
-        android:right="0dp"
+        android:right="40dp"
         android:top="0dp">
         <rotate
-            android:fromDegrees="7"
+            android:fromDegrees="30"
             android:pivotX="100%"
             android:pivotY="0%">
             <shape android:shape="rectangle">
-                <gradient android:startColor="#99F44437" android:centerColor="#99F44437" android:endColor="@android:color/transparent" android:angle="360" />
+                <solid android:color="#40F44437" />
+            </shape>
+        </rotate>
+    </item>
+
+    <item
+        android:bottom="-100dp"
+        android:left="0dp"
+        android:right="20dp"
+        android:top="0dp">
+        <rotate
+            android:fromDegrees="30"
+            android:pivotX="100%"
+            android:pivotY="0%">
+            <shape android:shape="rectangle">
+                <solid android:color="#40F44437" />
+            </shape>
+        </rotate>
+    </item>
+
+    <item
+        android:bottom="-100dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
+        <rotate
+            android:fromDegrees="30"
+            android:pivotX="100%"
+            android:pivotY="0%">
+            <shape android:shape="rectangle">
+                <solid android:color="#40F44437" />
             </shape>
         </rotate>
     </item>

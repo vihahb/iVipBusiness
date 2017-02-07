@@ -6,15 +6,15 @@
     android:layout_marginLeft="@dimen/size_8"
     android:layout_marginRight="@dimen/size_8"
     android:layout_marginTop="@dimen/size_8"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     card_view:cardBackgroundColor="@android:color/transparent"
     card_view:cardCornerRadius="@dimen/size_2"
     card_view:cardElevation="0dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:layout_height="@dimen/size_180">
 
         <ImageView
             android:id="@+id/item.store.img_banner"
@@ -31,42 +31,44 @@
             android:layout_gravity="bottom"
             android:background="@drawable/item_background_1" />
 
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="bottom"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="@dimen/size_16">-->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/size_16"
             android:gravity="bottom"
-            android:orientation="horizontal"
-            android:padding="@dimen/size_16">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/item.store.txt_name"
+                style="@style/textview_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:orientation="vertical">
+                android:text="@string/birth_day" />
 
-                <TextView
-                    android:id="@+id/item.store.txt_name"
-                    style="@style/textview_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/birth_day" />
+            <TextView
+                android:id="@+id/item.store.txt_address"
+                style="@style/textview_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/birth_day" />
 
-                <TextView
-                    android:id="@+id/item.store.txt_address"
-                    style="@style/textview_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/birth_day" />
-
-                <TextView
-                    android:id="@+id/item.store.txt_date_create"
-                    style="@style/textview_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|end"
-                    android:text="@string/day_create" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/item.store.txt_date_create"
+                style="@style/textview_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|end"
+                android:text="@string/day_create" />
         </LinearLayout>
+        <!--</LinearLayout>-->
 
         <ImageView
             android:id="@+id/item.store.img_avatar"
