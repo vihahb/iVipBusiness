@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
@@ -90,6 +91,7 @@ public class LoginPresenter extends BasicPresenter {
         configurationBuilder.setTitleType(AccountKitActivity.TitleType.LOGIN);
         configurationBuilder.setReadPhoneStateEnabled(true);
         configurationBuilder.setReceiveSMS(true);
+//        configurationBuilder.setInitialPhoneNumber(new PhoneNumber())
         intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
         view.startActivityForResult(intent, ACCOUNT_KIT_REQUEST_CODE);
     }

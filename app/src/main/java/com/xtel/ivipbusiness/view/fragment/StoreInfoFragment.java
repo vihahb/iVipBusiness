@@ -1,18 +1,24 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
 import com.xtel.ivipbusiness.presenter.StoreInfoPresenter;
@@ -25,11 +31,14 @@ import com.xtel.sdk.utils.WidgetHelper;
  * Created by Vulcl on 1/16/2017
  */
 
-public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
+public class StoreInfoFragment extends BasicFragment implements View.OnClickListener, IStoreInfoView {
     private StoreInfoPresenter presenter;
 
     private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
     private EditText edt_name, edt_address, edt_phone, edt_des;
+
+    private RESP_Store resp_store;
+    private boolean isShow = true;
 
     public static StoreInfoFragment newInstance() {
         return new StoreInfoFragment();
@@ -47,6 +56,7 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
 
         presenter = new StoreInfoPresenter(this);
         initView();
+        initListener();
         initAnimationHideImage(view);
         presenter.getStoreInfo();
     }
@@ -63,7 +73,10 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
         edt_des = findEditText(R.id.store_info_edt_des);
     }
 
-    private boolean isShow = true;
+    private void initListener() {
+        img_qr_code.setOnClickListener(this);
+        img_bar_code.setOnClickListener(this);
+    }
 
     private void initAnimationHideImage(View view) {
         AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.store_info_app_bar);
@@ -109,6 +122,7 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
 
     @Override
     public void onGetStoreInfoSuccess(RESP_Store resp_store) {
+        this.resp_store = resp_store;
         WidgetHelper.getInstance().setImageURL(img_banner, resp_store.getBanner());
         WidgetHelper.getInstance().setImageURL(img_logo, resp_store.getLogo());
         WidgetHelper.getInstance().setImageURL(img_qr_code, resp_store.getQr_code());
@@ -135,5 +149,91 @@ public class StoreInfoFragment extends BasicFragment implements IStoreInfoView {
             }
         });
 
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private void showQrCode() {
+        if (resp_store.getQr_code() == null || resp_store.getQr_code().isEmpty()) {
+            showShortToast(getString(R.string.error_view_code));
+            return;
+        }
+
+        final Dialog bottomSheetDialog = new Dialog(getContext(), R.style.MaterialDialogSheet);
+        bottomSheetDialog.setContentView(R.layout.qr_code_bottom_sheet);
+        bottomSheetDialog.setCancelable(true);
+        bottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog.getWindow().setGravity(Gravity.CENTER);
+
+        Button txt_close = (Button) bottomSheetDialog.findViewById(R.id.dialog_txt_close);
+        ImageView img_qr_code = (ImageView) bottomSheetDialog.findViewById(R.id.dialog_qr_code);
+
+        Picasso.with(getContext())
+                .load(resp_store.getQr_code())
+                .noPlaceholder()
+                .error(R.mipmap.ic_error)
+                .into(img_qr_code);
+
+        if (txt_close != null)
+            txt_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bottomSheetDialog.show();
+            }
+        }, 200);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private void showBarCode() {
+        if (resp_store.getBar_code() == null || resp_store.getBar_code().isEmpty()) {
+            showShortToast(getString(R.string.error_view_code));
+            return;
+        }
+
+        final Dialog bottomSheetDialog = new Dialog(getContext(), R.style.MaterialDialogSheet);
+        bottomSheetDialog.setContentView(R.layout.qr_code_bottom_sheet);
+        bottomSheetDialog.setCancelable(true);
+        bottomSheetDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog.getWindow().setGravity(Gravity.CENTER);
+
+        Button txt_close = (Button) bottomSheetDialog.findViewById(R.id.dialog_txt_close);
+        ImageView img_qr_code = (ImageView) bottomSheetDialog.findViewById(R.id.dialog_qr_code);
+
+        Picasso.with(getContext())
+                .load(resp_store.getBar_code())
+                .noPlaceholder()
+                .error(R.mipmap.ic_error)
+                .into(img_qr_code);
+
+        if (txt_close != null)
+            txt_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bottomSheetDialog.show();
+            }
+        }, 200);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+
+        if (id == R.id.store_info_img_qrCode)
+            showQrCode();
+        else if (id == R.id.store_info_img_bar_code)
+            showBarCode();
     }
 }

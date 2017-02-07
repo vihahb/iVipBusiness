@@ -73,6 +73,7 @@
     <string name="error_can_not_resett">Không thể đổi mật khẩu</string>
     <string name="error_try_again">Có lỗi xảy ra. Vui lòng thử lại</string>
     <string name="error_no_store_selected">Vui lòng chọn cửa hàng</string>
+    <string name="error_view_code">Không thể xem mã</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>

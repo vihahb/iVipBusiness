@@ -85,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@null"
+            android:layout_marginTop="@dimen/size_4"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher" />
 
