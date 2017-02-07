@@ -23,6 +23,8 @@ public class SortStore {
     private int bg_id;
     @Expose
     private long date_create;
+    @Expose
+    private boolean isCHecked;
 
     public int getId() {
         return id;
@@ -86,5 +88,13 @@ public class SortStore {
 
     public void setDate_create(long date_create) {
         this.date_create = date_create;
+    }
+
+    public boolean isCHecked() {
+        return isCHecked;
+    }
+
+    public void setCHecked(boolean CHecked) {
+        isCHecked = CHecked;
     }
 }

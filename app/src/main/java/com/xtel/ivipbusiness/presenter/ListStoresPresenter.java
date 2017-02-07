@@ -1,12 +1,16 @@
 package com.xtel.ivipbusiness.presenter;
 
+import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.StoresModel;
 import com.xtel.ivipbusiness.model.entity.RESP_List_Sort_Store;
+import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
 import com.xtel.nipservice.callback.ResponseHandle;
 import com.xtel.nipservice.model.entity.Error;
 import com.xtel.nipservice.model.entity.RESP_Basic;
 import com.xtel.sdk.utils.NetWorkInfo;
+
+import java.util.ArrayList;
 
 /**
  * Created by Vulcl on 1/17/2017
@@ -36,5 +40,21 @@ public class ListStoresPresenter {
                 view.onGetListStoresError(error);
             }
         });
+    }
+
+    public void chooseList(ArrayList<SortStore> listData) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+
+        for (int i = listData.size() - 1; i >= 0; i--) {
+            if (listData.get(i).isCHecked())
+                arrayList.add(listData.get(i).getId());
+        }
+
+        if (arrayList.size() == 0) {
+            view.showShortToast(view.getActivity().getString(R.string.error_no_store_selected));
+            return;
+        }
+
+
     }
 }

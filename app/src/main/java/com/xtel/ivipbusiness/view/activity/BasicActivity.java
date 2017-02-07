@@ -28,6 +28,7 @@ public abstract class BasicActivity extends IActivity {
     private ProgressDialog progressDialog;
     private Dialog dialog;
     boolean isWaitingForExit = false;
+    private Toast toast;
 
     protected void initToolbar(int id, String title) {
         Toolbar toolbar = (Toolbar) findViewById(id);
@@ -48,11 +49,19 @@ public abstract class BasicActivity extends IActivity {
     }
 
     protected void showLongToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if (toast != null)
+            toast.cancel();
+
+        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     protected void showShortToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        if (toast != null)
+            toast.cancel();
+
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     protected void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {

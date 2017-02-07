@@ -38,7 +38,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.arrayList = arrayList;
         this._view = view;
         background_item = new int[]{R.drawable.item_background_1, R.drawable.item_background_2, R.drawable.item_background_3, R.drawable.item_background_4, R.drawable.item_background_5,
-                R.drawable.item_background_6, R.drawable.item_background_7, R.drawable.item_background_8};
+                R.drawable.item_background_6, R.drawable.item_background_7, R.drawable.item_background_8, R.drawable.item_background_9};
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (position == arrayList.size())
             _view.onLoadMore();
         if (holder instanceof ViewHolder) {
-            if (bg_pos == 8)
+            if (bg_pos == 9)
                 bg_pos = 0;
 
             if (arrayList.get(position).getBg_id() == 0)

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -161,14 +162,28 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
     }
 
     @Override
+    public void showShortToast(String message) {
+        super.showShortToast(message);
+    }
+
+    @Override
     public Activity getActivity() {
         return this;
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list_store, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
+        int id = item.getItemId();
+        if (id == android.R.id.home)
             finish();
+        else if (id == R.id.action_list_store_done)
+            presenter.chooseList(listData);
         return super.onOptionsItemSelected(item);
     }
 }

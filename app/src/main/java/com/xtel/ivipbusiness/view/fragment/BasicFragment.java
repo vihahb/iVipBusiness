@@ -23,17 +23,26 @@ import java.io.Serializable;
 public class BasicFragment extends IFragment {
     private ProgressDialog progressDialog;
     private Dialog dialog;
+    private Toast toast;
 
     protected void debug(String message) {
         Log.e(this.getClass().getSimpleName(), message);
     }
 
     protected void showLongToast(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        if (toast != null)
+            toast.cancel();
+
+        toast = Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     protected void showShortToast(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        if (toast != null)
+            toast.cancel();
+
+        toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     protected void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {

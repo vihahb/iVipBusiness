@@ -12,7 +12,7 @@
             android:pivotX="100%"
             android:pivotY="0%">
             <shape android:shape="rectangle">
-                <gradient android:startColor="#99F44437" android:endColor="@android:color/transparent" android:angle="360" />
+                <gradient android:startColor="#99F44437" android:centerColor="#99F44437" android:endColor="@android:color/transparent" android:angle="360" />
             </shape>
         </rotate>
     </item>

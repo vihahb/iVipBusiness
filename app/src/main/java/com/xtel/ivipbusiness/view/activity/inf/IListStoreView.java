@@ -16,6 +16,7 @@ public interface IListStoreView {
     void onLoadMore();
     void onGetListStoresSuccess(ArrayList<SortStore> arrayList);
     void onGetListStoresError(Error error);
+    void showShortToast(String message);
     void onNoNetwork();
     Activity getActivity();
 }
