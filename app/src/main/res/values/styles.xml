@@ -45,13 +45,17 @@
         <item name="android:windowMinWidthMajor">100%</item>
     </style>
 
-    <style name="Theme_Activity_Transparent" parent="@style/AppTheme">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowAnimationStyle">@null</item>
+    <!--<style name="Theme_Activity_Transparent" parent="@style/AppTheme">-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:backgroundDimEnabled">false</item>-->
+        <!--<item name="android:windowAnimationStyle">@null</item>-->
+    <!--</style>-->
+
+    <style name="Navigation_View" parent="@style/AppTheme">
+        <item name="android:listDivider">@android:color/white</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
