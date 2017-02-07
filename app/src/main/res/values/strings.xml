@@ -14,7 +14,7 @@
     <string name="title_activity_add_store">Tạo cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
     <string name="title_activity_list_store">Danh sách cửa hàng</string>
-    <string name="title_activity_list_chain">Chuỗi cửa hàng</string>
+    <string name="title_activity_list_chain">Cửa hàng</string>
     <string name="title_activity_history">Lịch sử giao dịch</string>
     <string name="title_activity_list_member">Danh sách thành viên</string>
     <string name="title_activity_list_news">Bản tin</string>

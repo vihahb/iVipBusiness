@@ -15,28 +15,6 @@
         android:focusableInTouchMode="true"
         tools:context="com.xtel.ivipbusiness.view.activity.LoginActivity">
 
-        <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:theme="@style/AppTheme.AppBarOverlay"-->
-        <!--app:elevation="0dp">-->
-
-        <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/login.toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--app:titleTextAppearance="@style/Toolbar_TitleText"-->
-        <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-        <!--</android.support.design.widget.AppBarLayout>-->
-
-        <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:fillViewport="true"-->
-        <!--android:fitsSystemWindows="false">-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,21 +53,25 @@
 
                 <EditText
                     android:id="@+id/login.edt_username"
-                    style="@style/edittext_login"
+                    style="@style/edittext_no_drawable"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
+                    android:layout_height="@dimen/size_48"
                     android:hint="@string/input_phone"
                     android:inputType="phone"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
                     tools:ignore="LabelFor" />
 
                 <EditText
                     android:id="@+id/login.edt_pass"
-                    style="@style/edittext_login"
+                    style="@style/edittext_no_drawable"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40"
+                    android:layout_height="@dimen/size_48"
                     android:layout_marginTop="@dimen/size_8"
                     android:hint="@string/input_pass"
                     android:inputType="textPassword"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
                     tools:ignore="LabelFor" />
 
                 <Button
