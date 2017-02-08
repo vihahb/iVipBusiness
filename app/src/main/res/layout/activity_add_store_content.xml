@@ -3,44 +3,63 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/size_16"
-    android:paddingRight="@dimen/size_16">
+    android:padding="@dimen/size_16">
 
     <EditText
         android:id="@+id/add_store.edt_type"
-        style="@style/edittext_no_drawable"
+        style="@style/edittext_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_40"
+        android:layout_height="@dimen/size_48"
         android:layout_marginTop="@dimen/size_8"
-        android:hint="@string/store_name"
+        android:drawableLeft="@drawable/ic_action_shopping"
+        android:drawableStart="@drawable/ic_action_shopping"
+        android:hint="@string/store_type"
         android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/add_store.edt_address"
-        style="@style/edittext_no_drawable"
+        style="@style/edittext_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_40"
+        android:layout_height="@dimen/size_48"
         android:layout_marginTop="@dimen/size_8"
+        android:drawableLeft="@drawable/ic_action_location"
+        android:drawableStart="@drawable/ic_action_location"
         android:hint="@string/store_address"
         android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/add_store.edt_phone"
-        style="@style/edittext_no_drawable"
+        style="@style/edittext_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_40"
+        android:layout_height="@dimen/size_48"
         android:layout_marginTop="@dimen/size_8"
+        android:drawableLeft="@drawable/ic_action_phone"
+        android:drawableStart="@drawable/ic_action_phone"
         android:hint="@string/phone"
         android:inputType="phone" />
 
-    <EditText
-        android:id="@+id/add_store.edt_des"
-        style="@style/edittext_no_drawable"
+    <TextView
+        style="@style/textview_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_8"
-        android:hint="@string/store_des"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxLines="5"
-        android:minLines="4" />
+        android:layout_marginTop="@dimen/size_16"
+        android:drawableLeft="@drawable/ic_action_note"
+        android:drawablePadding="@dimen/size_12"
+        android:drawableStart="@drawable/ic_action_note"
+        android:gravity="center_vertical"
+        android:text="@string/store_des" />
+
+    <EditText
+        android:id="@+id/add_store.edt_des"
+        style="@style/edittext_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@drawable/edittext_border_0_5"
+        android:inputType="textMultiLine"
+        android:minLines="6"
+        android:padding="@dimen/size_8"
+        android:paddingBottom="@dimen/size_8" />
 </LinearLayout>

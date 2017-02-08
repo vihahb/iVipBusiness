@@ -31,8 +31,8 @@
             android:layout_marginEnd="@dimen/size_16"
             android:layout_marginRight="@dimen/size_16"
             android:layout_weight="1"
-            android:hint="@string/input_phone"
-            android:inputType="phone"
+            android:hint="@string/store_name"
+            android:inputType="textCapWords"
             tools:ignore="LabelFor" />
 
         <com.xtel.ivipbusiness.view.widget.RoundImage

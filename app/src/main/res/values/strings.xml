@@ -104,6 +104,7 @@
     <string name="store_name">Tên cửa hàng</string>
     <string name="store_address">Địa chỉ cửa hàng</string>
     <string name="store_des">Mô tả cửa hàng</string>
+    <string name="store_type">Loại cửa hàng</string>
 
     <string name="total_point">Tổng điểm</string>
     <string name="remaining_point">Điểm còn lại</string>

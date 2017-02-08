@@ -136,7 +136,7 @@
 
     <style name="textview_title">
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/font_15</item>
+        <item name="android:textSize">@dimen/font_16</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:ellipsize">end</item>
     </style>

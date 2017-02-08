@@ -47,7 +47,7 @@
         android:layout_marginTop="@dimen/size_10"
         android:background="@drawable/edittext_border_0_5"
         android:inputType="textMultiLine"
-        android:minLines="4"
+        android:minLines="6"
         android:padding="@dimen/size_8"
         android:paddingBottom="@dimen/size_8" />
 
