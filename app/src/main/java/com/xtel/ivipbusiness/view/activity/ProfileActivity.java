@@ -2,7 +2,6 @@ package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,21 +11,18 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.ProfilePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
-import com.xtel.nipservice.LoginManager;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.sdk.callback.DialogListener;
+import com.xtel.nipservicesdk.LoginManager;
+import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.IOException;

@@ -7,14 +7,13 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.accountkit.AccountKitLoginResult;
-import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.RegisterActivity;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
-import com.xtel.nipservice.utils.PermissionHelper;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 /**

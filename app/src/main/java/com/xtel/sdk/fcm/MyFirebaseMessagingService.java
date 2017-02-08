@@ -14,7 +14,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.annotations.Expose;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.HomeActivity;
-import com.xtel.nipservice.utils.JsonHelper;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 
 /**
  * Created by Lê Công Long Vũ on 1/4/2017

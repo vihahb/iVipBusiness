@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +17,8 @@ import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
 import com.xtel.ivipbusiness.view.adapter.ListStoreAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.nipservice.utils.JsonParse;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
 

@@ -4,8 +4,8 @@ import com.xtel.ivipbusiness.model.entity.History;
 import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.model.entity.RESP_History;
 import com.xtel.ivipbusiness.model.entity.RESP_Member;
-import com.xtel.nipservice.callback.ResponseHandle;
-import com.xtel.nipservice.utils.JsonHelper;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 
 import java.util.ArrayList;
 

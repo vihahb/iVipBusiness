@@ -14,7 +14,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180">
+        android:layout_height="@dimen/size_150">
 
         <ImageView
             android:id="@+id/item.list_store.img_banner"
@@ -35,8 +35,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
-                android:layout_weight="0.9"
-                android:background="@drawable/item" />
+                android:layout_weight="0.85"
+                android:background="@drawable/item_list_store_1" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,13 +58,15 @@
                     android:id="@+id/item.list_store.txt_checked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="-4dp"
+                    android:paddingStart="-4dp"
                     android:drawableLeft="@drawable/ic_action_tick_default"
                     android:drawableStart="@drawable/ic_action_tick_default" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/size_16"
+                    android:layout_marginTop="@dimen/size_12"
                     android:orientation="vertical">
 
                     <TextView

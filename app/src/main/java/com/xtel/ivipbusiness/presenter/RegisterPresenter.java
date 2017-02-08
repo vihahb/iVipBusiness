@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
@@ -62,13 +63,14 @@ public class RegisterPresenter extends BasicPresenter {
         return true;
     }
 
-    public void startValidatePhone() {
+    public void startValidatePhone(String phone) {
         Intent intent = new Intent(view.getActivity(), AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.CODE);
         configurationBuilder.setDefaultCountryCode("VN");
         configurationBuilder.setTitleType(AccountKitActivity.TitleType.LOGIN);
         configurationBuilder.setReadPhoneStateEnabled(true);
         configurationBuilder.setReceiveSMS(true);
+        configurationBuilder.setInitialPhoneNumber(new PhoneNumber("84", phone));
         intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
         view.startActivityForResult(intent, ACCOUNT_KIT_REQUEST_CODE);
     }

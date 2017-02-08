@@ -117,6 +117,10 @@
             android:theme="@style/AppLoginTheme"
             tools:replace="android:theme" />
         <!-- [END Account Kit] -->
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="1118d7f27cb1d16b657c40b206b20d3fb1125653" />
     </application>
 
 </manifest>

@@ -2,8 +2,8 @@ package com.xtel.ivipbusiness.model;
 
 import com.xtel.ivipbusiness.model.entity.News;
 import com.xtel.ivipbusiness.model.entity.RESP_News;
-import com.xtel.nipservice.callback.ResponseHandle;
-import com.xtel.nipservice.utils.JsonHelper;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class NewsModel {
             news.setId(i);
             news.setTitle("Title " + i);
             news.setDate_create(1483203600000L);
-            news.setBanner("http://3.bp.blogspot.com/-fGedPqEK7VA/USrzhrrrPAI/AAAAAAAAGrw/aywfic1mJYY/s1600/mobile_game_banner_jp.naver.lineplay.android.jpeg");
+            news.setBanner("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
 
             arrayList.add(news);
         }

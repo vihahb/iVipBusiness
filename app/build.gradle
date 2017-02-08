@@ -1,4 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
 
 android {
     compileSdkVersion 25
@@ -49,7 +54,11 @@ dependencies {
     //    Floating action button slide
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile 'com.github.florent37:diagonallayout:1.0.2'
-    compile project(':nipservice')
+    //  Fabric
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
+        transitive = true;
+    }
+    compile project(':NIPmodule')
 }
 
 apply plugin: 'com.google.gms.google-services'

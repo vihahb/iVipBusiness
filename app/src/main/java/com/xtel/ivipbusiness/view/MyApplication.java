@@ -12,8 +12,11 @@ import android.util.Log;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.FirebaseApp;
-import com.xtel.nipservice.LoginManager;
+import com.xtel.nipservicesdk.LoginManager;
+import com.xtel.nipservicesdk.NipApplication;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,11 +31,12 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         LoginManager.sdkInitialize(this);
         FirebaseApp.initializeApp(this);
-
+        NipApplication.context = this;
         context = this;
         getKeyHash(context.getPackageName());
     }

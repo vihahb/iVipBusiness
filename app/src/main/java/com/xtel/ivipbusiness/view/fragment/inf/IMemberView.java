@@ -2,7 +2,7 @@ package com.xtel.ivipbusiness.view.fragment.inf;
 
 import android.app.Activity;
 
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.Member;
 
 import java.util.ArrayList;

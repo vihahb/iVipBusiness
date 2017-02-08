@@ -13,15 +13,13 @@ import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.News;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.NewsPresenter;
-import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
 import com.xtel.ivipbusiness.view.adapter.NewsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.nipservice.utils.JsonParse;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
 

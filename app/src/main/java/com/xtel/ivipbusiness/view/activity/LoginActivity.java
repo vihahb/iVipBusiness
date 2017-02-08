@@ -13,13 +13,13 @@ import com.facebook.accountkit.AccountKit;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.LoginPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
-import com.xtel.nipservice.CallbackManager;
-import com.xtel.nipservice.callback.CallbacListener;
-import com.xtel.nipservice.commons.Cts;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.nipservice.model.entity.RESP_Login;
-import com.xtel.nipservice.utils.JsonHelper;
-import com.xtel.nipservice.utils.JsonParse;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.commons.Cts;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016

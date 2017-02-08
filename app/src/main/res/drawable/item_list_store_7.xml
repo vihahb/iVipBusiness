@@ -12,7 +12,7 @@
             android:pivotX="100%"
             android:pivotY="0%">
             <shape android:shape="rectangle">
-                <solid android:color="#4DFF9902" />
+                <solid android:color="#66FF9902" />
             </shape>
         </rotate>
     </item>

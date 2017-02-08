@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IAddStoreView;
-import com.xtel.nipservice.utils.PermissionHelper;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 
 /**
  * Created by Vulcl on 1/15/2017

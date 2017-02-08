@@ -3,8 +3,8 @@ package com.xtel.ivipbusiness.presenter;
 import com.xtel.ivipbusiness.model.NewsModel;
 import com.xtel.ivipbusiness.model.entity.RESP_News;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
-import com.xtel.nipservice.callback.ResponseHandle;
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.model.entity.Error;
 
 /**
  * Created by Vulcl on 1/21/2017

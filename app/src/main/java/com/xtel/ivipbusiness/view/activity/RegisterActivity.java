@@ -11,13 +11,13 @@ import android.widget.EditText;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.RegisterPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
-import com.xtel.nipservice.CallbackManager;
-import com.xtel.nipservice.callback.CallbackLisenerRegister;
-import com.xtel.nipservice.callback.CallbackListenerActive;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.nipservice.model.entity.RESP_Register;
-import com.xtel.nipservice.utils.JsonHelper;
-import com.xtel.nipservice.utils.JsonParse;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbackLisenerRegister;
+import com.xtel.nipservicesdk.callback.CallbackListenerActive;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Register;
+import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 public class RegisterActivity extends BasicActivity implements View.OnClickListener, IRegisterView {
     private RegisterPresenter presenter;
@@ -62,7 +62,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
     }
 
     @Override
-    public void onRegisterAccount(String phone, String password) {
+    public void onRegisterAccount(final String phone, String password) {
         showProgressBar(false, false, null, getString(R.string.doing_register));
 
         callbackManager.registerNipService(phone, password, "", true, new CallbackLisenerRegister() {
@@ -71,7 +71,7 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
                 closeProgressBar();
                 debug(JsonHelper.toJson(register));
 //                showShortToast(getString(R.string.success_register));
-                presenter.startValidatePhone();
+                presenter.startValidatePhone(phone);
             }
 
             @Override

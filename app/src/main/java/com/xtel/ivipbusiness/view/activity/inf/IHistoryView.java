@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.xtel.ivipbusiness.model.entity.History;
 import com.xtel.ivipbusiness.model.entity.Member;
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.Error;
 
 import java.util.ArrayList;
 

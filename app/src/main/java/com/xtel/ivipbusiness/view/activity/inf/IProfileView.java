@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.Error;
 
 /**
  * Created by Vulcl on 1/17/2017

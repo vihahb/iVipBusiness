@@ -9,14 +9,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -26,7 +22,7 @@ import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
 import com.xtel.ivipbusiness.view.widget.CircleTransform;
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.Error;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -121,7 +117,6 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     @Override
     public void onGetShortUserDataSuccess(RESP_Short_Profile obj) {
-        showShortToast("ok get data");
         final ImageView imageView = new ImageView(this);
         imageView.setVisibility(View.GONE);
 

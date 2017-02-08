@@ -1,8 +1,13 @@
 package com.xtel.ivipbusiness.view.fragment;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewCompat;
@@ -10,6 +15,7 @@ import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
@@ -26,6 +32,8 @@ import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
 import com.xtel.ivipbusiness.view.widget.AppBarStateChangeListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.WidgetHelper;
+
+import java.io.IOException;
 
 /**
  * Created by Vulcl on 1/16/2017
@@ -76,6 +84,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     private void initListener() {
         img_qr_code.setOnClickListener(this);
         img_bar_code.setOnClickListener(this);
+        img_banner.setOnClickListener(this);
+        img_logo.setOnClickListener(this);
     }
 
     private void initAnimationHideImage(View view) {
@@ -149,6 +159,52 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             }
         });
 
+    }
+
+    @Override
+    public void startActivityForResult(Class clazz, String key, Object object, int requestCode) {
+        super.startActivityForResult(clazz, key, object, requestCode);
+    }
+
+    @Override
+    public void onTakePictureGallary(int type, Uri uri) {
+        if (uri == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
+        Bitmap bitmap = null;
+
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (bitmap != null) {
+            if (type == 0)
+                img_banner.setImageBitmap(bitmap);
+            else
+                img_logo.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onTakePictureCamera(int type, Bitmap bitmap) {
+        if (bitmap == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
+        if (type == 0)
+            img_banner.setImageBitmap(bitmap);
+        else
+            img_logo.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onValidateError(String error) {
+        showShortToast(error);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -235,5 +291,27 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             showQrCode();
         else if (id == R.id.store_info_img_bar_code)
             showBarCode();
+        else if (id == R.id.store_info_img_banner)
+            presenter.takePicture(0);
+        else if (id == R.id.store_info_img_logo)
+            presenter.takePicture(1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        debug(requestCode + "   " + resultCode);
+        presenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -3,7 +3,7 @@ package com.xtel.ivipbusiness.view.activity.inf;
 import android.app.Activity;
 
 import com.xtel.ivipbusiness.model.entity.SortStore;
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.Error;
 
 import java.util.ArrayList;
 

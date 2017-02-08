@@ -14,10 +14,10 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.UserModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
-import com.xtel.nipservice.callback.ResponseHandle;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.nipservice.utils.JsonHelper;
-import com.xtel.nipservice.utils.PermissionHelper;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 

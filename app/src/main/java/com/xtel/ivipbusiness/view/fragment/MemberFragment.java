@@ -16,9 +16,9 @@ import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.ivipbusiness.view.adapter.MemberAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
-import com.xtel.nipservice.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.ivipbusiness.model.entity.Member;
-import com.xtel.nipservice.utils.JsonParse;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
 

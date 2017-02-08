@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,13 +18,10 @@ import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.nipservice.model.entity.Error;
-import com.xtel.nipservice.utils.JsonParse;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
-
-import io.github.yavski.fabspeeddial.FabSpeedDial;
-import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
 /**
  * Created by Mr. M.2 on 1/13/2017

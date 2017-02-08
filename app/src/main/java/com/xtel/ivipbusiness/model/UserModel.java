@@ -2,9 +2,9 @@ package com.xtel.ivipbusiness.model;
 
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
-import com.xtel.nipservice.callback.ResponseHandle;
-import com.xtel.nipservice.model.BasicModel;
-import com.xtel.nipservice.utils.JsonHelper;
+import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.model.BasicModel;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 
 /**
  * Created by Mr. M.2 on 1/12/2017
@@ -42,7 +42,7 @@ public class UserModel extends BasicModel {
         resp_full_profile.setStatus("new");
         resp_full_profile.setStore_number(30);
         resp_full_profile.setJoin_date(1262278800000L);
-        resp_full_profile.setBanner("http://3.bp.blogspot.com/-fGedPqEK7VA/USrzhrrrPAI/AAAAAAAAGrw/aywfic1mJYY/s1600/mobile_game_banner_jp.naver.lineplay.android.jpeg");
+        resp_full_profile.setBanner("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
 
         responseHandle.onSuccess(JsonHelper.toJson(resp_full_profile));
     }
