@@ -77,7 +77,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
             public void onError(Error error) {
                 closeProgressBar();
                 debug(JsonHelper.toJson(error));
-                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
+                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.have_error)));
             }
         });
     }

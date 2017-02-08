@@ -73,7 +73,7 @@ public class EnterPasswordActivity extends BasicActivity implements View.OnClick
             @Override
             public void onError(Error error) {
                 closeProgressBar();
-                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
+                showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.have_error)));
                 startActivityAndFinish(LoginActivity.class);
             }
         });

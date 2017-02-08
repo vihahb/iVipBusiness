@@ -143,7 +143,7 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
             showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
         else {
             progressView.setRefreshing(false);
-            progressView.updateData(-1, JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)), getString(R.string.click_to_try_again));
+            progressView.updateData(-1, JsonParse.getCodeMessage(error.getCode(), getString(R.string.have_error)), getString(R.string.click_to_try_again));
             progressView.hideData();
 
             listData.clear();

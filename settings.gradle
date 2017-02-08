@@ -1,1 +1,1 @@
-include ':app', ':nipservice'
+include ':app', ':NIPmodule'

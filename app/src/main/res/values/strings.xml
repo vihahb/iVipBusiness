@@ -50,7 +50,7 @@
     <string name="success_reset">Lấy lại mật khẩu thành công</string>
 
     <!-- Error -->
-    <string name="error">Có lỗi xảy ra</string>
+    <string name="have_error">Có lỗi xảy ra</string>
     <string name="error_validate_phone">Số điện thoại không hợp lệ</string>
     <string name="error_input_username">Vui lòng nhập số điện thoại</string>
     <string name="error_input_password">Vui lòng nhập mật khẩu</string>
