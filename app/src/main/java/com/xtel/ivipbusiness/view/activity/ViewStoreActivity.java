@@ -28,7 +28,7 @@ import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 public class ViewStoreActivity extends BasicActivity {
     private ActionBar actionBar;
 
-    private MenuItem menu_create, menu_choose;
+    private MenuItem menu_create, menu_choose, menu_add;
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", LIST_NEAR_NEWS = "list_near_news";
 
     @Override
@@ -91,6 +91,7 @@ public class ViewStoreActivity extends BasicActivity {
         if (menu_create != null && menu_choose != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
+            menu_add.setVisible(false);
         }
     }
 
@@ -120,6 +121,7 @@ public class ViewStoreActivity extends BasicActivity {
         actionBar.setTitle(getString(R.string.title_activity_list_news));
         replaceFragment(R.id.view_store_container, NewsFragment.newInstance(), LIST_NEWS);
         hideMenuItem();
+        menu_add.setVisible(true);
     }
 
     //    hiển thị fratment bản tin gần đây
@@ -163,9 +165,11 @@ public class ViewStoreActivity extends BasicActivity {
 
         menu_create = menu.findItem(R.id.action_view_store_create_store);
         menu_choose = menu.findItem(R.id.action_view_store_choose_store);
+        menu_add = menu.findItem(R.id.action_view_store_add_store);
 
         menu_create.setVisible(false);
         menu_choose.setVisible(false);
+        menu_add.setVisible(false);
 
         SpannableString s = new SpannableString(menu_create.getTitle());
         s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
@@ -174,6 +178,8 @@ public class ViewStoreActivity extends BasicActivity {
         SpannableString s2 = new SpannableString(menu_choose.getTitle());
         s2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
         menu_choose.setTitle(s2);
+
+//        menu_add.setIcon(R.drawable.ic_action_add_store);
 
         return true;
     }

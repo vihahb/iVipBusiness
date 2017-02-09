@@ -10,7 +10,7 @@
     <string name="title_activity_login">Đăng nhập</string>
     <string name="title_activity_reset_password">Quên mật khẩu</string>
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
-    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_profile">Thông tin tài khoản</string>
     <string name="title_activity_add_store">Tạo cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
     <string name="title_activity_list_store">Danh sách cửa hàng</string>

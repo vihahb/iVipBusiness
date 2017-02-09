@@ -37,7 +37,7 @@ public class ProfilePresenter extends BasicPresenter {
     }
 
     public void getProfile() {
-        UserModel.getIntances().getUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
+        UserModel.getIntances().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
             @Override
             public void onSuccess(RESP_Full_Profile obj) {
                 view.onGetProfileSuccess(obj);

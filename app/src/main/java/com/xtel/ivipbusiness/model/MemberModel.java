@@ -5,6 +5,7 @@ import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.model.entity.RESP_History;
 import com.xtel.ivipbusiness.model.entity.RESP_Member;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
+import com.xtel.nipservicesdk.model.BasicModel;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * Created by Vulcl on 1/19/2017
  */
 
-public class MemberModel {
+public class MemberModel extends BasicModel {
     private static MemberModel instance;
 
     public static MemberModel getInstance() {

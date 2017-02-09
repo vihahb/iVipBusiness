@@ -30,7 +30,7 @@ public class NewsModel {
             news.setId(i);
             news.setTitle("Title " + i);
             news.setDate_create(1483203600000L);
-            news.setBanner("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
+            news.setBanner("http://cuonghungthinh.com/imagesup/banner%20coffee.png");
 
             arrayList.add(news);
         }

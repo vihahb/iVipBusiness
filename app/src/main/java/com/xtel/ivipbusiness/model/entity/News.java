@@ -15,6 +15,8 @@ public class News {
     private String title;
     @Expose
     private long date_create;
+    @Expose
+    private int bg_id;
 
     public int getId() {
         return id;
@@ -46,5 +48,13 @@ public class News {
 
     public void setDate_create(long date_create) {
         this.date_create = date_create;
+    }
+
+    public int getBg_id() {
+        return bg_id;
+    }
+
+    public void setBg_id(int bg_id) {
+        this.bg_id = bg_id;
     }
 }

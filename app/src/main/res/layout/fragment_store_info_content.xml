@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16"
         android:drawableLeft="@drawable/ic_action_note"
-        android:drawablePadding="@dimen/size_12"
+        android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_note"
         android:gravity="center_vertical"
         android:text="@string/store_des" />
@@ -62,6 +62,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/store_info.edt_begin_time"
+            style="@style/edittext_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_8"
+            android:layout_marginRight="@dimen/size_8"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_location"
+            android:drawableStart="@drawable/ic_action_location"
+            android:hint="@string/address"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/store_info.edt_end_time"
+            style="@style/edittext_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_8"
+            android:layout_marginStart="@dimen/size_8"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_location"
+            android:drawableStart="@drawable/ic_action_location"
+            android:hint="@string/address"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16"
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
@@ -83,9 +115,9 @@
             android:id="@+id/store_info.img_qrCode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_16"
             android:layout_weight="1"
             android:contentDescription="@null"
-            android:layout_marginTop="@dimen/size_4"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher" />
 

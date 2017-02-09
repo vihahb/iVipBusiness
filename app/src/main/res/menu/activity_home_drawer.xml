@@ -12,34 +12,22 @@
             android:checked="true"
             android:icon="@mipmap/ic_shopping"
             android:title="@string/store" />
-    </group>
-    <group
-        android:id="@+id/grp2"
-        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav.home.statistic"
             android:icon="@mipmap/ic_statistic"
             android:title="@string/statistic" />
-    </group>
-    <group
-        android:id="@+id/grp3"
-        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav.home.policy"
             android:icon="@mipmap/ic_policy"
             android:title="@string/policy" />
-    </group>
-    <group
-        android:id="@+id/grp4"
-        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav.home.app_info"
             android:icon="@mipmap/ic_infomation"
             android:title="@string/app_info" />
-    </group>
-    <group
-        android:id="@+id/grp5"
-        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav.home.faq"
             android:icon="@mipmap/ic_faq"

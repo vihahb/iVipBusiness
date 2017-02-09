@@ -26,12 +26,17 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<News> arrayList;
     private INewsView _view;
 
+    private int bg_pos = 0 ;
+    private int[] background_item;
+
     private boolean isLoadMore = true;
     private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
 
     public NewsAdapter(INewsView view, ArrayList<News> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
+        background_item = new int[]{R.drawable.item_background_1, R.drawable.item_background_2, R.drawable.item_background_3, R.drawable.item_background_4, R.drawable.item_background_5,
+                R.drawable.item_background_6, R.drawable.item_background_7, R.drawable.item_background_8, R.drawable.item_background_9};
     }
 
     @Override
@@ -50,14 +55,22 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             _view.onLoadMore();
 
         if (holder instanceof ViewHolder) {
+            if (bg_pos == 9)
+                bg_pos = 0;
+
+            if (arrayList.get(position).getBg_id() == 0)
+                arrayList.get(position).setBg_id(background_item[bg_pos]);
+
             ViewHolder viewHolder = (ViewHolder) holder;
             News news = arrayList.get(position);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, news.getBanner());
+            WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, news.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_title, news.getTitle(), _view.getActivity().getString(R.string.not_update_title));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, _view.getActivity().getString(R.string.day_create) + ": ", news.getDate_create());
 
+            bg_pos++;
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,11 +104,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private class ViewHolder extends ViewHolderHelper {
         private ImageView img_banner;
+        private View img_background;
         private TextView txt_title, txt_date_create, txt_view, txt_like, txt_share;
 
         ViewHolder(View itemView) {
             super(itemView);
 
+            img_background = findView(R.id.item_chain_img_background);
             img_banner = findImageView(R.id.item_news_img_banner);
             txt_title = findTextView(R.id.item_news_txt_title);
             txt_date_create = findTextView(R.id.item_news_txt_day_create);
@@ -115,6 +130,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void setLoadMore(boolean isLoadMore) {
+        bg_pos = 0;
         this.isLoadMore = isLoadMore;
     }
 }

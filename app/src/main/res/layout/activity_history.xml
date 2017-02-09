@@ -51,6 +51,13 @@
                 android:text="@string/loading" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1"
+            android:layout_marginLeft="@dimen/size_6"
+            android:layout_marginRight="@dimen/size_6"
+            android:background="@android:color/white" />
+
         <include
             layout="@layout/layout_progress_view"
             android:layout_width="match_parent"
