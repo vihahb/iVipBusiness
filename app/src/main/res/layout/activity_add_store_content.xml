@@ -18,7 +18,7 @@
 
     <EditText
         android:id="@+id/add_store.edt_address"
-        style="@style/edittext_login"
+        style="@style/edittext_disable"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_48"
         android:layout_marginTop="@dimen/size_8"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16"
         android:drawableLeft="@drawable/ic_action_note"
-        android:drawablePadding="@dimen/size_12"
+        android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_note"
         android:gravity="center_vertical"
         android:text="@string/store_des" />

@@ -1,7 +1,9 @@
 package com.xtel.ivipbusiness.view.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.presenter.AddStorePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IAddStoreView;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.commons.Constants;
 
 import java.io.IOException;
 
@@ -23,6 +28,9 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     private ImageView img_banner, img_avatar;
     private EditText edt_name, edt_type, edt_address, edt_phone, edt_des;
+
+    private final int REQUEST_LOCATION = 99;
+    private PlaceModel placeModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private void initListener() {
         img_banner.setOnClickListener(this);
         img_avatar.setOnClickListener(this);
+        edt_address.setOnClickListener(this);
     }
 
 
@@ -105,6 +114,10 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
             presenter.takePicture(0);
         else if (id == R.id.add_store_img_avatar)
             presenter.takePicture(1);
+        else if (id == R.id.add_store_edt_address) {
+            if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, this, REQUEST_LOCATION))
+                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
+        }
     }
 
     @Override
@@ -117,12 +130,24 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
+            else
+                showShortToast(getString(R.string.error_permission));
+        } else
+            presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_LOCATION && resultCode == RESULT_OK) {
+            if (data != null) {
+                placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
+                edt_address.setText(placeModel.getAddress());
+            }
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

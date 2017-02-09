@@ -143,6 +143,24 @@ public class WidgetHelper {
             view.setText((content + getDate(milliseconds)));
     }
 
+    public void setTextViewDrawable(TextView view, int position, int resource) {
+        switch (position) {
+            case 0:
+                view.setCompoundDrawablesWithIntrinsicBounds(resource, 0, 0, 0);
+                break;
+            case 1:
+                view.setCompoundDrawablesWithIntrinsicBounds(0, resource, 0, 0);
+                break;
+            case 2:
+                view.setCompoundDrawablesWithIntrinsicBounds(0, 0, resource, 0);
+                break;
+            case 3:
+                view.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, resource);
+                break;
+            default:
+                break;
+        }
+    }
 
     private String getDate(long milliseconds) {
         Calendar calendar = Calendar.getInstance();

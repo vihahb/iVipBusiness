@@ -14,17 +14,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/news.fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:fitsSystemWindows="false"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:backgroundTint="@drawable/floating_action_button_home"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_white_36dp" />
 </android.support.design.widget.CoordinatorLayout>

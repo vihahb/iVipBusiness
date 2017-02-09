@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -50,18 +49,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new NewsPresenter(this);
-        initFloatingActionButton();
         initProgressView(view);
-    }
-
-    private void initFloatingActionButton() {
-        FloatingActionButton fab = findFloatingActionButton(R.id.news_fab_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                startActivity(AddStoreActivity.class);
-            }
-        });
     }
 
     //    Khởi tạo layout và recyclerview

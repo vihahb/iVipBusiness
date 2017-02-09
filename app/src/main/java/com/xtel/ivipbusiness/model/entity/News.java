@@ -17,6 +17,8 @@ public class News {
     private long date_create;
     @Expose
     private int bg_id;
+    @Expose
+    private boolean isPublic;
 
     public int getId() {
         return id;
@@ -56,5 +58,13 @@ public class News {
 
     public void setBg_id(int bg_id) {
         this.bg_id = bg_id;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 }

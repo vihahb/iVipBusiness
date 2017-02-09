@@ -19,7 +19,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll">
+            app:layout_scrollFlags="scroll|snap">
 
             <include
                 layout="@layout/fragment_store_info_header"

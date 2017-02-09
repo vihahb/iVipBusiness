@@ -55,7 +55,7 @@ public class ViewStoreActivity extends BasicActivity {
 
     //    Khởi tạo tab layout phía dưới
     private void initTablayout() {
-        int[] icon = new int[] {R.drawable.ic_action_store_info, R.drawable.ic_action_list_store, R.drawable.ic_action_member, R.drawable.ic_action_news, R.drawable.ic_action_news_fcm};
+        int[] icon = new int[] {R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
         TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
 
         for (int i = 0; i < 5; i++) {
@@ -81,14 +81,15 @@ public class ViewStoreActivity extends BasicActivity {
     }
 
     private void showMenuItem() {
-        if (menu_create != null && menu_choose != null) {
+        if (menu_create != null && menu_choose != null && menu_add != null) {
             menu_create.setVisible(true);
             menu_choose.setVisible(true);
+            menu_add.setVisible(false);
         }
     }
 
     private void hideMenuItem() {
-        if (menu_create != null && menu_choose != null) {
+        if (menu_create != null && menu_choose != null && menu_add != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_add.setVisible(false);
@@ -199,6 +200,8 @@ public class ViewStoreActivity extends BasicActivity {
             if (fragment != null) {
                 fragment.chooseExistsStore();
             }
+        } else if (id == R.id.action_view_store_add_store) {
+            startActivity(AddStoreActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }

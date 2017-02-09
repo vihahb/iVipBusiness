@@ -31,6 +31,10 @@ public class NewsModel {
             news.setTitle("Title " + i);
             news.setDate_create(1483203600000L);
             news.setBanner("http://cuonghungthinh.com/imagesup/banner%20coffee.png");
+            if (i % 2 == 0)
+                news.setPublic(false);
+            else
+                news.setPublic(true);
 
             arrayList.add(news);
         }
