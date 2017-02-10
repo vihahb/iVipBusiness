@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:padding="@dimen/size_16">
+
+    <EditText
+        android:id="@+id/profile.edt_birth_day"
+        style="@style/edittext_disable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:drawableLeft="@drawable/ic_action_date"
+        android:drawableStart="@drawable/ic_action_date"
+        android:focusable="false"
+        android:hint="@string/birth_day"
+        android:inputType="date"
+        android:paddingLeft="-2dp"
+        android:paddingStart="-2dp" />
+
+    <EditText
+        android:id="@+id/profile.edt_gender"
+        style="@style/edittext_disable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:layout_marginTop="@dimen/size_8"
+        android:drawableLeft="@drawable/ic_action_gender"
+        android:drawableStart="@drawable/ic_action_gender"
+        android:focusable="false"
+        android:hint="@string/gender"
+        android:inputType="text"
+        android:paddingLeft="-2dp"
+        android:paddingStart="-2dp" />
+    <!--<Spinner-->
+    <!--android:id="@+id/profile.sp_gender"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/size_40"-->
+    <!--android:layout_marginTop="@dimen/size_8"-->
+    <!--android:background="@android:color/transparent" />-->
+
+    <EditText
+        android:id="@+id/profile.edt_phone"
+        style="@style/edittext_disable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:layout_marginTop="@dimen/size_8"
+        android:drawableLeft="@drawable/ic_action_phone"
+        android:drawableStart="@drawable/ic_action_phone"
+        android:focusable="false"
+        android:hint="@string/phone"
+        android:inputType="phone"
+        android:paddingLeft="-2dp"
+        android:paddingStart="-2dp" />
+
+    <EditText
+        android:id="@+id/profile.edt_address"
+        style="@style/edittext_disable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:layout_marginBottom="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_8"
+        android:drawableLeft="@drawable/ic_action_location"
+        android:drawableStart="@drawable/ic_action_location"
+        android:gravity="center_vertical"
+
+        android:hint="@string/address"
+        android:inputType="text"
+        android:paddingLeft="-2dp"
+        android:paddingStart="-2dp" />
+</LinearLayout>

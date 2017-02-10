@@ -1,0 +1,181 @@
+package com.xtel.ivipbusiness.model.entity;
+
+import com.google.gson.annotations.Expose;
+import com.xtel.nipservicesdk.model.entity.RESP_Basic;
+
+/**
+ * Created by Vulcl on 1/17/2017
+ */
+
+public class RESP_Store extends RESP_Basic {
+    @Expose
+    private int id;
+    @Expose
+    private String banner;
+    @Expose
+    private String logo;
+    @Expose
+    private String name;
+    @Expose
+    private String store_type;
+    @Expose
+    private long create_time;
+    @Expose
+    private int news_number;
+    @Expose
+    private String address;
+    @Expose
+    private double location_lat;
+    @Expose
+    private double location_lng;
+    @Expose
+    private String phonenumber;
+    @Expose
+    private String description;
+    @Expose
+    private String qr_code;
+    @Expose
+    private String bar_code;
+    @Expose
+    private Long begin_time;
+    @Expose
+    private Long end_time;
+    @Expose
+    private int type;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStore_type() {
+        return store_type;
+    }
+
+    public void setStore_type(String store_type) {
+        this.store_type = store_type;
+    }
+
+    public long getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(long create_time) {
+        this.create_time = create_time;
+    }
+
+    public int getNews_number() {
+        return news_number;
+    }
+
+    public void setNews_number(int news_number) {
+        this.news_number = news_number;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getLocation_lat() {
+        return location_lat;
+    }
+
+    public void setLocation_lat(double location_lat) {
+        this.location_lat = location_lat;
+    }
+
+    public double getLocation_lng() {
+        return location_lng;
+    }
+
+    public void setLocation_lng(double location_lng) {
+        this.location_lng = location_lng;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getQr_code() {
+        return qr_code;
+    }
+
+    public void setQr_code(String qr_code) {
+        this.qr_code = qr_code;
+    }
+
+    public String getBar_code() {
+        return bar_code;
+    }
+
+    public void setBar_code(String bar_code) {
+        this.bar_code = bar_code;
+    }
+
+    public Long getBegin_time() {
+        return begin_time;
+    }
+
+    public void setBegin_time(Long begin_time) {
+        this.begin_time = begin_time;
+    }
+
+    public Long getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Long end_time) {
+        this.end_time = end_time;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/size_8"
+    android:layout_marginRight="@dimen/size_8"
+    android:layout_marginTop="@dimen/size_8"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardCornerRadius="@dimen/size_2"
+    card_view:cardElevation="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_150">
+
+        <ImageView
+            android:id="@+id/item.list_store.img_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <View
+                android:id="@+id/item.list_store.img_background"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.85"
+                android:background="@drawable/item_list_store_1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/size_16"
+                android:paddingRight="@dimen/size_16"
+                android:paddingTop="@dimen/size_8"
+                android:paddingBottom="@dimen/size_8">
+
+                <TextView
+                    android:id="@+id/item.list_store.txt_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="-4dp"
+                    android:paddingStart="-4dp"
+                    android:drawableLeft="@drawable/ic_action_tick_default"
+                    android:drawableStart="@drawable/ic_action_tick_default" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/size_4"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/item.list_store.txt_store_name"
+                        style="@style/textview_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/store_name" />
+
+                    <TextView
+                        android:id="@+id/item.list_store.txt_address"
+                        style="@style/textview_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/address" />
+
+                    <TextView
+                        android:id="@+id/item.list_store.txt_date_create"
+                        style="@style/textview_small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/day_create" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</android.support.v7.widget.CardView>

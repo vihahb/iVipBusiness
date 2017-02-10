@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.xtel.ivipbusiness.view.activity.RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="false"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/size_48">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <com.xtel.ivipbusiness.view.widget.SquareImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:padding="@dimen/size_48">
+
+                <EditText
+                    android:id="@+id/register.edt_username"
+                    style="@style/edittext_no_drawable"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:hint="@string/input_phone"
+                    android:inputType="phone"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/register.edt_pass"
+                    style="@style/edittext_no_drawable"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:hint="@string/input_pass"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/register.edt_re_pass"
+                    style="@style/edittext_no_drawable"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:hint="@string/input_re_pass"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/size_8"
+                    android:paddingRight="@dimen/size_8"
+                    tools:ignore="LabelFor" />
+
+                <Button
+                    android:id="@+id/register.btn_register"
+                    style="@style/button_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:text="@string/create_account" />
+
+                <Button
+                    android:id="@+id/register.btn_exists"
+                    style="@style/button_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:background="@drawable/button_border_transparent"
+                    android:text="@string/had_account" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

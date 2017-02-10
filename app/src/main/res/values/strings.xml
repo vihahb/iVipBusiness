@@ -1,0 +1,180 @@
+<resources>
+    <string name="app_name">iVipBusiness</string>
+
+    <string name="facebook_app_id">253770048377328</string>
+    <string name="account_kit_clien_token">3385b9c4bf321a82d3dab85358cae9d8</string>
+    <string name="google_server_key">AIzaSyAgoC7FzNT7LJE9B-q35LEZumZm8OH8VTY</string>
+
+    <string name="text_back_press_to_exit">Nhấn back lần nữa để thoát app</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Đăng nhập</string>
+    <string name="title_activity_reset_password">Quên mật khẩu</string>
+    <string name="title_activity_active_account">Kích hoạt tài khoản</string>
+    <string name="title_activity_profile">Thông tin tài khoản</string>
+    <string name="title_activity_add_store">Tạo cửa hàng</string>
+    <string name="title_activity_view_store">Thông tin cửa hàng</string>
+    <string name="title_activity_list_store">Danh sách cửa hàng</string>
+    <string name="title_activity_list_chain">Cửa hàng</string>
+    <string name="title_activity_history">Lịch sử giao dịch</string>
+    <string name="title_activity_list_member">Danh sách thành viên</string>
+    <string name="title_activity_list_news">Bản tin</string>
+    <string name="title_activity_list_fcm_news">Bản tin fcm</string>
+    <string name="title_activity_statistic">Thống kê</string>
+    <string name="title_activity_policy">Chính sách</string>
+    <string name="title_activity_app_info">Thông tin ứng dụng</string>
+    <string name="title_activity_faq">FAQ</string>
+    <string name="title_activity_maps">Chọn địa chỉ</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="service_code_key">XTL-IVIP-B</string>
+    <string name="type_phone">PHONE-NUMBER</string>
+
+    <!-- Action -->
+    <string name="action_edit">Chỉnh sửa</string>
+    <string name="action_user_info">Thông tin tài khoản</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="action_done">Hoàn thành</string>
+
+    <!-- Dialog -->
+    <string name="doing_register">Đang tạo tài khoản…</string>
+    <string name="doing_active">Đang kích hoạt tài khoản…</string>
+    <string name="doing_login">Đang đăng nhập…</string>
+    <string name="doing_reset">Đang lấy lại mật khẩu…</string>
+    <string name="can_not_load_data">Không thể tải dữ liệu</string>
+    <string name="back">Quay lại</string>
+    <string name="uploading_file">Đang tải file…</string>
+    <string name="adding_store">Đang tạo cửa hàng…</string>
+
+    <!-- Success -->
+    <string name="success_register">Đăng ký tài khoản thành công</string>
+    <string name="success_active">Kích hoạt tài khoản thành công</string>
+    <string name="success_reset">Lấy lại mật khẩu thành công</string>
+    <string name="success_add_store">Thêm cửa hàng thành công</string>
+
+    <!-- Error -->
+    <string name="have_error">Có lỗi xảy ra</string>
+    <string name="error_validate_phone">Số điện thoại không hợp lệ</string>
+    <string name="error_input_username">Vui lòng nhập số điện thoại</string>
+    <string name="error_input_password">Vui lòng nhập mật khẩu</string>
+    <string name="error_input_new_password">Vui lòng nhập mật khẩu mới</string>
+    <string name="error_input_re_password">Vui lòng nhập lại mật khẩu</string>
+    <string name="error_input_fullname">Vui lòng nhập tên</string>
+    <string name="error_input_avatar">Vui lòng chọn ảnh đại diện</string>
+    <string name="error_input_gender">Vui lòng chọn giới tính</string>
+    <string name="error_input_birthday">Vui lòng chọn ngày sinh</string>
+    <string name="error_input_email">Vui lòng nhập email</string>
+    <string name="error_input_address">Vui lòng nhập địa chỉ</string>
+    <string name="error_input_store_name">Vui lòng nhập tên cửa hàng</string>
+    <string name="error_input_phone">Vui lòng nhập số điện thoại</string>
+    <string name="error_input_begin_time">Vui lòng chọn thời gian mở cửa</string>
+    <string name="error_input_end_time">Vui lòng chọn thời gian đóng cửa</string>
+    <string name="error_input_banner">Vui lòng chọn ảnh banner</string>
+    <string name="error_input_logo">Vui lòng chọn ảnh logo</string>
+
+    <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
+    <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
+    <string name="error_no_internet">Không có kết nối internet</string>
+    <string name="error_get_image">Không thể tải hình ảnh</string>
+    <string name="error_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
+
+    <string name="error_register_phone">Đăng ký thất bại</string>
+    <string name="error_active_account">Kích hoạt tài khoản thất bại</string>
+    <string name="error_can_not_resett">Không thể đổi mật khẩu</string>
+    <string name="error_try_again">Có lỗi xảy ra. Vui lòng thử lại</string>
+    <string name="error_no_store_selected">Vui lòng chọn cửa hàng</string>
+    <string name="error_view_code">Không thể xem mã</string>
+    <string name="error_end_of_session">Bạn đã hết phiên làm việc</string>
+    <string name="error_server_request">Không thể kết nối tới Server</string>
+
+    <!-- Layout -->
+    <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
+    <string name="ivip_for_business">IVIP FOR BUSINESS</string>
+    <string name="ivip_for_business_not_cap">Ivip For Business</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="active_account">Kích hoạt tài khoản</string>
+    <string name="join_now">Tham gia ngay</string>
+    <string name="input_phone">Nhập số điện thoại</string>
+    <string name="input_new_pass">Nhập mật khẩu mới</string>
+    <string name="input_pass">Nhập mật khẩu</string>
+    <string name="input_re_pass">Nhập lại mật khẩu</string>
+    <string name="change_pass">Đổi mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="had_account">Đã có tài khoản</string>
+    <string name="login_by">Đăng nhập bằng</string>
+
+    <string name="qr_code">Mã QR Code</string>
+    <string name="fullname">Họ và tên</string>
+    <string name="birth_day">Ngày sinh</string>
+    <string name="gender">Giới tính</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="email">Email</string>
+    <string name="address">Địa chỉ liên lạc</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="store_name">Tên cửa hàng</string>
+    <string name="store_address">Địa chỉ cửa hàng</string>
+    <string name="store_des">Mô tả cửa hàng</string>
+    <string name="store_type">Loại cửa hàng</string>
+    <string name="begin_time">Mở cửa</string>
+    <string name="end_time">Đóng cửa</string>
+
+    <string name="total_point">Tổng điểm</string>
+    <string name="remaining_point">Điểm còn lại</string>
+    <string name="total_checkin">Số lần checkin</string>
+    <string name="total_shopping">Số lần mua hàng</string>
+    <string name="total_shopping_in_store">Số lần mua hàng tại store</string>
+    <string name="last_checkin">Thồi gian checkin cuối</string>
+    <string name="now_location">Vị trí hiện tại</string>
+
+    <!-- Activity -->
+    <string name="sselect_image">Chọn ảnh</string>
+    <string name="no_stores">Không có cửa hàng nào</string>
+    <string name="click_to_try_again">Click để thử lại</string>
+    <string name="loading_data">Đang tải dữ liệu</string>
+
+    <string name="can_not_get_member_info">Không thể lấy thông tin của khác hàng</string>
+
+    <string name="updating">Đang cập nhật</string>
+    <string name="loading">Đang tải dữ liệu…</string>
+    <string name="day_create">Ngày tạo</string>
+    <string name="store_number">Số cửa hàng</string>
+
+    <string name="not_update_name">Chưa cập nhật tên</string>
+    <string name="not_update_phone">Chưa cập nhật số điện thoại</string>
+    <string name="not_update_title">Chưa cập tiêu đề</string>
+    <string name="not_update_namemaile">Chưa cập nhật email</string>
+    <string name="not_update_address">Chưa cập nhật địa chỉ</string>
+    <string name="not_update_gender">Chưa cập nhật giới tính</string>
+    <string name="not_update_des">Không có mô tả</string>
+    <string name="not_update_store_name">Chưa cập nhật tên</string>
+
+    <!-- Menu -->
+    <string name="store">Cửa hàng</string>
+    <string name="policy">Chính sách</string>
+    <string name="statistic">Thống kê</string>
+    <string name="app_info">Thông tin ứng dụng</string>
+    <string name="faq">FAQ</string>
+    <string name="create_new_store">Tạo cửa hàng mới</string>
+    <string name="add_exists_store">Thêm cửa hàng đã có</string>
+
+    <!-- Spinner -->
+    <string-array name="gender">
+        <item>Giới tính</item>
+        <item>Nam</item>
+        <item>Nữ</item>
+        <item>Free</item>
+    </string-array>
+
+    <string-array name="store_type">
+        <item>Cà phê</item>
+        <item>Quán ăn</item>
+        <item>Tạp hóa</item>
+        <item>Đại lý</item>
+        <item>Siêu thị</item>
+        <item>Loại khác</item>
+    </string-array>
+</resources>

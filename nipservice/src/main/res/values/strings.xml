@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">NipService</string>
+
+    <string name="error">Có lỗi xảy ra</string>
+    <!-- ERROR CODE -->
+    <string name="error_service_code">Không tìm thấy mã dịch vụ</string>
+    <string name="can_not_request">Không thể kết nối tới Server</string>
+    <string name="error_no_service_code">Không tìm thấy service code</string>
+    <string name="error_session_invalid">Phiên làm việc đã hết hiệu lực</string>
+    <string name="error_input_invalid">Đầu vào không hợp lệ</string>
+    <string name="error_system">Lỗi hệ thống</string>
+    <string name="error_activation_failed">Xác thực thất bại</string>
+    <string name="error_service_not_valid">Dịch vũ không tồn tại</string>
+    <string name="error_service_in_valid">Dịch vụ chưa được kích hoạt</string>
+    <string name="error_email_already">Email đã tồn tại</string>
+    <string name="error_user_name_already">Tên tài khoản đã tồn tại</string>
+    <string name="error_activation_wrong">Kích hoạt sai</string>
+    <string name="error_account_already_activated">Tài khoản này đã kích hoạt</string>
+    <string name="error_url_invalid">Liên kết không còn hiệu lực</string>
+    <string name="error_user_invalid">Số điện thoại không tồn tại</string>
+    <string name="error_email_invalid">Email không tồn tại</string>
+    <string name="error_service_not_support_device">Dịch vụ không hỗ trợ thiết bị</string>
+    <string name="error_user_or_password_wrong">Tên đăng nhập hoặc mật khẩu không đúng</string>
+    <string name="error_account_not_active">Tài khoản chưa được xác thực</string>
+    <string name="error_authentication_id_wrong">Mã xác thực không đúng</string>
+    <string name="error_authentication_id_invalid">Mã xác thực đã hết hiệu lực</string>
+    <string name="error_facebook_access_token_invalid">Mã truy cập Facebook đã hết hiệu lực</string>
+    <string name="error_phone_number_wrong">Số điện thoại không đúng</string>
+</resources>
