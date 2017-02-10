@@ -66,7 +66,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             SortStore stores = arrayList.get(position);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, stores.getBanner());
-            WidgetHelper.getInstance().setImageURL(viewHolder.img_avatar, stores.getLogo());
+            WidgetHelper.getInstance().setSmallImageURL(viewHolder.img_avatar, stores.getLogo());
             WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, stores.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));

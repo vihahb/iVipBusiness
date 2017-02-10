@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -46,6 +47,14 @@ public abstract class BasicActivity extends IActivity {
 
     protected void debug(String message) {
         Log.e(this.getClass().getSimpleName(), message);
+    }
+
+    protected void showShortSnackBar(View view, String message) {
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    protected void showLongSnackBar(View view, String message) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 
     protected void showLongToast(String message) {

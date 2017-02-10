@@ -41,7 +41,7 @@
             android:paddingRight="@dimen/size_16"
             android:paddingTop="@dimen/size_8" >
 
-            <ImageView
+            <com.xtel.ivipbusiness.view.widget.RoundImage
                 android:id="@+id/item.chain.img_avatar"
                 android:layout_width="@dimen/size_40"
                 android:layout_height="@dimen/size_40"

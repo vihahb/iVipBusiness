@@ -15,7 +15,7 @@ import com.xtel.sdk.utils.NetWorkInfo;
 public class ChainsPresenter extends BasicPresenter {
     private IChainsView view;
 
-    private final String TYPE = "CHAIN";
+    private final String TYPE = "ALL";
     private int PAGE = 1;
     private int PAGESIZE = 10;
 
@@ -26,7 +26,8 @@ public class ChainsPresenter extends BasicPresenter {
                 StoresModel.getInstance().getListChains(TYPE, PAGE, PAGESIZE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
                     @Override
                     public void onSuccess(RESP_List_Sort_Store obj) {
-                        PAGE++;
+                        if (obj.getData().size() >= PAGESIZE)
+                            PAGE++;
                         view.onGetStoresSuccess(obj.getData());
                     }
 

@@ -32,10 +32,37 @@ public class WidgetHelper {
         if (url == null || url.isEmpty())
             return;
 
+        url = url.replace("https", "http").replace("9191", "9190");
+
         Picasso.with(MyApplication.context)
                 .load(url)
                 .noPlaceholder()
                 .error(R.drawable.color_primarykey)
+                .into(view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("WidgetHelper", "load ok");
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("WidgetHelper", "load error");
+                    }
+                });
+    }
+
+    public void setSmallImageURL(ImageView view, String url) {
+        if (url == null || url.isEmpty())
+            return;
+
+        url = url.replace("https", "http").replace("9191", "9190");
+
+        Picasso.with(MyApplication.context)
+                .load(url)
+                .noPlaceholder()
+                .error(R.drawable.color_primarykey)
+                .fit()
+                .centerCrop()
                 .into(view, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -112,6 +139,38 @@ public class WidgetHelper {
             mMonth = String.valueOf(month);
 
         view.setText(day + "-" + mMonth + "-" + year);
+    }
+
+    public void setEditTextTime(EditText view, int hour, int minute) {
+        String mHour, mMinute;
+
+        if (hour < 10)
+            mHour = "0" + hour;
+        else
+            mHour = String.valueOf(hour);
+
+        if (minute < 10)
+            mMinute = "0" + minute;
+        else
+            mMinute = String.valueOf(minute);
+
+        view.setText(mHour + ":" + mMinute);
+    }
+
+    public void setEditTextTime(EditText view, String title, int hour, int minute) {
+        String mHour, mMinute;
+
+        if (hour < 10)
+            mHour = "0" + hour;
+        else
+            mHour = String.valueOf(hour);
+
+        if (minute < 10)
+            mMinute = "0" + minute;
+        else
+            mMinute = String.valueOf(minute);
+
+        view.setText(title + mHour + ":" + mMinute);
     }
 
     public void setEditTextDrawable(EditText view, int position, int resource) {

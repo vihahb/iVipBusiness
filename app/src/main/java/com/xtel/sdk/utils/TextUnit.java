@@ -13,11 +13,11 @@ public class TextUnit {
         return instance;
     }
 
-    protected boolean validateText(String text) {
+    public boolean validateText(String text) {
         return (text != null && !text.isEmpty());
     }
 
-    protected long isPhone(String username) {
+    public long isPhone(String username) {
         try {
             return Long.parseLong(username);
         } catch (Exception e) {
@@ -27,11 +27,11 @@ public class TextUnit {
         return -1;
     }
 
-    protected boolean validatePhone(String username) {
+    public boolean validatePhone(String username) {
         return !(username.length() < 10 || username.length() > 11);
     }
 
-    protected boolean validateEmail(String text) {
+    public boolean validateEmail(String text) {
         return !android.text.TextUtils.isEmpty(text) && android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches();
     }
 }

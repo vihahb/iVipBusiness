@@ -2,6 +2,7 @@ package com.xtel.sdk.commons;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Random;
  * Created by Lê Công Long Vũ on 12/27/2016
  */
 
-public class Constants {
+public class               Constants {
     public static final String SHARED_NAME = "share_business";
     public static final String FCM_TOKEN = "fcm_token";
 
@@ -41,5 +42,16 @@ public class Constants {
             return mDate.getTime();
         else
             return 0;
+    }
+
+    public static long convertTimeToLong(String time) {
+        String[] mTime = time.split(":");
+        int hour = Integer.parseInt(mTime[0]);
+        int minute = Integer.parseInt(mTime[1]);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2017, 1, 1, hour, minute);
+
+        return (calendar.getTimeInMillis() / 1000);
     }
 }

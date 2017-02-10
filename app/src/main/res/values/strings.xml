@@ -47,11 +47,13 @@
     <string name="can_not_load_data">Không thể tải dữ liệu</string>
     <string name="back">Quay lại</string>
     <string name="uploading_file">Đang tải file…</string>
+    <string name="adding_store">Đang tạo cửa hàng…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
     <string name="success_active">Kích hoạt tài khoản thành công</string>
     <string name="success_reset">Lấy lại mật khẩu thành công</string>
+    <string name="success_add_store">Thêm cửa hàng thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -66,6 +68,12 @@
     <string name="error_input_birthday">Vui lòng chọn ngày sinh</string>
     <string name="error_input_email">Vui lòng nhập email</string>
     <string name="error_input_address">Vui lòng nhập địa chỉ</string>
+    <string name="error_input_store_name">Vui lòng nhập tên cửa hàng</string>
+    <string name="error_input_phone">Vui lòng nhập số điện thoại</string>
+    <string name="error_input_begin_time">Vui lòng chọn thời gian mở cửa</string>
+    <string name="error_input_end_time">Vui lòng chọn thời gian đóng cửa</string>
+    <string name="error_input_banner">Vui lòng chọn ảnh banner</string>
+    <string name="error_input_logo">Vui lòng chọn ảnh logo</string>
 
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
@@ -111,6 +119,8 @@
     <string name="store_address">Địa chỉ cửa hàng</string>
     <string name="store_des">Mô tả cửa hàng</string>
     <string name="store_type">Loại cửa hàng</string>
+    <string name="begin_time">Mở cửa</string>
+    <string name="end_time">Đóng cửa</string>
 
     <string name="total_point">Tổng điểm</string>
     <string name="remaining_point">Điểm còn lại</string>

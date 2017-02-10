@@ -25,6 +25,12 @@ public class StoresModel extends BasicModel {
         return instance;
     }
 
+    public void addStore(String jsonObject, ResponseHandle responseHandle) {
+        String url = API_BASE + ADD_STORE;
+        String session = LoginManager.getCurrentSession();
+        requestServer.postApi(url, jsonObject, session, responseHandle);
+    }
+
     public void getStoreInfo(ResponseHandle responseHandle) {
         RESP_Store resp_store = new RESP_Store();
 

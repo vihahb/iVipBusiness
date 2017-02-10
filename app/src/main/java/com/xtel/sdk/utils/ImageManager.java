@@ -8,29 +8,19 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.async.util.StreamUtility;
 import com.koushikdutta.ion.Ion;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
-import com.xtel.nipservicesdk.callback.RequestServer;
-import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.sdk.callback.RequestWithStringListener;
+import com.xtel.sdk.callback.CallbackImageListener;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by Lê Công Long Vũ on 12/1/2016
@@ -45,19 +35,19 @@ public class ImageManager {
         return instance;
     }
 
-    public void postImage(Context context, Bitmap bitmap, boolean isBigImage, RequestWithStringListener requestWithStringListener) {
-        new ConvertImage(context, isBigImage, requestWithStringListener).execute(bitmap);
+    public void postImage(Context context, Bitmap bitmap, boolean isBigImage, CallbackImageListener callbackImageListener) {
+        new ConvertImage(context, isBigImage, callbackImageListener).execute(bitmap);
     }
 
     public class ConvertImage extends AsyncTask<Bitmap, Void, File> {
         private Context context;
         private boolean isBigImage;
-        private RequestWithStringListener requestWithStringListener;
+        private CallbackImageListener callbackImageListener;
 
-        public ConvertImage(Context context, boolean isBigImage, RequestWithStringListener requestWithStringListener) {
+        public ConvertImage(Context context, boolean isBigImage, CallbackImageListener callbackImageListener) {
             this.context = context;
             this.isBigImage = isBigImage;
-            this.requestWithStringListener = requestWithStringListener;
+            this.callbackImageListener = callbackImageListener;
         }
 
         @Override
@@ -91,10 +81,10 @@ public class ImageManager {
             super.onPostExecute(file);
 
             if (file != null) {
-                postImageToServer(file, context, requestWithStringListener);
+                postImageToServer(file, context, callbackImageListener);
             } else {
 //                dialogProgressBar.hideProgressBar();
-                requestWithStringListener.onError();
+                callbackImageListener.onError();
             }
         }
 
@@ -179,60 +169,15 @@ public class ImageManager {
         }
     }
 
-    private void postImageToServer(final File file, final Context context, final RequestWithStringListener requestWithStringListener) {
-//        https://124.158.5.112:9191/upload/files
-
-        String SERVER_API = "https://124.158.5.112:9191/upload/files";
+    private void postImageToServer(final File file, final Context context, final CallbackImageListener callbackImageListener) {
+        String SERVER_API = "http://124.158.5.112:9190/upload/files";
         Log.e("tb_up_upload", "dang up: " + file.getPath() + "       " + SERVER_API);
 
-//        TrustManager[] trustManager = new TrustManager[] {new X509TrustManager() {
-//            @Override
-//            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-//
-//            }
-//
-//            @Override
-//            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-//
-//            }
-//
-//            @Override
-//            public X509Certificate[] getAcceptedIssuers() {
-//                return new X509Certificate[0];
-//            }
-//        }};
-//
-//        Ion.getDefault(context).getHttpClient().getSSLSocketMiddleware().setTrustManagers(trustManager);
-//
-//        SSLContext sslContext = null;
-//
-//        try {
-//            sslContext = SSLContext.getInstance("TLS");
-//            sslContext.init(null, trustManager, null);
-//        } catch (Exception e1) {
-//            e1.printStackTrace();
-//            Log.e("trust", e1.toString());
-//            Toast.makeText(context, context.getString(R.string.have_error), Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        Ion.getDefault(context).getHttpClient().getSSLSocketMiddleware().setSSLContext(sslContext);
-
-        URLConnection conn = null;
-        try {
-            conn = new URL("https://saren.wtako.net/Teikoku.Shounen.jpg").openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (conn == null)
-            return;
-
         Ion.with(context)
-                .load(String.valueOf(conn))
+                .load(SERVER_API)
 //                .setMultipartParameter("goop", "noop")
 //                .setMultipartFile("archive", "application/zip", file)
-                .setMultipartFile("", file)
+                .setMultipartFile("image", file)
                 .asString()
                 .setCallback(new FutureCallback<String>() {
                     @Override
@@ -240,17 +185,28 @@ public class ImageManager {
                         if (e != null) {
                             Log.e("tb_up_error", e.toString());
                             Toast.makeText(context, context.getString(R.string.error_server_request), Toast.LENGTH_SHORT).show();
-                            requestWithStringListener.onError();
+                            callbackImageListener.onError();
                         } else {
                             Log.e("tb_up_result", result);
                             Error error = JsonHelper.getObjectNoException(result, Error.class);
 
                             if (error != null) {
                                 Toast.makeText(context, JsonParse.getCodeMessage(error.getCode(), context.getString(R.string.have_error)), Toast.LENGTH_SHORT).show();
-                                requestWithStringListener.onError();
+                                callbackImageListener.onError();
                             } else {
-                                RESP_Image RESPImage = JsonHelper.getObjectNoException(result, RESP_Image.class);
-                                requestWithStringListener.onSuccess(RESPImage.getUri());
+//                                result = result.replace("https", "http").replace("9191", "9190");
+
+                                try {
+                                    JSONArray jsonArray = new JSONArray(result);
+                                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                    RESP_Image resp_image = JsonHelper.getObjectNoException(jsonObject.toString(), RESP_Image.class);
+
+                                    Log.e("upload_object", JsonHelper.toJson(resp_image));
+                                    callbackImageListener.onSuccess(resp_image);
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                    callbackImageListener.onError();
+                                }
                             }
 
                             try {
