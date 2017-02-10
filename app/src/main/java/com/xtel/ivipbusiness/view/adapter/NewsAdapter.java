@@ -67,7 +67,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (news.isPublic())
                 WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_world_white_18);
             else
-                WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_private_red_18);
+                WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_private_gray_18);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, news.getBanner());
             WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, news.getBg_id());

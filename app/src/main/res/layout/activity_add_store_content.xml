@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_15"
     android:orientation="vertical"
     android:padding="@dimen/size_16">
 
@@ -15,6 +16,12 @@
         android:drawableStart="@drawable/ic_action_shopping"
         android:hint="@string/store_type"
         android:inputType="textCapSentences" />
+
+    <Spinner
+        android:id="@+id/add_store.sp_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:background="@android:color/transparent" />
 
     <EditText
         android:id="@+id/add_store.edt_address"

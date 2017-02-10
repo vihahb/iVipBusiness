@@ -55,8 +55,10 @@ dependencies {
     //    Floating action button slide
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile 'com.github.florent37:diagonallayout:1.0.2'
+    //    Ion
+    compile 'com.koushikdutta.ion:ion:2.1.9'
 
-//    Google map
+    //    Google map
     //noinspection GradleDependency
     compile 'com.google.android.gms:play-services-places:10.0.0'
     //noinspection GradleDependency

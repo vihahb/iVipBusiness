@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">iVipBusiness</string>
 
     <string name="facebook_app_id">253770048377328</string>
@@ -46,6 +46,7 @@
     <string name="doing_reset">Đang lấy lại mật khẩu…</string>
     <string name="can_not_load_data">Không thể tải dữ liệu</string>
     <string name="back">Quay lại</string>
+    <string name="uploading_file">Đang tải file…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -78,6 +79,8 @@
     <string name="error_try_again">Có lỗi xảy ra. Vui lòng thử lại</string>
     <string name="error_no_store_selected">Vui lòng chọn cửa hàng</string>
     <string name="error_view_code">Không thể xem mã</string>
+    <string name="error_end_of_session">Bạn đã hết phiên làm việc</string>
+    <string name="error_server_request">Không thể kết nối tới Server</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -154,5 +157,14 @@
         <item>Nam</item>
         <item>Nữ</item>
         <item>Free</item>
+    </string-array>
+
+    <string-array name="store_type">
+        <item>Cà phê</item>
+        <item>Quán ăn</item>
+        <item>Tạp hóa</item>
+        <item>Đại lý</item>
+        <item>Siêu thị</item>
+        <item>Loại khác</item>
     </string-array>
 </resources>

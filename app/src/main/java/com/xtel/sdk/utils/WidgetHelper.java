@@ -114,6 +114,25 @@ public class WidgetHelper {
         view.setText(day + "-" + mMonth + "-" + year);
     }
 
+    public void setEditTextDrawable(EditText view, int position, int resource) {
+        switch (position) {
+            case 0:
+                view.setCompoundDrawablesWithIntrinsicBounds(resource, 0, 0, 0);
+                break;
+            case 1:
+                view.setCompoundDrawablesWithIntrinsicBounds(0, resource, 0, 0);
+                break;
+            case 2:
+                view.setCompoundDrawablesWithIntrinsicBounds(0, 0, resource, 0);
+                break;
+            case 3:
+                view.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, resource);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void setTextViewNoResult(TextView view, String content) {
         view.setText(content);
     }

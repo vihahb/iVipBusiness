@@ -43,8 +43,8 @@
                 android:layout_marginBottom="@dimen/size_56"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:background="@color/colorPrimaryKey_90"
-                app:backgroundTint="@color/colorPrimaryKey_90"
+                android:background="@color/colorPrimaryKey_80"
+                app:backgroundTint="@color/colorPrimaryKey_80"
                 app:fabSize="normal"
                 app:srcCompat="@drawable/ic_my_location_white_24dp" />
 
@@ -92,7 +92,7 @@
                 android:layout_height="@dimen/size_36"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="@dimen/size_10"
-                android:background="@color/colorPrimaryKey_90"
+                android:background="@color/colorPrimaryKey_80"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="Chọn vị trí này"
                 android:textColor="@android:color/white"

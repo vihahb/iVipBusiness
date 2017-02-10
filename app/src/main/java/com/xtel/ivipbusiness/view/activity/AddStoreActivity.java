@@ -13,21 +13,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.PlaceModel;
+import com.xtel.ivipbusiness.model.entity.Type;
 import com.xtel.ivipbusiness.presenter.AddStorePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IAddStoreView;
+import com.xtel.ivipbusiness.view.adapter.TypeAdapter;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AddStoreActivity extends BasicActivity implements View.OnClickListener, IAddStoreView {
     private AddStorePresenter presenter;
 
-    private ImageView img_banner, img_avatar;
-    private EditText edt_name, edt_type, edt_address, edt_phone, edt_des;
+    private ImageView img_banner, img_logo;
+    private Spinner sp_type;
+    private EditText edt_name, edt_address, edt_phone, edt_des;
 
     private final int REQUEST_LOCATION = 99;
     private PlaceModel placeModel;
@@ -38,34 +46,63 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         setContentView(R.layout.activity_add_store);
 
         presenter = new AddStorePresenter(this);
+        presenter.getData();
+
         initToolbar(R.id.add_store_toolbar, null);
         initView();
+        initType();
         initListener();
     }
 
     private void initView() {
         img_banner = findImageView(R.id.add_store_img_banner);
-        img_avatar = findImageView(R.id.add_store_img_avatar);
+        img_logo = findImageView(R.id.add_store_img_avatar);
         edt_name = findEditText(R.id.add_store_edt_name);
-        edt_type = findEditText(R.id.add_store_edt_type);
         edt_address = findEditText(R.id.add_store_edt_address);
         edt_phone = findEditText(R.id.add_store_edt_phone);
         edt_des = findEditText(R.id.add_store_edt_des);
     }
 
+    private void initType() {
+        sp_type = findSpinner(R.id.add_store_sp_type);
+        TypeAdapter typeAdapter = new TypeAdapter(this);
+        sp_type.setAdapter(typeAdapter);
+    }
+
     private void initListener() {
         img_banner.setOnClickListener(this);
-        img_avatar.setOnClickListener(this);
+        img_logo.setOnClickListener(this);
         edt_address.setOnClickListener(this);
     }
 
 
     @Override
+    public void onGetDataError() {
+        showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+    }
+
+    @Override
     public void onTakePictureGallary(int type, Uri uri) {
-        if (uri == null) {
+        if (!NetWorkInfo.isOnline(this)) {
+            showShortToast(getString(R.string.error_no_internet));
+            return;
+        } else if (uri == null) {
             showShortToast(getString(R.string.error_get_image));
             return;
         }
+
+        showProgressBar(false, false, null, getString(R.string.uploading_file));
 
         Bitmap bitmap = null;
 
@@ -76,28 +113,37 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         }
 
         if (bitmap != null) {
-            if (type == 0)
-                img_banner.setImageBitmap(bitmap);
-            else
-                img_avatar.setImageBitmap(bitmap);
+            presenter.postImage(bitmap, type);
         }
     }
 
     @Override
     public void onTakePictureCamera(int type, Bitmap bitmap) {
-        if (bitmap == null) {
+        if (!NetWorkInfo.isOnline(this)) {
+            showShortToast(getString(R.string.error_no_internet));
+            return;
+        } else if (bitmap == null) {
             showShortToast(getString(R.string.error_get_image));
             return;
         }
 
+        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        presenter.postImage(bitmap, type);
+    }
+
+    @Override
+    public void onLoadPicture(String url, int type) {
+        closeProgressBar();
+
         if (type == 0)
-            img_banner.setImageBitmap(bitmap);
+            WidgetHelper.getInstance().setImageURL(img_banner, url);
         else
-            img_avatar.setImageBitmap(bitmap);
+            WidgetHelper.getInstance().setImageURL(img_logo, url);
     }
 
     @Override
     public void showShortToast(String message) {
+        closeProgressBar();
         super.showShortToast(message);
     }
 

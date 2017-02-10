@@ -39,7 +39,8 @@
             android:minWidth="@dimen/size_64"
             android:paddingLeft="@dimen/size_8"
             android:paddingRight="@dimen/size_8"
-            android:textColor="#2196F3" />
+            android:textColor="#2196F3"
+            android:textSize="@dimen/font_13" />
 
         <Button
             android:id="@+id/dialog_btn_positive"
@@ -50,6 +51,7 @@
             android:minWidth="@dimen/size_64"
             android:paddingLeft="@dimen/size_8"
             android:paddingRight="@dimen/size_8"
-            android:textColor="#2196F3" />
+            android:textColor="#2196F3"
+            android:textSize="@dimen/font_13" />
     </LinearLayout>
 </LinearLayout>

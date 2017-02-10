@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.view.fragment.inf;
 import android.app.Activity;
 
 import com.xtel.ivipbusiness.model.entity.SortStore;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 
 import java.util.ArrayList;
@@ -17,5 +18,6 @@ public interface IChainsView {
     void onGetStoresSuccess(ArrayList<SortStore> arrayList);
     void onGetStoresError(Error error);
     void onNoNetwork();
+    void getNewSession(ICmd iCmd);
     Activity getActivity();
 }

@@ -82,6 +82,7 @@ public abstract class BasicActivity extends IActivity {
             progressDialog.dismiss();
     }
 
+    @SuppressWarnings("ConstantConditions")
     protected void showMaterialDialog(boolean isTouchOutside, boolean isCancelable, String title, String message,
                                       String negative, String positive, final DialogListener dialogListener) {
         dialog = new Dialog(BasicActivity.this, R.style.Theme_Transparent);

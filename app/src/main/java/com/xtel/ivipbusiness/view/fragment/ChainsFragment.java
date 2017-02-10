@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.view.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,12 +16,18 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ChainsPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
-import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
+import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
+import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
 
@@ -35,6 +42,10 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     private ArrayList<SortStore> listData;
     private ProgressView progressView;
     private boolean isClearData = false;
+    private CallbackManager callbackManager;
+
+    private final int REQUEST_ADD = 99;
+    private final String STORE_TYPE = "CHAIN";
 
     public static ChainsFragment newInstance() {
         return new ChainsFragment();
@@ -50,6 +61,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        callbackManager = CallbackManager.create(getActivity());
         presenter = new ChainsPresenter(this);
         initFloatingActionButton();
         initProgressView(view);
@@ -60,7 +72,9 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(AddStoreActivity.class);
+//                Intent intent = new Intent(getActivity(), AddStoreActivity.class);
+//                intent.putExtra(Constants.MODEL, STORE_TYPE);
+                startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD);
             }
         });
     }
@@ -128,7 +142,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
-            if (listData.size() < 20)
+            if (listData.size() < 10)
                 adapter.setLoadMore(false);
 
             progressView.showData();
@@ -188,5 +202,28 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
+    }
+
+    @Override
+    public void getNewSession(final ICmd iCmd) {
+        callbackManager.getNewSesion(new CallbacListener() {
+            @Override
+            public void onSuccess(RESP_Login success) {
+                iCmd.execute();
+            }
+
+            @Override
+            public void onError(Error error) {
+                showShortToast(getString(R.string.error_end_of_session));
+                getActivity().finishAffinity();
+                startActivity(LoginActivity.class);
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

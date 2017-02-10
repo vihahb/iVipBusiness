@@ -10,8 +10,12 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.inf.IAddStoreView;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.callback.RequestWithStringListener;
+import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.ImageManager;
 
 /**
  * Created by Vulcl on 1/15/2017
@@ -24,8 +28,17 @@ public class AddStorePresenter extends BasicPresenter {
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
+    private String STOREY_TYPE, URL_BENNER, URL_LOGO;
+
     public AddStorePresenter(IAddStoreView view) {
         this.view = view;
+    }
+
+    public void getData() {
+        STOREY_TYPE = view.getActivity().getIntent().getStringExtra(Constants.MODEL);
+
+        if (STOREY_TYPE == null)
+            view.onGetDataError();
     }
 
     public void takePicture(int type) {
@@ -51,6 +64,52 @@ public class AddStorePresenter extends BasicPresenter {
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
         view.startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
+
+    public void postImage(Bitmap bitmap, final int type) {
+        ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new RequestWithStringListener() {
+            @Override
+            public void onSuccess(String url) {
+                if (type == 0) {
+                    URL_BENNER = url;
+                    view.onLoadPicture(url, type);
+                } else {
+                    URL_LOGO = url;
+                    view.onLoadPicture(url, type);
+                }
+            }
+
+            @Override
+            public void onError() {
+                view.showShortToast(view.getActivity().getString(R.string.error_try_again));
+            }
+        });
+    }
+
+    public void addStore(String name, String address) {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA) {

@@ -11,8 +11,10 @@ import android.net.Uri;
 
 public interface IAddStoreView {
 
+    void onGetDataError();
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
+    void onLoadPicture(String url, int type);
     void showShortToast(String message);
     void startActivityForResult(Intent intent, int requestCode);
     Activity getActivity();

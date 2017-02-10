@@ -36,6 +36,12 @@ public class RESP_Store extends RESP_Basic {
     private String qr_code;
     @Expose
     private String bar_code;
+    @Expose
+    private Long begin_time;
+    @Expose
+    private Long end_time;
+    @Expose
+    private int type;
 
     public int getId() {
         return id;
@@ -147,5 +153,29 @@ public class RESP_Store extends RESP_Basic {
 
     public void setBar_code(String bar_code) {
         this.bar_code = bar_code;
+    }
+
+    public Long getBegin_time() {
+        return begin_time;
+    }
+
+    public void setBegin_time(Long begin_time) {
+        this.begin_time = begin_time;
+    }
+
+    public Long getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Long end_time) {
+        this.end_time = end_time;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
