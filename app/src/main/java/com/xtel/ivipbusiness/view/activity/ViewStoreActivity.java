@@ -1,34 +1,36 @@
 package com.xtel.ivipbusiness.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.RESP_Store;
+import com.xtel.ivipbusiness.model.entity.SortStore;
+import com.xtel.ivipbusiness.presenter.ViewStorePresenter;
+import com.xtel.ivipbusiness.view.activity.inf.IViewStoreView;
 import com.xtel.ivipbusiness.view.fragment.MemberFragment;
 import com.xtel.ivipbusiness.view.fragment.NewsFragment;
-import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
+import com.xtel.ivipbusiness.view.fragment.StoresFragment;
+import com.xtel.sdk.callback.DialogListener;
 
-public class ViewStoreActivity extends BasicActivity {
+public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
+    private ViewStorePresenter presenter;
+
     private ActionBar actionBar;
-
     private MenuItem menu_create, menu_choose, menu_add;
+
+    private RESP_Store resp_store = null;
+    private SortStore sortStore;
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", LIST_NEAR_NEWS = "list_near_news";
 
     @Override
@@ -36,9 +38,8 @@ public class ViewStoreActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_store);
 
-        initToolbar();
-        initTablayout();
-        replaceStoreInfo();
+        presenter = new ViewStorePresenter(this);
+        presenter.getData();
     }
 
     //    Khởi tạo toolbar
@@ -53,7 +54,7 @@ public class ViewStoreActivity extends BasicActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    //    Khởi tạo tab layout phía dưới
+    //    Khởi tạo tab chức năng
     private void initTablayout() {
         int[] icon = new int[] {R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
         TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
@@ -80,6 +81,30 @@ public class ViewStoreActivity extends BasicActivity {
         });
     }
 
+    //    lựa chọn chức năng khi tab được chọn
+    private void checkTabSelected(int position) {
+        switch (position) {
+            case 0:
+                replaceStoreInfo();
+                break;
+            case 1:
+                replaceListStore();
+                break;
+            case 2:
+                replaceListMember();
+                break;
+            case 3:
+                replaceListNews();
+                break;
+            case 4:
+                replaceListNearNews();
+                break;
+            default:
+                break;
+        }
+    }
+
+//    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
     private void showMenuItem() {
         if (menu_create != null && menu_choose != null && menu_add != null) {
             menu_create.setVisible(true);
@@ -88,6 +113,7 @@ public class ViewStoreActivity extends BasicActivity {
         }
     }
 
+//    Ản toàn bộ item trong menu
     private void hideMenuItem() {
         if (menu_create != null && menu_choose != null && menu_add != null) {
             menu_create.setVisible(false);
@@ -99,7 +125,7 @@ public class ViewStoreActivity extends BasicActivity {
     //    hiển thị fratment thông tin store
     private void replaceStoreInfo() {
         actionBar.setTitle(getString(R.string.title_activity_view_store));
-        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), STORE_INFO);
+        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(sortStore), STORE_INFO);
         hideMenuItem();
     }
 
@@ -128,31 +154,40 @@ public class ViewStoreActivity extends BasicActivity {
     //    hiển thị fratment bản tin gần đây
     private void replaceListNearNews() {
         actionBar.setTitle(getString(R.string.title_activity_list_fcm_news));
-        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), LIST_NEAR_NEWS);
+        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(sortStore), LIST_NEAR_NEWS);
         hideMenuItem();
     }
 
-    private void checkTabSelected(int position) {
-        switch (position) {
-            case 0:
-                replaceStoreInfo();
-                break;
-            case 1:
-                replaceListStore();
-                break;
-            case 2:
-                replaceListMember();
-                break;
-            case 3:
-                replaceListNews();
-                break;
-            case 4:
-                replaceListNearNews();
-                break;
-            default:
-                break;
-        }
+    public RESP_Store getResp_store() {
+        return resp_store;
     }
+
+    public void setResp_store(RESP_Store resp_store) {
+        this.resp_store = resp_store;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -221,5 +256,36 @@ public class ViewStoreActivity extends BasicActivity {
         StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
         if (fragment != null)
             fragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onGetDataSuccess(SortStore sortStore) {
+        this.sortStore = sortStore;
+
+        initToolbar();
+        initTablayout();
+        replaceStoreInfo();
+    }
+
+    @Override
+    public void onGetDataError() {
+        showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 }

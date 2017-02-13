@@ -8,6 +8,10 @@
     <color name="toolbar_background">#E6033f22</color>
     <color name="colorPrimaryKey_90">#E6033f22</color>
     <color name="colorPrimaryKey_80">#CC033f22</color>
+    <color name="colorPrimaryKey_70">#B3033f22</color>
+    <color name="colorPrimaryKey_60">#99033f22</color>
+    <color name="colorPrimaryKey_50">#80033f22</color>
+    <color name="colorPrimaryKey_40">#66033f22</color>
     <color name="black_40">#66000000</color>
 
     <color name="tablayout">#146535</color>

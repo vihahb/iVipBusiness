@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -82,5 +83,9 @@ public abstract class IActivity extends AppCompatActivity {
 
     protected ImageView findImageView(int id) {
         return (ImageView) findViewById(id);
+    }
+
+    protected ImageButton findImageButton(int id) {
+        return (ImageButton) findViewById(id);
     }
 }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryKey_90">
+    android:background="@color/colorPrimaryKey_80">
 
     <ImageView
         android:id="@+id/store_info.img_banner"
@@ -14,6 +14,24 @@
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_210"
+        android:background="@color/colorPrimaryKey_40" />
+
+    <ImageButton
+        android:id="@+id/store_info.img_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/button_transparent"
+        android:contentDescription="@null"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_action_camera" />
+
     <LinearLayout
         android:id="@+id/store_info.layout_header_content"
         android:layout_width="match_parent"
@@ -21,7 +39,7 @@
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/size_8"
+        android:paddingBottom="@dimen/size_4"
         android:paddingLeft="@dimen/size_16"
         android:paddingRight="@dimen/size_16">
 
@@ -34,7 +52,7 @@
             android:layout_marginRight="?attr/actionBarSize"
             android:hint="@string/fullname"
             android:inputType="textCapWords"
-            android:paddingEnd="@dimen/size_22"
-            android:paddingRight="@dimen/size_22" />
+            android:paddingEnd="@dimen/size_48"
+            android:paddingRight="@dimen/size_48" />
     </LinearLayout>
 </RelativeLayout>

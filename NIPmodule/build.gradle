@@ -1,13 +1,19 @@
 apply plugin: 'com.android.library'
 
 android {
+    signingConfigs {
+        Xtel {
+            keyAlias 'xtel'
+            keyPassword 'xtelsolution'
+            storeFile file('H:/GoogleDrive/Resource/xtel mobile keystore_/xtel_android_keystore.jks')
+            storePassword 'xtelsolution'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
     lintOptions {
         abortOnError false
     }
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
@@ -21,15 +27,25 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            jniDebuggable false
+            signingConfig signingConfigs.Xtel
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled false
+        }
+        debug {
+            signingConfig signingConfigs.Xtel
+            pseudoLocalesEnabled false
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+//    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.6.2'

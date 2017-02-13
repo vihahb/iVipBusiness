@@ -14,6 +14,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
@@ -52,7 +53,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (position == arrayList.size())
             _view.onLoadMore();
         if (holder instanceof ViewHolder) {
@@ -81,7 +82,8 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         return;
                     }
 
-                    _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
+                    _view.startActivityForResult(ViewStoreActivity.class, Constants.MODEL, arrayList.get(position), 11);
+//                    _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
                 }
             });
         } else {

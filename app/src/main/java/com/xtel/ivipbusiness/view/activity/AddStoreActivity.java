@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -42,6 +43,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private AddStorePresenter presenter;
 
     private ImageView img_banner, img_logo;
+    private ImageButton img_camera;
     private Spinner sp_type;
     private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
 
@@ -69,6 +71,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private void initView() {
         img_banner = findImageView(R.id.add_store_img_banner);
         img_logo = findImageView(R.id.add_store_img_avatar);
+        img_camera = findImageButton(R.id.add_store_img_camera);
         edt_begin_time = findEditText(R.id.add_store_edt_begin_time);
         edt_end_time = findEditText(R.id.add_store_edt_end_time);
         edt_name = findEditText(R.id.add_store_edt_name);
@@ -84,7 +87,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     }
 
     private void initListener() {
-        img_banner.setOnClickListener(this);
+        img_camera.setOnClickListener(this);
         img_logo.setOnClickListener(this);
         edt_address.setOnClickListener(this);
         edt_begin_time.setOnClickListener(this);
@@ -196,7 +199,19 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onAddStoreSuccess() {
-        showShortToast(getString(R.string.success_add_store));
+//        showShortToast(getString(R.string.success_add_store));
+        showMaterialDialog(false, false, null, getString(R.string.success_add_store), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     @Override
@@ -242,7 +257,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
 
-        if (id == R.id.add_store_img_banner)
+        if (id == R.id.add_store_img_camera)
             presenter.takePicture(0);
         else if (id == R.id.add_store_img_avatar)
             presenter.takePicture(1);

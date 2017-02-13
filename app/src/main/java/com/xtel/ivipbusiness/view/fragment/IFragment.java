@@ -5,11 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -81,5 +84,17 @@ public abstract class IFragment extends Fragment {
 
     protected ImageView findImageView(int id) {
         return (ImageView) getView().findViewById(id);
+    }
+
+    protected ImageButton findImageButton(int id) {
+        return (ImageButton) getView().findViewById(id);
+    }
+
+    protected SwipeRefreshLayout findSwipeRefreshLayout(int id) {
+        return (SwipeRefreshLayout) getView().findViewById(id);
+    }
+
+    protected View findView(int id) {
+        return (View) getView().findViewById(id);
     }
 }

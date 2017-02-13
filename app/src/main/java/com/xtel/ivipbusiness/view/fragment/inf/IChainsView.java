@@ -19,5 +19,6 @@ public interface IChainsView {
     void onGetStoresError(Error error);
     void onNoNetwork();
     void getNewSession(ICmd iCmd);
+    void startActivityForResult(Class clazz, String key, Object object, int requestCode);
     Activity getActivity();
 }

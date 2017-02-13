@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
 
@@ -13,6 +14,7 @@ import com.xtel.ivipbusiness.model.entity.RESP_Store;
 
 public interface IStoreInfoView {
 
+    void onGetDataError();
     void onGetStoreInfoSuccess(RESP_Store resp_store);
     void onGetStoreInfoError();
 
@@ -21,4 +23,5 @@ public interface IStoreInfoView {
     void onValidateError(String error);
     void startActivityForResult(Intent intent, int requestCode);
     Activity getActivity();
+    Fragment getFragment();
 }

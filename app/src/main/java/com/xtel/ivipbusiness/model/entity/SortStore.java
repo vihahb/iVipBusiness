@@ -2,11 +2,13 @@ package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by Vulcl on 1/17/2017
  */
 
-public class SortStore {
+public class SortStore implements Serializable {
     @Expose
     private int id;
     @Expose

@@ -72,8 +72,6 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), AddStoreActivity.class);
-//                intent.putExtra(Constants.MODEL, STORE_TYPE);
                 startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD);
             }
         });
@@ -94,7 +92,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getChains();
+                presenter.getChains(true);
             }
         });
 
@@ -106,7 +104,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
                 adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getChains();
+                presenter.getChains(true);
             }
         });
 
@@ -115,7 +113,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getChains();
+                presenter.getChains(true);
             }
         });
 
@@ -155,7 +153,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
     @Override
     public void onLoadMore() {
-        presenter.getChains();
+        presenter.getChains(false);
     }
 
     //    Sự kiện load danh sách store thành công
@@ -219,6 +217,11 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
                 startActivity(LoginActivity.class);
             }
         });
+    }
+
+    @Override
+    public void startActivityForResult(Class clazz, String key, Object object, int requestCode) {
+        super.startActivityForResult(clazz, key, object, requestCode);
     }
 
     @Override

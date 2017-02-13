@@ -46,11 +46,14 @@ public class ChainsPresenter extends BasicPresenter {
         this.view = view;
     }
 
-    public void getChains() {
+    public void getChains(boolean isClear) {
         if (!NetWorkInfo.isOnline(view.getActivity())) {
             view.onNoNetwork();
             return;
         }
+
+        if (isClear)
+            PAGE = 0;
 
         iCmd.execute(1);
     }
