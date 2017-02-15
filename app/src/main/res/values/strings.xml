@@ -38,6 +38,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="action_done">Hoàn thành</string>
+    <string name="action_create_store">Tạo cửa hàng</string>
+    <string name="action_create_chain">Tạo chuỗi cửa hàng</string>
 
     <!-- Dialog -->
     <string name="doing_register">Đang tạo tài khoản…</string>
@@ -48,12 +50,14 @@
     <string name="back">Quay lại</string>
     <string name="uploading_file">Đang tải file…</string>
     <string name="adding_store">Đang tạo cửa hàng…</string>
+    <string name="updating_store">Đang cập nhập…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
     <string name="success_active">Kích hoạt tài khoản thành công</string>
     <string name="success_reset">Lấy lại mật khẩu thành công</string>
     <string name="success_add_store">Thêm cửa hàng thành công</string>
+    <string name="success_update_store">Cập nhật cửa hàng thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -159,7 +163,9 @@
     <string name="app_info">Thông tin ứng dụng</string>
     <string name="faq">FAQ</string>
     <string name="create_new_store">Tạo cửa hàng mới</string>
+    <string name="create_new_news">Tạo bản tin mới</string>
     <string name="add_exists_store">Thêm cửa hàng đã có</string>
+    <string name="edit_store">Sửa cửa hàng</string>
 
     <!-- Spinner -->
     <string-array name="gender">

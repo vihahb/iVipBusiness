@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/store_info.img_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size_180"
         android:layout_alignBottom="@+id/store_info.layout_header_content"
         android:layout_alignTop="@+id/store_info.layout_header_content"
         android:alpha="0.9"
@@ -16,7 +16,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_210"
+        android:layout_height="@dimen/size_180"
         android:background="@color/colorPrimaryKey_40" />
 
     <ImageButton
@@ -35,9 +35,10 @@
     <LinearLayout
         android:id="@+id/store_info.layout_header_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_210"
+        android:layout_height="@dimen/size_180"
         android:layout_gravity="bottom"
         android:gravity="bottom"
+        android:weightSum="3"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/size_4"
         android:paddingLeft="@dimen/size_16"
@@ -46,13 +47,10 @@
         <EditText
             android:id="@+id/store_info.edt_fullname"
             style="@style/edittext_no_drawable"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="?attr/actionBarSize"
-            android:layout_marginRight="?attr/actionBarSize"
             android:hint="@string/fullname"
-            android:inputType="textCapWords"
-            android:paddingEnd="@dimen/size_48"
-            android:paddingRight="@dimen/size_48" />
+            android:layout_weight="2"
+            android:inputType="textCapWords" />
     </LinearLayout>
 </RelativeLayout>

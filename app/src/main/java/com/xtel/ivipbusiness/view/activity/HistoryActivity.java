@@ -51,7 +51,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
     //    Khởi tạo layout và recyclerview
     private void initProgressView() {
         progressView = new ProgressView(this, null);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -117,7 +117,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }

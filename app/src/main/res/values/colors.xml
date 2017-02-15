@@ -2,6 +2,10 @@
 <resources>
     <color name="colorPrimary">#033f22</color>
 
+    <color name="refresh_progress_1">#819F90</color>
+    <color name="refresh_progress_2">#35654E</color>
+    <color name="refresh_progress_3">@color/colorPrimary</color>
+
     <color name="button_color">#33000000</color>
     <color name="border_color">#33FFFFFF</color>
     <color name="edttext_background">#665c5ca7</color>

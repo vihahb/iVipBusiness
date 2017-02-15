@@ -15,9 +15,16 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action.view_store.add_store"
+        android:id="@+id/action.view_store.edit_store"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_action_edit_line"
+        android:title="@string/edit_store"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action.view_store.add_news"
         android:icon="@mipmap/ic_add_store"
         android:orderInCategory="100"
-        android:title="@string/create_new_store"
+        android:title="@string/create_new_news"
         app:showAsAction="always" />
 </menu>

@@ -31,6 +31,15 @@ public class StoresModel extends BasicModel {
         requestServer.postApi(url, jsonObject, session, responseHandle);
     }
 
+    public void updateStore(RESP_Store resp_store, ResponseHandle responseHandle) {
+        String url = API_BASE + UPDATE_STORE;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("updateStore", "url " + url + "    session " + session);
+        Log.e("updateStore", "RESP_Store " + JsonHelper.toJson(resp_store));
+        requestServer.putApi(url, JsonHelper.toJson(resp_store), session, responseHandle);
+    }
+
     public void getStoreInfo(int store_id, String store_type, ResponseHandle responseHandle) {
         String url = API_BASE + GET_STORE_INFO_ID + store_id + GET_STORE_INFO_TYPE + store_type;
         String session = LoginManager.getCurrentSession();

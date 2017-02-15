@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.CallbackLisenerRegister;
@@ -19,6 +20,7 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.model.entity.RESP_Reactive;
 import com.xtel.nipservicesdk.model.entity.RESP_Register;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.nipservicesdk.utils.SharedUtils;
 
@@ -44,6 +46,7 @@ public class CallbackManager {
                 LoginModel.getInstance().getNewSession((String) object.get(1), new ResponseHandle<RESP_Login>(RESP_Login.class) {
                     @Override
                     public void onSuccess(RESP_Login obj) {
+                        Log.e("getNewSession", "succcess " + JsonHelper.toJson(obj));
                         saveLoginInfo(obj);
                         if (callbacListener != null)
                             callbacListener.onSuccess(obj);
@@ -336,6 +339,7 @@ public class CallbackManager {
         if (obj.getSession() != null && !obj.getSession().isEmpty())
             SharedUtils.getInstance().putStringValue(Cts.USER_SESSION, obj.getSession());
 
+        Log.e("saveLoginInfo", "succcess");
 //        checkLogedTime();
     }
 

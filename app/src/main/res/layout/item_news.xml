@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_180"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/size_8"
     android:layout_marginRight="@dimen/size_8"
     android:layout_marginTop="@dimen/size_8"
@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/item.news.img_banner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/size_180"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
@@ -19,7 +19,7 @@
     <View
         android:id="@+id/item.chain.img_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/size_180"
         android:layout_gravity="bottom"
         android:background="@drawable/item_background_1" />
 

@@ -53,7 +53,7 @@ public class ChainsPresenter extends BasicPresenter {
         }
 
         if (isClear)
-            PAGE = 0;
+            PAGE = 1;
 
         iCmd.execute(1);
     }

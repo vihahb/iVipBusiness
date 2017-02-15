@@ -72,6 +72,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         img_banner = findImageView(R.id.add_store_img_banner);
         img_logo = findImageView(R.id.add_store_img_avatar);
         img_camera = findImageButton(R.id.add_store_img_camera);
+
         edt_begin_time = findEditText(R.id.add_store_edt_begin_time);
         edt_end_time = findEditText(R.id.add_store_edt_end_time);
         edt_name = findEditText(R.id.add_store_edt_name);
@@ -193,7 +194,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         if (type == 0)
             WidgetHelper.getInstance().setImageURL(img_banner, url);
         else
-            WidgetHelper.getInstance().setSmallImageURL(img_logo, url);
+            WidgetHelper.getInstance().setAvatarImageURL(img_logo, url);
         Log.e("url_success_4", url);
     }
 

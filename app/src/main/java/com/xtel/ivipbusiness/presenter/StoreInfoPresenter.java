@@ -18,8 +18,13 @@ import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Basic;
+import com.xtel.nipservicesdk.model.entity.RESP_None;
+import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.TextUnit;
 
 /**
  * Created by Vulcl on 1/21/2017
@@ -36,12 +41,13 @@ public class StoreInfoPresenter {
 
     private ICmd iCmd = new ICmd() {
         @Override
-        public void execute(Object... params) {
+        public void execute(final Object... params) {
             if (((int) params[0]) == 1)
                 StoresModel.getInstance().getStoreInfo((int) params[1], (String) params[2], new ResponseHandle<RESP_Store>(RESP_Store.class) {
                     @Override
                     public void onSuccess(RESP_Store obj) {
                         if (isExists) {
+                            obj.setId(sortStore.getId());
                             ((ViewStoreActivity) view.getActivity()).setResp_store(obj);
                             view.onGetStoreInfoSuccess(obj);
                         }
@@ -49,8 +55,31 @@ public class StoreInfoPresenter {
 
                     @Override
                     public void onError(Error error) {
-                        if (isExists)
-                        view.onGetStoreInfoError();
+                        if (isExists) {
+                            if (error.getCode() == 2)
+                                view.getNewSession(iCmd);
+                            else
+                                view.onGetStoreInfoError();
+                        }
+                    }
+                });
+            else if (((int) params[0]) == 2)
+                StoresModel.getInstance().updateStore((RESP_Store) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
+                    @Override
+                    public void onSuccess(RESP_None obj) {
+                        view.onUpdateStoreInfoSuccess((RESP_Store) params[1]);
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        if (isExists) {
+                            if (error.getCode() == 2)
+                                view.getNewSession(iCmd);
+                            else {
+                                view.closeProgressBar();
+                                view.onValidateError(JsonParse.getCodeMessage(error.getCode(), view.getActivity().getString(R.string.error_try_again)));
+                            }
+                        }
                     }
                 });
         }
@@ -60,7 +89,7 @@ public class StoreInfoPresenter {
         this.view = view;
     }
 
-//    Kiểm tra xem có data truyền vào hay không
+    //    Kiểm tra xem có data truyền vào hay không
     public void getData() {
         try {
             sortStore = (SortStore) view.getFragment().getArguments().getSerializable(Constants.MODEL);
@@ -81,7 +110,7 @@ public class StoreInfoPresenter {
         iCmd.execute(1, sortStore.getId(), sortStore.getStore_type());
     }
 
-//    Kiểm tra cấp quyền camera
+    //    Kiểm tra cấp quyền camera
     public void takePicture(int type) {
         TAKE_PICTURE_TYPE = type;
         if (!PermissionHelper.checkListPermission(permission, view.getActivity(), REQUEST_CAMERA))
@@ -90,7 +119,7 @@ public class StoreInfoPresenter {
         takePictureNow();
     }
 
-//    Bắt đầu chọn ảnh từ camera hoặc gallary
+    //    Bắt đầu chọn ảnh từ camera hoặc gallary
     private void takePictureNow() {
         final Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         galleryIntent.setType("image/*");
@@ -107,7 +136,35 @@ public class StoreInfoPresenter {
         view.startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
 
-//    Lắng nghe người dùng cấp quyền truy cập camera hay không
+    public void updateStore(RESP_Store resp_store) {
+        if (!NetWorkInfo.isOnline(view.getActivity())) {
+            view.onValidateError(view.getActivity().getString(R.string.error_no_internet));
+            return;
+        }
+
+        if (resp_store.getBanner().isEmpty()) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_banner));
+            return;
+        } else if (resp_store.getLogo().isEmpty()) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_logo));
+            return;
+        } else if (!TextUnit.getInstance().validateText(resp_store.getName())) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_store_name));
+            return;
+        } else if (resp_store.getAddress() == null) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_address));
+            return;
+        } else if (!TextUnit.getInstance().validatePhone(resp_store.getPhonenumber())) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_phone));
+            return;
+        }
+
+        view.showProgressBar(false, false, null, view.getActivity().getString(R.string.updating_store));
+        iCmd.execute(2, resp_store);
+    }
+
+
+    //    Lắng nghe người dùng cấp quyền truy cập camera hay không
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA) {
             boolean check = true;
@@ -125,7 +182,7 @@ public class StoreInfoPresenter {
         }
     }
 
-//    Lắng nghe khi người dùng đã chọn xong ảnh hoặc hủy
+    //    Lắng nghe khi người dùng đã chọn xong ảnh hoặc hủy
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_CAMERA) {
             if (resultCode == Activity.RESULT_OK) {
@@ -140,7 +197,7 @@ public class StoreInfoPresenter {
         }
     }
 
-//    set giá trị cho biến để kiểm tra xem fragment có đang được view hay không
+    //    set giá trị cho biến để kiểm tra xem fragment có đang được view hay không
     public void setExists(boolean exists) {
         isExists = exists;
     }

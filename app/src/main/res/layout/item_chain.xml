@@ -33,44 +33,31 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/size_8"
             android:paddingLeft="@dimen/size_16"
             android:paddingRight="@dimen/size_16"
-            android:paddingTop="@dimen/size_8" >
+            android:paddingTop="@dimen/size_8">
 
             <com.xtel.ivipbusiness.view.widget.RoundImage
                 android:id="@+id/item.chain.img_avatar"
-                android:layout_width="@dimen/size_40"
-                android:layout_height="@dimen/size_40"
+                android:layout_width="@dimen/size_48"
+                android:layout_height="@dimen/size_48"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/item.chain.txt_name"
+                style="@style/textview_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16"
                 android:layout_marginStart="@dimen/size_16"
-                android:gravity="bottom"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/item.chain.txt_name"
-                    style="@style/textview_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/birth_day" />
-
-                <TextView
-                    android:id="@+id/item.chain.txt_address"
-                    style="@style/textview_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/birth_day" />
-            </LinearLayout>
+                android:text="@string/birth_day" />
         </LinearLayout>
     </FrameLayout>
 </android.support.v7.widget.CardView>

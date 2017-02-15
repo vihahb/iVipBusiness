@@ -1,6 +1,5 @@
 package com.xtel.ivipbusiness.view.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.presenter.MemberPresenter;
-import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.ivipbusiness.view.adapter.MemberAdapter;
+import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.nipservicesdk.utils.JsonParse;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class MemberFragment extends BasicFragment implements IMemberView {
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
         progressView = new ProgressView(null, view);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -121,7 +120,7 @@ public class MemberFragment extends BasicFragment implements IMemberView {
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }

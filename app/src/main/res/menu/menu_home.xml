@@ -8,4 +8,18 @@
         android:orderInCategory="100"
         android:title="@string/action_user_info"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action.home.create_store"
+        android:icon="@drawable/ic_action_account"
+        android:orderInCategory="100"
+        android:title="@string/action_create_store"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action.home.create_chain"
+        android:icon="@drawable/ic_action_account"
+        android:orderInCategory="100"
+        android:title="@string/action_create_chain"
+        app:showAsAction="never" />
 </menu>

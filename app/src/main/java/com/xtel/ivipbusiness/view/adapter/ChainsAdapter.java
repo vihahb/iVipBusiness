@@ -67,11 +67,10 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             SortStore stores = arrayList.get(position);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, stores.getBanner());
-            WidgetHelper.getInstance().setSmallImageURL(viewHolder.img_avatar, stores.getLogo());
+            WidgetHelper.getInstance().setAvatarImageURL(viewHolder.img_avatar, stores.getLogo());
             WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, stores.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
-            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_address, stores.getAddress(), _view.getActivity().getString(R.string.not_update_address));
 
             bg_pos++;
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +110,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private class ViewHolder extends ViewHolderHelper {
         private ImageView img_banner, img_avatar;
         private View img_background;
-        private TextView txt_name, txt_address;
+        private TextView txt_name;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -120,7 +119,6 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             img_banner = findImageView(R.id.item_chain_img_banner);
             img_avatar = findImageView(R.id.item_chain_img_avatar);
             txt_name = findTextView(R.id.item_chain_txt_name);
-            txt_address = findTextView(R.id.item_chain_txt_address);
         }
     }
 

@@ -80,7 +80,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
         progressView = new ProgressView(null, view);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -129,7 +129,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }

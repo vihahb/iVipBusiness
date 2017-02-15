@@ -23,6 +23,8 @@ import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
 import com.xtel.ivipbusiness.view.widget.CircleTransform;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -35,8 +37,10 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBar actionBar;
-    private MenuItem menuItem;
+    private MenuItem menu_avatar, menu_create_store, menu_create_chain;
 
+    private final int REQUEST_ADD_STORE = 11;
+    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
     private final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
 
     @Override
@@ -128,7 +132,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
-                        menuItem.setIcon(imageView.getDrawable());
+                        menu_avatar.setIcon(imageView.getDrawable());
                         imageView.destroyDrawingCache();
                     }
 
@@ -162,7 +166,10 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
-        menuItem = menu.findItem(R.id.action_home_user_info);
+
+        menu_avatar = menu.findItem(R.id.action_home_user_info);
+        menu_create_store = menu.findItem(R.id.action_home_create_store);
+        menu_create_chain = menu.findItem(R.id.action_home_create_chain);
 
         presenter.getShortUserData();
         return true;
@@ -174,6 +181,17 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         if (id == R.id.action_home_user_info)
             startActivity(ProfileActivity.class);
+        else if (id == R.id.action_home_create_store) {
+            if (!NetWorkInfo.isOnline(getApplicationContext())) {
+                showShortToast(getString(R.string.error_no_internet));
+            } else
+            startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD_STORE);
+        } else if (id == R.id.action_home_create_chain) {
+            if (!NetWorkInfo.isOnline(getApplicationContext())) {
+                showShortToast(getString(R.string.error_no_internet));
+            } else
+                startActivityForResult(AddStoreActivity.class, Constants.MODEL, CHAIN_TYPE, REQUEST_ADD_STORE);
+        }
 
         return super.onOptionsItemSelected(item);
     }

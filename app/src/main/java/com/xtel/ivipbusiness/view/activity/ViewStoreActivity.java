@@ -22,12 +22,13 @@ import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 
 public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     private ViewStorePresenter presenter;
 
     private ActionBar actionBar;
-    private MenuItem menu_create, menu_choose, menu_add;
+    private MenuItem menu_create, menu_choose, menu_add_news, menu_edi_storet;
 
     private RESP_Store resp_store = null;
     private SortStore sortStore;
@@ -56,7 +57,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
 
     //    Khởi tạo tab chức năng
     private void initTablayout() {
-        int[] icon = new int[] {R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
+        int[] icon = new int[]{R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
         TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
 
         for (int i = 0; i < 5; i++) {
@@ -104,21 +105,43 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         }
     }
 
-//    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
-    private void showMenuItem() {
-        if (menu_create != null && menu_choose != null && menu_add != null) {
-            menu_create.setVisible(true);
-            menu_choose.setVisible(true);
-            menu_add.setVisible(false);
+    //    Hiện menu của tab thông tin cửa hàng
+    private void showMenuStoreInfo() {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+            menu_create.setVisible(false);
+            menu_choose.setVisible(false);
+            menu_edi_storet.setVisible(true);
+            menu_add_news.setVisible(false);
         }
     }
 
-//    Ản toàn bộ item trong menu
-    private void hideMenuItem() {
-        if (menu_create != null && menu_choose != null && menu_add != null) {
+    //    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
+    private void showMenuListNew() {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+            menu_create.setVisible(true);
+            menu_choose.setVisible(true);
+            menu_edi_storet.setVisible(false);
+            menu_add_news.setVisible(false);
+        }
+    }
+
+    //    Hiện menu của tab bản tin
+    private void showMenuNews() {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
-            menu_add.setVisible(false);
+            menu_edi_storet.setVisible(false);
+            menu_add_news.setVisible(true);
+        }
+    }
+
+    //    Ản toàn bộ item trong menu
+    private void hideMenuItem() {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+            menu_create.setVisible(false);
+            menu_choose.setVisible(false);
+            menu_edi_storet.setVisible(false);
+            menu_add_news.setVisible(false);
         }
     }
 
@@ -126,14 +149,14 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     private void replaceStoreInfo() {
         actionBar.setTitle(getString(R.string.title_activity_view_store));
         replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(sortStore), STORE_INFO);
-        hideMenuItem();
+        showMenuStoreInfo();
     }
 
     //    hiển thị fratment danh sách chuỗi store
     private void replaceListStore() {
         actionBar.setTitle(getString(R.string.title_activity_list_store));
         replaceFragment(R.id.view_store_container, StoresFragment.newInstance(), LIST_STORE);
-        showMenuItem();
+        showMenuListNew();
     }
 
     //    hiển thị fratment member
@@ -147,8 +170,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     private void replaceListNews() {
         actionBar.setTitle(getString(R.string.title_activity_list_news));
         replaceFragment(R.id.view_store_container, NewsFragment.newInstance(), LIST_NEWS);
-        hideMenuItem();
-        menu_add.setVisible(true);
+        showMenuNews();
     }
 
     //    hiển thị fratment bản tin gần đây
@@ -166,97 +188,29 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         this.resp_store = resp_store;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_view_store, menu);
-
-        menu_create = menu.findItem(R.id.action_view_store_create_store);
-        menu_choose = menu.findItem(R.id.action_view_store_choose_store);
-        menu_add = menu.findItem(R.id.action_view_store_add_store);
-
-        menu_create.setVisible(false);
-        menu_choose.setVisible(false);
-        menu_add.setVisible(false);
-
-        SpannableString s = new SpannableString(menu_create.getTitle());
-        s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
-        menu_create.setTitle(s);
-
-        SpannableString s2 = new SpannableString(menu_choose.getTitle());
-        s2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
-        menu_choose.setTitle(s2);
-
-//        menu_add.setIcon(R.drawable.ic_action_add_store);
-
-        return true;
+    public void onUpdateStoreSuccess() {
+        menu_edi_storet.setIcon(R.drawable.ic_action_edit_line);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home)
-            finish();
-        else if (id == R.id.action_view_store_create_store) {
-            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
-            if (fragment != null) {
-                fragment.createNewStore();
-            }
-        } else if (id == R.id.action_view_store_choose_store) {
-            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
-            if (fragment != null) {
-                fragment.chooseExistsStore();
-            }
-        } else if (id == R.id.action_view_store_add_store) {
-            startActivity(AddStoreActivity.class);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
-        if (fragment != null)
-            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        debug(requestCode + "   " + resultCode);
-        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
-        if (fragment != null)
-            fragment.onActivityResult(requestCode, resultCode, data);
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onGetDataSuccess(SortStore sortStore) {
@@ -287,5 +241,80 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     @Override
     public Activity getActivity() {
         return this;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_view_store, menu);
+
+        menu_create = menu.findItem(R.id.action_view_store_create_store);
+        menu_choose = menu.findItem(R.id.action_view_store_choose_store);
+        menu_add_news = menu.findItem(R.id.action_view_store_add_news);
+        menu_edi_storet = menu.findItem(R.id.action_view_store_edit_store);
+
+        menu_create.setVisible(false);
+        menu_choose.setVisible(false);
+        menu_add_news.setVisible(false);
+        menu_edi_storet.setVisible(true);
+
+        SpannableString s = new SpannableString(menu_create.getTitle());
+        s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
+        menu_create.setTitle(s);
+
+        SpannableString s2 = new SpannableString(menu_choose.getTitle());
+        s2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
+        menu_choose.setTitle(s2);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home)
+            finish();
+        else if (id == R.id.action_view_store_create_store) {
+            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
+            if (fragment != null) {
+                fragment.createNewStore();
+            }
+        } else if (id == R.id.action_view_store_choose_store) {
+            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
+            if (fragment != null) {
+                fragment.chooseExistsStore();
+            }
+        } else if (id == R.id.action_view_store_edit_store) {
+            StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+
+            if (fragment != null) {
+                if (menu_edi_storet.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                    fragment.setEnableView(true);
+                    menu_edi_storet.setIcon(R.drawable.ic_action_done);
+                } else {
+                    fragment.updateStore();
+                }
+            }
+        } else if (id == R.id.action_view_store_add_news) {
+            startActivity(AddStoreActivity.class);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+        if (fragment != null)
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        debug(requestCode + "   " + resultCode);
+        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+        if (fragment != null)
+            fragment.onActivityResult(requestCode, resultCode, data);
     }
 }

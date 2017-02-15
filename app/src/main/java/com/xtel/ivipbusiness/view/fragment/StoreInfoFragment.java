@@ -1,7 +1,11 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,18 +30,30 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoreInfoPresenter;
+import com.xtel.ivipbusiness.view.activity.ChooseMapsActivity;
+import com.xtel.ivipbusiness.view.activity.LoginActivity;
+import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
 import com.xtel.ivipbusiness.view.widget.AppBarStateChangeListener;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.callback.ICmd;
+import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * Created by Vulcl on 1/16/2017
@@ -48,11 +64,15 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
     private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
     private ImageButton img_camera;
-    private EditText edt_name, edt_address, edt_phone, edt_des;
+    private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private CallbackManager callbackManager;
 
     private RESP_Store resp_store;
+//    private PlaceModel placeModel;
+    private final int REQUEST_LOCATION = 99;
     private boolean isShow = true;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static StoreInfoFragment newInstance(SortStore sortStore) {
         Bundle args = new Bundle();
@@ -72,11 +92,13 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        callbackManager = CallbackManager.create(getActivity());
 
         presenter = new StoreInfoPresenter(this);
         initSwwipe();
         initView();
         initListener();
+        setEnableView(false);
         initAnimationHideImage(view);
         presenter.getData();
     }
@@ -85,6 +107,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     private void initSwwipe() {
         swipeRefreshLayout = findSwipeRefreshLayout(R.id.store_info_swipe);
         swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
     private void initView() {
@@ -94,6 +117,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         img_bar_code = findImageView(R.id.store_info_img_bar_code);
         img_camera = findImageButton(R.id.store_info_img_camera);
 
+        edt_begin_time = findEditText(R.id.store_info_edt_begin_time);
+        edt_end_time = findEditText(R.id.store_info_edt_end_time);
         edt_name = findEditText(R.id.store_info_edt_fullname);
         edt_address = findEditText(R.id.store_info_edt_address);
         edt_phone = findEditText(R.id.store_info_edt_phone);
@@ -105,6 +130,28 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         img_bar_code.setOnClickListener(this);
         img_camera.setOnClickListener(this);
         img_logo.setOnClickListener(this);
+
+        edt_begin_time.setOnClickListener(this);
+        edt_end_time.setOnClickListener(this);
+        edt_address.setOnClickListener(this);
+    }
+
+    public void setEnableView(boolean isEnable) {
+        if (isEnable && resp_store == null)
+            return;
+
+        edt_begin_time.setEnabled(isEnable);
+        edt_end_time.setEnabled(isEnable);
+        edt_name.setEnabled(isEnable);
+        edt_address.setEnabled(isEnable);
+        edt_phone.setEnabled(isEnable);
+        edt_des.setEnabled(isEnable);
+
+        img_banner.setEnabled(isEnable);
+        img_logo.setEnabled(isEnable);
+        img_qr_code.setEnabled(isEnable);
+        img_bar_code.setEnabled(isEnable);
+        img_camera.setEnabled(isEnable);
     }
 
     private void initAnimationHideImage(View view) {
@@ -149,107 +196,28 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         ViewCompat.animate(view).scaleX(1.0F).scaleY(1.0F).alpha(1.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(null).start();
     }
 
-    @Override
-    public void onGetDataError() {
-        showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
+    private void selectBeginTime() {
+        Calendar calendar = Calendar.getInstance();
+        new TimePickerDialog(getContext(), R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onClicked(Object object) {
-                closeDialog();
-                getActivity().finish();
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.begin_time) + ": ", hourOfDay, minute);
+//                String BEGIN_TIME = hourOfDay + ":" + minute;
+                resp_store.setBegin_time(Constants.convertTimeToLong(hourOfDay, minute));
             }
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+    }
 
+    private void selectEndTime() {
+        Calendar calendar = Calendar.getInstance();
+        new TimePickerDialog(getContext(), R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onCancel() {
-
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
+//                String END_TIME = hourOfDay + ":" + minute;
+                resp_store.setEnd_time(Constants.convertTimeToLong(hourOfDay, minute));
             }
-        });
-    }
-
-    @Override
-    public void onGetStoreInfoSuccess(RESP_Store resp_store) {
-        this.resp_store = resp_store;
-        WidgetHelper.getInstance().setImageURL(img_banner, resp_store.getBanner());
-        WidgetHelper.getInstance().setSmallImageURL(img_logo, resp_store.getLogo());
-        WidgetHelper.getInstance().setImageURL(img_qr_code, resp_store.getQr_code());
-        WidgetHelper.getInstance().setImageURL(img_bar_code, resp_store.getBar_code());
-
-        WidgetHelper.getInstance().setEditTextNoResult(edt_name, resp_store.getName());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_address, resp_store.getAddress());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_phone, resp_store.getPhonenumber());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_des, resp_store.getDescription());
-
-        swipeRefreshLayout.setRefreshing(false);
-        swipeRefreshLayout.setEnabled(false);
-    }
-
-    @Override
-    public void onGetStoreInfoError() {
-        showMaterialDialog(false, false, null, getString(R.string.can_not_load_data), null, getString(R.string.back), new DialogListener() {
-            @Override
-            public void onClicked(Object object) {
-                closeDialog();
-                getActivity().finish();
-            }
-
-            @Override
-            public void onCancel() {
-                closeDialog();
-                getActivity().finish();
-            }
-        });
-
-    }
-
-    @Override
-    public void startActivityForResult(Class clazz, String key, Object object, int requestCode) {
-        super.startActivityForResult(clazz, key, object, requestCode);
-    }
-
-
-    @Override
-    public void onTakePictureGallary(int type, Uri uri) {
-        if (uri == null) {
-            showShortToast(getString(R.string.error_get_image));
-            return;
-        }
-
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            if (type == 0)
-                img_banner.setImageBitmap(bitmap);
-            else
-                img_logo.setImageBitmap(bitmap);
-        }
-    }
-
-    @Override
-    public void onTakePictureCamera(int type, Bitmap bitmap) {
-        if (bitmap == null) {
-            showShortToast(getString(R.string.error_get_image));
-            return;
-        }
-
-        if (type == 0)
-            img_banner.setImageBitmap(bitmap);
-        else
-            img_logo.setImageBitmap(bitmap);
-    }
-
-    @Override
-    public void onValidateError(String error) {
-        showShortToast(error);
-    }
-
-    @Override
-    public Fragment getFragment() {
-        return this;
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -320,6 +288,197 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         }, 200);
     }
 
+    public void updateStore() {
+        resp_store.setName(edt_name.getText().toString());
+        resp_store.setPhonenumber(edt_phone.getText().toString());
+        resp_store.setDescription(edt_des.getText().toString());
+
+        presenter.updateStore(resp_store);
+    }
+
+    private void setAddress(PlaceModel placeModel) {
+        edt_address.setText(placeModel.getAddress());
+
+        resp_store.setAddress(placeModel.getAddress());
+        resp_store.setLocation_lat(placeModel.getLatitude());
+        resp_store.setLocation_lng(placeModel.getLongtitude());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public void onGetDataError() {
+        showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                getActivity().finish();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+    }
+
+    @Override
+    public void onGetStoreInfoSuccess(RESP_Store resp_store) {
+        this.resp_store = resp_store;
+        WidgetHelper.getInstance().setImageURL(img_banner, resp_store.getBanner());
+        WidgetHelper.getInstance().setAvatarImageURL(img_logo, resp_store.getLogo());
+        WidgetHelper.getInstance().setImageURL(img_qr_code, resp_store.getQr_code());
+        WidgetHelper.getInstance().setImageURL(img_bar_code, resp_store.getBar_code());
+
+        WidgetHelper.getInstance().setEditTextTime(edt_begin_time, (getString(R.string.begin_time) + ": "), (resp_store.getBegin_time() * 1000));
+        WidgetHelper.getInstance().setEditTextTime(edt_end_time, (getString(R.string.end_time) + ": "), (resp_store.getEnd_time() * 1000));
+        WidgetHelper.getInstance().setEditTextNoResult(edt_name, resp_store.getName());
+        WidgetHelper.getInstance().setEditTextNoResult(edt_address, resp_store.getAddress());
+        WidgetHelper.getInstance().setEditTextNoResult(edt_phone, resp_store.getPhonenumber());
+        WidgetHelper.getInstance().setEditTextNoResult(edt_des, resp_store.getDescription());
+
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(false);
+    }
+
+    @Override
+    public void onUpdateStoreInfoSuccess(RESP_Store resp_store) {
+        ((ViewStoreActivity) getActivity()).setResp_store(resp_store);
+        ((ViewStoreActivity) getActivity()).onUpdateStoreSuccess();
+        onGetStoreInfoSuccess(resp_store);
+        closeProgressBar();
+
+        showMaterialDialog(false, false, null, getString(R.string.success_update_store), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+            }
+        });
+    }
+
+    @Override
+    public void onGetStoreInfoError() {
+        showMaterialDialog(false, false, null, getString(R.string.can_not_load_data), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                getActivity().finish();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+                getActivity().finish();
+            }
+        });
+    }
+
+    @Override
+    public void startActivityForResult(Class clazz, String key, Object object, int requestCode) {
+        super.startActivityForResult(clazz, key, object, requestCode);
+    }
+
+
+    @Override
+    public void onTakePictureGallary(int type, Uri uri) {
+        if (uri == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
+        Bitmap bitmap = null;
+
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (bitmap != null) {
+            if (type == 0)
+                img_banner.setImageBitmap(bitmap);
+            else
+                img_logo.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onTakePictureCamera(int type, Bitmap bitmap) {
+        if (bitmap == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
+        if (type == 0)
+            img_banner.setImageBitmap(bitmap);
+        else
+            img_logo.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void getNewSession(final ICmd iCmd) {
+        callbackManager.getNewSesion(new CallbacListener() {
+            @Override
+            public void onSuccess(RESP_Login success) {
+                iCmd.execute();
+            }
+
+            @Override
+            public void onError(Error error) {
+                showShortToast(getString(R.string.error_end_of_session));
+                getActivity().finishAffinity();
+                startActivity(LoginActivity.class);
+            }
+        });
+    }
+
+    @Override
+    public void onValidateError(String error) {
+        showShortToast(error);
+    }
+
+    @Override
+    public void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {
+        super.showProgressBar(isTouchOutside, isCancel, title, message);
+    }
+
+    @Override
+    public void closeProgressBar() {
+        super.closeProgressBar();
+    }
+
+    @Override
+    public Fragment getFragment() {
+        return this;
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -334,6 +493,13 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         } else if (id == R.id.store_info_img_logo) {
             if (!swipeRefreshLayout.isRefreshing())
                 presenter.takePicture(1);
+        } else if (id == R.id.store_info_edt_begin_time)
+            selectBeginTime();
+        else if (id == R.id.store_info_edt_end_time)
+            selectEndTime();
+        else if (id == R.id.store_info_edt_address) {
+            if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, getActivity(), REQUEST_LOCATION))
+                startActivityForResult(ChooseMapsActivity.class, REQUEST_LOCATION);
         }
     }
 
@@ -347,6 +513,15 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                startActivityForResult(ChooseMapsActivity.class, REQUEST_LOCATION);
+            else
+                showShortToast(getString(R.string.error_permission));
+        } else
+            presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -354,6 +529,14 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         debug(requestCode + "   " + resultCode);
         presenter.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_LOCATION && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                PlaceModel placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
+                setAddress(placeModel);
+            }
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

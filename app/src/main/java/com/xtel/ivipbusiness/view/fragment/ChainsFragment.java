@@ -28,6 +28,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,6 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     private CallbackManager callbackManager;
 
     private final int REQUEST_ADD = 99;
-    private final String STORE_TYPE = "CHAIN";
 
     public static ChainsFragment newInstance() {
         return new ChainsFragment();
@@ -63,24 +63,28 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
         callbackManager = CallbackManager.create(getActivity());
         presenter = new ChainsPresenter(this);
-        initFloatingActionButton();
+//        initFloatingActionButton();
         initProgressView(view);
     }
 
-    private void initFloatingActionButton() {
-        FloatingActionButton fab = findFloatingActionButton(R.id.chain_fab_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD);
-            }
-        });
-    }
+//    private void initFloatingActionButton() {
+//        FloatingActionButton fab = findFloatingActionButton(R.id.chain_fab_add);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!NetWorkInfo.isOnline(getContext())) {
+//                    showShortToast(getString(R.string.error_no_internet));
+//                    return;
+//                }
+//                startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD);
+//            }
+//        });
+//    }
 
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
         progressView = new ProgressView(null, view);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -146,7 +150,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             progressView.showData();
             adapter.notifyDataSetChanged();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }

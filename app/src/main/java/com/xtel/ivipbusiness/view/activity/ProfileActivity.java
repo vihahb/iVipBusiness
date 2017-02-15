@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ import java.util.Calendar;
 public class ProfileActivity extends BasicActivity implements View.OnClickListener, IProfileView {
     private ProfilePresenter presenter;
 
+    private ImageButton img_camera;
     private ImageView img_avatar, img_banner;
     private TextView txt_fullname, txt_email, txt_total_stores, txt_date_create;
     private EditText edt_birthday, edt_phone, edt_address, edt_gender;
@@ -45,7 +47,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         initToolbar(R.id.profile_toolbar, null);
 
         initView();
-//        initSpinner();
         initListener();
         initLogout();
 
@@ -54,6 +55,8 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
 //    Khởi tạo view
     private void initView() {
+        img_camera = findImageButton(R.id.profile_img_camera);
+
         img_avatar = findImageView(R.id.profile_img_avatar);
         img_banner = findImageView(R.id.profile_img_banner);
 
@@ -70,7 +73,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     private void initListener() {
         edt_birthday.setOnClickListener(this);
-        img_banner.setOnClickListener(this);
+        img_camera.setOnClickListener(this);
         img_avatar.setOnClickListener(this);
     }
 
@@ -103,7 +106,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
             case R.id.profile_edt_birth_day:
                 selectDate();
                 break;
-            case R.id.profile_img_banner:
+            case R.id.profile_img_camera:
                 presenter.takePicture(0);
                 break;
             case R.id.profile_img_avatar:
@@ -117,7 +120,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 //    Hiển thị thông tin của người dùng khi load dữ liệu thành công
     @Override
     public void onGetProfileSuccess(RESP_Full_Profile obj) {
-        WidgetHelper.getInstance().setImageURL(img_avatar, obj.getAvatar());
+        WidgetHelper.getInstance().setAvatarImageURL(img_avatar, obj.getAvatar());
         WidgetHelper.getInstance().setImageURL(img_banner, obj.getBanner());
 
         WidgetHelper.getInstance().setTextViewNoResult(txt_total_stores, getString(R.string.store_number) + " " + obj.getStore_number());

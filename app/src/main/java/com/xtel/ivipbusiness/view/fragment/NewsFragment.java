@@ -1,6 +1,5 @@
 package com.xtel.ivipbusiness.view.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -55,7 +54,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
         progressView = new ProgressView(null, view);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -121,7 +120,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
             progressView.showData();
             adapter.notifyDataSetChanged();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again), getString(R.string.loading_data), Color.WHITE);
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }

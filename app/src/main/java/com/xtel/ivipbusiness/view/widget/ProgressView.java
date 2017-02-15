@@ -35,6 +35,12 @@ public class ProgressView {
             swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_progress_view);
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_progress_view);
         }
+
+        setUpSwipeLayout();
+    }
+
+    private void setUpSwipeLayout() {
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
     public void setUpRecyclerView(RecyclerView.LayoutManager layoutManager, RecyclerView.Adapter adapter) {
@@ -46,7 +52,7 @@ public class ProgressView {
         recyclerView.addOnScrollListener(onScrollListener);
     }
 
-    public void initData(int imageView, String textViewData, String button, String textViewPro, int color) {
+    public void initData(int imageView, String textViewData, String button) {
         if (imageView == -1)
             this.imageView.setVisibility(View.GONE);
         else

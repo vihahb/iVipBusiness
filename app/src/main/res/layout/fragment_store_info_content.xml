@@ -5,6 +5,39 @@
     android:orientation="vertical"
     android:padding="@dimen/size_16">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/store_info.edt_begin_time"
+            style="@style/edittext_disable"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_48"
+            android:layout_marginEnd="-4dp"
+            android:layout_marginRight="-4dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_time"
+            android:drawableStart="@drawable/ic_action_time"
+            android:hint="@string/begin_time"
+            android:inputType="textCapSentences" />
+
+        <EditText
+            android:id="@+id/store_info.edt_end_time"
+            style="@style/edittext_disable"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_48"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginStart="-5dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_time"
+            android:drawableStart="@drawable/ic_action_time"
+            android:hint="@string/end_time"
+            android:inputType="textCapSentences" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/store_info.edt_address"
         style="@style/edittext_login"
@@ -24,7 +57,8 @@
         android:drawableLeft="@drawable/ic_action_phone"
         android:drawableStart="@drawable/ic_action_phone"
         android:hint="@string/phone"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:maxLength="11" />
 
     <TextView
         style="@style/textview_profile"
@@ -58,38 +92,6 @@
         android:layout_marginRight="@dimen/size_4"
         android:layout_marginTop="@dimen/size_16"
         android:background="@android:color/white" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/store_info.edt_begin_time"
-            style="@style/edittext_login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/size_8"
-            android:layout_marginRight="@dimen/size_8"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_action_location"
-            android:drawableStart="@drawable/ic_action_location"
-            android:hint="@string/address"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/store_info.edt_end_time"
-            style="@style/edittext_login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_8"
-            android:layout_marginStart="@dimen/size_8"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_action_location"
-            android:drawableStart="@drawable/ic_action_location"
-            android:hint="@string/address"
-            android:inputType="text" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

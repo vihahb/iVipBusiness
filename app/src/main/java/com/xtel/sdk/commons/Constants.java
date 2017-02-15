@@ -54,4 +54,15 @@ public class               Constants {
 
         return (calendar.getTimeInMillis() / 1000);
     }
+
+    public static long convertTimeToLong(int hour, int minute) {
+//        String[] mTime = time.split(":");
+//        int hour = Integer.parseInt(mTime[0]);
+//        int minute = Integer.parseInt(mTime[1]);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2017, 1, 1, hour, minute);
+
+        return (calendar.getTimeInMillis() / 1000);
+    }
 }

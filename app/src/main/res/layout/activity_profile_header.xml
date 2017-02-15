@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryKey_90"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_50"
+    android:background="@color/colorPrimaryKey_90">
 
     <ImageView
         android:id="@+id/profile.img_banner"
@@ -10,25 +11,36 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/profile.layout_header_content"
         android:layout_alignTop="@+id/profile.layout_header_content"
-        android:alpha="0.9"
+        android:background="@color/colorPrimary"
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
 
     <LinearLayout
         android:id="@+id/profile.layout_header_content"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="@dimen/size_180"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="@dimen/size_18"
         android:paddingRight="@dimen/size_18">
 
+        <ImageButton
+            android:id="@+id/profile.img_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_transparent"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:foreground="?attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_action_camera" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/size_16"
-            android:paddingTop="@dimen/size_16">
+            android:paddingBottom="@dimen/size_12"
+            android:paddingTop="@dimen/size_8">
 
             <TextView
                 android:id="@+id/profile.txt_date_create"
@@ -57,18 +69,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="3"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/size_16"
-            android:paddingTop="@dimen/size_16">
+            android:paddingTop="@dimen/size_10">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/size_16"
-                android:layout_marginRight="@dimen/size_16"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/profile.txt_fullname"
@@ -86,12 +97,19 @@
                     android:text="@string/loading" />
             </LinearLayout>
 
-            <com.xtel.ivipbusiness.view.widget.RoundImage
-                android:id="@+id/profile.img_avatar"
-                android:layout_width="@dimen/size_48"
-                android:layout_height="@dimen/size_48"
-                android:contentDescription="@null"
-                android:src="@mipmap/ic_launcher" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|end">
+
+                <com.xtel.ivipbusiness.view.widget.RoundImage
+                    android:id="@+id/profile.img_avatar"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

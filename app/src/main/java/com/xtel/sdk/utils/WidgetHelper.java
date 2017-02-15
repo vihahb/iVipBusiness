@@ -11,6 +11,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.MyApplication;
+import com.xtel.ivipbusiness.view.widget.CircleTransform;
 
 import java.util.Calendar;
 
@@ -32,21 +33,21 @@ public class WidgetHelper {
         if (url == null || url.isEmpty())
             return;
 
-        url = url.replace("https", "http").replace("9191", "9190");
+        final String finalUrl = url.replace("https", "http").replace("9191", "9190");
 
         Picasso.with(MyApplication.context)
-                .load(url)
+                .load(finalUrl)
                 .noPlaceholder()
                 .error(R.drawable.color_primarykey)
                 .into(view, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.e("WidgetHelper", "load ok");
+                        Log.e("WidgetHelper", "load ok " + finalUrl);
                     }
 
                     @Override
                     public void onError() {
-                        Log.e("WidgetHelper", "load error");
+                        Log.e("WidgetHelper", "load error " + finalUrl);
                     }
                 });
     }
@@ -55,10 +56,10 @@ public class WidgetHelper {
         if (url == null || url.isEmpty())
             return;
 
-        url = url.replace("https", "http").replace("9191", "9190");
+        final String finalUrl = url.replace("https", "http").replace("9191", "9190");
 
         Picasso.with(MyApplication.context)
-                .load(url)
+                .load(finalUrl)
                 .noPlaceholder()
                 .error(R.drawable.color_primarykey)
                 .fit()
@@ -66,12 +67,37 @@ public class WidgetHelper {
                 .into(view, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.e("WidgetHelper", "load ok");
+                        Log.e("WidgetHelper", "load ok " + finalUrl);
                     }
 
                     @Override
                     public void onError() {
-                        Log.e("WidgetHelper", "load error");
+                        Log.e("WidgetHelper", "load error " + finalUrl);
+                    }
+                });
+    }
+
+    public void setAvatarImageURL(ImageView view, String url) {
+        if (url == null || url.isEmpty())
+            return;
+
+        final String finalUrl = url.replace("https", "http").replace("9191", "9190");
+
+        Picasso.with(MyApplication.context)
+                .load(finalUrl)
+                .noPlaceholder()
+                .error(R.mipmap.ic_avatar_default)
+                .fit()
+                .centerCrop()
+                .into(view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("WidgetHelper", "load ok " + finalUrl);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("WidgetHelper", "load error " + finalUrl);
                     }
                 });
     }
@@ -159,6 +185,28 @@ public class WidgetHelper {
 
     public void setEditTextTime(EditText view, String title, int hour, int minute) {
         String mHour, mMinute;
+
+        if (hour < 10)
+            mHour = "0" + hour;
+        else
+            mHour = String.valueOf(hour);
+
+        if (minute < 10)
+            mMinute = "0" + minute;
+        else
+            mMinute = String.valueOf(minute);
+
+        view.setText(title + mHour + ":" + mMinute);
+    }
+
+    public void setEditTextTime(EditText view, String title, long milisecond) {
+        String mHour, mMinute;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milisecond);
+
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
         if (hour < 10)
             mHour = "0" + hour;
