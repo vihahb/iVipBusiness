@@ -60,12 +60,11 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         callbackManager = CallbackManager.create(this);
 
         presenter = new AddStorePresenter(this);
-        presenter.getData();
-
         initToolbar(R.id.add_store_toolbar, null);
         initView();
         initType();
         initListener();
+        presenter.getData();
     }
 
     private void initView() {
@@ -117,19 +116,12 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public void onGetDataChain() {
+        edt_name.setHint(getString(R.string.chain_name));
+        edt_address.setHint(getString(R.string.chain_address));
+        edt_des.setHint(getString(R.string.chain_des));
+    }
 
     @Override
     public void onGetDataError() {

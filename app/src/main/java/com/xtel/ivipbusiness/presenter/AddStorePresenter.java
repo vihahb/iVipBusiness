@@ -38,6 +38,7 @@ public class AddStorePresenter extends BasicPresenter {
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
+    private final String CHAIN = "CHAIN", STORE = "STORE";
     private String STOREY_TYPE, URL_BANNER = "", URL_LOGO = "";
     private int chain_id = -1;
 
@@ -66,7 +67,6 @@ public class AddStorePresenter extends BasicPresenter {
         }
     };
 
-
     public AddStorePresenter(IAddStoreView view) {
         this.view = view;
     }
@@ -87,6 +87,8 @@ public class AddStorePresenter extends BasicPresenter {
 
         if (STOREY_TYPE == null)
             view.onGetDataError();
+        else if (STOREY_TYPE.equals(CHAIN))
+            view.onGetDataChain();
     }
 
     public void takePicture(int type) {

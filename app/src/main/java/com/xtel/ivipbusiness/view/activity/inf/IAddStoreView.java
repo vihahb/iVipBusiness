@@ -14,6 +14,7 @@ import com.xtel.nipservicesdk.callback.ICmd;
 
 public interface IAddStoreView {
 
+    void onGetDataChain();
     void onGetDataError();
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
