@@ -12,6 +12,9 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
@@ -58,24 +61,32 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
+    private int currentTab = 0;
+
     //    Khởi tạo tab chức năng
-    private void initTablayout() {
+    private void initTablayout(final boolean isStore) {
         int[] icon = new int[]{R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
 
         for (int i = 0; i < 5; i++) {
             tabLayout.addTab(tabLayout.newTab().setIcon(icon[i]));
         }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (isStore && tab.getPosition() == 1) {
+                    tabLayout.getTabAt(currentTab).select();
+                    return;
+                }
+
+                currentTab = tab.getPosition();
                 checkTabSelected(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
@@ -218,11 +229,15 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     @Override
     public void onGetDataSuccess(SortStore sortStore) {
         this.sortStore = sortStore;
-
         Log.e(this.getClass().getSimpleName(), "sortStore " + JsonHelper.toJson(sortStore));
 
         initToolbar();
-        initTablayout();
+
+        if (sortStore.getStore_type().equals(STORE_TYPE))
+            initTablayout(true);
+        else
+            initTablayout(false);
+
         replaceStoreInfo();
     }
 

@@ -38,7 +38,7 @@ public class AddStorePresenter extends BasicPresenter {
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
-    private final String CHAIN = "CHAIN", STORE = "STORE";
+    private final String CHAIN = "CHAIN";
     private String STOREY_TYPE, URL_BANNER = "", URL_LOGO = "";
     private int chain_id = -1;
 
