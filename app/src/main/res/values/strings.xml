@@ -25,6 +25,7 @@
     <string name="title_activity_app_info">Thông tin ứng dụng</string>
     <string name="title_activity_faq">FAQ</string>
     <string name="title_activity_maps">Chọn địa chỉ</string>
+    <string name="title_activity_update_profile">Cập nhật thông tin</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

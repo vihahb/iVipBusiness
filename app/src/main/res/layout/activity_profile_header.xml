@@ -47,7 +47,7 @@
                 style="@style/textview_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/loading" />
+                android:text="@string/day_create" />
 
             <TextView
                 android:id="@+id/profile.txt_total_store"
@@ -58,7 +58,7 @@
                 android:layout_marginStart="@dimen/size_16"
                 android:layout_weight="1"
                 android:gravity="right|end"
-                android:text="@string/loading" />
+                android:text="@string/store_number" />
         </LinearLayout>
 
         <View
@@ -86,7 +86,7 @@
                     style="@style/textview_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/loading" />
+                    android:text="@string/fullname" />
 
                 <TextView
                     android:id="@+id/profile.txt_email"
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_2"
-                    android:text="@string/loading" />
+                    android:text="@string/email" />
             </LinearLayout>
 
             <LinearLayout

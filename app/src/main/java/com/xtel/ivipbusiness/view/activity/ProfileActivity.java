@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.xtel.ivipbusiness.presenter.ProfilePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
 import com.xtel.nipservicesdk.LoginManager;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.IOException;
@@ -38,6 +40,8 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private EditText edt_birthday, edt_phone, edt_address, edt_gender;
 //    private Spinner sp_gender;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +50,20 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         presenter = new ProfilePresenter(this);
         initToolbar(R.id.profile_toolbar, null);
 
+        initSwwipe();
         initView();
         initListener();
         initLogout();
 
+        setEnableView(false);
         presenter.getProfile();
+    }
+
+    //    Khởi tạo swipeRefreshLayout để hiển thị load thông tin
+    private void initSwwipe() {
+        swipeRefreshLayout = findSwipeRefreshLayout(R.id.profile_view_swipe);
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
 //    Khởi tạo view
@@ -80,14 +93,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 //    Khởi tạo sự kiện logout
     private void initLogout() {
         Button btn_logout = (findButton(R.id.profile_btn_logout));
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.logOut();
-                finishAffinity();
-                startActivityAndFinish(LoginActivity.class);
-            }
-        });
+        btn_logout.setOnClickListener(this);
     }
 
     private void selectDate() {
@@ -100,6 +106,52 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    public void setEnableView(boolean isEnable) {
+        if (swipeRefreshLayout.isRefreshing())
+            return;
+
+        img_camera.setEnabled(isEnable);
+        img_avatar.setEnabled(isEnable);
+        img_banner.setEnabled(isEnable);
+
+        txt_total_stores.setEnabled(isEnable);
+        txt_date_create.setEnabled(isEnable);
+        txt_fullname.setEnabled(isEnable);
+
+        txt_email.setEnabled(isEnable);
+        edt_birthday.setEnabled(isEnable);
+        edt_phone.setEnabled(isEnable);
+        edt_address.setEnabled(isEnable);
+        edt_gender.setEnabled(isEnable);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -111,6 +163,11 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
                 break;
             case R.id.profile_img_avatar:
                 presenter.takePicture(1);
+                break;
+            case R.id.profile_btn_logout:
+                LoginManager.logOut();
+                finishAffinity();
+                startActivityAndFinish(LoginActivity.class);
                 break;
             default:
                 break;
@@ -132,22 +189,26 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         WidgetHelper.getInstance().setEditTextWithResult(edt_phone, (getString(R.string.phone) + ": "), obj.getPhonenumber(), getString(R.string.not_update_phone));
         WidgetHelper.getInstance().setEditTextWithResult(edt_address, (getString(R.string.address) + ": "), obj.getAddress(), getString(R.string.not_update_address));
         WidgetHelper.getInstance().setEditTextGemder(edt_gender, (getString(R.string.gender) + ": "), obj.getGender());
+
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(false);
     }
 
     @Override
     public void onGetProfileError(Error error) {
-//        showMaterialDialog(false, false, null, getString(R.string.can_not_load_data), null, getString(R.string.back), new DialogListener() {
-//            @Override
-//            public void onClicked(Object object) {
-//                closeDialog();
-//                finish();
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//
-//            }
-//        });
+        showMaterialDialog(false, false, null, getString(R.string.can_not_load_data), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+                finish();
+            }
+        });
     }
 
     @Override

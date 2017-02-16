@@ -72,8 +72,7 @@ public class StoresModel extends BasicModel {
         String url = API_BASE + GET_LIST_CHAIN_TYPE + type + GET_LIST_CHAIN_PAGE + page + GET_LIST_CHAIN_PAGE_SIZE + pagesize;
         String session = LoginManager.getCurrentSession();
 
-        Log.e("GET_LIST_CHAIN", "url " + url);
-        Log.e("GET_LIST_CHAIN", "session " + session);
+        Log.e("GET_LIST_CHAIN", "url " + url + "     session " + session);
         requestServer.getApi(url, session, responseHandle);
 
 
@@ -96,6 +95,14 @@ public class StoresModel extends BasicModel {
 //
 //        resp_list_sort_store.setData(arrayList);
 //        responseHandle.onSuccess(JsonHelper.toJson(resp_list_sort_store));
+    }
+
+    public void getListStoreInChain(int store_id, int page, int pagesize, ResponseHandle responseHandle) {
+        String url = API_BASE + GET_LIST_STORE_IN_CHAIN + store_id + GET_LIST_STORE_IN_CHAIN_PAGE + page + GET_LIST_STORE_IN_CHAIN_PAGESIZE + pagesize;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("GET_LIST_CHAIN", "url " + url + "     session " + session);
+        requestServer.postApi(url, null, session, responseHandle);
     }
 
     public void getListStoreNotInChain(ResponseHandle responseHandle) {

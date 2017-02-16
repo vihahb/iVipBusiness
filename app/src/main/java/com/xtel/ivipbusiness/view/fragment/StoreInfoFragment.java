@@ -70,7 +70,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     private CallbackManager callbackManager;
 
     private RESP_Store resp_store;
-//    private PlaceModel placeModel;
+    //    private PlaceModel placeModel;
     private final int REQUEST_LOCATION = 99;
     private boolean isShow = true;
 
@@ -147,11 +147,11 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         edt_phone.setEnabled(isEnable);
         edt_des.setEnabled(isEnable);
 
+        img_camera.setEnabled(isEnable);
         img_banner.setEnabled(isEnable);
         img_logo.setEnabled(isEnable);
-        img_qr_code.setEnabled(isEnable);
-        img_bar_code.setEnabled(isEnable);
-        img_camera.setEnabled(isEnable);
+//        img_qr_code.setEnabled(isEnable);
+//        img_bar_code.setEnabled(isEnable);
     }
 
     private void initAnimationHideImage(View view) {
@@ -303,29 +303,6 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         resp_store.setLocation_lat(placeModel.getLatitude());
         resp_store.setLocation_lng(placeModel.getLongtitude());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -498,8 +475,14 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         else if (id == R.id.store_info_edt_end_time)
             selectEndTime();
         else if (id == R.id.store_info_edt_address) {
-            if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, getActivity(), REQUEST_LOCATION))
-                startActivityForResult(ChooseMapsActivity.class, REQUEST_LOCATION);
+            if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, getActivity(), REQUEST_LOCATION)) {
+                PlaceModel placeModel = new PlaceModel();
+                placeModel.setAddress(resp_store.getAddress());
+                placeModel.setLatitude(resp_store.getLocation_lat());
+                placeModel.setLongtitude(resp_store.getLocation_lng());
+
+                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
+            }
         }
     }
 
@@ -516,9 +499,14 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                startActivityForResult(ChooseMapsActivity.class, REQUEST_LOCATION);
-            else
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                PlaceModel placeModel = new PlaceModel();
+                placeModel.setAddress(resp_store.getAddress());
+                placeModel.setLatitude(resp_store.getLocation_lat());
+                placeModel.setLongtitude(resp_store.getLocation_lng());
+
+                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
+            } else
                 showShortToast(getString(R.string.error_permission));
         } else
             presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);

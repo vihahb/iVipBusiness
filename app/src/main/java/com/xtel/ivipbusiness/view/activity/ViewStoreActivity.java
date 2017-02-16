@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,6 +22,7 @@ import com.xtel.ivipbusiness.view.fragment.MemberFragment;
 import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
@@ -32,6 +34,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
 
     private RESP_Store resp_store = null;
     private SortStore sortStore;
+    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", LIST_NEAR_NEWS = "list_near_news";
 
     @Override
@@ -155,7 +158,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     //    hiển thị fratment danh sách chuỗi store
     private void replaceListStore() {
         actionBar.setTitle(getString(R.string.title_activity_list_store));
-        replaceFragment(R.id.view_store_container, StoresFragment.newInstance(), LIST_STORE);
+        replaceFragment(R.id.view_store_container, StoresFragment.newInstance(sortStore.getId()), LIST_STORE);
         showMenuListNew();
     }
 
@@ -216,6 +219,8 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     public void onGetDataSuccess(SortStore sortStore) {
         this.sortStore = sortStore;
 
+        Log.e(this.getClass().getSimpleName(), "sortStore " + JsonHelper.toJson(sortStore));
+
         initToolbar();
         initTablayout();
         replaceStoreInfo();
@@ -275,15 +280,12 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         if (id == android.R.id.home)
             finish();
         else if (id == R.id.action_view_store_create_store) {
-            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
-            if (fragment != null) {
-                fragment.createNewStore();
-            }
+            Intent intent = new Intent(this, AddStoreActivity.class);
+            intent.putExtra(Constants.ID, sortStore.getId());
+            intent.putExtra(Constants.MODEL, STORE_TYPE);
+            startActivityForResult(intent, 21);
         } else if (id == R.id.action_view_store_choose_store) {
-            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
-            if (fragment != null) {
-                fragment.chooseExistsStore();
-            }
+            startActivityForResult(ListStoresActivity.class, 22);
         } else if (id == R.id.action_view_store_edit_store) {
             StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
 

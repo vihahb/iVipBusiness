@@ -56,8 +56,8 @@
 
     <com.xtel.ivipbusiness.view.widget.RoundImage
         android:id="@+id/store_info.img_logo"
-        android:layout_width="@dimen/size_60"
-        android:layout_height="@dimen/size_60"
+        android:layout_width="@dimen/size_80"
+        android:layout_height="@dimen/size_80"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:contentDescription="@null"

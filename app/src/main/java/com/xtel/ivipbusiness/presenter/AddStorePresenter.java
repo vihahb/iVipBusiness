@@ -39,7 +39,7 @@ public class AddStorePresenter extends BasicPresenter {
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
     private String STOREY_TYPE, URL_BANNER = "", URL_LOGO = "";
-
+    private int chain_id = -1;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -72,7 +72,18 @@ public class AddStorePresenter extends BasicPresenter {
     }
 
     public void getData() {
-        STOREY_TYPE = view.getActivity().getIntent().getStringExtra(Constants.MODEL);
+        try {
+            STOREY_TYPE = view.getActivity().getIntent().getStringExtra(Constants.MODEL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            chain_id = view.getActivity().getIntent().getIntExtra(Constants.ID, -1);
+            Log.e(this.getClass().getSimpleName(), "chain_id " + chain_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (STOREY_TYPE == null)
             view.onGetDataError();
@@ -157,6 +168,10 @@ public class AddStorePresenter extends BasicPresenter {
         view.showProgressBar(false,false,null, view.getActivity().getString(R.string.adding_store));
 
         RESP_Store store = new RESP_Store();
+
+        if (chain_id != -1)
+            store.setChain_store_id(chain_id);
+
         store.setBanner(URL_BANNER);
         store.setLogo(URL_LOGO);
         store.setName(name);

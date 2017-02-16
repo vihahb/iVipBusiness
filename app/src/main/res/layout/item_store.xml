@@ -66,7 +66,7 @@
         </LinearLayout>
         <!--</LinearLayout>-->
 
-        <ImageView
+        <com.xtel.ivipbusiness.view.widget.RoundImage
             android:id="@+id/item.store.img_avatar"
             android:layout_width="@dimen/size_40"
             android:layout_height="@dimen/size_40"

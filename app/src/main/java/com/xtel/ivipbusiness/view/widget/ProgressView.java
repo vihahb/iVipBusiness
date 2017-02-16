@@ -96,27 +96,10 @@ public class ProgressView {
             layout_data.setVisibility(View.VISIBLE);
     }
 
-//    public void show() {
-//        if (layout_data.getVisibility() == View.GONE)
-//            layout_data.setVisibility(View.VISIBLE);
-//        if (swipeRefreshLayout.getVisibility() == View.GONE)
-//            swipeRefreshLayout.setVisibility(View.VISIBLE);
-//        if (recyclerView != null)
-//            recyclerView.setVisibility(View.GONE);
-//    }
-//
-//    public void hide() {
-//        if (layout_data.getVisibility() == View.VISIBLE)
-//            layout_data.setVisibility(View.GONE);
-//        if (swipeRefreshLayout.getVisibility() == View.VISIBLE)
-//            swipeRefreshLayout.setVisibility(View.GONE);
-//        if (recyclerView != null)
-//            recyclerView.setVisibility(View.VISIBLE);
-//    }
-
-//    public void notifyDatasetChange() {
-//        recyclerView.getAdapter().notifyDataSetChanged();
-//    }
+    public void setEnableView(boolean isEnable) {
+        swipeRefreshLayout.setEnabled(false);
+        layout_data.setEnabled(isEnable);
+    }
 
     public void onLayoutClicked(View.OnClickListener onClickListener) {
         layout_data.setOnClickListener(onClickListener);

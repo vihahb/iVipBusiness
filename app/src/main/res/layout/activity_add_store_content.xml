@@ -47,7 +47,7 @@
 
     <EditText
         android:id="@+id/add_store.edt_address"
-        style="@style/edittext_disable"
+        style="@style/edittext_address_disable"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_48"
         android:layout_marginTop="@dimen/size_8"

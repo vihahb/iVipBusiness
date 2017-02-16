@@ -50,7 +50,7 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position == arrayList.size())
+        if (isLoadMore && position == arrayList.size())
             _view.onLoadMore();
 
         if (holder instanceof ViewHolder) {

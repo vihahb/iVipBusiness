@@ -1,9 +1,10 @@
 package com.xtel.ivipbusiness.view.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -15,11 +16,17 @@ import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
+import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
 
@@ -33,12 +40,18 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     private StoresAdapter adapter;
     private ArrayList<SortStore> listData;
     private ProgressView progressView;
+    private CallbackManager callbackManager;
 
     private boolean isClearData = false;
     private final int REQUEST_CODE_ADD = 8, REQUEST_CODE_CREATE = 9;
 
-    public static StoresFragment newInstance() {
-        return new StoresFragment();
+    public static StoresFragment newInstance(int store_id) {
+        Bundle args = new Bundle();
+        args.putInt(Constants.MODEL, store_id);
+
+        StoresFragment fragment = new StoresFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Nullable
@@ -50,32 +63,11 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        callbackManager = CallbackManager.create(getActivity());
 
         presenter = new StoresPresenter(this);
-//        initFloatingActionButton(view);
         initProgressView(view);
     }
-
-//    private void initFloatingActionButton(View view) {
-//        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.store_fab_show);
-//        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
-//            @Override
-//            public boolean onMenuItemSelected(MenuItem menuItem) {
-//                //TODO: Start some activity
-//                switch (menuItem.getItemId()) {
-//                    case R.id.nav_floating_create_store:
-//                        startActivityForResult(AddStoreActivity.class, REQUEST_CODE_CREATE);
-//                        break;
-//                    case R.id.nav_floating_add_store:
-//                        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
-//    }
 
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
@@ -92,7 +84,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores();
+                presenter.getStores(true);
             }
         });
 
@@ -104,7 +96,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores();
+                presenter.getStores(true);
             }
         });
 
@@ -113,7 +105,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores();
+                presenter.getStores(true);
             }
         });
     }
@@ -123,9 +115,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
-            if (listData.size() < 20)
-                adapter.setLoadMore(false);
-
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
@@ -134,13 +123,24 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         }
     }
 
-    public void createNewStore() {
-        startActivityForResult(AddStoreActivity.class, REQUEST_CODE_CREATE);
-    }
+//    public void createNewStore() {
+//        startActivityForResult(AddStoreActivity.class, Constants.MODEL REQUEST_CODE_CREATE);
+//    }
+//
+//    public void chooseExistsStore() {
+//        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
+//    }
 
-    public void chooseExistsStore() {
-        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
-    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -159,16 +159,43 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
 
     @Override
+    public void onGetDataError() {
+        progressView.setRefreshing(false);
+        progressView.updateData(-1, getString(R.string.have_error), getString(R.string.click_to_try_again));
+        progressView.hideData();
+    }
+
+    @Override
+    public void getNewSession(final ICmd iCmd) {
+        callbackManager.getNewSesion(new CallbacListener() {
+            @Override
+            public void onSuccess(RESP_Login success) {
+                iCmd.execute();
+            }
+
+            @Override
+            public void onError(Error error) {
+                showShortToast(getString(R.string.error_end_of_session));
+                getActivity().finishAffinity();
+                startActivity(LoginActivity.class);
+            }
+        });
+    }
+
+    @Override
     public void onLoadMore() {
-        presenter.getStores();
+        presenter.getStores(false);
     }
 
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        if (arrayList.size() < 10)
+            adapter.setLoadMore(false);
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 if (isClearData) {
                     listData.clear();
                     adapter.setLoadMore(true);
@@ -177,8 +204,8 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 listData.addAll(arrayList);
 
                 checkListData();
-            }
-        }, 1000);
+//            }
+//        }, 1000);
     }
 
     @Override
@@ -203,4 +230,20 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
         progressView.hideData();
     }
-}
+
+    @Override
+    public Fragment getFragment() {
+        return this;
+    }
+
+    @Override
+    public void onDestroy() {
+        presenter.setExists(false);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }}

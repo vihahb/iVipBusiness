@@ -22,23 +22,24 @@ public class ChainsPresenter extends BasicPresenter {
     private ICmd iCmd = new ICmd() {
         @Override
         public void execute(Object... params) {
-            if ((int) params[0] == 1)
-                StoresModel.getInstance().getListChains(TYPE, PAGE, PAGESIZE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
-                    @Override
-                    public void onSuccess(RESP_List_Sort_Store obj) {
-                        if (obj.getData().size() >= PAGESIZE)
+            if (params.length > 0) {
+                if ((int) params[0] == 1)
+                    StoresModel.getInstance().getListChains(TYPE, PAGE, PAGESIZE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
+                        @Override
+                        public void onSuccess(RESP_List_Sort_Store obj) {
                             PAGE++;
-                        view.onGetStoresSuccess(obj.getData());
-                    }
+                            view.onGetStoresSuccess(obj.getData());
+                        }
 
-                    @Override
-                    public void onError(Error error) {
-                        if (error.getCode() == 2)
-                            view.getNewSession(iCmd);
-                        else
-                            view.onGetStoresError(error);
-                    }
-                });
+                        @Override
+                        public void onError(Error error) {
+                            if (error.getCode() == 2)
+                                view.getNewSession(iCmd);
+                            else
+                                view.onGetStoresError(error);
+                        }
+                    });
+            }
         }
     };
 

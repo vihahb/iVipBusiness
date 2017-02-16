@@ -13,6 +13,8 @@ public class RESP_Store extends RESP_Basic implements Serializable {
     @Expose
     private int id;
     @Expose
+    private Integer chain_store_id;
+    @Expose
     private String banner;
     @Expose
     private String logo;
@@ -51,6 +53,14 @@ public class RESP_Store extends RESP_Basic implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getChain_store_id() {
+        return chain_store_id;
+    }
+
+    public void setChain_store_id(int chain_store_id) {
+        this.chain_store_id = chain_store_id;
     }
 
     public String getBanner() {

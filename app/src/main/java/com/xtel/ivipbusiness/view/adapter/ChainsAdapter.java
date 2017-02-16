@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.view.adapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (position == arrayList.size())
             _view.onLoadMore();
+
         if (holder instanceof ViewHolder) {
             if (bg_pos == 9)
                 bg_pos = 0;
@@ -101,9 +103,9 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        if (isLoadMore && arrayList.size() > 0)
+        if (isLoadMore && arrayList.size() > 0) {
             return arrayList.size() + 1;
-        else
+        } else
             return arrayList.size();
     }
 

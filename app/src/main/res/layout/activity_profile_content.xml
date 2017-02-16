@@ -55,7 +55,7 @@
 
     <EditText
         android:id="@+id/profile.edt_address"
-        style="@style/edittext_disable"
+        style="@style/edittext_address_disable"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_48"
         android:layout_marginBottom="@dimen/size_16"
@@ -63,7 +63,6 @@
         android:drawableLeft="@drawable/ic_action_location"
         android:drawableStart="@drawable/ic_action_location"
         android:gravity="center_vertical"
-
         android:hint="@string/address"
         android:inputType="text"
         android:paddingLeft="-2dp"

@@ -1,13 +1,12 @@
 package com.xtel.ivipbusiness.view.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ChainsPresenter;
-import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
@@ -27,8 +25,6 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
 
@@ -144,9 +140,6 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
-            if (listData.size() < 10)
-                adapter.setLoadMore(false);
-
             progressView.showData();
             adapter.notifyDataSetChanged();
         } else {
@@ -163,9 +156,12 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        if (arrayList.size() < 10)
+            adapter.setLoadMore(false);
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 if (isClearData) {
                     listData.clear();
                     adapter.setLoadMore(true);
@@ -174,8 +170,8 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
                 listData.addAll(arrayList);
 
                 checkListData();
-            }
-        }, 1000);
+//            }
+//        }, 1000);
     }
 
     @Override
@@ -211,7 +207,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         callbackManager.getNewSesion(new CallbacListener() {
             @Override
             public void onSuccess(RESP_Login success) {
-                iCmd.execute();
+                iCmd.execute(1);
             }
 
             @Override

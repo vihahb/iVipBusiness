@@ -40,7 +40,7 @@
 
     <EditText
         android:id="@+id/store_info.edt_address"
-        style="@style/edittext_login"
+        style="@style/edittext_address_disable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_action_location"

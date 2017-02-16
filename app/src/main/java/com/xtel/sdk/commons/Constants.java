@@ -16,6 +16,7 @@ public class               Constants {
     public static final String FCM_TOKEN = "fcm_token";
 
     public static final String MODEL = "model";
+    public static final String ID = "id";
 
     public static int randInt(int min, int max) {
 
