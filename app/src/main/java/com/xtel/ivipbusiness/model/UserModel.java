@@ -10,6 +10,7 @@ import com.xtel.nipservicesdk.model.BasicModel;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.sdk.utils.SharedPreferencesUtils;
 
 /**
  * Created by Mr. M.2 on 1/12/2017
@@ -29,37 +30,64 @@ public class UserModel extends BasicModel {
         String session = LoginManager.getCurrentSession();
 
         Log.e("getShortUserInfo", "url " + url + "      " + session);
-
         requestServer.getApi(url, session, responseHandle);
-
-//        RESP_Short_Profile resp_short_profile = new RESP_Short_Profile();
-//
-//        resp_short_profile.setFullname("Le Cong Long Vu");
-//        resp_short_profile.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
-//
-//        responseHandle.onSuccess(JsonHelper.toJson(resp_short_profile));
     }
 
     public void getFulllUserInfo(ResponseHandle responseHandle) {
         String url = API_BASE + GET_FULL_INFO_USER;
         String session = LoginManager.getCurrentSession();
-        requestServer.getApi(url, session, responseHandle);
 
-//        RESP_Full_Profile resp_full_profile = new RESP_Full_Profile();
-//        resp_full_profile.setFullname("Le Cong Long Vu");
-//        resp_full_profile.setGender(1);
-//        resp_full_profile.setBirthday(763405200000L);
-//        resp_full_profile.setEmail("leconglongvu@gmail.com");
-//        resp_full_profile.setPhonenumber("0986495949");
-//        resp_full_profile.setAddress("Ha Noi, Viet Nam");
-//        resp_full_profile.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
-//        resp_full_profile.setQr_code("https://www.google.com.vn/search?q=qr+code&rlz=1C1CHZL_viVN727VN727&espv=2&biw=1745&bih=885&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj9t5nzpdrRAhWFtpQKHYbqBigQ_AUIBigB#tbs=simg%3Am00&tbnid=P8CGc_XpSHMFKM%3A&docid=09_DNSxKkwquqM&tbm=isch&imgrc=P8CGc_XpSHMFKM%3A");
-//        resp_full_profile.setBar_code("https://lh3.googleusercontent.com/-hJ48FJsv_Jc/TXe5XDFnHBI/AAAAAAAAAEs/0wQowx8hpGE/s1600/ab.bmp");
-//        resp_full_profile.setStatus("new");
-//        resp_full_profile.setStore_number(30);
-//        resp_full_profile.setJoin_date(1262278800000L);
-//        resp_full_profile.setBanner("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
-//
-//        responseHandle.onSuccess(JsonHelper.toJson(resp_full_profile));
+        Log.e("getFulllUserInfo", "url " + url + "      " + session);
+        requestServer.getApi(url, session, responseHandle);
+    }
+
+    public void updateUserInfo(RESP_Full_Profile resp_full_profile, ResponseHandle responseHandle) {
+        String url = API_BASE + UPDATE_USER;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("updateUserInfo", "url " + url + "      " + session);
+        requestServer.putApi(url, JsonHelper.toJson(resp_full_profile), session, responseHandle);
+    }
+
+    public void saveFullUserInfo(RESP_Full_Profile resp_full_profile) {
+        SharedPreferencesUtils.getInstance().putStringValue(USER_FULLNAME, resp_full_profile.getFullname());
+        SharedPreferencesUtils.getInstance().putIntValue(USER_GENDER, resp_full_profile.getGender());
+        SharedPreferencesUtils.getInstance().putLongValue(USER_BIRTHDAY, resp_full_profile.getBirthday());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_EMAIL, resp_full_profile.getEmail());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_PHONENUMBER, resp_full_profile.getPhonenumber());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_ADDRESS, resp_full_profile.getAddress());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_AVATAR, resp_full_profile.getAvatar());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_QR_CODE, resp_full_profile.getQr_code());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_BAR_CODE, resp_full_profile.getBar_code());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_STATUS, resp_full_profile.getStatus());
+        SharedPreferencesUtils.getInstance().putIntValue(USER_STORE_NUMBER, resp_full_profile.getStore_number());
+        SharedPreferencesUtils.getInstance().putLongValue(USER_JOIN_DATE, resp_full_profile.getJoin_date());
+        SharedPreferencesUtils.getInstance().putStringValue(USER_BANNER, resp_full_profile.getBanner());
+    }
+
+    public RESP_Full_Profile getFulllUserInfo() {
+        RESP_Full_Profile resp_full_profile = new RESP_Full_Profile();
+
+        resp_full_profile.setFullname(SharedPreferencesUtils.getInstance().getStringValue(USER_FULLNAME));
+        resp_full_profile.setGender(SharedPreferencesUtils.getInstance().getIntValue(USER_GENDER));
+        resp_full_profile.setBirthday(SharedPreferencesUtils.getInstance().getLongValue(USER_BIRTHDAY));
+        resp_full_profile.setEmail(SharedPreferencesUtils.getInstance().getStringValue(USER_EMAIL));
+        resp_full_profile.setPhonenumber(SharedPreferencesUtils.getInstance().getStringValue(USER_PHONENUMBER));
+        resp_full_profile.setAddress(SharedPreferencesUtils.getInstance().getStringValue(USER_ADDRESS));
+        resp_full_profile.setAvatar(SharedPreferencesUtils.getInstance().getStringValue(USER_AVATAR));
+        resp_full_profile.setQr_code(SharedPreferencesUtils.getInstance().getStringValue(USER_QR_CODE));
+        resp_full_profile.setBar_code(SharedPreferencesUtils.getInstance().getStringValue(USER_BAR_CODE));
+        resp_full_profile.setStatus(SharedPreferencesUtils.getInstance().getStringValue(USER_STATUS));
+        resp_full_profile.setStore_number(SharedPreferencesUtils.getInstance().getIntValue(USER_STORE_NUMBER));
+        resp_full_profile.setJoin_date(SharedPreferencesUtils.getInstance().getLongValue(USER_JOIN_DATE));
+        resp_full_profile.setBanner(SharedPreferencesUtils.getInstance().getStringValue(USER_BANNER));
+
+        return resp_full_profile;
+    }
+
+    public void addNewStore() {
+        int store_number = SharedPreferencesUtils.getInstance().getIntValue(USER_STORE_NUMBER);
+        store_number++;
+        SharedPreferencesUtils.getInstance().putIntValue(USER_STORE_NUMBER, store_number);
     }
 }

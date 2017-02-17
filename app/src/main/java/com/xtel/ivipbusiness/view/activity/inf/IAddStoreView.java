@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.xtel.nipservicesdk.callback.ICmd;
 
+import java.io.File;
+
 /**
  * Created by Vulcl on 1/15/2017
  */
@@ -18,7 +20,8 @@ public interface IAddStoreView {
     void onGetDataError();
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
-    void onLoadPicture(String url, int type);
+    void onLoadPicture(File url, int type);
+    void onAddChainSuccess();
     void onAddStoreSuccess();
     void getNewSession(ICmd iCmd);
 

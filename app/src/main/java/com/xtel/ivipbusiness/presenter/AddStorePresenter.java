@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.StoresModel;
+import com.xtel.ivipbusiness.model.UserModel;
 import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
@@ -26,6 +27,8 @@ import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.ImageManager;
 import com.xtel.sdk.utils.TextUnit;
+
+import java.io.File;
 
 /**
  * Created by Vulcl on 1/15/2017
@@ -50,7 +53,13 @@ public class AddStorePresenter extends BasicPresenter {
                     @Override
                     public void onSuccess(RESP_Store obj) {
                         view.closeProgressBar();
-                        view.onAddStoreSuccess();
+
+                        if (STOREY_TYPE.equals(CHAIN)) {
+                            view.onAddChainSuccess();
+                        } else {
+                            UserModel.getIntances().addNewStore();
+                            view.onAddStoreSuccess();
+                        }
                     }
 
                     @Override
@@ -117,23 +126,18 @@ public class AddStorePresenter extends BasicPresenter {
 
     public void postImage(Bitmap bitmap, final int type) {
         boolean isBigImage;
-        if (type == 0)
-            isBigImage = true;
-        else
-            isBigImage = false;
+        isBigImage = type == 0;
 
         ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
             @Override
-            public void onSuccess(RESP_Image resp_image) {
-                Log.e("url_success", resp_image.getUri());
+            public void onSuccess(RESP_Image resp_image, File file) {
                 if (type == 0) {
                     URL_BANNER = resp_image.getServer_path();
-                    view.onLoadPicture(resp_image.getUri(), type);
+                    view.onLoadPicture(file, type);
                 } else {
                     URL_LOGO = resp_image.getServer_path();;
-                    view.onLoadPicture(resp_image.getUri(), type);
+                    view.onLoadPicture(file, type);
                 }
-                Log.e("url_success_2", resp_image.getUri());
             }
 
             @Override

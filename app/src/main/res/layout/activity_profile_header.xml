@@ -67,12 +67,13 @@
             android:background="@android:color/white" />
 
         <LinearLayout
+            android:baselineAligned="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="3"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/size_10">
+            android:paddingTop="@dimen/size_10"
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -81,20 +82,21 @@
                 android:orientation="vertical"
                 android:weightSum="2">
 
-                <TextView
+                <EditText
                     android:id="@+id/profile.txt_fullname"
-                    style="@style/textview_title"
-                    android:layout_width="wrap_content"
+                    style="@style/edittext_no_drawable_low"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/fullname" />
+                    android:inputType="textCapWords"
+                    android:hint="@string/fullname" />
 
-                <TextView
+                <EditText
                     android:id="@+id/profile.txt_email"
-                    style="@style/textview_profile"
-                    android:layout_width="wrap_content"
+                    style="@style/edittext_no_drawable_low"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_2"
-                    android:text="@string/email" />
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/email" />
             </LinearLayout>
 
             <LinearLayout
@@ -108,7 +110,7 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:contentDescription="@null"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/ic_avatar_default" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

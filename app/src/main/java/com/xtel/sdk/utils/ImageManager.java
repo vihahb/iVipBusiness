@@ -120,7 +120,7 @@ public class ImageManager {
                 double width = bitmap.getWidth(), height = bitmap.getHeight();
                 Log.e("tb_bitmap_old", width + "        " + height);
 
-                if (width > 1280 || height > 1280) {
+                if (width > 1000 || height > 1000) {
                     int new_width, new_height;
                     while (width > 1280 || height > 1280) {
                         width = width * 0.8;
@@ -202,18 +202,18 @@ public class ImageManager {
                                     RESP_Image resp_image = JsonHelper.getObjectNoException(jsonObject.toString(), RESP_Image.class);
 
                                     Log.e("upload_object", JsonHelper.toJson(resp_image));
-                                    callbackImageListener.onSuccess(resp_image);
+                                    callbackImageListener.onSuccess(resp_image, file);
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
                                     callbackImageListener.onError();
                                 }
                             }
 
-                            try {
-                                boolean delete = file.delete();
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
+//                            try {
+//                                boolean delete = file.delete();
+//                            } catch (Exception ex) {
+//                                ex.printStackTrace();
+//                            }
                         }
                     }
                 });

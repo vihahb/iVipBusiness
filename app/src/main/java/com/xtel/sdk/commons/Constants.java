@@ -40,7 +40,7 @@ public class               Constants {
         }
 
         if (mDate != null)
-            return mDate.getTime();
+            return mDate.getTime()/1000;
         else
             return 0;
     }

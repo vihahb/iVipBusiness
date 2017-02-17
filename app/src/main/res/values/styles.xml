@@ -99,6 +99,18 @@
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
+    <style name="edittext_no_drawable_low">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingBottom">@dimen/size_8</item>
+        <item name="android:paddingTop">@dimen/size_8</item>
+        <!--<item name="android:background">@drawable/edittext_disable</item>-->
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
     <style name="edittext_login">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_12</item>
@@ -107,6 +119,20 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:drawablePadding">@dimen/size_26</item>
         <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingLeft">-2dp</item>
+        <!--<item name="android:background">@drawable/edittext_disable</item>-->
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_low">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_8</item>
+        <item name="android:paddingTop">@dimen/size_8</item>
         <item name="android:paddingLeft">-2dp</item>
         <!--<item name="android:background">@drawable/edittext_disable</item>-->
         <item name="android:theme">@style/Theme_Edittext</item>

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.xtel.ivipbusiness.model.UserModel;
+import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
@@ -31,10 +32,14 @@ public class HomePresenter {
         }
     }
 
-    public void getShortUserData() {
-        UserModel.getIntances().getShortUserInfo(new ResponseHandle<RESP_Short_Profile>(RESP_Short_Profile.class) {
+    public void getFullUserData() {
+        RESP_Full_Profile resp_full_profile = UserModel.getIntances().getFulllUserInfo();
+        view.onGetShortUserDataSuccess(resp_full_profile);
+
+        UserModel.getIntances().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
             @Override
-            public void onSuccess(RESP_Short_Profile obj) {
+            public void onSuccess(RESP_Full_Profile obj) {
+                UserModel.getIntances().saveFullUserInfo(obj);
                 view.onGetShortUserDataSuccess(obj);
             }
 

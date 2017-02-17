@@ -49,7 +49,7 @@
     <string name="doing_reset">Đang lấy lại mật khẩu…</string>
     <string name="can_not_load_data">Không thể tải dữ liệu</string>
     <string name="back">Quay lại</string>
-    <string name="uploading_file">Đang tải file…</string>
+    <string name="uploading_file">Đang tải ảnh…</string>
     <string name="adding_store">Đang tạo cửa hàng…</string>
     <string name="updating_store">Đang cập nhập…</string>
 
@@ -58,7 +58,9 @@
     <string name="success_active">Kích hoạt tài khoản thành công</string>
     <string name="success_reset">Lấy lại mật khẩu thành công</string>
     <string name="success_add_store">Thêm cửa hàng thành công</string>
+    <string name="success_add_chain">Thêm trụ sở thành công</string>
     <string name="success_update_store">Cập nhật cửa hàng thành công</string>
+    <string name="success_update_user">Cập nhật thông tin thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -94,6 +96,7 @@
     <string name="error_view_code">Không thể xem mã</string>
     <string name="error_end_of_session">Bạn đã hết phiên làm việc</string>
     <string name="error_server_request">Không thể kết nối tới Server</string>
+    <string name="error_user_not_exists">Tài khoản không tồn tại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -156,6 +159,7 @@
     <string name="not_update_title">Chưa cập tiêu đề</string>
     <string name="not_update_namemaile">Chưa cập nhật email</string>
     <string name="not_update_address">Chưa cập nhật địa chỉ</string>
+    <string name="not_update_birthday">Chưa cập nhật ngày sinh</string>
     <string name="not_update_gender">Chưa cập nhật giới tính</string>
     <string name="not_update_des">Không có mô tả</string>
     <string name="not_update_store_name">Chưa cập nhật tên</string>
@@ -173,7 +177,7 @@
 
     <!-- Spinner -->
     <string-array name="gender">
-        <item>Giới tính</item>
+        <item>Chọn giới tính</item>
         <item>Nam</item>
         <item>Nữ</item>
         <item>Free</item>

@@ -17,12 +17,16 @@ import android.widget.ImageView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
+import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
 import com.xtel.ivipbusiness.view.widget.CircleTransform;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
@@ -32,6 +36,7 @@ import com.xtel.sdk.utils.NetWorkInfo;
 
 public class HomeActivity extends BasicActivity implements NavigationView.OnNavigationItemSelectedListener, IHomeView {
     private HomePresenter presenter;
+    private CallbackManager callbackManager;
 
     private Toolbar toolbar;
     private DrawerLayout drawer;
@@ -47,6 +52,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        callbackManager = CallbackManager.create(this);
 
         presenter = new HomePresenter(this);
         initView();
@@ -120,7 +126,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
 
     @Override
-    public void onGetShortUserDataSuccess(RESP_Short_Profile obj) {
+    public void onGetShortUserDataSuccess(RESP_Full_Profile obj) {
         final ImageView imageView = new ImageView(this);
         imageView.setVisibility(View.GONE);
 
@@ -145,7 +151,25 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
     @Override
     public void onGetShortUserDataError(Error error) {
+        presenter.getFullUserData();
+    }
 
+    @Override
+    public void getNewSession(final ICmd iCmd, final int type) {
+        callbackManager.getNewSesion(new CallbacListener() {
+            @Override
+            public void onSuccess(RESP_Login success) {
+                iCmd.execute(type);
+            }
+
+            @Override
+            public void onError(Error error) {
+                closeProgressBar();
+                showShortToast(getString(R.string.error_end_of_session));
+                getActivity().finishAffinity();
+                startActivity(LoginActivity.class);
+            }
+        });
     }
 
     @Override
@@ -171,7 +195,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         menu_create_store = menu.findItem(R.id.action_home_create_store);
         menu_create_chain = menu.findItem(R.id.action_home_create_chain);
 
-        presenter.getShortUserData();
+        presenter.getFullUserData();
         return true;
     }
 
@@ -215,5 +239,11 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

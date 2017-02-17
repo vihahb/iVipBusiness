@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +35,7 @@ import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -179,15 +179,29 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     }
 
     @Override
-    public void onLoadPicture(String url, int type) {
+    public void onLoadPicture(File file, int type) {
         closeProgressBar();
 
-        Log.e("url_success_3", url);
         if (type == 0)
-            WidgetHelper.getInstance().setImageURL(img_banner, url);
+            WidgetHelper.getInstance().setImageFile(img_banner, file);
         else
-            WidgetHelper.getInstance().setAvatarImageURL(img_logo, url);
-        Log.e("url_success_4", url);
+            WidgetHelper.getInstance().setAvatarImageFile(img_logo, file);
+    }
+
+    @Override
+    public void onAddChainSuccess() {
+        showMaterialDialog(false, false, null, getString(R.string.success_add_chain), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     @Override

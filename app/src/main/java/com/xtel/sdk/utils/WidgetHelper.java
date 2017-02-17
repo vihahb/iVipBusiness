@@ -13,6 +13,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.MyApplication;
 import com.xtel.ivipbusiness.view.widget.CircleTransform;
 
+import java.io.File;
 import java.util.Calendar;
 
 /**
@@ -27,6 +28,29 @@ public class WidgetHelper {
             instance = new WidgetHelper();
         }
         return instance;
+    }
+
+    public void setImageFile(ImageView view, final File file) {
+        if (file == null)
+            return;
+
+        Picasso.with(MyApplication.context)
+                .load(file)
+                .noPlaceholder()
+                .error(R.drawable.color_primarykey)
+                .into(view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("WidgetHelper", "load ok " + file.getPath());
+                        deleteFile(file);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("WidgetHelper", "load error " + file.getPath());
+                        deleteFile(file);
+                    }
+                });
     }
 
     public void setImageURL(ImageView view, String url) {
@@ -102,6 +126,39 @@ public class WidgetHelper {
                 });
     }
 
+    public void setAvatarImageFile(ImageView view, final File file) {
+        if (file == null)
+            return;
+
+        Picasso.with(MyApplication.context)
+                .load(file)
+                .noPlaceholder()
+                .error(R.mipmap.ic_avatar_default)
+                .fit()
+                .centerCrop()
+                .into(view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("WidgetHelper", "load ok " + file.getPath());
+                        deleteFile(file);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("WidgetHelper", "load error " + file.getPath());
+                        deleteFile(file);
+                    }
+                });
+    }
+
+    private void deleteFile(File file) {
+        try {
+            boolean delete = file.delete();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void setImageResource(ImageView view, int resource) {
         view.setImageResource(resource);
     }
@@ -116,14 +173,14 @@ public class WidgetHelper {
 
     public void setEditTextWithResult(EditText view, String content, String result) {
         if (content == null || content.isEmpty())
-            view.setText(result);
+            view.setHint(result);
         else
             view.setText(content);
     }
 
     public void setEditTextWithResult(EditText view, String title, String content, String result) {
         if (content == null || content.isEmpty())
-            view.setText((title + result));
+            view.setHint((title + result));
         else
             view.setText((title + content));
     }
@@ -165,6 +222,20 @@ public class WidgetHelper {
             mMonth = String.valueOf(month);
 
         view.setText(day + "-" + mMonth + "-" + year);
+    }
+
+    public void setEditTextDateWithResult(EditText view, long milliseconds, String result) {
+        if (milliseconds != 0)
+            view.setText(getDate(milliseconds));
+        else
+            view.setText(result);
+    }
+
+    public void setEditTextDateWithResult(EditText view, String title, long milliseconds, String result) {
+        if (milliseconds != 0)
+            view.setText((title + getDate(milliseconds)));
+        else
+            view.setText(result);
     }
 
     public void setEditTextTime(EditText view, int hour, int minute) {
@@ -312,6 +383,20 @@ public class WidgetHelper {
     }
 
     public void setSpinnerGender(Spinner view, int type) {
+        switch (type) {
+            case 1:
+                view.setSelection(1);
+                break;
+            case 2:
+                view.setSelection(2);
+                break;
+            case 3:
+                view.setSelection(3);
+                break;
+            default:
+                view.setSelection(0);
+                break;
+        }
         view.setSelection(type);
     }
 }

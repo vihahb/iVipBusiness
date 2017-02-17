@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item.spinner.txt_type"
+    android:id="@+id/item.spinner.txt_gender"
     style="@style/textview_profile"
     android:layout_width="match_parent"
     android:layout_height="@dimen/size_48"
     android:background="@color/colorPrimaryKey_80"
-    android:drawableLeft="@drawable/ic_action_note"
     android:drawablePadding="@dimen/size_26"
-    android:drawableStart="@drawable/ic_action_note"
     android:gravity="center_vertical"
-    android:paddingLeft="@dimen/size_12"
-    android:paddingStart="@dimen/size_12"
+    android:paddingLeft="@dimen/size_16"
+    android:paddingStart="@dimen/size_16"
     android:text="@string/store_des" />

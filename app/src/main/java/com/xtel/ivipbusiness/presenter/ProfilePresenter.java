@@ -12,14 +12,22 @@ import android.util.Log;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.UserModel;
+import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
+import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.ImageManager;
 import com.xtel.sdk.utils.NetWorkInfo;
+
+import java.io.File;
 
 /**
  * Created by Vulcl on 1/17/2017
@@ -28,26 +36,67 @@ import com.xtel.sdk.utils.NetWorkInfo;
 public class ProfilePresenter extends BasicPresenter {
     private IProfileView view;
 
+    private RESP_Full_Profile resp_full_profile;
+
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
+    private String URL_BANNER = "", URL_AVATAR = "";
+
+    private ICmd iCmd = new ICmd() {
+        @Override
+        public void execute(final Object... params) {
+            if (((int) params[0]) == 1)
+                UserModel.getIntances().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
+                    @Override
+                    public void onSuccess(RESP_Full_Profile obj) {
+                        UserModel.getIntances().saveFullUserInfo(obj);
+                        view.onGetProfileSuccess(obj);
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        if (error.getCode() == 2)
+                            view.getNewSession(iCmd, ((int) params[0]));
+                        else
+                            view.onRequestError(error);
+                    }
+                });
+            else if (((int) params[0]) == 2)
+                UserModel.getIntances().updateUserInfo(resp_full_profile, new ResponseHandle<RESP_None>(RESP_None.class) {
+                    @Override
+                    public void onSuccess(RESP_None obj) {
+                        UserModel.getIntances().saveFullUserInfo(resp_full_profile);
+                        view.onUpdateProfileSuccess();
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        if (error.getCode() == 2)
+                            view.getNewSession(iCmd, ((int) params[0]));
+                        else if (error.getCode() == 101) {
+                            view.closeProgressBar();
+                            view.onValidateError(view.getActivity().getString(R.string.error_user_not_exists));
+                        } else {
+                            view.closeProgressBar();
+                            view.onRequestError(error);
+                        }
+                    }
+                });
+        }
+    };
 
     public ProfilePresenter(IProfileView view) {
         this.view = view;
     }
 
     public void getProfile() {
-        UserModel.getIntances().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
-            @Override
-            public void onSuccess(RESP_Full_Profile obj) {
-                view.onGetProfileSuccess(obj);
-            }
+        resp_full_profile = UserModel.getIntances().getFulllUserInfo();
 
-            @Override
-            public void onError(Error error) {
-                view.onGetProfileError(error);
-            }
-        });
+        if (resp_full_profile != null)
+            view.onGetProfileSuccess(resp_full_profile);
+        else
+            iCmd.execute(1);
     }
 
     public void takePicture(int type) {
@@ -74,26 +123,51 @@ public class ProfilePresenter extends BasicPresenter {
         view.startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
 
-    public void updateUser(String avatar, String fullname, int gender, String birthday, String phone, String email, String address) {
-        if (!validateInput(avatar, fullname, gender, birthday, email, address))
+    public void postImage(Bitmap bitmap, final int type) {
+        boolean isBigImage;
+        isBigImage = type == 0;
+
+        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
+            @Override
+            public void onSuccess(RESP_Image resp_image, File file) {
+                if (type == 0) {
+                    URL_BANNER = resp_image.getServer_path();
+                    view.onLoadPicture(file, type);
+                } else {
+                    URL_AVATAR = resp_image.getServer_path();
+                    view.onLoadPicture(file, type);
+                }
+            }
+
+            @Override
+            public void onError() {
+                view.onValidateError(view.getActivity().getString(R.string.error_try_again));
+            }
+        });
+    }
+
+    public void updateUser(String fullname, int gender, String birthday, String email, PlaceModel placeModel) {
+        if (!validateInput(URL_AVATAR, fullname, gender, birthday, email, placeModel))
             return;
         if (!NetWorkInfo.isOnline(view.getActivity())) {
             view.onNoInternet();
             return;
         }
 
-        RESP_Full_Profile resp_full_profile = new RESP_Full_Profile();
-        resp_full_profile.setAvatar(avatar);
+        view.showProgressBar(false, false, null, view.getActivity().getString(R.string.updating));
+
+        resp_full_profile.setAvatar(URL_AVATAR);
         resp_full_profile.setFullname(fullname);
         resp_full_profile.setGender(gender);
-        resp_full_profile.setPhonenumber(phone);
         resp_full_profile.setBirthday(Constants.convertDataToLong(birthday));
         resp_full_profile.setEmail(email);
+        resp_full_profile.setAddress(placeModel.getAddress());
 
         Log.e(this.getClass().getSimpleName(), JsonHelper.toJson(resp_full_profile));
+        iCmd.execute(2);
     }
 
-    private boolean validateInput(String avatar, String fullname, int gender, String birthday, String email, String address) {
+    private boolean validateInput(String avatar, String fullname, int gender, String birthday, String email, PlaceModel placeModel) {
         if (!validateText(avatar)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_avatar));
             return false;
@@ -114,7 +188,7 @@ public class ProfilePresenter extends BasicPresenter {
             view.onValidateError(view.getActivity().getString(R.string.error_input_email));
             return false;
         }
-        if (!validateText(address)) {
+        if (placeModel == null) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_address));
             return false;
         }
