@@ -12,9 +12,6 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
@@ -183,7 +180,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     //    hiển thị fratment bản tin
     private void replaceListNews() {
         actionBar.setTitle(getString(R.string.title_activity_list_news));
-        replaceFragment(R.id.view_store_container, NewsFragment.newInstance(), LIST_NEWS);
+        replaceFragment(R.id.view_store_container, NewsFragment.newInstance(sortStore), LIST_NEWS);
         showMenuNews();
     }
 

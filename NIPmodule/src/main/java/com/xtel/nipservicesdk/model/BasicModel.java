@@ -29,6 +29,11 @@ public abstract class BasicModel {
     protected final String GET_STORE_INFO_ID = "/v0.1/store/";
     protected final String GET_STORE_INFO_TYPE = "?type=";
 
+    protected final String GET_NEWS_PAGE = "/v0.1/news?page=";
+    protected final String GET_NEWS_PAGESISE = "&pagesize=";
+    protected final String GET_NEWS_ID = "&id=";
+    protected final String GET_NEWS_TYPE = "&type=";
+
     //    Google
     protected final String GET_ADDRESS_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
     protected final String GET_ADDRESS_KEY = "&key=";

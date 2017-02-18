@@ -144,6 +144,7 @@
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>
+    <string name="no_news">Không có bản tin nào</string>
     <string name="click_to_try_again">Click để thử lại</string>
     <string name="loading_data">Đang tải dữ liệu</string>
 

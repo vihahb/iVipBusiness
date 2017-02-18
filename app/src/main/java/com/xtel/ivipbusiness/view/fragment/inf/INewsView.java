@@ -1,8 +1,10 @@
 package com.xtel.ivipbusiness.view.fragment.inf;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 
 import com.xtel.ivipbusiness.model.entity.News;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 
 import java.util.ArrayList;
@@ -13,9 +15,12 @@ import java.util.ArrayList;
 
 public interface INewsView {
 
+    void onGetDataError();
     void onLoadMore();
     void onGetNewsSuccess(ArrayList<News> arrayList);
-    void onGetNewError(Error error);
+    void onRequestError(Error error);
+    void getNewSession(ICmd iCmd, int type);
     void onNoNetwork();
     Activity getActivity();
+    Fragment getFragment();
 }

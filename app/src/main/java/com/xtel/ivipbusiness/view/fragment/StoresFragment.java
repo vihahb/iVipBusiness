@@ -1,7 +1,6 @@
 package com.xtel.ivipbusiness.view.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +13,6 @@ import android.view.ViewGroup;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
-import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
-import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
@@ -229,6 +226,11 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         progressView.setRefreshing(false);
         progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
         progressView.hideData();
+    }
+
+    @Override
+    public void startActivity(Class clazz, String key, Object object, int requestCode) {
+        super.startActivity(clazz, key, object, requestCode);
     }
 
     @Override

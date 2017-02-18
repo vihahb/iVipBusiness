@@ -1,12 +1,10 @@
 package com.xtel.ivipbusiness.view.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,19 +157,14 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         if (arrayList.size() < 10)
             adapter.setLoadMore(false);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-                if (isClearData) {
-                    listData.clear();
-                    adapter.setLoadMore(true);
-                    isClearData = false;
-                }
-                listData.addAll(arrayList);
+        if (isClearData) {
+            listData.clear();
+            adapter.setLoadMore(true);
+            isClearData = false;
+        }
 
-                checkListData();
-//            }
-//        }, 1000);
+        listData.addAll(arrayList);
+        checkListData();
     }
 
     @Override
