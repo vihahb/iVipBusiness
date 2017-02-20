@@ -111,7 +111,7 @@
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
-    <style name="edittext_login">
+    <style name="edittext_normal">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_12</item>
         <item name="android:textColor">@android:color/white</item>
@@ -196,6 +196,14 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="textview_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">-2dp</item>
+    </style>
+
     <style name="textview_horizontal">
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
@@ -218,5 +226,20 @@
         <item name="android:textSize">@dimen/font_13</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="checkbox_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:theme">@style/Theme_Checkbox</item>
+    </style>
+
+    <style name="Theme_Checkbox" parent="Base.Theme.AppCompat">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorAccent">#c5c5c5</item>
+        <item name="android:paddingLeft">@dimen/size_26</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 </resources>

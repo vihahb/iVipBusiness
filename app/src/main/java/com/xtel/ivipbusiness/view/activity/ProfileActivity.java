@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.ProfilePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
-import com.xtel.ivipbusiness.view.adapter.GenderAdapter;
+import com.xtel.ivipbusiness.view.adapter.SpinnerOneIconAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.LoginManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
@@ -48,7 +47,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private CallbackManager callbackManager;
 
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ImageButton img_camera;
     private ImageView img_avatar, img_banner;
     private TextView txt_total_stores, txt_date_create;
     private EditText edt_fullname, edt_email, edt_birthday, edt_phone, edt_address;
@@ -86,7 +84,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     //    Khởi tạo view
     private void initView() {
-        img_camera = findImageButton(R.id.profile_img_camera);
         img_avatar = findImageView(R.id.profile_img_avatar);
         img_banner = findImageView(R.id.profile_img_banner);
 
@@ -102,8 +99,9 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     //    Khởi tạo spinner để chọn giới tính
     private void initGender() {
+        String[] arrayList = getResources().getStringArray(R.array.gender);
         sp_gender = findSpinner(R.id.profile_sp_gender);
-        GenderAdapter typeAdapter = new GenderAdapter(this);
+        SpinnerOneIconAdapter typeAdapter = new SpinnerOneIconAdapter(this, R.drawable.ic_action_gender, arrayList);
         sp_gender.setAdapter(typeAdapter);
     }
 
@@ -111,7 +109,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         edt_birthday.setOnClickListener(this);
         edt_address.setOnClickListener(this);
 
-        img_camera.setOnClickListener(this);
         img_avatar.setOnClickListener(this);
     }
 
@@ -135,7 +132,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         if (isEnable && swipeRefreshLayout.isRefreshing())
             return;
 
-        img_camera.setEnabled(isEnable);
         img_avatar.setEnabled(isEnable);
         img_banner.setEnabled(isEnable);
 
@@ -152,14 +148,36 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.profile_edt_birth_day:
                 selectDate();
-                break;
-            case R.id.profile_img_camera:
-                presenter.takePicture(0);
                 break;
             case R.id.profile_img_avatar:
                 presenter.takePicture(1);
@@ -201,19 +219,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     @Override
     public void onRequestError(Error error) {
         showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.can_not_load_data)));
-//        showMaterialDialog(false, false, null, getString(R.string.can_not_load_data), null, getString(R.string.back), new DialogListener() {
-//            @Override
-//            public void onClicked(Object object) {
-//                closeDialog();
-//                finish();
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                closeDialog();
-//                finish();
-//            }
-//        });
     }
 
     @Override

@@ -49,7 +49,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     private final int REQUEST_LOCATION = 99;
     private PlaceModel placeModel;
-    private String BEGIN_TIME, END_TIME;
+//    private String BEGIN_TIME, END_TIME;
 
     private CallbackManager callbackManager;
 
@@ -94,27 +94,32 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         edt_end_time.setOnClickListener(this);
     }
 
-    private void selectBeginTime() {
+    private void selectTime(final int type) {
         Calendar calendar = Calendar.getInstance();
         new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.begin_time) + ": ", hourOfDay, minute);
-                BEGIN_TIME = hourOfDay + ":" + minute;
+                if (type == 0) {
+                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.open_time) + ": ", hourOfDay, minute);
+//                    BEGIN_TIME = hourOfDay + ":" + minute;
+                } else {
+                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.close_time) + ": ", hourOfDay, minute);
+//                    END_TIME = hourOfDay + ":" + minute;
+                }
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
     }
 
-    private void selectEndTime() {
-        Calendar calendar = Calendar.getInstance();
-        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
-                END_TIME = hourOfDay + ":" + minute;
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
-    }
+//    private void selectEndTime() {
+//        Calendar calendar = Calendar.getInstance();
+//        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
+//            @Override
+//            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.close_time) + ": ", hourOfDay, minute);
+//                END_TIME = hourOfDay + ":" + minute;
+//            }
+//        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+//    }
 
     @Override
     public void onGetDataChain() {
@@ -269,9 +274,9 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         else if (id == R.id.add_store_img_avatar)
             presenter.takePicture(1);
         else if (id == R.id.add_store_edt_begin_time)
-            selectBeginTime();
+            selectTime(0);
         else if (id == R.id.add_store_edt_end_time)
-            selectEndTime();
+            selectTime(1);
         else if (id == R.id.add_store_edt_address) {
             if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, this, REQUEST_LOCATION))
                 startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
@@ -291,7 +296,8 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         if (id == android.R.id.home)
             finish();
         else if (id == R.id.action_add_store_done)
-            presenter.addStore(edt_name.getText().toString(), placeModel, edt_phone.getText().toString(), edt_des.getText().toString(), BEGIN_TIME, END_TIME, sp_type.getSelectedItemPosition());
+            presenter.addStore(edt_name.getText().toString(), placeModel, edt_phone.getText().toString(), edt_des.getText().toString(), edt_begin_time.getText().toString(),
+                    edt_end_time.getText().toString(), sp_type.getSelectedItemPosition());
         return super.onOptionsItemSelected(item);
     }
 

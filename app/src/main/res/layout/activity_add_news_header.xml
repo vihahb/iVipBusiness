@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_50"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/add_news.img_banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_180"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_180"
+        android:background="@color/colorPrimaryKey_40" />
+
+    <ImageButton
+        android:id="@+id/add_news.img_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_12"
+        android:background="@drawable/button_transparent"
+        android:clickable="true"
+        android:contentDescription="@null"
+        android:foreground="?attr/selectableItemBackground"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_action_camera" />
+
+    <TextView
+        android:id="@+id/add_news.txt_public"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|end"
+        android:layout_margin="@dimen/size_16"
+        android:drawableEnd="@mipmap/ic_world_white_18"
+        android:drawableRight="@mipmap/ic_world_white_18" />
+
+    <EditText
+        android:id="@+id/add_news.edt_title"
+        style="@style/edittext_no_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_40"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/size_8"
+        android:layout_marginLeft="@dimen/size_16"
+        android:layout_marginRight="@dimen/size_16"
+        android:hint="@string/store_name"
+        android:inputType="textCapWords"
+        tools:ignore="LabelFor" />
+</FrameLayout>

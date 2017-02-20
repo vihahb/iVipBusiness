@@ -201,7 +201,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         new TimePickerDialog(getContext(), R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.begin_time) + ": ", hourOfDay, minute);
+                WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.open_time) + ": ", hourOfDay, minute);
 //                String BEGIN_TIME = hourOfDay + ":" + minute;
                 resp_store.setBegin_time(Constants.convertTimeToLong(hourOfDay, minute));
             }
@@ -213,7 +213,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         new TimePickerDialog(getContext(), R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
+                WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.close_time) + ": ", hourOfDay, minute);
 //                String END_TIME = hourOfDay + ":" + minute;
                 resp_store.setEnd_time(Constants.convertTimeToLong(hourOfDay, minute));
             }
@@ -329,8 +329,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         WidgetHelper.getInstance().setImageURL(img_qr_code, resp_store.getQr_code());
         WidgetHelper.getInstance().setImageURL(img_bar_code, resp_store.getBar_code());
 
-        WidgetHelper.getInstance().setEditTextTime(edt_begin_time, (getString(R.string.begin_time) + ": "), (resp_store.getBegin_time() * 1000));
-        WidgetHelper.getInstance().setEditTextTime(edt_end_time, (getString(R.string.end_time) + ": "), (resp_store.getEnd_time() * 1000));
+        WidgetHelper.getInstance().setEditTextTime(edt_begin_time, (getString(R.string.open_time) + ": "), (resp_store.getBegin_time() * 1000));
+        WidgetHelper.getInstance().setEditTextTime(edt_end_time, (getString(R.string.close_time) + ": "), (resp_store.getEnd_time() * 1000));
         WidgetHelper.getInstance().setEditTextNoResult(edt_name, resp_store.getName());
         WidgetHelper.getInstance().setEditTextNoResult(edt_address, resp_store.getAddress());
         WidgetHelper.getInstance().setEditTextNoResult(edt_phone, resp_store.getPhonenumber());

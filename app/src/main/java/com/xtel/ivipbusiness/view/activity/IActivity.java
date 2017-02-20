@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -93,6 +94,10 @@ public abstract class IActivity extends AppCompatActivity {
 
     protected SwipeRefreshLayout findSwipeRefreshLayout(int id) {
         return (SwipeRefreshLayout) findViewById(id);
+    }
+
+    protected LinearLayout findLinearLayout(int id) {
+        return (LinearLayout) findViewById(id);
     }
 
     protected View findView(int id) {

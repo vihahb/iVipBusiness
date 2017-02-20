@@ -25,6 +25,7 @@
     <string name="title_activity_app_info">Thông tin ứng dụng</string>
     <string name="title_activity_faq">FAQ</string>
     <string name="title_activity_maps">Chọn địa chỉ</string>
+    <string name="title_activity_add_news">Tạo bản tin</string>
     <string name="title_activity_update_profile">Cập nhật thông tin</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -130,8 +131,8 @@
     <string name="store_des">Mô tả cửa hàng</string>
     <string name="chain_des">Mô tả trụ sở chính</string>
     <string name="store_type">Loại cửa hàng</string>
-    <string name="begin_time">Mở cửa</string>
-    <string name="end_time">Đóng cửa</string>
+    <string name="open_time">Mở cửa</string>
+    <string name="close_time">Đóng cửa</string>
 
     <string name="total_point">Tổng điểm</string>
     <string name="remaining_point">Điểm còn lại</string>
@@ -140,6 +141,14 @@
     <string name="total_shopping_in_store">Số lần mua hàng tại store</string>
     <string name="last_checkin">Thồi gian checkin cuối</string>
     <string name="now_location">Vị trí hiện tại</string>
+
+    <string name="create_voucher">Tạo mã khuyến mãi</string>
+    <string name="number_voucher">Số lượng voucheri</string>
+    <string name="sale_percent">Giảm (%)</string>
+    <string name="start_time">Thời gian bắt đầu</string>
+    <string name="end_time">Thời gian kết thúc</string>
+    <string name="time_take_effect">Hiệu lực</string>
+    <string name="exchange_point">Điểm quy đổi</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
@@ -191,5 +200,10 @@
         <item>Đại lý</item>
         <item>Siêu thị</item>
         <item>Loại khác</item>
+    </string-array>
+
+    <string-array name="type_sale">
+        <item>Giảm theo phần trăm</item>
+        <item>Giảm thẳng tiền mặt</item>
     </string-array>
 </resources>

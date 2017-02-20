@@ -15,16 +15,18 @@ import com.xtel.sdk.utils.WidgetHelper;
  * Created by vulclph03762 on 12/11/2016
  */
 
-public class GenderAdapter extends BaseAdapter {
-    private String[] arrayList;
+public class SpinnerOneIconAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
 
-    public GenderAdapter(Activity activity) {
+    private String[] arrayList;
+    private int drawable;
+
+    public SpinnerOneIconAdapter(Activity activity, int drawable, String[] arrayList) {
         this.activity = activity;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        arrayList = activity.getResources().getStringArray(R.array.gender);
+        this.arrayList = arrayList;
+        this.drawable = drawable;
     }
 
     @Override
@@ -55,7 +57,6 @@ public class GenderAdapter extends BaseAdapter {
             viewHolder = (ViewHolderDropdown) convertView.getTag();
         }
 
-//        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, type.getResource());
         WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
 
         return convertView;
@@ -74,7 +75,7 @@ public class GenderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, R.drawable.ic_action_gender);
+        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, drawable);
         WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
 
         return convertView;

@@ -310,7 +310,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
                 }
             }
         } else if (id == R.id.action_view_store_add_news) {
-            startActivity(AddStoreActivity.class);
+            startActivity(AddNewsActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }
