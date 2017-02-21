@@ -100,6 +100,10 @@
             android:name=".view.activity.AddNewsActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_add_news" />
+        <activity
+            android:name=".view.activity.UpdateNewsActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_update_news" />
 
         <meta-data
             android:name="xtel_service_code"

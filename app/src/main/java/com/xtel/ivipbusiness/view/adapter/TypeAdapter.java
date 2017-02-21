@@ -41,7 +41,7 @@ public class TypeAdapter extends BaseAdapter {
         String[] type_name = activity.getResources().getStringArray(R.array.store_type);
         int[] type_resource = {R.drawable.ic_action_view, R.drawable.ic_action_view, R.drawable.ic_action_view, R.drawable.ic_action_view, R.drawable.ic_action_view, R.drawable.ic_action_view};
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < type_name.length; i++) {
             Type type = new Type(type_resource[i], type_name[i]);
             arrayList.add(type);
         }

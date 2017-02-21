@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -56,6 +57,10 @@ public abstract class ViewHolderHelper extends RecyclerView.ViewHolder {
 
     protected ImageView findImageView(int id) {
         return (ImageView) itemView.findViewById(id);
+    }
+
+    protected ImageButton findImageButton(int id) {
+        return (ImageButton) itemView.findViewById(id);
     }
 
     protected View findView(int id) {

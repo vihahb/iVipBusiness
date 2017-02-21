@@ -68,7 +68,7 @@
                 android:layout_height="@dimen/size_60"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/ic_logo_store" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

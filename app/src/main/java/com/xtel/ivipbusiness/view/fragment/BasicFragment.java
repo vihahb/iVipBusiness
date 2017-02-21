@@ -125,7 +125,7 @@ public class BasicFragment extends IFragment {
         getActivity().startActivity(new Intent(getActivity(), clazz));
     }
 
-    protected void startActivity(Class clazz, String key, Object object, int requestCode) {
+    protected void startActivity(Class clazz, String key, Object object) {
         Intent intent = new Intent(getActivity(), clazz);
         intent.putExtra(key, (Serializable) object);
         getActivity().startActivity(intent);

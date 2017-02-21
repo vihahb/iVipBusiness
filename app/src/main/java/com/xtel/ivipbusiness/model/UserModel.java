@@ -17,12 +17,12 @@ import com.xtel.sdk.utils.SharedPreferencesUtils;
  */
 
 public class UserModel extends BasicModel {
-    private static UserModel intances;
+    private static UserModel instance;
 
-    public static UserModel getIntances() {
-        if (intances == null)
-            intances = new UserModel();
-        return intances;
+    public static UserModel getInstance() {
+        if (instance == null)
+            instance = new UserModel();
+        return instance;
     }
 
     public void getShortUserInfo(ResponseHandle responseHandle) {

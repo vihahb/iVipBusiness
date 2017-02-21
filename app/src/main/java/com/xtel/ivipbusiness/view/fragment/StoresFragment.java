@@ -229,8 +229,8 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     }
 
     @Override
-    public void startActivity(Class clazz, String key, Object object, int requestCode) {
-        super.startActivity(clazz, key, object, requestCode);
+    public void startActivity(Class clazz, String key, Object object) {
+        super.startActivity(clazz, key, object);
     }
 
     @Override

@@ -5,13 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.News;
+import com.xtel.ivipbusiness.view.activity.UpdateNewsActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
@@ -50,7 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (position == arrayList.size())
             _view.onLoadMore();
 
@@ -62,9 +65,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 arrayList.get(position).setBg_id(background_item[bg_pos]);
 
             ViewHolder viewHolder = (ViewHolder) holder;
-            News news = arrayList.get(position);
+            final News news = arrayList.get(position);
 
-            if (news.isPublic())
+            if (news.is_public())
                 WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_world_white_18);
             else
                 WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_private_gray_18);
@@ -76,13 +79,28 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, _view.getActivity().getString(R.string.day_create) + ": ", news.getDate_create());
 
             bg_pos++;
+
+            viewHolder.img_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!NetWorkInfo.isOnline(_view.getActivity())) {
+                        _view.showShortToast(_view.getActivity().getString(R.string.error_no_internet));
+                        return;
+                    }
+
+                    _view.deleteNews(news.getId(), position);
+                }
+            });
+
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!NetWorkInfo.isOnline(_view.getActivity())) {
-                        _view.onNoNetwork();
+                        _view.showShortToast(_view.getActivity().getString(R.string.error_no_internet));
                         return;
                     }
+
+                    _view.startActivity(UpdateNewsActivity.class, Constants.MODEL, news);
                 }
             });
         } else {
@@ -108,6 +126,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private class ViewHolder extends ViewHolderHelper {
+        private ImageButton img_delete;
         private ImageView img_banner;
         private View img_background;
         private TextView txt_title, txt_date_create, txt_view, txt_like, txt_share;
@@ -115,7 +134,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
 
-            img_background = findView(R.id.item_chain_img_background);
+            img_delete = findImageButton(R.id.item_news_img_delete);
+            img_background = findView(R.id.item_news_img_background);
             img_banner = findImageView(R.id.item_news_img_banner);
             txt_title = findTextView(R.id.item_news_txt_title);
             txt_date_create = findTextView(R.id.item_news_txt_day_create);
@@ -132,6 +152,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             progressBar = (ProgressBar) itemView.findViewById(R.id.item_progress_bar);
         }
+    }
+
+    public void removeNews(int position) {
+        arrayList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, arrayList.size());
     }
 
     public void setLoadMore(boolean isLoadMore) {

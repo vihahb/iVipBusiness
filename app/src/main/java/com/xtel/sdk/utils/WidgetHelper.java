@@ -399,4 +399,16 @@ public class WidgetHelper {
         }
         view.setSelection(type);
     }
+
+    public void setSpinnerNewsType(Spinner view, int type) {
+        int pos = type - 1;
+        if (pos >= 0)
+            view.setSelection(pos);
+    }
+
+    public void setSpinnerVoucherType(Spinner view, int type) {
+        int pos = type - 2;
+        if (pos >= 0)
+            view.setSelection(pos);
+    }
 }

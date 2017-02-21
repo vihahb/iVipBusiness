@@ -126,6 +126,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onGetDataChain() {
+        WidgetHelper.getInstance().setImageResource(img_logo, R.mipmap.ic_logo_chain);
         actionBar.setTitle(getString(R.string.title_activity_add_chain));
         edt_name.setHint(getString(R.string.chain_name));
         edt_address.setHint(getString(R.string.chain_address));
@@ -134,6 +135,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onGetDataError() {
+        closeProgressBar();
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
             public void onClicked(Object object) {
@@ -301,7 +303,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
             finish();
         else if (id == R.id.action_add_store_done)
             presenter.addStore(edt_name.getText().toString(), placeModel, edt_phone.getText().toString(), edt_des.getText().toString(), edt_begin_time.getText().toString(),
-                    edt_end_time.getText().toString(), sp_type.getSelectedItemPosition());
+                    edt_end_time.getText().toString(), (sp_type.getSelectedItemPosition() + 2));
         return super.onOptionsItemSelected(item);
     }
 

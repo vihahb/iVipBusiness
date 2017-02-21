@@ -13,7 +13,7 @@
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
     <string name="title_activity_profile">Thông tin tài khoản</string>
     <string name="title_activity_add_store">Tạo cửa hàng</string>
-    <string name="title_activity_add_chain">Tạo chuỗi cửa hàng</string>
+    <string name="title_activity_add_chain">Tạo trụ sở chính</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
     <string name="title_activity_list_store">Danh sách cửa hàng</string>
     <string name="title_activity_list_chain">Cửa hàng</string>
@@ -28,6 +28,7 @@
     <string name="title_activity_maps">Chọn địa chỉ</string>
     <string name="title_activity_add_news">Tạo bản tin</string>
     <string name="title_activity_update_profile">Cập nhật thông tin</string>
+    <string name="title_activity_update_news">Cập nhật bản tin</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -55,6 +56,8 @@
     <string name="uploading_file">Đang tải ảnh…</string>
     <string name="adding_store">Đang tạo cửa hàng…</string>
     <string name="updating_store">Đang cập nhập…</string>
+    <string name="doing_delete_news">Đang xóa bản tin…</string>
+    <string name="doing_update_news">Đang cập nhật bản tin…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -65,6 +68,7 @@
     <string name="success_update_store">Cập nhật cửa hàng thành công</string>
     <string name="success_update_user">Cập nhật thông tin thành công</string>
     <string name="success_add_news">Thêm bản tin thành công</string>
+    <string name="success_update_news">Cập nhật bản tin thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -175,6 +179,9 @@
     <string name="loading">Đang tải dữ liệu…</string>
     <string name="day_create">Ngày tạo</string>
     <string name="store_number">Số cửa hàng</string>
+    <string name="delete_this_news">Bạn muốn xóa bản tin này</string>
+    <string name="delete">Xóa ngay</string>
+    <string name="cancel">Hủy bỏ</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
     <string name="not_update_phone">Chưa cập nhật số điện thoại</string>
@@ -206,12 +213,11 @@
     </string-array>
 
     <string-array name="store_type">
-        <item>Cà phê</item>
-        <item>Quán ăn</item>
-        <item>Tạp hóa</item>
-        <item>Đại lý</item>
-        <item>Siêu thị</item>
-        <item>Loại khác</item>
+        <item>Thời trang làm đẹp</item>
+        <item>Ăn uống</item>
+        <item>Công nghệ</item>
+        <item>Chăm sóc sức khỏe</item>
+        <item>Dịch vụ khác</item>
     </string-array>
 
     <string-array name="type_sale">

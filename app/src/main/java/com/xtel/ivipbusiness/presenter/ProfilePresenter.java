@@ -47,10 +47,10 @@ public class ProfilePresenter extends BasicPresenter {
         @Override
         public void execute(final Object... params) {
             if (((int) params[0]) == 1)
-                UserModel.getIntances().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
+                UserModel.getInstance().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
                     @Override
                     public void onSuccess(RESP_Full_Profile obj) {
-                        UserModel.getIntances().saveFullUserInfo(obj);
+                        UserModel.getInstance().saveFullUserInfo(obj);
                         view.onGetProfileSuccess(obj);
                     }
 
@@ -63,10 +63,10 @@ public class ProfilePresenter extends BasicPresenter {
                     }
                 });
             else if (((int) params[0]) == 2)
-                UserModel.getIntances().updateUserInfo(resp_full_profile, new ResponseHandle<RESP_None>(RESP_None.class) {
+                UserModel.getInstance().updateUserInfo(resp_full_profile, new ResponseHandle<RESP_None>(RESP_None.class) {
                     @Override
                     public void onSuccess(RESP_None obj) {
-                        UserModel.getIntances().saveFullUserInfo(resp_full_profile);
+                        UserModel.getInstance().saveFullUserInfo(resp_full_profile);
                         view.onUpdateProfileSuccess();
                     }
 
@@ -91,7 +91,7 @@ public class ProfilePresenter extends BasicPresenter {
     }
 
     public void getProfile() {
-        resp_full_profile = UserModel.getIntances().getFulllUserInfo();
+        resp_full_profile = UserModel.getInstance().getFulllUserInfo();
 
         if (resp_full_profile != null)
             view.onGetProfileSuccess(resp_full_profile);

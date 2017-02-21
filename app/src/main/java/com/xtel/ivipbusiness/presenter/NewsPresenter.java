@@ -7,6 +7,7 @@ import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
@@ -27,26 +28,49 @@ public class NewsPresenter {
         @Override
         public void execute(final Object... params) {
             if (params.length > 0) {
-                if ((int) params[0] == 1)
-                    NewsModel.getInstance().getNews(PAGE, PAGESIZE, sortStore.getId(), sortStore.getStore_type(), new ResponseHandle<RESP_List_News>(RESP_List_News.class) {
-                        @Override
-                        public void onSuccess(RESP_List_News obj) {
-                            if (isExists) {
-                                PAGE++;
-                                view.onGetNewsSuccess(obj.getData());
+                switch (((int) params[0])) {
+                    case 1:
+                        NewsModel.getInstance().getNews(PAGE, PAGESIZE, sortStore.getId(), sortStore.getStore_type(), new ResponseHandle<RESP_List_News>(RESP_List_News.class) {
+                            @Override
+                            public void onSuccess(RESP_List_News obj) {
+                                if (isExists) {
+                                    PAGE++;
+                                    view.onGetNewsSuccess(obj.getData());
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onError(Error error) {
-                            if (isExists) {
-                                if (error.getCode() == 2)
-                                    view.getNewSession(iCmd, ((int) params[0]));
-                                else
-                                    view.onRequestError(error);
+                            @Override
+                            public void onError(Error error) {
+                                if (isExists) {
+                                    if (error.getCode() == 2)
+                                        view.getNewSession(iCmd, params);
+                                    else
+                                        view.onRequestError(error);
+                                }
                             }
-                        }
-                    });
+                        });
+                        break;
+                    case 2:
+                        NewsModel.getInstance().deleteNews((int) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
+                            @Override
+                            public void onSuccess(RESP_None obj) {
+                                view.onDeleteNewsSuccess(((int) params[2]));
+                            }
+
+                            @Override
+                            public void onError(Error error) {
+                                if (isExists) {
+                                    if (error.getCode() == 2)
+                                        view.getNewSession(iCmd, params);
+                                    else
+                                        view.onRequestError(error);
+                                }
+                            }
+                        });
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     };
@@ -81,6 +105,10 @@ public class NewsPresenter {
         }
 
         return (sortStore != null);
+    }
+
+    public void deleteNews(int id, int position) {
+        iCmd.execute(2, id, position);
     }
 
     public void setExists(boolean isExists) {

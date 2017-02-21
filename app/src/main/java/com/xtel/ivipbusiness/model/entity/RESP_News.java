@@ -9,6 +9,8 @@ import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 
 public class RESP_News extends RESP_Basic {
     @Expose
+    private int id;
+    @Expose
     private Integer store_id;
     @Expose
     private Integer chain_store_id;
@@ -24,6 +26,14 @@ public class RESP_News extends RESP_Basic {
     private Voucher voucher;
     @Expose
     private boolean is_public;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getStore_id() {
         return store_id;

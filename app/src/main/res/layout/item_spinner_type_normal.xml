@@ -12,9 +12,11 @@
         android:layout_height="@dimen/size_39"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_action_shopping"
+        android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_shopping"
         android:gravity="center_vertical"
-        android:drawablePadding="@dimen/size_26"
+        android:paddingLeft="-2dp"
+        android:paddingStart="-2dp"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_13" />
 

@@ -56,7 +56,7 @@ public class AddStorePresenter extends BasicPresenter {
                     if (STOREY_TYPE.equals(CHAIN)) {
                         view.onAddChainSuccess();
                     } else {
-                        UserModel.getIntances().addNewStore();
+                        UserModel.getInstance().addNewStore();
                         view.onAddStoreSuccess();
                     }
                 }
@@ -188,7 +188,7 @@ public class AddStorePresenter extends BasicPresenter {
         store.setDescription(des);
         store.setBegin_time(Constants.convertTimeToLong(begin_time));
         store.setEnd_time(Constants.convertTimeToLong(end_time));
-        store.setType(type);
+        store.setType((type + 1));
 
         Log.e("store_object", JsonHelper.toJson(store));
         iCmd.execute(1, JsonHelper.toJson(store));

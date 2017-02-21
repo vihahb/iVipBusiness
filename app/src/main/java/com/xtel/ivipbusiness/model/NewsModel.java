@@ -19,6 +19,7 @@ public class NewsModel extends BasicModel {
         return instance;
     }
 
+    /* Lấy danh sách  */
     public void getNews(int page, int pagesize, int id, String type, ResponseHandle responseHandle) {
         String url = API_BASE + GET_NEWS_PAGE + page + GET_NEWS_PAGESISE + pagesize + GET_NEWS_ID + id + GET_NEWS_TYPE + type;
         String session = LoginManager.getCurrentSession();
@@ -34,5 +35,29 @@ public class NewsModel extends BasicModel {
         Log.e("getNews", url + "     " + session);
         Log.e("getNews", "Object " + jsonObject);
         requestServer.postApi(url, jsonObject, session, responseHandle);
+    }
+
+    public void getNewsInfo(int id, ResponseHandle responseHandle) {
+        String url = API_BASE + UPDATE_NEWS + id;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("getNewsInfo", url + "     " + session);
+        requestServer.getApi(url, session, responseHandle);
+    }
+
+    public void updateNews(int id, String jsonObject, ResponseHandle responseHandle) {
+        String url = API_BASE + UPDATE_NEWS + id;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("getNews", url + "     " + session);
+        requestServer.putApi(url, jsonObject, session, responseHandle);
+    }
+
+    public void deleteNews(int id, ResponseHandle responseHandle) {
+        String url = API_BASE + UPDATE_NEWS + id;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("deleteNews", url + "     " + session);
+        requestServer.deleteApi(url, "", session, responseHandle);
     }
 }

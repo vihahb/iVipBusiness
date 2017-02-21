@@ -41,7 +41,7 @@ public class AddNewsPresenter extends BasicPresenter {
 
     private SortStore sortStore;
     private final String CHAIN = "CHAIN";
-    private String URL_BANNER = "2017/02/20/1487576673089@e8t48j4Cms.png";
+    private String URL_BANNER;
 
     private ICmd iCmd = new ICmd() {
         @Override

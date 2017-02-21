@@ -42,6 +42,8 @@
             android:id="@+id/view_store.tablayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:theme="@style/Theme_Tablayout"
+            app:theme="@style/Theme_Tablayout"
             app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/white"
             app:tabIndicatorHeight="@dimen/size_2"

@@ -18,13 +18,13 @@ import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.NewsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
@@ -105,23 +105,6 @@ public class NewsFragment extends BasicFragment implements INewsView {
                 presenter.getNews(true);
             }
         });
-
-        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
-            @Override
-            public void onScrollUp() {
-//                hideBottomView();
-            }
-
-            @Override
-            public void onScrollDown() {
-//                showBottomView();
-            }
-
-            @Override
-            public void onLoadMore() {
-//                presenter.getChains();
-            }
-        });
     }
 
     //    Kiểm tra xem danh sách cửa hàng có trống không
@@ -147,11 +130,13 @@ public class NewsFragment extends BasicFragment implements INewsView {
         progressView.hideData();
     }
 
+//    Load data của page tiếp theo
     @Override
     public void onLoadMore() {
         presenter.getNews(false);
     }
 
+    /* Khi lấy dữ liệu của page thành công */
     @Override
     public void onGetNewsSuccess(final ArrayList<News> arrayList) {
         if (arrayList.size() < 10)
@@ -168,6 +153,30 @@ public class NewsFragment extends BasicFragment implements INewsView {
     }
 
     @Override
+    public void deleteNews(final int id,final int position) {
+        showMaterialDialog(false, false, null, getString(R.string.delete_this_news), getString(R.string.delete), getString(R.string.cancel), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                showProgressBar(false, false, null, getString(R.string.doing_delete_news));
+                presenter.deleteNews(id, position);
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+            }
+        });
+    }
+
+    @Override
+    public void onDeleteNewsSuccess(int position) {
+        closeProgressBar();
+        adapter.removeNews(position);
+    }
+
+    /* Khi request lên server lỗi */
+    @Override
     public void onRequestError(Error error) {
         if (listData.size() > 0)
             showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
@@ -183,12 +192,13 @@ public class NewsFragment extends BasicFragment implements INewsView {
         }
     }
 
+    /* Lấy phiên làm việc mới */
     @Override
-    public void getNewSession(final ICmd iCmd, final int type) {
+    public void getNewSession(final ICmd iCmd, final Object... params) {
         callbackManager.getNewSesion(new CallbacListener() {
             @Override
             public void onSuccess(RESP_Login success) {
-                iCmd.execute(type);
+                iCmd.execute(params);
             }
 
             @Override
@@ -201,10 +211,21 @@ public class NewsFragment extends BasicFragment implements INewsView {
     }
 
     @Override
+    public void startActivity(Class clazz, String key, Object object) {
+        super.startActivity(clazz, key, object);
+    }
+
+    /* Sự kiện khi không có internet */
+    @Override
     public void onNoNetwork() {
         progressView.setRefreshing(false);
         progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
         progressView.hideData();
+    }
+
+    @Override
+    public void showShortToast(String message) {
+        super.showShortToast(message);
     }
 
     @Override

@@ -73,6 +73,8 @@
         android:drawableLeft="@drawable/ic_action_note"
         android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_note"
+        android:paddingLeft="-2dp"
+        android:paddingStart="-2dp"
         android:gravity="center_vertical"
         android:text="@string/store_des" />
 

@@ -2,11 +2,13 @@ package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by Vulcl on 1/21/2017
  */
 
-public class News {
+public class News implements Serializable {
     @Expose
     private int id;
     @Expose
@@ -18,7 +20,7 @@ public class News {
     @Expose
     private int bg_id;
     @Expose
-    private boolean isPublic;
+    private boolean is_public;
 
     public int getId() {
         return id;
@@ -60,11 +62,11 @@ public class News {
         this.bg_id = bg_id;
     }
 
-    public boolean isPublic() {
-        return isPublic;
+    public boolean is_public() {
+        return is_public;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setIs_public(boolean is_public) {
+        this.is_public = is_public;
     }
 }

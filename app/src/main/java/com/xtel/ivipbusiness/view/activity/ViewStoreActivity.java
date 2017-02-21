@@ -69,6 +69,10 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
             tabLayout.addTab(tabLayout.newTab().setIcon(icon[i]));
         }
 
+        if (isStore)
+            //noinspection ConstantConditions
+            tabLayout.getTabAt(1).setIcon(R.mipmap.ic_list_store_gray);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @SuppressWarnings("ConstantConditions")
             @Override

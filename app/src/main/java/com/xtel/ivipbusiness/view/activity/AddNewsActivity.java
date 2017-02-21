@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -22,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.AddNewsPresenter;
@@ -68,6 +66,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         initTypeSale();
         initListener();
         presenter.getData();
+        hideLayout();
     }
 
     //    Lấy toàn bộ view
@@ -128,22 +127,22 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void selectTime(final int type) {
-        Calendar calendar = Calendar.getInstance();
-        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if (type == 0) {
-                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.start_time) + ": ", hourOfDay, minute);
-                } else if (type == 1) {
-                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
-//                    END_TIME = hourOfDay + ":" + minute;
-                } else {
-                    WidgetHelper.getInstance().setEditTextTime(edt_alive, "", hourOfDay, minute);
-                }
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
-    }
+//    private void selectTime(final int type) {
+//        Calendar calendar = Calendar.getInstance();
+//        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
+//            @Override
+//            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                if (type == 0) {
+//                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.start_time) + ": ", hourOfDay, minute);
+//                } else if (type == 1) {
+//                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
+////                    END_TIME = hourOfDay + ":" + minute;
+//                } else {
+//                    WidgetHelper.getInstance().setEditTextTime(edt_alive, "", hourOfDay, minute);
+//                }
+//            }
+//        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+//    }
 
     private void setPublic() {
         isPublic = !isPublic;
@@ -152,6 +151,36 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_world_white_18);
         else
             WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_private_gray_18);
+    }
+
+    private void showLayout() {
+//             Prepare the View for the animation
+        layout_voucher.setVisibility(View.VISIBLE);
+        layout_voucher.setAlpha(0.0f);
+
+//             Start the animation
+        layout_voucher.animate()
+                .translationY(0)
+                .alpha(1.0f)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                    }
+                });
+    }
+
+    private void hideLayout() {
+        layout_voucher.animate()
+                .translationY(-layout_voucher.getHeight())
+                .alpha(0.0f)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        layout_voucher.setVisibility(View.GONE);
+                    }
+                });
     }
 
 
@@ -208,31 +237,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-//             Prepare the View for the animation
-            layout_voucher.setVisibility(View.VISIBLE);
-            layout_voucher.setAlpha(0.0f);
-
-//             Start the animation
-            layout_voucher.animate()
-                    .translationY(0)
-                    .alpha(1.0f)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                        }
-                    });
+            showLayout();
         } else {
-            layout_voucher.animate()
-                    .translationY(-layout_voucher.getHeight())
-                    .alpha(0.0f)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            layout_voucher.setVisibility(View.GONE);
-                        }
-                    });
+            hideLayout();
         }
     }
 

@@ -8,7 +8,7 @@
         <item name="colorAccent">@android:color/white</item>
 
         <item name="android:windowBackground">@mipmap/background_window</item>
-        <item name="android:windowAnimationStyle">@null</item>
+        <!--<item name="android:windowAnimationStyle">@null</item>-->
         <!--<item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
@@ -241,5 +241,11 @@
         <item name="colorAccent">#c5c5c5</item>
         <item name="android:paddingLeft">@dimen/size_26</item>
         <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="Theme_Tablayout" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
     </style>
 </resources>

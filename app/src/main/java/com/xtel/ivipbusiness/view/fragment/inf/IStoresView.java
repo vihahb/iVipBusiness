@@ -22,7 +22,7 @@ public interface IStoresView {
     void onGetStoresSuccess(ArrayList<SortStore> arrayList);
     void onGetStoresError(Error error);
     void onNoNetwork();
-    void startActivity(Class clazz, String key, Object object, int requestCode);
+    void startActivity(Class clazz, String key, Object object);
     Activity getActivity();
     Fragment getFragment();
 }

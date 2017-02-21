@@ -83,7 +83,7 @@ public class StoresAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         return;
                     }
 
-                    _view.startActivity(ViewStoreActivity.class, Constants.MODEL, arrayList.get(position), 11);
+                    _view.startActivity(ViewStoreActivity.class, Constants.MODEL, arrayList.get(position));
                 }
             });
         } else {

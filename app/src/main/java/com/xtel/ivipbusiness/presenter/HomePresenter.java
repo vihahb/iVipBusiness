@@ -33,13 +33,13 @@ public class HomePresenter {
     }
 
     public void getFullUserData() {
-        RESP_Full_Profile resp_full_profile = UserModel.getIntances().getFulllUserInfo();
+        RESP_Full_Profile resp_full_profile = UserModel.getInstance().getFulllUserInfo();
         view.onGetShortUserDataSuccess(resp_full_profile);
 
-        UserModel.getIntances().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
+        UserModel.getInstance().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
             @Override
             public void onSuccess(RESP_Full_Profile obj) {
-                UserModel.getIntances().saveFullUserInfo(obj);
+                UserModel.getInstance().saveFullUserInfo(obj);
                 view.onGetShortUserDataSuccess(obj);
             }
 
