@@ -7,19 +7,19 @@ import android.util.Log;
  * Created by VULCL on 1/10/2017
  */
 
-public abstract class BasicPresenter {
+abstract class BasicPresenter {
 
     protected void debug(String message) {
         Log.d(this.getClass().getSimpleName(), message);
     }
 
-    protected boolean validateText(String text) {
+    boolean validateText(String text) {
         return (text != null && !text.isEmpty());
     }
 
-    protected long isPhone(String username) {
+    int validateInteger(String _long) {
         try {
-            return Long.parseLong(username);
+            return Integer.parseInt(_long);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,7 +27,27 @@ public abstract class BasicPresenter {
         return -1;
     }
 
-    protected boolean validatePhone(String username) {
+    long validateLong(String _long) {
+        try {
+            return Long.parseLong(_long);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    double validateDouble(String _double) {
+        try {
+            return Double.parseDouble(_double);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    boolean validatePhone(String username) {
         return !(username.length() < 10 || username.length() > 11);
     }
 

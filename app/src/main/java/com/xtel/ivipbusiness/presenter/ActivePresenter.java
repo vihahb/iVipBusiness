@@ -33,7 +33,7 @@ public class ActivePresenter extends BasicPresenter {
             return;
         }
 
-        if (isPhone(phone) == -1) {
+        if (validateLong(phone) == -1) {
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }

@@ -1,7 +1,7 @@
 package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.NewsModel;
-import com.xtel.ivipbusiness.model.entity.RESP_News;
+import com.xtel.ivipbusiness.model.entity.RESP_List_News;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -28,9 +28,9 @@ public class NewsPresenter {
         public void execute(final Object... params) {
             if (params.length > 0) {
                 if ((int) params[0] == 1)
-                    NewsModel.getInstance().getNews(PAGE, PAGESIZE, sortStore.getId(), sortStore.getStore_type(), new ResponseHandle<RESP_News>(RESP_News.class) {
+                    NewsModel.getInstance().getNews(PAGE, PAGESIZE, sortStore.getId(), sortStore.getStore_type(), new ResponseHandle<RESP_List_News>(RESP_List_News.class) {
                         @Override
-                        public void onSuccess(RESP_News obj) {
+                        public void onSuccess(RESP_List_News obj) {
                             if (isExists) {
                                 PAGE++;
                                 view.onGetNewsSuccess(obj.getData());

@@ -48,31 +48,29 @@ public class AddStorePresenter extends BasicPresenter {
     private ICmd iCmd = new ICmd() {
         @Override
         public void execute(Object... params) {
-            if ((int) params[0] == 1) {
-                StoresModel.getInstance().addStore((String) params[1], new ResponseHandle<RESP_Store>(RESP_Store.class) {
-                    @Override
-                    public void onSuccess(RESP_Store obj) {
+            StoresModel.getInstance().addStore((String) params[1], new ResponseHandle<RESP_Store>(RESP_Store.class) {
+                @Override
+                public void onSuccess(RESP_Store obj) {
+                    view.closeProgressBar();
+
+                    if (STOREY_TYPE.equals(CHAIN)) {
+                        view.onAddChainSuccess();
+                    } else {
+                        UserModel.getIntances().addNewStore();
+                        view.onAddStoreSuccess();
+                    }
+                }
+
+                @Override
+                public void onError(Error error) {
+                    if (error.getCode() == 2)
+                        view.getNewSession(iCmd);
+                    else {
                         view.closeProgressBar();
-
-                        if (STOREY_TYPE.equals(CHAIN)) {
-                            view.onAddChainSuccess();
-                        } else {
-                            UserModel.getIntances().addNewStore();
-                            view.onAddStoreSuccess();
-                        }
+                        view.showShortToast(JsonParse.getCodeMessage(error.getCode(), view.getActivity().getString(R.string.error_try_again)));
                     }
-
-                    @Override
-                    public void onError(Error error) {
-                        if (error.getCode() == 2)
-                            view.getNewSession(iCmd);
-                        else {
-                            view.closeProgressBar();
-                            view.showShortToast(JsonParse.getCodeMessage(error.getCode(), view.getActivity().getString(R.string.error_try_again)));
-                        }
-                    }
-                });
-            }
+                }
+            });
         }
     };
 
@@ -135,13 +133,14 @@ public class AddStorePresenter extends BasicPresenter {
                     URL_BANNER = resp_image.getServer_path();
                     view.onLoadPicture(file, type);
                 } else {
-                    URL_LOGO = resp_image.getServer_path();;
+                    URL_LOGO = resp_image.getServer_path();
                     view.onLoadPicture(file, type);
                 }
             }
 
             @Override
             public void onError() {
+                view.closeProgressBar();
                 view.showShortToast(view.getActivity().getString(R.string.error_try_again));
             }
         });
@@ -164,14 +163,14 @@ public class AddStorePresenter extends BasicPresenter {
             view.showShortToast(view.getActivity().getString(R.string.error_input_phone));
             return;
         } else if (!TextUnit.getInstance().validateText(begin_time)) {
-            view.showShortToast(view.getActivity().getString(R.string.error_input_begin_time));
+            view.showShortToast(view.getActivity().getString(R.string.error_input_open_time));
             return;
         } else if (!TextUnit.getInstance().validateText(end_time)) {
-            view.showShortToast(view.getActivity().getString(R.string.error_input_end_time));
+            view.showShortToast(view.getActivity().getString(R.string.error_input_close_time));
             return;
         }
 
-        view.showProgressBar(false,false,null, view.getActivity().getString(R.string.adding_store));
+        view.showProgressBar(false, false, null, view.getActivity().getString(R.string.adding_store));
 
         RESP_Store store = new RESP_Store();
 
@@ -194,19 +193,6 @@ public class AddStorePresenter extends BasicPresenter {
         Log.e("store_object", JsonHelper.toJson(store));
         iCmd.execute(1, JsonHelper.toJson(store));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -37,7 +37,7 @@ public class LoginPresenter extends BasicPresenter {
         if (!validateData(phone, password))
             return;
 
-        if (isPhone(phone) == -1) {
+        if (validateLong(phone) == -1) {
             debug("6");
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;

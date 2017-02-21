@@ -34,6 +34,8 @@ public abstract class BasicModel {
     protected final String GET_NEWS_ID = "&id=";
     protected final String GET_NEWS_TYPE = "&type=";
 
+    protected final String ADD_NEWS = "/v0.1/news";
+
     //    Google
     protected final String GET_ADDRESS_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
     protected final String GET_ADDRESS_KEY = "&key=";

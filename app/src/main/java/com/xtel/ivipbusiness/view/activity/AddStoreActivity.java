@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,17 +43,17 @@ import java.util.Calendar;
 
 public class AddStoreActivity extends BasicActivity implements View.OnClickListener, IAddStoreView {
     private AddStorePresenter presenter;
+    private CallbackManager callbackManager;
 
     private ImageView img_banner, img_logo;
     private ImageButton img_camera;
     private Spinner sp_type;
     private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
 
+    private ActionBar actionBar;
     private final int REQUEST_LOCATION = 99;
     private PlaceModel placeModel;
 //    private String BEGIN_TIME, END_TIME;
-
-    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +62,23 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         callbackManager = CallbackManager.create(this);
 
         presenter = new AddStorePresenter(this);
-        initToolbar(R.id.add_store_toolbar, null);
+//        initToolbar(R.id.add_store_toolbar, null);
+        initToolbar();
         initView();
         initType();
         initListener();
         presenter.getData();
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.add_store_toolbar);
+        setSupportActionBar(toolbar);
+
+        actionBar = getSupportActionBar();
+
+        assert actionBar != null;
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void initView() {
@@ -110,19 +124,9 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
     }
 
-//    private void selectEndTime() {
-//        Calendar calendar = Calendar.getInstance();
-//        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-//            @Override
-//            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.close_time) + ": ", hourOfDay, minute);
-//                END_TIME = hourOfDay + ":" + minute;
-//            }
-//        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
-//    }
-
     @Override
     public void onGetDataChain() {
+        actionBar.setTitle(getString(R.string.title_activity_add_chain));
         edt_name.setHint(getString(R.string.chain_name));
         edt_address.setHint(getString(R.string.chain_address));
         edt_des.setHint(getString(R.string.chain_des));

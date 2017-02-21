@@ -26,9 +26,9 @@ public interface IAddStoreView {
     void getNewSession(ICmd iCmd);
 
     void showShortToast(String message);
+    void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message);
     void closeProgressBar();
 
-    void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message);
     void startActivityForResult(Intent intent, int requestCode);
     Activity getActivity();
 }

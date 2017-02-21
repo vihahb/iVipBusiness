@@ -28,7 +28,7 @@ public class RegisterPresenter extends BasicPresenter {
         if (!validateData(username, password, rePassword))
             return;
 
-        if (isPhone(username) != -1) {
+        if (validateLong(username) != -1) {
             if (!validatePhone(username)) {
                 view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
                 return;

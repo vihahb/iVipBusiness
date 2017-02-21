@@ -164,6 +164,12 @@ public abstract class BasicActivity extends IActivity {
         startActivity(new Intent(this, clazz));
     }
 
+    protected void startActivity(Class clazz, String key, Object object) {
+        Intent intent = new Intent(this, clazz);
+        intent.putExtra(key, (Serializable) object);
+        startActivity(intent);
+    }
+
     protected void startActivityForResult(Class clazz, int requestCode) {
         startActivityForResult(new Intent(this, clazz), requestCode);
     }

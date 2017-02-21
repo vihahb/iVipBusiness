@@ -13,6 +13,7 @@
     <string name="title_activity_active_account">Kích hoạt tài khoản</string>
     <string name="title_activity_profile">Thông tin tài khoản</string>
     <string name="title_activity_add_store">Tạo cửa hàng</string>
+    <string name="title_activity_add_chain">Tạo chuỗi cửa hàng</string>
     <string name="title_activity_view_store">Thông tin cửa hàng</string>
     <string name="title_activity_list_store">Danh sách cửa hàng</string>
     <string name="title_activity_list_chain">Cửa hàng</string>
@@ -41,13 +42,14 @@
 
     <string name="action_done">Hoàn thành</string>
     <string name="action_create_store">Tạo cửa hàng</string>
-    <string name="action_create_chain">Tạo chuỗi cửa hàng</string>
+    <string name="action_create_chain">Tạo trụ sở chính</string>
 
     <!-- Dialog -->
     <string name="doing_register">Đang tạo tài khoản…</string>
     <string name="doing_active">Đang kích hoạt tài khoản…</string>
     <string name="doing_login">Đang đăng nhập…</string>
     <string name="doing_reset">Đang lấy lại mật khẩu…</string>
+    <string name="doing_add_news">Đang tạo bản tin…</string>
     <string name="can_not_load_data">Không thể tải dữ liệu</string>
     <string name="back">Quay lại</string>
     <string name="uploading_file">Đang tải ảnh…</string>
@@ -62,6 +64,7 @@
     <string name="success_add_chain">Thêm trụ sở thành công</string>
     <string name="success_update_store">Cập nhật cửa hàng thành công</string>
     <string name="success_update_user">Cập nhật thông tin thành công</string>
+    <string name="success_add_news">Thêm bản tin thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -78,10 +81,17 @@
     <string name="error_input_address">Vui lòng nhập địa chỉ</string>
     <string name="error_input_store_name">Vui lòng nhập tên cửa hàng</string>
     <string name="error_input_phone">Vui lòng nhập số điện thoại</string>
-    <string name="error_input_begin_time">Vui lòng chọn thời gian mở cửa</string>
-    <string name="error_input_end_time">Vui lòng chọn thời gian đóng cửa</string>
+    <string name="error_input_open_time">Vui lòng chọn thời gian mở cửa</string>
+    <string name="error_input_close_time">Vui lòng chọn thời gian đóng cửa</string>
+    <string name="error_input_begin_time">Vui lòng chọn thời gian bắt đầu</string>
+    <string name="error_input_end_time">Vui lòng chọn thời gian kết thúc</string>
+    <string name="error_input_alive_time">Vui lòng chọn thời gian hiệu lực</string>
     <string name="error_input_banner">Vui lòng chọn ảnh banner</string>
     <string name="error_input_logo">Vui lòng chọn ảnh logo</string>
+    <string name="error_input_title">Vui lòng nhập tiêu đề</string>
+    <string name="error_input_exchange_point">Vui lòng nhập điểm quy đổi</string>
+    <string name="error_input_number_of_voucher">Vui lòng nhập số lượng voucher</string>
+    <string name="error_input_sale">Vui lòng nhập phần trăm giảm giá</string>
 
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
@@ -98,6 +108,8 @@
     <string name="error_end_of_session">Bạn đã hết phiên làm việc</string>
     <string name="error_server_request">Không thể kết nối tới Server</string>
     <string name="error_user_not_exists">Tài khoản không tồn tại</string>
+    <string name="error_not_found_chain">Không tìm thấy trụ sở chính</string>
+    <string name="error_not_found_store">Không tìm thấy cửa hàng</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -143,7 +155,7 @@
     <string name="now_location">Vị trí hiện tại</string>
 
     <string name="create_voucher">Tạo mã khuyến mãi</string>
-    <string name="number_voucher">Số lượng voucheri</string>
+    <string name="number_voucher">Số lượng voucher</string>
     <string name="sale_percent">Giảm (%)</string>
     <string name="start_time">Thời gian bắt đầu</string>
     <string name="end_time">Thời gian kết thúc</string>

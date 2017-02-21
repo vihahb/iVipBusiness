@@ -43,9 +43,9 @@
         style="@style/checkbox_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginStart="-2dp"
         android:layout_marginTop="@dimen/size_16"
-        android:paddingLeft="-2dp"
-        android:paddingStart="-2dp"
         android:text="@string/create_voucher" />
 
     <LinearLayout
@@ -54,7 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16"
         android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,7 +111,8 @@
                 android:drawableLeft="@drawable/ic_action_time"
                 android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/start_time"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:longClickable="false" />
 
             <EditText
                 android:id="@+id/add_news.edt_end_time"
@@ -123,7 +125,8 @@
                 android:drawableLeft="@drawable/ic_action_time"
                 android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/end_time"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:longClickable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,8 +135,8 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/add_news.edt_take_effect"
-                style="@style/edittext_disable"
+                android:id="@+id/add_news.edt_alive_time"
+                style="@style/edittext_normal"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
                 android:layout_marginEnd="-4dp"
@@ -142,7 +145,8 @@
                 android:drawableLeft="@drawable/ic_action_time"
                 android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/time_take_effect"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:longClickable="false" />
 
             <EditText
                 android:id="@+id/add_news.edt_exchange_point"

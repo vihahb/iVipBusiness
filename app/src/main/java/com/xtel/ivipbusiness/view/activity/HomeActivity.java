@@ -1,6 +1,9 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,10 +62,26 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         initView();
         initNavigationView();
         replaceListStore();
-//        presenter.getShortUserData();
+//        launchCalculator();
     }
 
-    //     Khởi tạo view
+//    private static final String CALCULATOR_PACKAGE_NAME = "com.android.calculator2";
+//    private static final String CALCULATOR_CLASS_NAME = "com.android.calculator2.Calculator";
+
+//    public void launchCalculator() {
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+//        intent.setComponent(new ComponentName(CALCULATOR_PACKAGE_NAME, CALCULATOR_CLASS_NAME));
+//
+//        try {
+//            startActivityForResult(intent, 111);
+//        } catch (ActivityNotFoundException noSuchActivity) {
+//            // handle exception where calculator intent filter is not registered
+//        }
+//    }
+
+        //     Khởi tạo view`
     private void initView() {
         drawer = findDrawerLayout(R.id.drawer_layout);
         navigationView = findNavigationView(R.id.nav_view);
@@ -239,6 +259,14 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 111 && resultCode == RESULT_OK) {
+            Log.e("result", "data " + data.getData().toString());
+        }
     }
 
     @Override
