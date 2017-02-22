@@ -46,7 +46,8 @@ public class BasicFragment extends IFragment {
     }
 
     protected void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {
-        progressDialog = new ProgressDialog(getContext(), R.style.AppCompatAlertDialogStyle);
+        if (progressDialog == null)
+            progressDialog = new ProgressDialog(getContext(), R.style.AppCompatAlertDialogStyle);
         progressDialog.setCanceledOnTouchOutside(isTouchOutside);
         progressDialog.setCancelable(isCancel);
 

@@ -1,5 +1,6 @@
 package com.xtel.sdk.utils;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -353,6 +354,25 @@ public class WidgetHelper {
                 break;
             case 3:
                 view.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, resource);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void setTextViewDrawable(TextView view, int position, Drawable resource) {
+        switch (position) {
+            case 0:
+                view.setCompoundDrawablesWithIntrinsicBounds(resource, null, null, null);
+                break;
+            case 1:
+                view.setCompoundDrawablesWithIntrinsicBounds(null, resource, null, null);
+                break;
+            case 2:
+                view.setCompoundDrawablesWithIntrinsicBounds(null, null, resource, null);
+                break;
+            case 3:
+                view.setCompoundDrawablesWithIntrinsicBounds(null, null, null, resource);
                 break;
             default:
                 break;

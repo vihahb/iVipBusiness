@@ -207,6 +207,9 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         menu_edi_storet.setIcon(R.drawable.ic_action_edit_line);
     }
 
+    public void restoreMenuIcon() {
+        menu_edi_storet.setIcon(R.drawable.ic_action_edit_line);
+    }
 
 
 

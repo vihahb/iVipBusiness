@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action.list_store.done"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_action_tick_default"
+        android:icon="@drawable/ic_action_done_2"
         android:title="@string/action_done"
         app:showAsAction="always" />
 </menu>

@@ -69,7 +69,7 @@ public class RoundImage extends ImageView {
         if (getWidth() == 0 || getHeight() == 0) {
             return;
         }
-        Bitmap b = ((BitmapDrawable) drawable).getBitmap();
+            Bitmap b = ((BitmapDrawable) drawable).getBitmap();
         Bitmap bitmap = b.copy(Config.ARGB_8888, true);
 
         int w = getWidth(), h = getHeight();

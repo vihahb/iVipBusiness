@@ -47,6 +47,10 @@
     <string name="action_create_store">Tạo cửa hàng</string>
     <string name="action_create_chain">Tạo chuỗi cửa hàng</string>
 
+    <string name="action_send_to_people">Gửi tới mọi người</string>
+    <string name="action_send_a_group">Gửi theo nhóm</string>
+    <string name="action_send_member">Gửi cho thành viên</string>
+
     <!-- Dialog -->
     <string name="doing_register">Đang tạo tài khoản…</string>
     <string name="doing_active">Đang kích hoạt tài khoản…</string>

@@ -19,6 +19,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -52,6 +53,7 @@ import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.WidgetHelper;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -341,7 +343,10 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     @Override
-    public void onUpdateStoreInfoSuccess(RESP_Store resp_store) {
+    public void onUpdateStoreInfoSuccess() {
+        ((ViewStoreActivity) getActivity()).restoreMenuIcon();
+        setEnableView(false);
+
         ((ViewStoreActivity) getActivity()).setResp_store(resp_store);
         ((ViewStoreActivity) getActivity()).onUpdateStoreSuccess();
         onGetStoreInfoSuccess(resp_store);
@@ -390,20 +395,21 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             return;
         }
 
+        Log.e("111111111", "11111");
+        showProgressBar(false, false, null, getString(R.string.uploading_file));
+
         Bitmap bitmap = null;
 
         try {
-            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+            bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         if (bitmap != null) {
-            if (type == 0)
-                img_banner.setImageBitmap(bitmap);
-            else
-                img_logo.setImageBitmap(bitmap);
-        }
+            presenter.postImage(bitmap, type);
+        } else
+            closeProgressBar();
     }
 
     @Override
@@ -413,10 +419,18 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             return;
         }
 
+        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        presenter.postImage(bitmap, type);
+    }
+
+    @Override
+    public void onLoadPicture(File file, int type) {
+        closeProgressBar();
+
         if (type == 0)
-            img_banner.setImageBitmap(bitmap);
+            WidgetHelper.getInstance().setImageFile(img_banner, file);
         else
-            img_logo.setImageBitmap(bitmap);
+            WidgetHelper.getInstance().setAvatarImageFile(img_logo, file);
     }
 
     @Override
@@ -516,7 +530,6 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         debug(requestCode + "   " + resultCode);
-        presenter.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_LOCATION && resultCode == Activity.RESULT_OK) {
             if (data != null) {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav.list_fcm.send_people"
+        android:icon="@mipmap/ic_store_not_line"
+        android:title="@string/action_send_to_people" />
+
+    <item
+        android:id="@+id/nav.list_fcm.send_group"
+        android:icon="@mipmap/ic_chain_not_line"
+        android:title="@string/action_send_a_group" />
+
+    <item
+        android:id="@+id/nav.list_fcm.send_member"
+        android:icon="@mipmap/ic_chain_not_line"
+        android:title="@string/action_send_member" />
+</menu>

@@ -76,7 +76,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, news.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_title, news.getTitle(), _view.getActivity().getString(R.string.not_update_title));
-            WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, _view.getActivity().getString(R.string.day_create) + ": ", news.getDate_create());
+            WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, _view.getActivity().getString(R.string.day_create) + ": ", (news.getCreate_time() * 1000));
+            viewHolder.txt_view.setText(String.valueOf(news.getView()));
+            viewHolder.txt_like.setText(String.valueOf(news.getLike()));
+            viewHolder.txt_share.setText(String.valueOf(news.getShare()));
 
             bg_pos++;
 

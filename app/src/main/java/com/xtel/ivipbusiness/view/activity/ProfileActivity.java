@@ -26,7 +26,7 @@ import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.ProfilePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
-import com.xtel.ivipbusiness.view.adapter.SpinnerOneIconAdapter;
+import com.xtel.ivipbusiness.view.adapter.GenderAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.LoginManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
@@ -101,7 +101,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private void initGender() {
         String[] arrayList = getResources().getStringArray(R.array.gender);
         sp_gender = findSpinner(R.id.profile_sp_gender);
-        SpinnerOneIconAdapter typeAdapter = new SpinnerOneIconAdapter(this, R.drawable.ic_action_gender, arrayList);
+        GenderAdapter typeAdapter = new GenderAdapter(this, arrayList);
         sp_gender.setAdapter(typeAdapter);
     }
 
@@ -146,31 +146,6 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
         sp_gender.setEnabled(isEnable);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
