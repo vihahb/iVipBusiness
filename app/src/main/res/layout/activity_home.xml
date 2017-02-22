@@ -35,6 +35,16 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <!--<io.github.yavski.fabspeeddial.FabSpeedDial-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--app:fabGravity="bottom_end"-->
+        <!--app:fabMenu="@menu/menu_nav_home"-->
+        <!--app:miniFabBackgroundTint="@android:color/white"-->
+        <!--app:miniFabDrawableTint="?attr/colorPrimaryDark"-->
+        <!--app:miniFabTitleTextColor="?attr/colorPrimaryDark" />-->
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

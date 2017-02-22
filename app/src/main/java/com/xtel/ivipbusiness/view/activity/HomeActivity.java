@@ -1,8 +1,6 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +32,9 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
+
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
  */
@@ -42,14 +43,13 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     private HomePresenter presenter;
     private CallbackManager callbackManager;
 
-    private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBar actionBar;
-    private MenuItem menu_avatar, menu_create_store, menu_create_chain;
+    private MenuItem menu_avatar;
 
-    private final int REQUEST_ADD_STORE = 11;
-    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
+//    private final int REQUEST_ADD_STORE = 11;
+//    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
     private final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
 
     @Override
@@ -61,25 +61,9 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         presenter = new HomePresenter(this);
         initView();
         initNavigationView();
+//        initFloatingActionButton();
         replaceListStore();
-//        launchCalculator();
     }
-
-//    private static final String CALCULATOR_PACKAGE_NAME = "com.android.calculator2";
-//    private static final String CALCULATOR_CLASS_NAME = "com.android.calculator2.Calculator";
-
-//    public void launchCalculator() {
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-//        intent.setComponent(new ComponentName(CALCULATOR_PACKAGE_NAME, CALCULATOR_CLASS_NAME));
-//
-//        try {
-//            startActivityForResult(intent, 111);
-//        } catch (ActivityNotFoundException noSuchActivity) {
-//            // handle exception where calculator intent filter is not registered
-//        }
-//    }
 
         //     Khởi tạo view`
     private void initView() {
@@ -90,7 +74,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     //    Khởi tạo navigation
     @SuppressWarnings("deprecation")
     private void initNavigationView() {
-        toolbar = findToolbar(R.id.home_toolbar);
+        Toolbar toolbar = findToolbar(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
@@ -212,8 +196,8 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         getMenuInflater().inflate(R.menu.menu_home, menu);
 
         menu_avatar = menu.findItem(R.id.action_home_user_info);
-        menu_create_store = menu.findItem(R.id.action_home_create_store);
-        menu_create_chain = menu.findItem(R.id.action_home_create_chain);
+//        menu_create_store = menu.findItem(R.id.action_home_create_store);
+//        menu_create_chain = menu.findItem(R.id.action_home_create_chain);
 
         presenter.getFullUserData();
         return true;
@@ -225,17 +209,17 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         if (id == R.id.action_home_user_info)
             startActivity(ProfileActivity.class);
-        else if (id == R.id.action_home_create_store) {
-            if (!NetWorkInfo.isOnline(getApplicationContext())) {
-                showShortToast(getString(R.string.error_no_internet));
-            } else
-            startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD_STORE);
-        } else if (id == R.id.action_home_create_chain) {
-            if (!NetWorkInfo.isOnline(getApplicationContext())) {
-                showShortToast(getString(R.string.error_no_internet));
-            } else
-                startActivityForResult(AddStoreActivity.class, Constants.MODEL, CHAIN_TYPE, REQUEST_ADD_STORE);
-        }
+//        else if (id == R.id.action_home_create_store) {
+//            if (!NetWorkInfo.isOnline(getApplicationContext())) {
+//                showShortToast(getString(R.string.error_no_internet));
+//            } else
+//            startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD_STORE);
+//        } else if (id == R.id.action_home_create_chain) {
+//            if (!NetWorkInfo.isOnline(getApplicationContext())) {
+//                showShortToast(getString(R.string.error_no_internet));
+//            } else
+//                startActivityForResult(AddStoreActivity.class, Constants.MODEL, CHAIN_TYPE, REQUEST_ADD_STORE);
+//        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -6,12 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ChainsPresenter;
+import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
@@ -23,8 +25,13 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
+
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
 /**
  * Created by Vulcl on 1/13/2017
@@ -39,7 +46,8 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     private boolean isClearData = false;
     private CallbackManager callbackManager;
 
-    private final int REQUEST_ADD = 99;
+    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
+    private final int REQUEST_ADD = 99, REQUEST_ADD_STORE = 11;
 
     public static ChainsFragment newInstance() {
         return new ChainsFragment();
@@ -59,6 +67,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
         presenter = new ChainsPresenter(this);
 //        initFloatingActionButton();
         initProgressView(view);
+        initFloatingActionButton(view);
     }
 
 //    private void initFloatingActionButton() {
@@ -129,6 +138,35 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
             @Override
             public void onLoadMore() {
 //                presenter.getChains();
+            }
+        });
+    }
+
+    private void initFloatingActionButton(View view) {
+        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.home_fab);
+        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+
+                switch (id) {
+                    case R.id.nav_home_create_store:
+                        if (!NetWorkInfo.isOnline(getContext())) {
+                            showShortToast(getString(R.string.error_no_internet));
+                        } else
+                            startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD_STORE);
+                        break;
+                    case R.id.nav_home_create_chain:
+                        if (!NetWorkInfo.isOnline(getContext())) {
+                            showShortToast(getString(R.string.error_no_internet));
+                        } else
+                            startActivityForResult(AddStoreActivity.class, Constants.MODEL, CHAIN_TYPE, REQUEST_ADD_STORE);
+                        break;
+                    default:
+                        break;
+                }
+
+                return super.onMenuItemSelected(menuItem);
             }
         });
     }

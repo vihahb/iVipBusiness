@@ -447,7 +447,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
             case R.id.action_add_news_send_fcm:
                 if (!swipeRefreshLayout.isRefreshing())
-                    startActivity(SendFcmActivity.class, Constants.MODEL, resp_news);
+                    startActivity(ListFcmActivity.class, Constants.MODEL, resp_news);
                 break;
             default:
                 break;

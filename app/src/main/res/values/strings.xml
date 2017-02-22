@@ -29,6 +29,7 @@
     <string name="title_activity_add_news">Tạo bản tin</string>
     <string name="title_activity_update_profile">Cập nhật thông tin</string>
     <string name="title_activity_update_news">Cập nhật bản tin</string>
+    <string name="title_activity_list_fcm">Danh sách gửi tin</string>
     <string name="title_activity_send_fcm">Gửi bản tin</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

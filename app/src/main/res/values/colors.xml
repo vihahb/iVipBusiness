@@ -18,6 +18,9 @@
     <color name="colorPrimaryKey_40">#66033f22</color>
     <color name="black_40">#66000000</color>
 
+    <color name="fab_background">#80C242</color>
+    <color name="fab_title">#eff6e4</color>
+
     <color name="tablayout">#146535</color>
     <color name="text_color_member">#FFF202</color>
     <color name="white_50">#80FFFFFF</color>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:ignore="UselessParent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/list_fcm.toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryKey_90"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextAppearance="@style/Toolbar_TitleText" />
+        </android.support.design.widget.AppBarLayout>
+
+        <include
+            layout="@layout/layout_progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize" />
+
+        <io.github.yavski.fabspeeddial.FabSpeedDial
+            android:id="@+id/list_fcm.fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:fitsSystemWindows="false"
+            app:fabBackgroundTint="@color/fab_background"
+            app:fabGravity="bottom_end"
+            app:fabMenu="@menu/menu_nav_home"
+            app:miniFabBackgroundTint="@color/fab_background"
+            app:miniFabDrawableTint="@android:color/white"
+            app:miniFabTitleBackgroundTint="@color/fab_background"
+            app:miniFabTitleTextColor="@color/fab_title" />
+    </FrameLayout>
+</LinearLayout>
