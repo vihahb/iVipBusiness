@@ -21,14 +21,16 @@
         android:layout_height="@dimen/size_180"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/size_18"
-        android:paddingRight="@dimen/size_18">
+        android:paddingLeft="@dimen/size_16"
+        android:paddingRight="@dimen/size_16">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/size_12"
+            android:paddingLeft="@dimen/size_4"
+            android:paddingRight="@dimen/size_4"
             android:paddingTop="@dimen/size_8">
 
             <TextView
@@ -53,12 +55,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1"
+            android:layout_marginLeft="@dimen/size_4"
+            android:layout_marginRight="@dimen/size_4"
             android:background="@android:color/white" />
 
         <LinearLayout
-            android:baselineAligned="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingTop="@dimen/size_10"
@@ -76,16 +80,16 @@
                     style="@style/edittext_no_drawable_low"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords"
-                    android:hint="@string/fullname" />
+                    android:hint="@string/fullname"
+                    android:inputType="textCapWords" />
 
                 <EditText
                     android:id="@+id/profile.txt_email"
                     style="@style/edittext_no_drawable_low"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="@string/email" />
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
             </LinearLayout>
 
             <LinearLayout

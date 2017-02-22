@@ -114,10 +114,10 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 if (type == 0) {
-                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.open_time) + ": ", hourOfDay, minute);
+                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, hourOfDay, minute);
 //                    BEGIN_TIME = hourOfDay + ":" + minute;
                 } else {
-                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.close_time) + ": ", hourOfDay, minute);
+                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, hourOfDay, minute);
 //                    END_TIME = hourOfDay + ":" + minute;
                 }
             }

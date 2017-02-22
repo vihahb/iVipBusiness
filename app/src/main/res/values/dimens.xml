@@ -16,6 +16,7 @@
     <dimen name="size_10">10dp</dimen>
     <dimen name="size_12">12dp</dimen>
     <dimen name="size_13">13dp</dimen>
+    <dimen name="size_14">14dp</dimen>
     <dimen name="size_15">15dp</dimen>
     <dimen name="size_16">16dp</dimen>
     <dimen name="size_18">18dp</dimen>

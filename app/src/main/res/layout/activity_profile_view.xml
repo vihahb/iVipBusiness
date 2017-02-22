@@ -36,8 +36,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:elevation="@dimen/size_8"
-                app:elevation="@dimen/size_8"
-                android:theme="@style/AppTheme.AppBarOverlay">
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:elevation="@dimen/size_8">
 
                 <android.support.design.widget.CollapsingToolbarLayout
                     android:id="@+id/main.collapsing"
@@ -67,33 +67,29 @@
                     android:background="@color/colorPrimaryKey_80"
                     android:orientation="vertical">
 
-                    <!--<android.support.v7.widget.CardView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0.1mm"-->
-                    <!--app:cardBackgroundColor="@color/colorPrimaryKey_90"-->
-                    <!--app:cardElevation="@dimen/size_8" />-->
-
                     <include
                         layout="@layout/activity_profile_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/profile.btn_logout"
+                        style="@style/button_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_48"
+                        android:background="@drawable/button_transparent"
+                        android:drawableLeft="@drawable/ic_action_log_out"
+                        android:drawablePadding="@dimen/size_26"
+                        android:drawableStart="@drawable/ic_action_log_out"
+                        android:fitsSystemWindows="false"
+                        android:gravity="center_vertical|left|start"
+                        android:paddingLeft="@dimen/size_14"
+                        android:paddingRight="@dimen/size_14"
+                        android:text="@string/logout"
+                        android:theme="@style/Theme_Tablayout"
+                        app:theme="@style/Theme_Tablayout" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </android.support.design.widget.CoordinatorLayout>
-
-        <Button
-            android:id="@+id/profile.btn_logout"
-            style="@style/button_login"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_36"
-            android:background="@drawable/button_transparent"
-            android:drawableLeft="@drawable/ic_action_log_out"
-            android:drawablePadding="@dimen/size_12"
-            android:drawableStart="@drawable/ic_action_log_out"
-            android:fitsSystemWindows="false"
-            android:gravity="center_vertical|left|start"
-            android:paddingLeft="@dimen/size_12"
-            android:paddingStart="@dimen/size_12"
-            android:text="@string/logout" />
     </LinearLayout>
 </LinearLayout>

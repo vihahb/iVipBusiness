@@ -11,7 +11,7 @@ import java.util.Random;
  * Created by Lê Công Long Vũ on 12/27/2016
  */
 
-public class               Constants {
+public class Constants {
     public static final String SHARED_NAME = "share_business";
     public static final String FCM_TOKEN = "fcm_token";
 
