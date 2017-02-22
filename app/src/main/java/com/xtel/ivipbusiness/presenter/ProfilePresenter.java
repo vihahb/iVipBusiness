@@ -51,6 +51,7 @@ public class ProfilePresenter extends BasicPresenter {
                     @Override
                     public void onSuccess(RESP_Full_Profile obj) {
                         UserModel.getInstance().saveFullUserInfo(obj);
+                        URL_AVATAR = obj.getAvatar();
                         view.onGetProfileSuccess(obj);
                     }
 
@@ -93,8 +94,10 @@ public class ProfilePresenter extends BasicPresenter {
     public void getProfile() {
         resp_full_profile = UserModel.getInstance().getFulllUserInfo();
 
-        if (resp_full_profile != null)
+        if (resp_full_profile != null) {
+            URL_AVATAR = resp_full_profile.getAvatar();
             view.onGetProfileSuccess(resp_full_profile);
+        }
         else
             iCmd.execute(1);
     }

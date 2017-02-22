@@ -378,6 +378,8 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_news, menu);
+        menu.findItem(R.id.action_add_news_send_fcm).setVisible(false);
+        menu.findItem(R.id.action_add_news_done).setIcon(R.drawable.ic_action_done);
         return true;
     }
 

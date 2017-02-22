@@ -212,12 +212,18 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         WidgetHelper.getInstance().setEditTextWithResult(edt_address, obj.getAddress(), getString(R.string.not_update_address));
         WidgetHelper.getInstance().setSpinnerGender(sp_gender, obj.getGender());
 
+        if (placeModel == null)
+            placeModel = new PlaceModel();
+        placeModel.setAddress(obj.getAddress());
+
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
     }
 
     @Override
     public void onRequestError(Error error) {
+        closeProgressBar();
+        menuItem.setIcon(R.drawable.ic_action_edit_line);
         showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.can_not_load_data)));
     }
 
@@ -225,6 +231,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     public void onUpdateProfileSuccess() {
         closeProgressBar();
         showShortToast(getString(R.string.success_update_user));
+        menuItem.setIcon(R.drawable.ic_action_edit_line);
     }
 
     @Override

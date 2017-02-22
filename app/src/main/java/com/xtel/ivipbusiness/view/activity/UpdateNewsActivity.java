@@ -4,13 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_News;
@@ -38,6 +37,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -49,6 +49,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     private UpdateNewsPresenter presenter;
     private CallbackManager callbackManager;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ImageView img_banner, img_camera;
     private EditText edt_title, edt_des, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
     private TextView txt_public;
@@ -56,22 +57,33 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     private Spinner sp_news_type, sp_type_sale;
     private LinearLayout layout_voucher;
 
+    private RESP_News resp_news;
+    private MenuItem menuItem;
     private boolean isPublic = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_news);
+        setContentView(R.layout.activity_update_news);
         callbackManager = CallbackManager.create(this);
 
         presenter = new UpdateNewsPresenter(this);
         initToolbar(R.id.add_news_toolbar, null);
+        initSwwipe();
         initView();
         initType();
         initTypeSale();
         initListener();
-        presenter.getData();
+        setEnableView(false);
         hideLayout();
+        presenter.getData();
+    }
+
+    //    Khởi tạo swipeRefreshLayout để hiển thị load thông tin
+    private void initSwwipe() {
+        swipeRefreshLayout = findSwipeRefreshLayout(R.id.update_news_swipe);
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
     //    Lấy toàn bộ view
@@ -119,6 +131,26 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         edt_end_time.setOnClickListener(this);
     }
 
+    public void setEnableView(boolean isEnable) {
+        if (isEnable && swipeRefreshLayout.isRefreshing())
+            return;
+
+        img_camera.setEnabled(isEnable);
+
+        edt_title.setEnabled(isEnable);
+        edt_des.setEnabled(isEnable);
+        edt_number_voucher.setEnabled(isEnable);
+        edt_sale.setEnabled(isEnable);
+        edt_begin_time.setEnabled(isEnable);
+        edt_end_time.setEnabled(isEnable);
+        edt_alive.setEnabled(isEnable);
+        edt_point.setEnabled(isEnable);
+
+        chk_voucher.setEnabled(isEnable);
+        sp_news_type.setEnabled(isEnable);
+        sp_type_sale.setEnabled(isEnable);
+    }
+
     private void selectDate(final int type) {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(this, R.style.AppCompatAlertDialogStyle, new DatePickerDialog.OnDateSetListener() {
@@ -132,22 +164,22 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void selectTime(final int type) {
-        Calendar calendar = Calendar.getInstance();
-        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if (type == 0) {
-                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.start_time) + ": ", hourOfDay, minute);
-                } else if (type == 1) {
-                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
-//                    END_TIME = hourOfDay + ":" + minute;
-                } else {
-                    WidgetHelper.getInstance().setEditTextTime(edt_alive, "", hourOfDay, minute);
-                }
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
-    }
+//    private void selectTime(final int type) {
+//        Calendar calendar = Calendar.getInstance();
+//        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
+//            @Override
+//            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                if (type == 0) {
+//                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.start_time) + ": ", hourOfDay, minute);
+//                } else if (type == 1) {
+//                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
+////                    END_TIME = hourOfDay + ":" + minute;
+//                } else {
+//                    WidgetHelper.getInstance().setEditTextTime(edt_alive, "", hourOfDay, minute);
+//                }
+//            }
+//        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+//    }
 
     private void setPublic() {
         isPublic = !isPublic;
@@ -187,31 +219,6 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                     }
                 });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -265,6 +272,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
 
     @Override
     public void onGetNewsInfoSuccess(RESP_News obj) {
+        resp_news = obj;
+
         WidgetHelper.getInstance().setImageURL(img_banner, obj.getBanner());
         WidgetHelper.getInstance().setEditTextWithResult(edt_title, obj.getTitle(), getString(R.string.not_update_title));
         WidgetHelper.getInstance().setSpinnerNewsType(sp_news_type, obj.getNews_type());
@@ -272,9 +281,9 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
 
         if (obj.getVoucher() != null) {
             chk_voucher.setChecked(true);
+            showLayout();
 
             Voucher voucher = obj.getVoucher();
-
             WidgetHelper.getInstance().setEditTextNoResult(edt_number_voucher, String.valueOf(voucher.getNumber_of_voucher()));
             WidgetHelper.getInstance().setEditTextNoResult(edt_sale, String.valueOf(voucher.getSales()));
             WidgetHelper.getInstance().setSpinnerVoucherType(sp_type_sale, voucher.getSales_type());
@@ -283,6 +292,9 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             WidgetHelper.getInstance().setEditTextNoResult(edt_alive, String.valueOf((voucher.getTime_alive() / 60)));
             WidgetHelper.getInstance().setEditTextNoResult(edt_point, String.valueOf(voucher.getPoint()));
         }
+
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(false);
     }
 
     @Override
@@ -333,6 +345,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     @Override
     public void onUpdateSuccess() {
         closeProgressBar();
+        menuItem.setIcon(R.drawable.ic_action_edit_line);
         showMaterialDialog(false, false, null, getString(R.string.success_update_news), null, getString(R.string.back), new DialogListener() {
             @Override
             public void onClicked(Object object) {
@@ -367,6 +380,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     @Override
     public void onRequestError(Error error) {
         closeProgressBar();
+        menuItem.setIcon(R.drawable.ic_action_edit_line);
         showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_no_internet)));
     }
 
@@ -410,6 +424,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_news, menu);
+        menuItem = menu.findItem(R.id.action_add_news_done);
         return true;
     }
 
@@ -421,9 +436,18 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.action_add_news_done:
-                presenter.updateNews(edt_title.getText().toString(), (sp_news_type.getSelectedItemPosition() + 2), edt_des.getText().toString(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
-                        edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),
-                        edt_sale.getText().toString(), sp_type_sale.getSelectedItemPosition());
+                if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                    menuItem.setIcon(R.drawable.ic_action_done);
+                    setEnableView(true);
+                } else {
+                    presenter.updateNews(edt_title.getText().toString(), (sp_news_type.getSelectedItemPosition() + 2), edt_des.getText().toString(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
+                            edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),
+                            edt_sale.getText().toString(), sp_type_sale.getSelectedItemPosition());
+                }
+                break;
+            case R.id.action_add_news_send_fcm:
+                if (!swipeRefreshLayout.isRefreshing())
+                    startActivity(SendFcmActivity.class, Constants.MODEL, resp_news);
                 break;
             default:
                 break;
