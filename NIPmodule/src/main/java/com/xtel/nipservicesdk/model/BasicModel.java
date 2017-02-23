@@ -36,7 +36,8 @@ public abstract class BasicModel {
     protected final String GET_NEWS_TYPE = "&type=";
 
     protected final String ADD_NEWS = "/v0.1/news";
-    protected final String UPDATE_NEWS = "/v0.1/news/";
+    protected final String GET_NEWS = "/v0.1/news/";
+    protected final String UPDATE_NEWS = "/v0.1/news";
 
 //    Fcm
     protected final String SEND_NOTIFY = "/v0.1/news/notify";

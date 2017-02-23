@@ -350,6 +350,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     public void onUpdateSuccess() {
         closeProgressBar();
         menuItem.setIcon(R.drawable.ic_action_edit_line);
+        setEnableView(false);
         showMaterialDialog(false, false, null, getString(R.string.success_update_news), null, getString(R.string.back), new DialogListener() {
             @Override
             public void onClicked(Object object) {
@@ -385,7 +386,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     public void onRequestError(Error error) {
         closeProgressBar();
         menuItem.setIcon(R.drawable.ic_action_edit_line);
-        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_no_internet)));
+        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
     }
 
     @Override

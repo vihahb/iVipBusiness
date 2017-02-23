@@ -38,7 +38,7 @@ public class NewsModel extends BasicModel {
     }
 
     public void getNewsInfo(int id, ResponseHandle responseHandle) {
-        String url = API_BASE + UPDATE_NEWS + id;
+        String url = API_BASE + GET_NEWS + id;
         String session = LoginManager.getCurrentSession();
 
         Log.e("getNewsInfo", url + "     " + session);
@@ -46,7 +46,7 @@ public class NewsModel extends BasicModel {
     }
 
     public void updateNews(int id, String jsonObject, ResponseHandle responseHandle) {
-        String url = API_BASE + UPDATE_NEWS + id;
+        String url = API_BASE + UPDATE_NEWS;
         String session = LoginManager.getCurrentSession();
 
         Log.e("updateNews", url + "     " + session);
@@ -55,7 +55,7 @@ public class NewsModel extends BasicModel {
     }
 
     public void deleteNews(int id, ResponseHandle responseHandle) {
-        String url = API_BASE + UPDATE_NEWS + id;
+        String url = API_BASE + ADD_NEWS + id;
         String session = LoginManager.getCurrentSession();
 
         Log.e("deleteNews", url + "     " + session);

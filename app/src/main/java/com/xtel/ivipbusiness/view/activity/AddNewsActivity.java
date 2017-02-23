@@ -127,23 +127,6 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-//    private void selectTime(final int type) {
-//        Calendar calendar = Calendar.getInstance();
-//        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-//            @Override
-//            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                if (type == 0) {
-//                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.start_time) + ": ", hourOfDay, minute);
-//                } else if (type == 1) {
-//                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
-////                    END_TIME = hourOfDay + ":" + minute;
-//                } else {
-//                    WidgetHelper.getInstance().setEditTextTime(edt_alive, "", hourOfDay, minute);
-//                }
-//            }
-//        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
-//    }
-
     private void setPublic() {
         isPublic = !isPublic;
 

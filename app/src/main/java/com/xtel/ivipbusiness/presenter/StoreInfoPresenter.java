@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.StoresModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
-import com.xtel.ivipbusiness.model.entity.RESP_News;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
@@ -20,7 +19,6 @@ import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
@@ -199,10 +197,14 @@ public class StoreInfoPresenter {
             return;
         }
 
-        if (PATH_BANNER != null)
+//        if (PATH_BANNER != null)
             resp_store.setBanner(PATH_BANNER);
-        if (PATH_LOGO != null)
+//        else
+//            resp_store.setBanner(null);
+//        if (PATH_LOGO != null)
             resp_store.setLogo(PATH_LOGO);
+//        else
+//            resp_store.setLogo(null);
 
 
         view.showProgressBar(false, false, null, view.getActivity().getString(R.string.updating_store));

@@ -41,7 +41,7 @@ public class ProfilePresenter extends BasicPresenter {
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
-    private String URL_BANNER = "", URL_AVATAR = "";
+    private String PATH_AVATAR;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -51,7 +51,7 @@ public class ProfilePresenter extends BasicPresenter {
                     @Override
                     public void onSuccess(RESP_Full_Profile obj) {
                         UserModel.getInstance().saveFullUserInfo(obj);
-                        URL_AVATAR = obj.getAvatar();
+//                        URL_AVATAR = obj.getAvatar();
                         view.onGetProfileSuccess(obj);
                     }
 
@@ -95,7 +95,7 @@ public class ProfilePresenter extends BasicPresenter {
         resp_full_profile = UserModel.getInstance().getFulllUserInfo();
 
         if (resp_full_profile != null) {
-            URL_AVATAR = resp_full_profile.getAvatar();
+//            URL_AVATAR = resp_full_profile.getAvatar();
             view.onGetProfileSuccess(resp_full_profile);
         }
         else
@@ -133,13 +133,13 @@ public class ProfilePresenter extends BasicPresenter {
         ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
             @Override
             public void onSuccess(RESP_Image resp_image, File file) {
-                if (type == 0) {
-                    URL_BANNER = resp_image.getServer_path();
+//                if (type == 0) {
+//                    PATH_BANNER = resp_image.getServer_path();
+//                    view.onLoadPicture(file, type);
+//                } else {
+                    PATH_AVATAR = resp_image.getServer_path();
                     view.onLoadPicture(file, type);
-                } else {
-                    URL_AVATAR = resp_image.getServer_path();
-                    view.onLoadPicture(file, type);
-                }
+//                }
             }
 
             @Override
@@ -150,7 +150,7 @@ public class ProfilePresenter extends BasicPresenter {
     }
 
     public void updateUser(String fullname, int gender, String birthday, String email, PlaceModel placeModel) {
-        if (!validateInput(URL_AVATAR, fullname, gender, birthday, email, placeModel))
+        if (!validateInput("notnull", fullname, gender, birthday, email, placeModel))
             return;
         if (!NetWorkInfo.isOnline(view.getActivity())) {
             view.onNoInternet();
@@ -159,7 +159,7 @@ public class ProfilePresenter extends BasicPresenter {
 
         view.showProgressBar(false, false, null, view.getActivity().getString(R.string.updating));
 
-        resp_full_profile.setAvatar(URL_AVATAR);
+        resp_full_profile.setAvatar(PATH_AVATAR);
         resp_full_profile.setFullname(fullname);
         resp_full_profile.setGender(gender);
         resp_full_profile.setBirthday(Constants.convertDataToLong(birthday));
@@ -187,7 +187,7 @@ public class ProfilePresenter extends BasicPresenter {
             view.onValidateError(view.getActivity().getString(R.string.error_input_birthday));
             return false;
         }
-        if (!validateText(email)) {
+        if (!validateEmail(email)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_email));
             return false;
         }

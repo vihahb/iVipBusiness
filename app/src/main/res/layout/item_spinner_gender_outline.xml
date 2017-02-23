@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/size_50"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/item.spinner.gender.txt_name"
         style="@style/textview_profile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:layout_height="@dimen/size_36"
+        android:background="@drawable/edittext_des"
         android:drawableLeft="@drawable/ic_action_gender"
-        android:drawablePadding="@dimen/size_26"
+        android:drawablePadding="@dimen/size_4"
         android:drawableStart="@drawable/ic_action_gender"
         android:gravity="center_vertical"
-        android:paddingLeft="-2dp"
-        android:paddingStart="-2dp"
+        android:paddingLeft="@dimen/size_4"
+        android:paddingRight="@dimen/size_4"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_13" />
 

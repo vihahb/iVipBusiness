@@ -62,7 +62,6 @@
         android:clickable="true"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"
         app:layout_anchor="@id/store_info.app_bar"
         app:layout_anchorGravity="bottom|right|end" />
 </android.support.design.widget.CoordinatorLayout>

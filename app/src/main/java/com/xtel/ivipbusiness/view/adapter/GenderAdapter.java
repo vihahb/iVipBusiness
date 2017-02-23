@@ -19,7 +19,7 @@ public class GenderAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
 
-    private boolean isEnable = true;
+    private boolean isEnable = true, isOutline = false;
     private String[] arrayList;
 
     public GenderAdapter(Activity activity, String[] arrayList) {
@@ -65,7 +65,10 @@ public class GenderAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_spinner_gender_normal, parent, false);
+            if (isOutline)
+                convertView = inflater.inflate(R.layout.item_spinner_gender_outline, parent, false);
+            else
+                convertView = inflater.inflate(R.layout.item_spinner_gender_normal, parent, false);
             viewHolder = new ViewHolder();
 
             viewHolder.view = convertView.findViewById(R.id.item_spinner_gender_view);
@@ -80,7 +83,6 @@ public class GenderAdapter extends BaseAdapter {
         else
             viewHolder.view.setBackgroundColor(activity.getResources().getColor(R.color.line_disable));
 
-        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, R.drawable.ic_action_gender);
         WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
 
         return convertView;

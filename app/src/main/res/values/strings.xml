@@ -31,7 +31,7 @@
     <string name="title_activity_update_news">Cập nhật bản tin</string>
     <string name="title_activity_list_fcm">Danh sách gửi tin</string>
     <string name="title_activity_send_fcm">Gửi bản tin</string>
-    <string name="title_activity_choose_option_fcm">Lọc theo</string>
+    <string name="title_activity_choose_option_fcm">Gửi theo nhóm</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -177,6 +177,11 @@
     <string name="end_time">Thời gian kết thúc</string>
     <string name="time_take_effect">Hiệu lực</string>
     <string name="exchange_point">Điểm quy đổi</string>
+    <string name="area">Khu vực</string>
+    <string name="age">Độ tuổi</string>
+    <string name="from">Từ</string>
+    <string name="to">Đến</string>
+    <string name="level">Cấp bậc</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
@@ -194,6 +199,7 @@
     <string name="delete_this_news">Bạn muốn xóa bản tin này</string>
     <string name="delete">Xóa ngay</string>
     <string name="cancel">Hủy bỏ</string>
+    <string name="cancel_one">Hủy</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
     <string name="not_update_phone">Chưa cập nhật số điện thoại</string>
@@ -235,5 +241,78 @@
     <string-array name="type_sale">
         <item>Giảm theo phần trăm</item>
         <item>Giảm thẳng tiền mặt</item>
+    </string-array>
+
+    <string-array name="level">
+        <item>Kim cương</item>
+        <item>Vàng</item>
+        <item>Bạc</item>
+        <item>Đồng</item>
+    </string-array>
+
+    <string-array name="area">
+        <item>An Giang</item>
+        <item>Bà Rịa - Vũng Tàu</item>
+        <item>Bắc Giang</item>
+        <item>Bắc Kạn</item>
+        <item>Bạc Liêu</item>
+        <item>Bắc Ninh</item>
+        <item>Bến Tre</item>
+        <item>Bình Định</item>
+        <item>Bình Dương</item>
+        <item>Bình Phước</item>
+        <item>Bình Thuận</item>
+        <item>Cà Mau</item>
+        <item>Cao Bằng</item>
+        <item>Đắk Lắk</item>
+        <item>Đắk Nông</item>
+        <item>Điện Biên</item>
+        <item>Đồng Nai</item>
+        <item>Đồng Tháp</item>
+        <item>Gia Lai</item>
+        <item>Hà Giang</item>
+        <item>Hà Nam</item>
+        <item>Hà Tĩnh</item>
+        <item>Hải Dương</item>
+        <item>Hậu Giang</item>
+        <item>Hòa Bình</item>
+        <item>Hưng Yên</item>
+        <item>Khánh Hòa</item>
+        <item>Kiên Giang</item>
+        <item>Kon Tum</item>
+        <item>Lai Châu</item>
+        <item>Lâm Đồng</item>
+        <item>Lạng Sơn</item>
+        <item>Lào Cai</item>
+        <item>Long An</item>
+        <item>Nam Định</item>
+        <item>Nghệ An</item>
+        <item>Ninh Bình</item>
+        <item>Ninh Thuận</item>
+        <item>Phú Thọ</item>
+        <item>Quảng Bình</item>
+        <item>Quảng Nam</item>
+        <item>Quảng Ngãi</item>
+        <item>Quảng Ninh</item>
+        <item>Quảng Trị</item>
+        <item>Sóc Trăng</item>
+        <item>Sơn La</item>
+        <item>Tây Ninh</item>
+        <item>Thái Bình</item>
+        <item>Thái Nguyên</item>
+        <item>Thanh Hóa</item>
+        <item>Thừa Thiên Huế</item>
+        <item>Tiền Giang</item>
+        <item>Trà Vinh</item>
+        <item>Tuyên Quang</item>
+        <item>Vĩnh Long</item>
+        <item>Vĩnh Phúc</item>
+        <item>Yên Bái</item>
+        <item>Phú Yên</item>
+        <item>Cần Thơ</item>
+        <item>Đà Nẵng</item>
+        <item>Hải Phòng</item>
+        <item>Hà Nội</item>
+        <item>TP HCM</item>
     </string-array>
 </resources>

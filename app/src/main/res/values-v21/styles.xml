@@ -237,14 +237,20 @@
         <item name="android:textSize">@dimen/font_13</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:paddingStart">@dimen/size_26</item>
         <item name="android:theme">@style/Theme_Checkbox</item>
     </style>
 
     <style name="Theme_Checkbox" parent="Base.Theme.AppCompat">
         <item name="colorControlNormal">#c5c5c5</item>
         <item name="colorAccent">#c5c5c5</item>
-        <item name="android:paddingStart">@dimen/size_26</item>
         <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="Theme_Checkbox_PrimaryKey" parent="Base.Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
     </style>
 
     <style name="Theme_Tablayout" parent="Theme.AppCompat.Light.DarkActionBar">

@@ -27,6 +27,8 @@
     <dimen name="size_28">28dp</dimen>
     <dimen name="size_30">30dp</dimen>
     <dimen name="size_32">32dp</dimen>
+    <dimen name="size_34">34dp</dimen>
+    <dimen name="size_35">35dp</dimen>
     <dimen name="size_36">36dp</dimen>
     <dimen name="size_38">38dp</dimen>
     <dimen name="size_39">39dp</dimen>

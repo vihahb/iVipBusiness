@@ -28,6 +28,8 @@ public class RESP_News extends RESP_Basic implements Serializable {
     private Voucher voucher;
     @Expose
     private boolean is_public;
+    @Expose
+    private Integer delete_voucher;
 
     public int getId() {
         return id;
@@ -99,5 +101,13 @@ public class RESP_News extends RESP_Basic implements Serializable {
 
     public void setIs_public(boolean is_public) {
         this.is_public = is_public;
+    }
+
+    public Integer getDelete_voucher() {
+        return delete_voucher;
+    }
+
+    public void setDelete_voucher(Integer delete_voucher) {
+        this.delete_voucher = delete_voucher;
     }
 }

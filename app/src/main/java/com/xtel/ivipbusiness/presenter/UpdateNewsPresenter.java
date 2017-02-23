@@ -41,7 +41,7 @@ public class UpdateNewsPresenter extends BasicPresenter {
     private RESP_News resp_news;
     private News news;
     private final String CHAIN = "CHAIN";
-    private String URL_BANNER, PATH_BANNER;
+    private String PATH_BANNER;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -53,7 +53,7 @@ public class UpdateNewsPresenter extends BasicPresenter {
                         @Override
                         public void onSuccess(RESP_News obj) {
                             resp_news = obj;
-                            URL_BANNER = obj.getBanner();
+//                            URL_BANNER = obj.getBanner();
                             view.onGetNewsInfoSuccess(obj);
                         }
 
@@ -142,10 +142,10 @@ public class UpdateNewsPresenter extends BasicPresenter {
     }
 
     public void updateNews(String title, int news_type, String des, boolean isPublic, boolean isVoucher, String begin_time, String end_time, String time_alive, String point, String number, String sale, int sale_type) {
-        if (URL_BANNER == null) {
-            view.showShortToast(-1, view.getActivity().getString(R.string.error_input_banner));
-            return;
-        }
+//        if (URL_BANNER == null) {
+//            view.showShortToast(-1, view.getActivity().getString(R.string.error_input_banner));
+//            return;
+//        }
         if (!validateText(title)) {
             view.showShortToast(0, view.getActivity().getString(R.string.error_input_title));
             return;
@@ -178,14 +178,14 @@ public class UpdateNewsPresenter extends BasicPresenter {
             }
         }
 
-        if (PATH_BANNER != null)
+//        if (PATH_BANNER != null)
             resp_news.setBanner(PATH_BANNER);
 
         resp_news.setStore_id(null);
         resp_news.setChain_store_id(null);
 
         resp_news.setId(news.getId());
-        resp_news.setNews_type((news_type + 1));
+        resp_news.setNews_type(news_type);
 //        resp_news.setBanner(URL_BANNER);
         resp_news.setDescription(des);
         resp_news.setTitle(title);
