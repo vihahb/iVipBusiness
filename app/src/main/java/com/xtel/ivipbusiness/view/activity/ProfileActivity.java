@@ -51,6 +51,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private TextView txt_total_stores, txt_date_create;
     private EditText edt_fullname, edt_email, edt_birthday, edt_phone, edt_address;
     private Spinner sp_gender;
+    private GenderAdapter typeAdapter;
     private MenuItem menuItem;
 
     private final int REQUEST_LOCATION = 99;
@@ -101,7 +102,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     private void initGender() {
         String[] arrayList = getResources().getStringArray(R.array.gender);
         sp_gender = findSpinner(R.id.profile_sp_gender);
-        GenderAdapter typeAdapter = new GenderAdapter(this, arrayList);
+        typeAdapter = new GenderAdapter(this, arrayList);
         sp_gender.setAdapter(typeAdapter);
     }
 
@@ -129,8 +130,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     }
 
     public void setEnableView(boolean isEnable) {
-        if (isEnable && swipeRefreshLayout.isRefreshing())
-            return;
+        typeAdapter.setEnable(isEnable);
 
         img_avatar.setEnabled(isEnable);
         img_banner.setEnabled(isEnable);
@@ -146,6 +146,17 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
         sp_gender.setEnabled(isEnable);
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Override
@@ -204,6 +215,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     @Override
     public void onUpdateProfileSuccess() {
+        setEnableView(false);
         closeProgressBar();
         showShortToast(getString(R.string.success_update_user));
         menuItem.setIcon(R.drawable.ic_action_edit_line);
@@ -312,8 +324,10 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.action_profile_edit:
+                if (swipeRefreshLayout.isRefreshing())
+                    break;
                 if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
-                    menuItem.setIcon(R.drawable.ic_action_done);
+                    menuItem.setIcon(R.drawable.ic_action_done_2);
                     setEnableView(true);
                 } else {
                     presenter.updateUser(edt_fullname.getText().toString(), sp_gender.getSelectedItemPosition(), edt_birthday.getText().toString(),

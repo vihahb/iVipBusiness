@@ -42,7 +42,7 @@
             android:fitsSystemWindows="false"
             app:fabBackgroundTint="@color/fab_background"
             app:fabGravity="bottom_end"
-            app:fabMenu="@menu/menu_nav_home"
+            app:fabMenu="@menu/menu_nav_list_fcm"
             app:miniFabBackgroundTint="@color/fab_background"
             app:miniFabDrawableTint="@android:color/white"
             app:miniFabTitleBackgroundTint="@color/fab_background"

@@ -1,7 +1,6 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -10,7 +9,7 @@ import android.widget.Spinner;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.SendFcmPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ISendFcmView;
-import com.xtel.ivipbusiness.view.adapter.SpinnerOneIconAdapter;
+import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.sdk.callback.DialogListener;
 
 public class SendFcmActivity extends BasicActivity implements ISendFcmView {
@@ -41,7 +40,7 @@ public class SendFcmActivity extends BasicActivity implements ISendFcmView {
     private void initGender() {
         String[] arrayList = getResources().getStringArray(R.array.gender);
         sp_gender = findSpinner(R.id.send_fcm_sp_gender);
-        SpinnerOneIconAdapter typeAdapter = new SpinnerOneIconAdapter(this, R.drawable.ic_action_gender, arrayList);
+        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this, R.drawable.ic_action_gender, arrayList);
         sp_gender.setAdapter(typeAdapter);
     }
 

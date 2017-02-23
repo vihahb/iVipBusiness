@@ -22,7 +22,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="-2dp"
         android:paddingStart="-2dp"
-        android:text="@string/store_des" />
+        android:text="@string/news_des" />
 
     <EditText
         android:id="@+id/add_news.edt_des"
@@ -82,8 +82,8 @@
                 android:layout_marginLeft="-5dp"
                 android:layout_marginStart="-5dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_time"
-                android:drawableStart="@drawable/ic_action_time"
+                android:drawableLeft="@drawable/ic_action_end_time"
+                android:drawableStart="@drawable/ic_action_end_time"
                 android:hint="@string/sale_percent"
                 android:inputType="number" />
         </LinearLayout>
@@ -121,8 +121,8 @@
                 android:layout_marginLeft="-5dp"
                 android:layout_marginStart="-5dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_time"
-                android:drawableStart="@drawable/ic_action_time"
+                android:drawableLeft="@drawable/ic_action_end_time"
+                android:drawableStart="@drawable/ic_action_end_time"
                 android:hint="@string/end_time"
                 android:inputType="textCapSentences"
                 android:longClickable="false" />

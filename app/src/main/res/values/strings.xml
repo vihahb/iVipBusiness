@@ -31,6 +31,7 @@
     <string name="title_activity_update_news">Cập nhật bản tin</string>
     <string name="title_activity_list_fcm">Danh sách gửi tin</string>
     <string name="title_activity_send_fcm">Gửi bản tin</string>
+    <string name="title_activity_choose_option_fcm">Lọc theo</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -64,6 +65,7 @@
     <string name="updating_store">Đang cập nhập…</string>
     <string name="doing_delete_news">Đang xóa bản tin…</string>
     <string name="doing_update_news">Đang cập nhật bản tin…</string>
+    <string name="doing_send_fcm">Đang gửi bản tin…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -75,6 +77,7 @@
     <string name="success_update_user">Cập nhật thông tin thành công</string>
     <string name="success_add_news">Thêm bản tin thành công</string>
     <string name="success_update_news">Cập nhật bản tin thành công</string>
+    <string name="success_send_fcm">Gửi bản tin thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -120,6 +123,7 @@
     <string name="error_user_not_exists">Tài khoản không tồn tại</string>
     <string name="error_not_found_chain">Không tìm thấy chuỗi cửa hàng</string>
     <string name="error_not_found_store">Không tìm thấy cửa hàng</string>
+    <string name="error_news_not_exitst">Bản tin không tồn tại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -155,6 +159,8 @@
     <string name="store_type">Loại cửa hàng</string>
     <string name="open_time">Mở cửa</string>
     <string name="close_time">Đóng cửa</string>
+    <string name="news_title">Tiêu đề bản tin</string>
+    <string name="news_des">Mô tả bản tin</string>
 
     <string name="total_point">Tổng điểm</string>
     <string name="remaining_point">Điểm còn lại</string>

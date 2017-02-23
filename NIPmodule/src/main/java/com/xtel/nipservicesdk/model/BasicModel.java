@@ -14,7 +14,7 @@ public abstract class BasicModel {
     protected final String GET_SHORT_INFO_USER = "/v0.1/user?type=Sort";
     protected final String UPDATE_USER = "/v0.1/user";
 
-    //    Business
+//    Store
     protected final String GET_LIST_CHAIN_TYPE = "/v0.1/store?type=";
     protected final String GET_LIST_CHAIN_PAGE = "&page=";
     protected final String GET_LIST_CHAIN_PAGE_SIZE = "&pagesize=";
@@ -29,6 +29,7 @@ public abstract class BasicModel {
     protected final String GET_STORE_INFO_ID = "/v0.1/store/";
     protected final String GET_STORE_INFO_TYPE = "?type=";
 
+//    Bản tin
     protected final String GET_NEWS_PAGE = "/v0.1/news?page=";
     protected final String GET_NEWS_PAGESISE = "&pagesize=";
     protected final String GET_NEWS_ID = "&id=";
@@ -36,6 +37,9 @@ public abstract class BasicModel {
 
     protected final String ADD_NEWS = "/v0.1/news";
     protected final String UPDATE_NEWS = "/v0.1/news/";
+
+//    Fcm
+    protected final String SEND_NOTIFY = "/v0.1/news/notify";
 
     //    Google
     protected final String GET_ADDRESS_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";

@@ -207,8 +207,8 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         menu_edi_storet.setIcon(R.drawable.ic_action_edit_line);
     }
 
-    public void restoreMenuIcon() {
-        menu_edi_storet.setIcon(R.drawable.ic_action_edit_line);
+    public void changeMenuIcon(int id) {
+        menu_edi_storet.setIcon(id);
     }
 
 
@@ -310,8 +310,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
 
             if (fragment != null) {
                 if (menu_edi_storet.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
-                    fragment.setEnableView(true);
-                    menu_edi_storet.setIcon(R.drawable.ic_action_done);
+                    fragment.enableToEdit();
                 } else {
                     fragment.updateStore();
                 }

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/item.spinner.edt_type"
+        android:id="@+id/item.spinner.type.txt_type"
         style="@style/textview_profile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_39"
@@ -21,6 +21,7 @@
         android:textSize="@dimen/font_13" />
 
     <View
+        android:id="@+id/item.spinner.type.view"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="@dimen/size_4"

@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.AddNewsPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IAddNewsView;
-import com.xtel.ivipbusiness.view.adapter.SpinnerOneIconAdapter;
+import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.ivipbusiness.view.adapter.TypeAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
@@ -101,7 +101,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         String[] arraylist = getResources().getStringArray(R.array.type_sale);
 
         sp_type_sale = findSpinner(R.id.add_news_sp_type_salse);
-        SpinnerOneIconAdapter typeAdapter = new SpinnerOneIconAdapter(this, R.drawable.ic_action_gender, arraylist);
+        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this, R.drawable.ic_action_gender, arraylist);
         sp_type_sale.setAdapter(typeAdapter);
     }
 

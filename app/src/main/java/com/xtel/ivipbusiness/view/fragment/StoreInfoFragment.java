@@ -139,9 +139,6 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     public void setEnableView(boolean isEnable) {
-        if (isEnable && resp_store == null)
-            return;
-
         edt_begin_time.setEnabled(isEnable);
         edt_end_time.setEnabled(isEnable);
         edt_name.setEnabled(isEnable);
@@ -306,6 +303,26 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         resp_store.setLocation_lng(placeModel.getLongtitude());
     }
 
+    public void enableToEdit() {
+        if (swipeRefreshLayout.isRefreshing())
+            return;
+
+        setEnableView(true);
+        ((ViewStoreActivity) getActivity()).changeMenuIcon(R.drawable.ic_action_done_2);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onGetDataError() {
@@ -344,7 +361,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
     @Override
     public void onUpdateStoreInfoSuccess() {
-        ((ViewStoreActivity) getActivity()).restoreMenuIcon();
+        ((ViewStoreActivity) getActivity()).changeMenuIcon(R.drawable.ic_action_edit_line);
         setEnableView(false);
 
         ((ViewStoreActivity) getActivity()).setResp_store(resp_store);

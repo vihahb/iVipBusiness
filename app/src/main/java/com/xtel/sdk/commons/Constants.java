@@ -66,4 +66,8 @@ public class Constants {
 
         return (calendar.getTimeInMillis() / 1000);
     }
+
+    public static long getNowTime() {
+        return (System.currentTimeMillis() / 1000);
+    }
 }

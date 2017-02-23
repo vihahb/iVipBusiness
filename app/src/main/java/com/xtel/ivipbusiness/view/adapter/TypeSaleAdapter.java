@@ -15,14 +15,15 @@ import com.xtel.sdk.utils.WidgetHelper;
  * Created by vulclph03762 on 12/11/2016
  */
 
-public class SpinnerOneIconAdapter extends BaseAdapter {
+public class TypeSaleAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
 
+    private boolean isEnable = true;
     private String[] arrayList;
     private int drawable;
 
-    public SpinnerOneIconAdapter(Activity activity, int drawable, String[] arrayList) {
+    public TypeSaleAdapter(Activity activity, int drawable, String[] arrayList) {
         this.activity = activity;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.arrayList = arrayList;
@@ -69,11 +70,17 @@ public class SpinnerOneIconAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_spinner_type_normal, parent, false);
             viewHolder = new ViewHolder();
 
-            viewHolder.textView = (TextView) convertView.findViewById(R.id.item_spinner_edt_type);
+            viewHolder.view = convertView.findViewById(R.id.item_spinner_type_view);
+            viewHolder.textView = (TextView) convertView.findViewById(R.id.item_spinner_type_txt_type);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        if (isEnable)
+            viewHolder.view.setBackgroundColor(activity.getResources().getColor(android.R.color.white));
+        else
+            viewHolder.view.setBackgroundColor(activity.getResources().getColor(R.color.line_disable));
 
         WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, drawable);
         WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
@@ -82,10 +89,16 @@ public class SpinnerOneIconAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
+        private View view;
         private TextView textView;
     }
 
     private class ViewHolderDropdown {
         private TextView textView;
+    }
+
+    public void setEnable(boolean isEnable) {
+        this.isEnable = isEnable;
+        notifyDataSetChanged();
     }
 }

@@ -50,7 +50,7 @@
         android:layout_marginBottom="@dimen/size_8"
         android:layout_marginLeft="@dimen/size_16"
         android:layout_marginRight="@dimen/size_16"
-        android:hint="@string/store_name"
+        android:hint="@string/news_title"
         android:inputType="textCapWords"
         tools:ignore="LabelFor" />
 </FrameLayout>

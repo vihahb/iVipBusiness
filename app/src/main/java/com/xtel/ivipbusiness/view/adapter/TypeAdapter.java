@@ -28,6 +28,7 @@ public class TypeAdapter extends BaseAdapter {
     private ArrayList<Type> arrayList;
     private Activity activity;
     private LayoutInflater inflater;
+    private boolean isEnable = true;
 
     public TypeAdapter(Activity activity) {
         this.activity = activity;
@@ -91,11 +92,17 @@ public class TypeAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_spinner_type_normal, parent, false);
             viewHolder = new ViewHolder();
 
-            viewHolder.textView = (TextView) convertView.findViewById(R.id.item_spinner_edt_type);
+            viewHolder.view = convertView.findViewById(R.id.item_spinner_type_view);
+            viewHolder.textView = (TextView) convertView.findViewById(R.id.item_spinner_type_txt_type);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        if (isEnable)
+            viewHolder.view.setBackgroundColor(activity.getResources().getColor(android.R.color.white));
+        else
+            viewHolder.view.setBackgroundColor(activity.getResources().getColor(R.color.line_disable));
 
         Type type = arrayList.get(position);
         WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, type.getResource());
@@ -105,10 +112,16 @@ public class TypeAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
+        private View view;
         private TextView textView;
     }
 
     private class ViewHolderDropdown {
         private TextView textView;
+    }
+
+    public void setEnable(boolean isEnable) {
+        this.isEnable = isEnable;
+        notifyDataSetChanged();
     }
 }

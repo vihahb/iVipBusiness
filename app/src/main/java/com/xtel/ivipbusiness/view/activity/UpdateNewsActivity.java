@@ -28,7 +28,7 @@ import com.xtel.ivipbusiness.model.entity.RESP_News;
 import com.xtel.ivipbusiness.model.entity.Voucher;
 import com.xtel.ivipbusiness.presenter.UpdateNewsPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IUpdateNewsView;
-import com.xtel.ivipbusiness.view.adapter.SpinnerOneIconAdapter;
+import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.ivipbusiness.view.adapter.TypeAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
@@ -55,6 +55,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     private TextView txt_public;
     private CheckBox chk_voucher;
     private Spinner sp_news_type, sp_type_sale;
+    private TypeAdapter typeAdapter;
     private LinearLayout layout_voucher;
 
     private RESP_News resp_news;
@@ -109,7 +110,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     //    Khởi tạo spinner chọn type
     private void initType() {
         sp_news_type = findSpinner(R.id.add_news_sp_type);
-        TypeAdapter typeAdapter = new TypeAdapter(this);
+        typeAdapter = new TypeAdapter(this);
         sp_news_type.setAdapter(typeAdapter);
     }
 
@@ -118,7 +119,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         String[] arraylist = getResources().getStringArray(R.array.type_sale);
 
         sp_type_sale = findSpinner(R.id.add_news_sp_type_salse);
-        SpinnerOneIconAdapter typeAdapter = new SpinnerOneIconAdapter(this, R.drawable.ic_action_gender, arraylist);
+        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this, R.drawable.ic_action_gender, arraylist);
         sp_type_sale.setAdapter(typeAdapter);
     }
 
@@ -132,9 +133,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     }
 
     public void setEnableView(boolean isEnable) {
-        if (isEnable && swipeRefreshLayout.isRefreshing())
-            return;
-
+        typeAdapter.setEnable(isEnable);
         img_camera.setEnabled(isEnable);
 
         edt_title.setEnabled(isEnable);
@@ -436,8 +435,10 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.action_add_news_done:
+                if (swipeRefreshLayout.isRefreshing())
+                    break;
                 if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
-                    menuItem.setIcon(R.drawable.ic_action_done);
+                    menuItem.setIcon(R.drawable.ic_action_done_2);
                     setEnableView(true);
                 } else {
                     presenter.updateNews(edt_title.getText().toString(), (sp_news_type.getSelectedItemPosition() + 2), edt_des.getText().toString(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
@@ -447,7 +448,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
             case R.id.action_add_news_send_fcm:
                 if (!swipeRefreshLayout.isRefreshing())
-                    startActivity(ListFcmActivity.class, Constants.MODEL, resp_news);
+                    startActivity(ListFcmActivity.class, Constants.MODEL, resp_news.getId());
                 break;
             default:
                 break;
