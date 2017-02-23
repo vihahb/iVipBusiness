@@ -32,7 +32,7 @@
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
         android:layout_marginTop="@dimen/size_10"
-        android:background="@drawable/edittext_border_0_5"
+        android:background="@drawable/edittext_des"
         android:inputType="textMultiLine"
         android:minLines="10"
         android:padding="@dimen/size_8"

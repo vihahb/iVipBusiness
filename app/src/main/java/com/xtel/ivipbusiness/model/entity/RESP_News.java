@@ -41,7 +41,7 @@ public class RESP_News extends RESP_Basic implements Serializable {
         return store_id;
     }
 
-    public void setStore_id(int store_id) {
+    public void setStore_id(Integer store_id) {
         this.store_id = store_id;
     }
 
@@ -49,7 +49,7 @@ public class RESP_News extends RESP_Basic implements Serializable {
         return chain_store_id;
     }
 
-    public void setChain_store_id(int chain_store_id) {
+    public void setChain_store_id(Integer chain_store_id) {
         this.chain_store_id = chain_store_id;
     }
 

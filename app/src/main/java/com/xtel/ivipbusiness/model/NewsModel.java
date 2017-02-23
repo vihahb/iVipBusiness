@@ -49,7 +49,8 @@ public class NewsModel extends BasicModel {
         String url = API_BASE + UPDATE_NEWS + id;
         String session = LoginManager.getCurrentSession();
 
-        Log.e("getNews", url + "     " + session);
+        Log.e("updateNews", url + "     " + session);
+        Log.e("updateNews", jsonObject);
         requestServer.putApi(url, jsonObject, session, responseHandle);
     }
 

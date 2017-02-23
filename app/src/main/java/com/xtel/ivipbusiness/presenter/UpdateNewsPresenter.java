@@ -41,7 +41,7 @@ public class UpdateNewsPresenter extends BasicPresenter {
     private RESP_News resp_news;
     private News news;
     private final String CHAIN = "CHAIN";
-    private String URL_BANNER;
+    private String URL_BANNER, PATH_BANNER;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -129,7 +129,7 @@ public class UpdateNewsPresenter extends BasicPresenter {
         ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
             @Override
             public void onSuccess(RESP_Image resp_image, File file) {
-                URL_BANNER = resp_image.getServer_path();
+                PATH_BANNER = resp_image.getServer_path();
                 view.onLoadPicture(file);
             }
 
@@ -178,9 +178,15 @@ public class UpdateNewsPresenter extends BasicPresenter {
             }
         }
 
+        if (PATH_BANNER != null)
+            resp_news.setBanner(PATH_BANNER);
+
+        resp_news.setStore_id(null);
+        resp_news.setChain_store_id(null);
+
         resp_news.setId(news.getId());
         resp_news.setNews_type((news_type + 1));
-        resp_news.setBanner(URL_BANNER);
+//        resp_news.setBanner(URL_BANNER);
         resp_news.setDescription(des);
         resp_news.setTitle(title);
         resp_news.setIs_public(isPublic);

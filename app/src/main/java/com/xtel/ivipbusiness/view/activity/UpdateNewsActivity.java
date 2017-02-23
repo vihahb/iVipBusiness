@@ -148,6 +148,11 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         chk_voucher.setEnabled(isEnable);
         sp_news_type.setEnabled(isEnable);
         sp_type_sale.setEnabled(isEnable);
+
+        if (isEnable)
+            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des));
+        else
+            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
     }
 
     private void selectDate(final int type) {

@@ -149,8 +149,11 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         img_camera.setEnabled(isEnable);
         img_banner.setEnabled(isEnable);
         img_logo.setEnabled(isEnable);
-//        img_qr_code.setEnabled(isEnable);
-//        img_bar_code.setEnabled(isEnable);
+
+        if (isEnable)
+            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des));
+        else
+            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
     }
 
     private void initAnimationHideImage(View view) {
