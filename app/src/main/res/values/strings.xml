@@ -31,7 +31,8 @@
     <string name="title_activity_update_news">Cập nhật bản tin</string>
     <string name="title_activity_list_fcm">Danh sách gửi tin</string>
     <string name="title_activity_send_fcm">Gửi bản tin</string>
-    <string name="title_activity_choose_option_fcm">Gửi theo nhóm</string>
+    <string name="title_activity_send_group">Gửi theo nhóm</string>
+    <string name="title_activity_send_member">Gửi cho thành viên</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -105,6 +106,9 @@
     <string name="error_input_exchange_point">Vui lòng nhập điểm quy đổi</string>
     <string name="error_input_number_of_voucher">Vui lòng nhập số lượng voucher</string>
     <string name="error_input_sale">Vui lòng nhập phần trăm giảm giá</string>
+    <string name="error_input_area">Vui lòng chọn khu vực</string>
+    <string name="error_input_level">Vui lòng chọn cấp bậc</string>
+    <string name="error_input_age">Vui lòng nhập tuổi</string>
 
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>

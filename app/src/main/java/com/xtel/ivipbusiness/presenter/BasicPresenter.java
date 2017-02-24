@@ -51,7 +51,7 @@ abstract class BasicPresenter {
         return !(username.length() < 10 || username.length() > 11);
     }
 
-    protected boolean validateEmail(String text) {
+    boolean validateEmail(String text) {
         return !TextUtils.isEmpty(text) && android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches();
     }
 }

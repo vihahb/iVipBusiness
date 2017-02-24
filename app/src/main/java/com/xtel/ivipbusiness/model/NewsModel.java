@@ -55,7 +55,7 @@ public class NewsModel extends BasicModel {
     }
 
     public void deleteNews(int id, ResponseHandle responseHandle) {
-        String url = API_BASE + ADD_NEWS + id;
+        String url = API_BASE + GET_NEWS + id;
         String session = LoginManager.getCurrentSession();
 
         Log.e("deleteNews", url + "     " + session);

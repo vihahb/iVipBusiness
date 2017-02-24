@@ -69,7 +69,7 @@ public class UpdateNewsPresenter extends BasicPresenter {
                     NewsModel.getInstance().updateNews(news.getId(), (String) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
                         public void onSuccess(RESP_None obj) {
-                             view.onUpdateSuccess();
+                            view.onUpdateSuccess();
                         }
 
                         @Override
@@ -179,7 +179,7 @@ public class UpdateNewsPresenter extends BasicPresenter {
         }
 
 //        if (PATH_BANNER != null)
-            resp_news.setBanner(PATH_BANNER);
+        resp_news.setBanner(PATH_BANNER);
 
         resp_news.setStore_id(null);
         resp_news.setChain_store_id(null);
@@ -192,16 +192,18 @@ public class UpdateNewsPresenter extends BasicPresenter {
         resp_news.setIs_public(isPublic);
 
         if (isVoucher) {
-            Voucher voucher = new Voucher();
-            voucher.setBegin_time(Constants.convertDataToLong(begin_time));
-            voucher.setFinish_time(Constants.convertDataToLong(end_time));
-            voucher.setTime_alive(((long) (Integer.parseInt(time_alive) * 60)));
-            voucher.setNumber_of_voucher(Integer.parseInt(number));
-            voucher.setSales(Double.parseDouble(sale));
-            voucher.setSales_type((sale_type + 1));
-            voucher.setPoint(Integer.parseInt(point));
-
-            resp_news.setVoucher(voucher);
+            resp_news.getVoucher().setBegin_time(Constants.convertDataToLong(begin_time));
+            resp_news.getVoucher().setFinish_time(Constants.convertDataToLong(end_time));
+            resp_news.getVoucher().setTime_alive(((long) (Integer.parseInt(time_alive) * 60)));
+            resp_news.getVoucher().setNumber_of_voucher(Integer.parseInt(number));
+            resp_news.getVoucher().setSales(Double.parseDouble(sale));
+            resp_news.getVoucher().setSales_type((sale_type + 1));
+            resp_news.getVoucher().setPoint(Integer.parseInt(point));
+        } else {
+            if (resp_news.getVoucher() != null) {
+                resp_news.setVoucher(null);
+                resp_news.setDelete_voucher(1);
+            }
         }
 
         view.showProgressBar(false, false, null, view.getActivity().getString(R.string.doing_add_news));

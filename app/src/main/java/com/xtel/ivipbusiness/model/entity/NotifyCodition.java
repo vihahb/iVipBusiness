@@ -2,11 +2,13 @@ package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
- * Created by Vulcl on 2/23/2017.
+ * Created by Vulcl on 2/23/2017
  */
 
-public class NotifyCodition {
+public class NotifyCodition implements Serializable {
     @Expose
     private Integer[] levels;
     @Expose

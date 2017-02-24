@@ -29,7 +29,7 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
 
     private ProgressView progressView;
 
-    private final int REQUEST_CHOOSE_OPTION = 99;
+    private final int REQUEST_GROUP = 88, REQUEST_MEMBER = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,13 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
                 switch (id) {
                     case R.id.nav_list_fcm_send_people:
                         showProgressBar(false, false, null, getString(R.string.doing_send_fcm));
-                        presenter.sendToPeople();
+                        presenter.sendNotify(1, null);
                         break;
                     case R.id.nav_list_fcm_send_group:
-                        startActivityForResult(ChooseOptionFcmActivity.class, Constants.MODEL, 1, REQUEST_CHOOSE_OPTION);
+                        startActivityForResult(ChooseOptionFcmActivity.class, Constants.MODEL, 1, REQUEST_GROUP);
                         break;
                     case R.id.nav_list_fcm_send_member:
-
+                        startActivityForResult(ChooseOptionFcmActivity.class, Constants.MODEL, 2, REQUEST_MEMBER);
                         break;
                     default:
                         break;
@@ -74,6 +74,31 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
             }
         });
     }
+
+    private void sendNotify(int type, Intent data) {
+        showProgressBar(false, false, null, getString(R.string.doing_send_fcm));
+
+        NotifyCodition notifyCodition = null;
+        try {
+            notifyCodition = (NotifyCodition) data.getSerializableExtra(Constants.MODEL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (notifyCodition != null)
+            presenter.sendNotify(type, notifyCodition);
+        else
+            showShortToast(getString(R.string.error_try_again));
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onGetDataError() {
@@ -159,17 +184,10 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CHOOSE_OPTION && resultCode == RESULT_OK) {
-            NotifyCodition notifyCodition = null;
-            try {
-                notifyCodition = (NotifyCodition) data.getSerializableExtra(Constants.MODEL);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (notifyCodition != null) {
-
-            }
+        if (requestCode == REQUEST_GROUP && resultCode == RESULT_OK) {
+            sendNotify(2, data);
+        } else if (requestCode == REQUEST_MEMBER && resultCode == RESULT_OK) {
+            sendNotify(3, data);
         }
     }
 }

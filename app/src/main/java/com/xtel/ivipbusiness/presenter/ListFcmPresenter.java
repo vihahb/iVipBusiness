@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.presenter;
 import android.util.Log;
 
 import com.xtel.ivipbusiness.model.FcmModel;
+import com.xtel.ivipbusiness.model.entity.NotifyCodition;
 import com.xtel.ivipbusiness.model.entity.RESP_Fcm;
 import com.xtel.ivipbusiness.view.activity.inf.IListFcmView;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -66,12 +67,13 @@ public class ListFcmPresenter {
         Log.e("ListFcmActivity", "null k " + news_d);
     }
 
-    public void sendToPeople() {
+    public void sendNotify(int notify_type, NotifyCodition notify_condition) {
         RESP_Fcm resp_fcm = new RESP_Fcm();
 
         resp_fcm.setNews_id(news_d);
-        resp_fcm.setNotify_type(1);
+        resp_fcm.setNotify_type(notify_type);
         resp_fcm.setBegin_time(Constants.getNowTime());
+        resp_fcm.setNotify_condition(notify_condition);
 
         iCmd.execute(1, JsonHelper.toJson(resp_fcm));
     }

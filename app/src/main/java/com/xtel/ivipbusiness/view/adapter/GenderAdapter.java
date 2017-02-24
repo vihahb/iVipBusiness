@@ -78,10 +78,13 @@ public class GenderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if (isEnable)
-            viewHolder.view.setBackgroundColor(activity.getResources().getColor(android.R.color.white));
-        else
-            viewHolder.view.setBackgroundColor(activity.getResources().getColor(R.color.line_disable));
+        if (!isOutline) {
+            if (isEnable)
+                viewHolder.view.setBackgroundColor(activity.getResources().getColor(android.R.color.white));
+            else
+                viewHolder.view.setBackgroundColor(activity.getResources().getColor(R.color.line_disable));
+        } else
+            viewHolder.view.setVisibility(View.GONE);
 
         WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
 
@@ -100,5 +103,9 @@ public class GenderAdapter extends BaseAdapter {
     public void setEnable(boolean isEnable) {
         this.isEnable = isEnable;
         notifyDataSetChanged();
+    }
+
+    public void setOutline(boolean outline) {
+        isOutline = outline;
     }
 }
