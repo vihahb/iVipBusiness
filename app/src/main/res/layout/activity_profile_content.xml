@@ -29,6 +29,7 @@
         android:id="@+id/profile.edt_phone"
         style="@style/edittext_disable"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size_8"
         android:layout_height="@dimen/size_48"
         android:drawableLeft="@drawable/ic_action_phone"
         android:drawableStart="@drawable/ic_action_phone"

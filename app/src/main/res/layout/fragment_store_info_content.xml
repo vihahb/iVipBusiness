@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/size_16"
-    >
+    android:padding="@dimen/size_16">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +42,7 @@
         android:id="@+id/store_info.edt_address"
         style="@style/edittext_address_disable"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size_48"
         android:drawableLeft="@drawable/ic_action_location"
         android:drawableStart="@drawable/ic_action_location"
         android:hint="@string/address"
@@ -53,7 +52,7 @@
         android:id="@+id/store_info.edt_phone"
         style="@style/edittext_normal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size_48"
         android:drawableLeft="@drawable/ic_action_phone"
         android:drawableStart="@drawable/ic_action_phone"
         android:hint="@string/phone"
@@ -68,7 +67,8 @@
         android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_note"
         android:gravity="center_vertical"
-        android:text="@string/store_des" />
+        android:text="@string/store_des"
+        android:id="@+id/textView" />
 
     <EditText
         android:id="@+id/store_info.edt_des"
