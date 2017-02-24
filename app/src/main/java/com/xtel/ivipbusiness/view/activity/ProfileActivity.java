@@ -186,7 +186,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     @Override
     public void onGetProfileSuccess(RESP_Full_Profile obj) {
         WidgetHelper.getInstance().setAvatarImageURL(img_avatar, obj.getAvatar());
-        WidgetHelper.getInstance().setImageURL(img_banner, obj.getBanner());
+        WidgetHelper.getInstance().setImageBlurURL(img_banner, obj.getAvatar());
 
         WidgetHelper.getInstance().setTextViewNoResult(txt_total_stores, getString(R.string.store_number) + " " + obj.getStore_number());
         WidgetHelper.getInstance().setTextViewDate(txt_date_create, getString(R.string.day_create) + ": ", obj.getJoin_date());
@@ -215,6 +215,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     @Override
     public void onUpdateProfileSuccess() {
+        setResult(RESULT_OK);
         setEnableView(false);
         closeProgressBar();
         showShortToast(getString(R.string.success_update_user));
@@ -276,10 +277,11 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     public void onLoadPicture(File file, int type) {
         closeProgressBar();
 
-        if (type == 0)
-            WidgetHelper.getInstance().setImageFile(img_banner, file);
-        else
+//        if (type == 0)
+//            WidgetHelper.getInstance().setImageFile(img_banner, file);
+//        else
             WidgetHelper.getInstance().setAvatarImageFile(img_avatar, file);
+            WidgetHelper.getInstance().setImageBlurFile(img_banner, file);
     }
 
     @Override

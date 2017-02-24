@@ -15,8 +15,8 @@
         android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_gender"
         android:gravity="center_vertical"
-        android:paddingLeft="-2dp"
-        android:paddingStart="-2dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_13" />
 

@@ -7,9 +7,14 @@
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@android:color/white</item>
 
+        <item name="android:popupMenuStyle">@style/PopupMenu.MyAppTheme</item>
         <item name="android:windowBackground">@mipmap/background_window</item>
         <!--<item name="android:windowAnimationStyle">@null</item>-->
         <!--<item name="colorAccent">@color/colorAccent</item>-->
+    </style>
+
+    <style name="PopupMenu.MyAppTheme" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@android:color/white</item>
     </style>
 
     <style name="AppLoginTheme" parent="Theme.AccountKit">

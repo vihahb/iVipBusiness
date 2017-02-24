@@ -5,23 +5,26 @@
     android:background="@android:color/white"
     android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/item.spinner.area.chk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_12"
-        android:layout_marginStart="@dimen/size_12"
-        android:theme="@style/Theme_Checkbox_PrimaryKey" />
-
     <TextView
         android:id="@+id/item.spinner.area.txt"
         style="@style/textview_profile"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/size_12"
-        android:layout_marginStart="@dimen/size_12"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_marginLeft="@dimen/size_16"
+        android:layout_weight="1"
         android:drawablePadding="@dimen/size_26"
         android:gravity="center_vertical"
         android:text="@string/store_des"
         android:textColor="@color/colorPrimary" />
+
+    <CheckBox
+        android:id="@+id/item.spinner.area.chk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_12"
+        android:layout_marginLeft="@dimen/size_12"
+        android:layout_marginRight="@dimen/size_12"
+        android:layout_marginStart="@dimen/size_12"
+        android:theme="@style/Theme_Checkbox_PrimaryKey" />
 </LinearLayout>

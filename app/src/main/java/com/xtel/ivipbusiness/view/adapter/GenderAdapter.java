@@ -47,7 +47,10 @@ public class GenderAdapter extends BaseAdapter {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         ViewHolderDropdown viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_spinner_gender_dropdown, parent, false);
+            if (isOutline)
+                convertView = inflater.inflate(R.layout.item_spinner_gender_dropdown_outline, parent, false);
+            else
+                convertView = inflater.inflate(R.layout.item_spinner_gender_dropdown, parent, false);
             viewHolder = new ViewHolderDropdown();
 
             viewHolder.textView = (TextView) convertView.findViewById(R.id.item_spinner_txt_gender);

@@ -29,11 +29,7 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
-import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
-
-import io.github.yavski.fabspeeddial.FabSpeedDial;
-import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -48,9 +44,10 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     private ActionBar actionBar;
     private MenuItem menu_avatar;
 
-//    private final int REQUEST_ADD_STORE = 11;
+    //    private final int REQUEST_ADD_STORE = 11;
 //    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
     private final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
+    private final int REQUEST_PROFILE = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +58,10 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         presenter = new HomePresenter(this);
         initView();
         initNavigationView();
-//        initFloatingActionButton();
         replaceListStore();
     }
 
-        //     Khởi tạo view`
+    //     Khởi tạo view`
     private void initView() {
         drawer = findDrawerLayout(R.id.drawer_layout);
         navigationView = findNavigationView(R.id.nav_view);
@@ -128,29 +124,35 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
 
 
+    private ImageView img_avatar;
 
     @Override
     public void onGetShortUserDataSuccess(RESP_Full_Profile obj) {
-        final ImageView imageView = new ImageView(this);
-        imageView.setVisibility(View.GONE);
+        if (obj != null)
+            if (obj.getAvatar() != null) {
+                if (img_avatar == null)
+                    img_avatar = new ImageView(this);
+                img_avatar.setVisibility(View.GONE);
 
-        Picasso.with(getApplicationContext())
-                .load(obj.getAvatar())
-                .noPlaceholder()
-                .transform(new CircleTransform())
-                .error(R.mipmap.ic_launcher)
-                .into(imageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        menu_avatar.setIcon(imageView.getDrawable());
-                        imageView.destroyDrawingCache();
-                    }
+                String finalUrl = obj.getAvatar().replace("https", "http").replace("9191", "9190");
 
-                    @Override
-                    public void onError() {
+                Picasso.with(HomeActivity.this)
+                        .load(finalUrl)
+                        .noPlaceholder()
+                        .transform(new CircleTransform())
+                        .error(R.mipmap.ic_launcher)
+                        .into(img_avatar, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                menu_avatar.setIcon(img_avatar.getDrawable());
+                                img_avatar.destroyDrawingCache();
+                            }
 
-                    }
-                });
+                            @Override
+                            public void onError() {
+                            }
+                        });
+            }
     }
 
     @Override
@@ -208,7 +210,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.action_home_user_info)
-            startActivity(ProfileActivity.class);
+            startActivityForResult(ProfileActivity.class, REQUEST_PROFILE);
 //        else if (id == R.id.action_home_create_store) {
 //            if (!NetWorkInfo.isOnline(getApplicationContext())) {
 //                showShortToast(getString(R.string.error_no_internet));
@@ -248,8 +250,8 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 111 && resultCode == RESULT_OK) {
-            Log.e("result", "data " + data.getData().toString());
+        if (requestCode == REQUEST_PROFILE && resultCode == RESULT_OK) {
+            presenter.getFullUserData();
         }
     }
 

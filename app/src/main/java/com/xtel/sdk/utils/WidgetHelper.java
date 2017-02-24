@@ -1,5 +1,8 @@
 package com.xtel.sdk.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.xtel.ivipbusiness.view.widget.CircleTransform;
 
 import java.io.File;
 import java.util.Calendar;
+
+import jp.wasabeef.blurry.Blurry;
 
 /**
  * Created by Vulcl on 1/17/2017
@@ -75,6 +80,50 @@ public class WidgetHelper {
                         Log.e("WidgetHelper", "load error " + finalUrl);
                     }
                 });
+    }
+
+    public void setImageBlurURL(final ImageView imageBlur, String url) {
+        String finalUrl = url.replace("https", "http").replace("9191", "9190");
+        Picasso.with(MyApplication.context)
+                .load(finalUrl)
+                .noPlaceholder()
+                .error(R.mipmap.ic_avatar_default)
+                .into(imageBlur, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("setImageBlurURL", "success");
+                        Bitmap bitmap = ((BitmapDrawable) imageBlur.getDrawable()).getBitmap();
+
+                        Blurry.with(MyApplication.context).from(bitmap).into(imageBlur);
+
+//                        Bitmap blurredBitmap = BlurBuilder.blur(MyApplication.context, bitmap);
+//                        imageBlur.setImageDrawable(new BitmapDrawable(MyApplication.context.getResources(), blurredBitmap));
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("setImageBlurURL", "error");
+                    }
+                });
+    }
+
+    public void setImageBlurResource(final ImageView imageBlur, int resource) {
+        Bitmap bitmap = BitmapFactory.decodeResource(MyApplication.context.getResources(), resource);
+
+        Blurry.with(MyApplication.context).from(bitmap).into(imageBlur);
+//        Bitmap blurredBitmap = BlurBuilder.blur(MyApplication.context, bitmap);
+//        imageBlur.setImageDrawable(new BitmapDrawable(MyApplication.context.getResources(), blurredBitmap));
+    }
+
+    public void setImageBlurFile(final ImageView imageBlur, File file) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
+
+        Blurry.with(MyApplication.context).from(bitmap).into(imageBlur);
+
+//        Bitmap blurredBitmap = BlurBuilder.blur(MyApplication.context, bitmap);
+//        imageBlur.setImageDrawable(new BitmapDrawable(MyApplication.context.getResources(), blurredBitmap));
     }
 
     public void setSmallImageURL(ImageView view, String url) {

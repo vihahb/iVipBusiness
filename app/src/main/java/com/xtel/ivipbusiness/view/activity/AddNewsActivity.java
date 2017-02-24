@@ -4,12 +4,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -127,13 +130,29 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void setPublic() {
-        isPublic = !isPublic;
-
-        if (isPublic)
-            WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_world_white_18);
-        else
-            WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_private_gray_18);
+    private void setPublic(View view) {
+//        Context wrapper = new ContextThemeWrapper(getApplicationContext(), R.style.MyPopupMenu);
+        final PopupMenu popup = new PopupMenu(getApplicationContext(), view);
+        popup.getMenuInflater().inflate(R.menu.menu_nav_add_news, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_add_news_private:
+                        isPublic = false;
+                        WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_private_gray_18);
+                        break;
+                    case R.id.nav_add_news_puplic:
+                        isPublic = true;
+                        WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_world_white_18);
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+        popup.show();
     }
 
     private void showLayout() {
@@ -207,7 +226,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 selectDate(1);
                 break;
             case R.id.add_news_txt_public:
-                setPublic();
+                setPublic(v);
                 break;
             case R.id.add_news_img_camera:
                 presenter.takePicture();

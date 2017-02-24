@@ -83,11 +83,10 @@
                         android:drawableStart="@drawable/ic_action_log_out"
                         android:fitsSystemWindows="false"
                         android:gravity="center_vertical|left|start"
-                        android:paddingLeft="@dimen/size_14"
-                        android:paddingRight="@dimen/size_14"
+                        android:paddingLeft="@dimen/size_16"
+                        android:paddingRight="@dimen/size_16"
                         android:text="@string/logout"
-                        android:theme="@style/Theme_Tablayout"
-                        app:theme="@style/Theme_Tablayout" />
+                        android:theme="@style/Theme_Tablayout" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </android.support.design.widget.CoordinatorLayout>

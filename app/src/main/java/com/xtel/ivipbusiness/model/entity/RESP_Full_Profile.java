@@ -32,8 +32,6 @@ public class RESP_Full_Profile extends RESP_Basic {
     private int store_number;
     @Expose
     private long join_date;
-    @Expose
-    private String banner;
 
     public String getFullname() {
         return fullname;
@@ -129,13 +127,5 @@ public class RESP_Full_Profile extends RESP_Basic {
 
     public void setJoin_date(long join_date) {
         this.join_date = join_date;
-    }
-
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setBanner(String banner) {
-        this.banner = banner;
     }
 }

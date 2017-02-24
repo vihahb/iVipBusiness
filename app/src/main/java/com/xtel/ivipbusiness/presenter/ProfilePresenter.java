@@ -41,7 +41,7 @@ public class ProfilePresenter extends BasicPresenter {
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
-    private String PATH_AVATAR;
+    private String PATH_AVATAR, URL_AVATAR;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -67,6 +67,7 @@ public class ProfilePresenter extends BasicPresenter {
                 UserModel.getInstance().updateUserInfo(resp_full_profile, new ResponseHandle<RESP_None>(RESP_None.class) {
                     @Override
                     public void onSuccess(RESP_None obj) {
+                        resp_full_profile.setAvatar(URL_AVATAR);
                         UserModel.getInstance().saveFullUserInfo(resp_full_profile);
                         view.onUpdateProfileSuccess();
                     }
@@ -97,8 +98,7 @@ public class ProfilePresenter extends BasicPresenter {
         if (resp_full_profile != null) {
 //            URL_AVATAR = resp_full_profile.getAvatar();
             view.onGetProfileSuccess(resp_full_profile);
-        }
-        else
+        } else
             iCmd.execute(1);
     }
 
@@ -127,18 +127,16 @@ public class ProfilePresenter extends BasicPresenter {
     }
 
     public void postImage(Bitmap bitmap, final int type) {
-        boolean isBigImage;
-        isBigImage = type == 0;
-
-        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
+        ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
             @Override
             public void onSuccess(RESP_Image resp_image, File file) {
 //                if (type == 0) {
 //                    PATH_BANNER = resp_image.getServer_path();
 //                    view.onLoadPicture(file, type);
 //                } else {
-                    PATH_AVATAR = resp_image.getServer_path();
-                    view.onLoadPicture(file, type);
+                PATH_AVATAR = resp_image.getServer_path();
+                URL_AVATAR = resp_image.getUri();
+                view.onLoadPicture(file, type);
 //                }
             }
 

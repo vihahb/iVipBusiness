@@ -118,8 +118,8 @@
                                 android:layout_marginEnd="@dimen/size_8"
                                 android:layout_marginRight="@dimen/size_8"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/ic_action_phone"
-                                android:drawableStart="@drawable/ic_action_phone"
+                                android:drawableLeft="@drawable/ic_action_age"
+                                android:drawableStart="@drawable/ic_action_age"
                                 android:hint="@string/from"
                                 android:inputType="phone" />
 
@@ -136,8 +136,8 @@
                                 android:layout_marginLeft="@dimen/size_8"
                                 android:layout_marginStart="@dimen/size_8"
                                 android:layout_weight="1"
-                                android:drawableLeft="@drawable/ic_action_phone"
-                                android:drawableStart="@drawable/ic_action_phone"
+                                android:drawableLeft="@drawable/ic_action_age"
+                                android:drawableStart="@drawable/ic_action_age"
                                 android:hint="@string/to"
                                 android:inputType="phone" />
                         </LinearLayout>

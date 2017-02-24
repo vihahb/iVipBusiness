@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -135,6 +136,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     public void setEnableView(boolean isEnable) {
         typeAdapter.setEnable(isEnable);
         img_camera.setEnabled(isEnable);
+        txt_public.setEnabled(isEnable);
 
         edt_title.setEnabled(isEnable);
         edt_des.setEnabled(isEnable);
@@ -185,13 +187,28 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
 //        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
 //    }
 
-    private void setPublic() {
-        isPublic = !isPublic;
-
-        if (isPublic)
-            WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_world_white_18);
-        else
-            WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_private_gray_18);
+    private void setPublic(View view) {
+        final PopupMenu popup = new PopupMenu(getApplicationContext(), view);
+        popup.getMenuInflater().inflate(R.menu.menu_nav_add_news, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_add_news_private:
+                        isPublic = false;
+                        WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_private_gray_18);
+                        break;
+                    case R.id.nav_add_news_puplic:
+                        isPublic = true;
+                        WidgetHelper.getInstance().setTextViewDrawable(txt_public, 0, R.mipmap.ic_world_white_18);
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+        popup.show();
     }
 
     private void showLayout() {
@@ -225,6 +242,26 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -237,7 +274,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 selectDate(1);
                 break;
             case R.id.add_news_txt_public:
-                setPublic();
+                setPublic(v);
                 break;
             case R.id.add_news_img_camera:
                 presenter.takePicture();

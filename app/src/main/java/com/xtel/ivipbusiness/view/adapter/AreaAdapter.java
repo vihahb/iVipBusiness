@@ -1,8 +1,6 @@
 package com.xtel.ivipbusiness.view.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +23,12 @@ public class AreaAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
 
+    private boolean isArea;
     private ArrayList<Area> arrayList;
 
-    public AreaAdapter(Context context, ArrayList<Area> arrayList) {
+    public AreaAdapter(Context context, boolean isArea, ArrayList<Area> arrayList) {
         this.context = context;
+        this.isArea = isArea;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.arrayList = arrayList;
     }
@@ -80,7 +80,10 @@ public class AreaAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_spinner_area_normal, parent, false);
+            if (isArea)
+                convertView = inflater.inflate(R.layout.item_spinner_area_normal, parent, false);
+            else
+                convertView = inflater.inflate(R.layout.item_spinner_level_normal, parent, false);
             viewHolder = new ViewHolder();
 
             viewHolder.view = convertView.findViewById(R.id.item_spinner_area_view);

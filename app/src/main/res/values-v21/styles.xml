@@ -6,12 +6,18 @@
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@android:color/white</item>
+
         <!--<item name="colorAccent">@color/colorAccent</item>-->
         <!--<item name="android:windowAnimationStyle">@null</item>-->
+        <item name="android:popupMenuStyle">@style/PopupMenu.MyAppTheme</item>
         <item name="android:windowBackground">@mipmap/background_window</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="PopupMenu.MyAppTheme" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@android:color/white</item>
     </style>
 
     <style name="AppLoginTheme" parent="Theme.AccountKit">
@@ -69,7 +75,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Toolbar_TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/font_15</item>
     </style>
 
     <style name="Theme.MyApp.ActionBar" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

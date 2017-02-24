@@ -88,7 +88,7 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
         }
 
         sp_level = findSpinner(R.id.option_sp_level);
-        AreaAdapter areaAdapter = new AreaAdapter(getApplicationContext(), arrayList_level);
+        AreaAdapter areaAdapter = new AreaAdapter(getApplicationContext(), false, arrayList_level);
         sp_level.setAdapter(areaAdapter);
     }
 
@@ -101,7 +101,7 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
         }
 
         Spinner sp_area = findSpinner(R.id.option_sp_area);
-        AreaAdapter areaAdapter = new AreaAdapter(getApplicationContext(), arrayList_area);
+        AreaAdapter areaAdapter = new AreaAdapter(getApplicationContext(), true, arrayList_area);
         sp_area.setAdapter(areaAdapter);
     }
 

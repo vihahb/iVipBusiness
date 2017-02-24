@@ -122,7 +122,7 @@ public class ImageManager {
 
                 if (width > 1000 || height > 1000) {
                     int new_width, new_height;
-                    while (width > 1280 || height > 1280) {
+                    while (width > 1000 || height > 1000) {
                         width = width * 0.8;
                         height = height * 0.8;
                         Log.e("tb_bitmap_run", width + "       " + height);
@@ -177,6 +177,7 @@ public class ImageManager {
                 .load(SERVER_API)
 //                .setMultipartParameter("goop", "noop")
 //                .setMultipartFile("archive", "application/zip", file)
+                .setTimeout(60000)
                 .setMultipartFile("image", file)
                 .asString()
                 .setCallback(new FutureCallback<String>() {

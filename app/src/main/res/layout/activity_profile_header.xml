@@ -2,18 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/size_50"
     android:background="@color/colorPrimaryKey_90">
 
     <ImageView
         android:id="@+id/profile.img_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size_180"
+        android:src="@mipmap/ic_avatar_default"
         android:layout_alignBottom="@+id/profile.layout_header_content"
         android:layout_alignTop="@+id/profile.layout_header_content"
-        android:background="@color/colorPrimary"
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_180"
+        android:background="@color/black_40" />
 
     <LinearLayout
         android:id="@+id/profile.layout_header_content"

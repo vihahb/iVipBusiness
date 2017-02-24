@@ -93,6 +93,9 @@ dependencies {
     //noinspection GradleDependency
     compile 'com.google.android.gms:play-services-location:10.0.0'
     //    End Google map
+    //    blur
+    compile 'jp.wasabeef:blurry:2.1.0'
+    //    End blur
     //  Fabric
     compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
         transitive = true;

@@ -62,7 +62,6 @@ public class UserModel extends BasicModel {
         SharedPreferencesUtils.getInstance().putStringValue(USER_STATUS, resp_full_profile.getStatus());
         SharedPreferencesUtils.getInstance().putIntValue(USER_STORE_NUMBER, resp_full_profile.getStore_number());
         SharedPreferencesUtils.getInstance().putLongValue(USER_JOIN_DATE, resp_full_profile.getJoin_date());
-        SharedPreferencesUtils.getInstance().putStringValue(USER_BANNER, resp_full_profile.getBanner());
     }
 
     public RESP_Full_Profile getFulllUserInfo() {
@@ -80,7 +79,6 @@ public class UserModel extends BasicModel {
         resp_full_profile.setStatus(SharedPreferencesUtils.getInstance().getStringValue(USER_STATUS));
         resp_full_profile.setStore_number(SharedPreferencesUtils.getInstance().getIntValue(USER_STORE_NUMBER));
         resp_full_profile.setJoin_date(SharedPreferencesUtils.getInstance().getLongValue(USER_JOIN_DATE));
-        resp_full_profile.setBanner(SharedPreferencesUtils.getInstance().getStringValue(USER_BANNER));
 
         return resp_full_profile;
     }

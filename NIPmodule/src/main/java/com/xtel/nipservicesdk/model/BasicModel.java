@@ -59,7 +59,6 @@ public abstract class BasicModel {
     protected final String USER_STATUS = "user_status";
     protected final String USER_STORE_NUMBER = "user_store_number";
     protected final String USER_JOIN_DATE = "user_join_date";
-    protected final String USER_BANNER = "user_banner";
 
     protected RequestServer requestServer = new RequestServer();
 }
