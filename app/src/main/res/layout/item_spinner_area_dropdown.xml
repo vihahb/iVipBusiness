@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/item.spinner.area.txt"
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/size_16"

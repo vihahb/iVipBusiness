@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/item.spinner.type.txt_type"
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_39"
         android:background="@android:color/transparent"

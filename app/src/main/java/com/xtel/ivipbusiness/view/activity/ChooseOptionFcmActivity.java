@@ -1,6 +1,8 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,6 +26,8 @@ import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.blurry.Blurry;
 
 public class ChooseOptionFcmActivity extends BasicActivity implements View.OnClickListener {
     private ActionBar actionBar;
@@ -63,10 +69,10 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
         edt_to = findEditText(R.id.option_edt_to);
         txt_level = findTextView(R.id.option_txt_level);
 
-        Button btn_cancel = findButton(R.id.option_btn_cancel);
+//        Button btn_cancel = findButton(R.id.option_btn_cancel);
         Button btn_done = findButton(R.id.option_btn_done);
 
-        btn_cancel.setOnClickListener(this);
+//        btn_cancel.setOnClickListener(this);
         btn_done.setOnClickListener(this);
     }
 
@@ -255,15 +261,11 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
         return level;
     }
 
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
 
         switch (id) {
-            case R.id.option_btn_cancel:
-                closeDialog();
-                break;
             case R.id.option_btn_done:
                 doneOption();
                 break;
@@ -275,7 +277,7 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
-            finish();
+            closeOption();
         return super.onOptionsItemSelected(item);
     }
 }

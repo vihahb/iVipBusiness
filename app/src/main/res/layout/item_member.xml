@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/item.member.txt_fullname"
-            style="@style/textview_profile"
+            style="@style/textview_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size_16"
@@ -46,21 +46,21 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/textview_profile"
+                style="@style/textview_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/total_point" />
 
             <TextView
                 android:id="@+id/item.member.txt_total_point"
-                style="@style/textview_profile"
+                style="@style/textview_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
                 android:textColor="@color/text_color_member" />
 
             <TextView
-                style="@style/textview_profile"
+                style="@style/textview_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
@@ -68,7 +68,7 @@
 
             <TextView
                 android:id="@+id/item.member.txt_remaining_point"
-                style="@style/textview_profile"
+                style="@style/textview_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"

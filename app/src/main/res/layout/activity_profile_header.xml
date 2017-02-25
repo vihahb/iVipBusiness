@@ -8,11 +8,11 @@
         android:id="@+id/profile.img_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_180"
-        android:src="@mipmap/ic_avatar_default"
         android:layout_alignBottom="@+id/profile.layout_header_content"
         android:layout_alignTop="@+id/profile.layout_header_content"
         android:contentDescription="@null"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_avatar_default" />
 
     <View
         android:layout_width="match_parent"
@@ -25,28 +25,26 @@
         android:layout_height="@dimen/size_180"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/size_16"
-        android:paddingRight="@dimen/size_16">
+        android:paddingLeft="@dimen/size_18"
+        android:paddingRight="@dimen/size_18">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/size_12"
-            android:paddingLeft="@dimen/size_4"
-            android:paddingRight="@dimen/size_4"
             android:paddingTop="@dimen/size_8">
 
             <TextView
                 android:id="@+id/profile.txt_date_create"
-                style="@style/textview_profile"
+                style="@style/textview_normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/day_create" />
 
             <TextView
                 android:id="@+id/profile.txt_total_store"
-                style="@style/textview_profile"
+                style="@style/textview_normal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16"
@@ -59,8 +57,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1"
-            android:layout_marginLeft="@dimen/size_4"
-            android:layout_marginRight="@dimen/size_4"
             android:background="@android:color/white" />
 
         <LinearLayout
@@ -79,21 +75,21 @@
                 android:orientation="vertical"
                 android:weightSum="2">
 
-                <EditText
+                <TextView
                     android:id="@+id/profile.txt_fullname"
-                    style="@style/edittext_no_drawable_low"
+                    style="@style/textview_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/fullname"
-                    android:inputType="textCapWords" />
+                    android:textColor="@android:color/white" />
 
-                <EditText
+                <TextView
                     android:id="@+id/profile.txt_email"
-                    style="@style/edittext_no_drawable_low"
+                    style="@style/textview_normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginTop="@dimen/size_8"
+                    android:hint="@string/email" />
             </LinearLayout>
 
             <LinearLayout

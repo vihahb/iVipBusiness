@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
-        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_8"
         android:background="@drawable/edittext_des_disable"
         android:inputType="textMultiLine"
         android:minLines="6"
@@ -98,12 +98,12 @@
         android:layout_marginBottom="@dimen/size_16"
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
-        android:layout_marginTop="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_14"
         android:gravity="right|end|center_horizontal"
         android:orientation="horizontal">
 
         <TextView
-            style="@style/textview_profile"
+            style="@style/textview_normal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"

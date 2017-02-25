@@ -9,13 +9,32 @@
     android:paddingTop="@dimen/size_16">
 
     <EditText
+        android:id="@+id/profile.edt_fullname"
+        style="@style/edittext_normal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:drawableLeft="@drawable/ic_action_name"
+        android:drawableStart="@drawable/ic_action_name"
+        android:hint="@string/fullname"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/profile.edt_email"
+        style="@style/edittext_normal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:drawableLeft="@drawable/ic_action_email"
+        android:drawableStart="@drawable/ic_action_email"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
         android:id="@+id/profile.edt_birth_day"
         style="@style/edittext_disable"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_48"
         android:drawableLeft="@drawable/ic_action_date"
         android:drawableStart="@drawable/ic_action_date"
-        android:focusable="false"
         android:hint="@string/birth_day"
         android:inputType="date" />
 
@@ -29,22 +48,22 @@
         android:id="@+id/profile.edt_phone"
         style="@style/edittext_disable"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/size_8"
         android:layout_height="@dimen/size_48"
+        android:layout_marginTop="@dimen/size_8"
         android:drawableLeft="@drawable/ic_action_phone"
         android:drawableStart="@drawable/ic_action_phone"
-        android:focusable="false"
         android:hint="@string/phone"
         android:inputType="phone" />
 
     <EditText
         android:id="@+id/profile.edt_address"
-        style="@style/edittext_address_disable"
+        style="@style/edittext_multi_line"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_48"
+        android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_action_location"
         android:drawableStart="@drawable/ic_action_location"
         android:gravity="center_vertical"
         android:hint="@string/address"
-        android:inputType="text" />
+        android:inputType="textMultiLine|textCapSentences"
+        android:minHeight="@dimen/size_48" />
 </LinearLayout>

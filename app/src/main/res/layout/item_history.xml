@@ -15,13 +15,13 @@
     
     <TextView
         android:id="@+id/item.history.txt_date"
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name" />
 
     <TextView
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_16"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/item.history.txt_content"
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_16"

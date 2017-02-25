@@ -147,8 +147,8 @@ public class ProfilePresenter extends BasicPresenter {
         });
     }
 
-    public void updateUser(String fullname, int gender, String birthday, String email, PlaceModel placeModel) {
-        if (!validateInput("notnull", fullname, gender, birthday, email, placeModel))
+    public void updateUser(String fullname, int gender, String birthday, String email, String address) {
+        if (!validateInput("notnull", fullname, gender, birthday, email, address))
             return;
         if (!NetWorkInfo.isOnline(view.getActivity())) {
             view.onNoInternet();
@@ -162,13 +162,13 @@ public class ProfilePresenter extends BasicPresenter {
         resp_full_profile.setGender(gender);
         resp_full_profile.setBirthday(Constants.convertDataToLong(birthday));
         resp_full_profile.setEmail(email);
-        resp_full_profile.setAddress(placeModel.getAddress());
+        resp_full_profile.setAddress(address);
 
         Log.e(this.getClass().getSimpleName(), JsonHelper.toJson(resp_full_profile));
         iCmd.execute(2);
     }
 
-    private boolean validateInput(String avatar, String fullname, int gender, String birthday, String email, PlaceModel placeModel) {
+    private boolean validateInput(String avatar, String fullname, int gender, String birthday, String email, String address) {
         if (!validateText(avatar)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_avatar));
             return false;
@@ -189,7 +189,7 @@ public class ProfilePresenter extends BasicPresenter {
             view.onValidateError(view.getActivity().getString(R.string.error_input_email));
             return false;
         }
-        if (placeModel == null) {
+        if (!validateEmail(address)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_address));
             return false;
         }

@@ -6,12 +6,14 @@
 
     <TextView
         android:id="@+id/item.spinner.gender.txt_name"
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
         android:background="@drawable/edittext_des"
+        android:drawableEnd="@drawable/ic_arrow_drop_down_white_36dp"
         android:drawableLeft="@drawable/ic_action_gender"
         android:drawablePadding="@dimen/size_4"
+        android:drawableRight="@drawable/ic_arrow_drop_down_white_36dp"
         android:drawableStart="@drawable/ic_action_gender"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/size_4"

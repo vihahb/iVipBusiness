@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/item.spinner.area.txt_name"
-        style="@style/textview_profile"
+        style="@style/textview_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
         android:background="@drawable/edittext_des"

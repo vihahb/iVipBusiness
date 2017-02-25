@@ -48,14 +48,14 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ImageView img_avatar, img_banner;
-    private TextView txt_total_stores, txt_date_create;
+    private TextView txt_total_stores, txt_date_create, txt_fullname, txt_email;
     private EditText edt_fullname, edt_email, edt_birthday, edt_phone, edt_address;
     private Spinner sp_gender;
     private GenderAdapter typeAdapter;
     private MenuItem menuItem;
 
-    private final int REQUEST_LOCATION = 99;
-    private PlaceModel placeModel;
+//    private final int REQUEST_LOCATION = 99;
+//    private PlaceModel placeModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +90,11 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
         txt_total_stores = findTextView(R.id.profile_txt_total_store);
         txt_date_create = findTextView(R.id.profile_txt_date_create);
+        txt_fullname = findTextView(R.id.profile_txt_fullname);
+        txt_email = findTextView(R.id.profile_txt_email);
 
-        edt_fullname = findEditText(R.id.profile_txt_fullname);
-        edt_email = findEditText(R.id.profile_txt_email);
+        edt_fullname = findEditText(R.id.profile_edt_fullname);
+        edt_email = findEditText(R.id.profile_edt_email);
         edt_birthday = findEditText(R.id.profile_edt_birth_day);
         edt_phone = findEditText(R.id.profile_edt_phone);
         edt_address = findEditText(R.id.profile_edt_address);
@@ -108,7 +110,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
     private void initListener() {
         edt_birthday.setOnClickListener(this);
-        edt_address.setOnClickListener(this);
+//        edt_address.setOnClickListener(this);
 
         img_avatar.setOnClickListener(this);
     }
@@ -173,10 +175,10 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
                 finishAffinity();
                 startActivityAndFinish(LoginActivity.class);
                 break;
-            case R.id.profile_edt_address:
-                if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, this, REQUEST_LOCATION))
-                    startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
-                break;
+//            case R.id.profile_edt_address:
+//                if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, this, REQUEST_LOCATION))
+//                    startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
+//                break;
             default:
                 break;
         }
@@ -190,6 +192,8 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
 
         WidgetHelper.getInstance().setTextViewNoResult(txt_total_stores, getString(R.string.store_number) + " " + obj.getStore_number());
         WidgetHelper.getInstance().setTextViewDate(txt_date_create, getString(R.string.day_create) + ": ", obj.getJoin_date());
+        WidgetHelper.getInstance().setTextViewWithResult(txt_fullname, obj.getFullname(), getString(R.string.not_update_name));
+        WidgetHelper.getInstance().setTextViewWithResult(txt_email, obj.getEmail(), getString(R.string.not_update_name));
 
         WidgetHelper.getInstance().setEditTextWithResult(edt_fullname, obj.getFullname(), getString(R.string.not_update_name));
         WidgetHelper.getInstance().setEditTextWithResult(edt_email, obj.getEmail(), getString(R.string.not_update_namemaile));
@@ -198,9 +202,9 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         WidgetHelper.getInstance().setEditTextWithResult(edt_address, obj.getAddress(), getString(R.string.not_update_address));
         WidgetHelper.getInstance().setSpinnerGender(sp_gender, obj.getGender());
 
-        if (placeModel == null)
-            placeModel = new PlaceModel();
-        placeModel.setAddress(obj.getAddress());
+//        if (placeModel == null)
+//            placeModel = new PlaceModel();
+//        placeModel.setAddress(obj.getAddress());
 
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
@@ -333,7 +337,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
                     setEnableView(true);
                 } else {
                     presenter.updateUser(edt_fullname.getText().toString(), sp_gender.getSelectedItemPosition(), edt_birthday.getText().toString(),
-                            edt_email.getText().toString(), placeModel);
+                            edt_email.getText().toString(), edt_address.getText().toString());
                 }
                 break;
             default:
@@ -349,25 +353,25 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
         presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == REQUEST_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
-            else
-                showShortToast(getString(R.string.error_permission));
-        } else
-            presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == REQUEST_LOCATION) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
+//            else
+//                showShortToast(getString(R.string.error_permission));
+//        } else
+//            presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_LOCATION && resultCode == RESULT_OK) {
-            if (data != null) {
-                placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
-                edt_address.setText(placeModel.getAddress());
-            }
-        } else
+//        if (requestCode == REQUEST_LOCATION && resultCode == RESULT_OK) {
+//            if (data != null) {
+//                placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
+//                edt_address.setText(placeModel.getAddress());
+//            }
+//        } else
             presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

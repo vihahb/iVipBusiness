@@ -13,6 +13,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IActiveView;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.TextUnit;
 
 /**
  * Created by Mr. M.2 on 1/12/2017
@@ -28,7 +29,7 @@ public class ActivePresenter extends BasicPresenter {
     }
 
     public void validatePhoneToActive(String phone) {
-        if (!validateText(phone)) {
+        if (!TextUnit.getInstance().validatePhone(phone)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_username));
             return;
         }
