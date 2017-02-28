@@ -26,6 +26,7 @@ import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.ImageManager;
+import com.xtel.sdk.utils.TextUnit;
 
 import java.io.File;
 
@@ -41,7 +42,7 @@ public class AddNewsPresenter extends BasicPresenter {
 
     private SortStore sortStore;
     private final String CHAIN = "CHAIN";
-    private String URL_BANNER;
+    private String PATH_BANNER;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -113,7 +114,7 @@ public class AddNewsPresenter extends BasicPresenter {
         ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
             @Override
             public void onSuccess(RESP_Image resp_image, File file) {
-                URL_BANNER = resp_image.getServer_path();
+                PATH_BANNER = resp_image.getServer_path();
                 view.onLoadPicture(file);
             }
 
@@ -126,37 +127,37 @@ public class AddNewsPresenter extends BasicPresenter {
     }
 
     public void addNews(String title, int news_type, String des, boolean isPublic, boolean isVoucher, String begin_time, String end_time, String time_alive, String point, String number, String sale, int sale_type) {
-        if (URL_BANNER == null) {
+        if (PATH_BANNER == null) {
             view.showShortToast(-1, view.getActivity().getString(R.string.error_input_banner));
             return;
         }
-        if (!validateText(title)) {
+        if (!TextUnit.getInstance().validateText(title)) {
             view.showShortToast(0, view.getActivity().getString(R.string.error_input_title));
             return;
         }
 
         if (isVoucher) {
-            if (!validateText(begin_time)) {
+            if (!TextUnit.getInstance().validateText(begin_time)) {
                 view.showShortToast(-1, view.getActivity().getString(R.string.error_input_begin_time));
                 return;
             }
-            if (!validateText(end_time)) {
+            if (!TextUnit.getInstance().validateText(end_time)) {
                 view.showShortToast(-1, view.getActivity().getString(R.string.error_input_end_time));
                 return;
             }
-            if (!validateText(time_alive)) {
+            if (!TextUnit.getInstance().validateText(time_alive)) {
                 view.showShortToast(-1, view.getActivity().getString(R.string.error_input_alive_time));
                 return;
             }
-            if (validateDouble(point) <= 0) {
+            if (TextUnit.getInstance().validateDouble(point) <= 0) {
                 view.showShortToast(3, view.getActivity().getString(R.string.error_input_exchange_point));
                 return;
             }
-            if (validateInteger(number) <= 0) {
+            if (TextUnit.getInstance().validateInteger(number) <= 0) {
                 view.showShortToast(1, view.getActivity().getString(R.string.error_input_number_of_voucher));
                 return;
             }
-            if (validateDouble(sale) <= 0) {
+            if (TextUnit.getInstance().validateDouble(sale) <= 0) {
                 view.showShortToast(2, view.getActivity().getString(R.string.error_input_sale));
                 return;
             }
@@ -170,7 +171,7 @@ public class AddNewsPresenter extends BasicPresenter {
             resp_news.setStore_id(sortStore.getId());
 
         resp_news.setNews_type((news_type + 1));
-        resp_news.setBanner(URL_BANNER);
+        resp_news.setBanner(PATH_BANNER);
         resp_news.setDescription(des);
         resp_news.setTitle(title);
         resp_news.setIs_public(isPublic);

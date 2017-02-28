@@ -50,7 +50,7 @@ public class TextUnit {
     }
 
     public boolean validatePhone(String username) {
-        return validateInteger(username) == -1 && !(username.length() < 10 || username.length() > 11);
+        return validateInteger(username) != -1 && !(username.length() < 10 || username.length() > 11);
     }
 
     public boolean validateEmail(String text) {

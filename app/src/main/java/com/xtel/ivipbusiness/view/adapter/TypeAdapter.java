@@ -46,8 +46,6 @@ public class TypeAdapter extends BaseAdapter {
             Type type = new Type(type_resource[i], type_name[i]);
             arrayList.add(type);
         }
-
-        Log.e("total_array", "total: " + arrayList.size());
     }
 
     @Override

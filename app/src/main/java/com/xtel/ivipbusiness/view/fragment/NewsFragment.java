@@ -182,7 +182,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
             showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
         else {
             progressView.setRefreshing(false);
-            progressView.updateData(-1, JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)), getString(R.string.click_to_try_again));
+            progressView.updateData(-1, getString(R.string.error_try_again), getString(R.string.click_to_try_again));
             progressView.hideData();
 
             listData.clear();

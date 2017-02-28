@@ -15,6 +15,7 @@ import com.xtel.ivipbusiness.view.activity.RegisterActivity;
 import com.xtel.ivipbusiness.view.activity.inf.ILoginView;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.TextUnit;
 
 /**
  * Created by VULCL on 1/10/2017
@@ -37,13 +38,13 @@ public class LoginPresenter extends BasicPresenter {
         if (!validateData(phone, password))
             return;
 
-        if (validateLong(phone) == -1) {
+        if (TextUnit.getInstance().validateLong(phone) == -1) {
             debug("6");
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }
 
-        if (!validatePhone(phone)) {
+        if (!TextUnit.getInstance().validatePhone(phone)) {
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }
@@ -60,10 +61,10 @@ public class LoginPresenter extends BasicPresenter {
     }
 
     private boolean validateData(String username, String password) {
-        if (!validateText(username)) {
+        if (!TextUnit.getInstance().validateText(username)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_username));
             return false;
-        } else if (!validateText(password)) {
+        } else if (!TextUnit.getInstance().validateText(password)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_password));
             return false;
         }

@@ -182,6 +182,17 @@
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
+    <style name="edittext_address">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
     <style name="edittext_des">
         <item name="android:textSize">@dimen/font_12</item>
         <item name="android:textColor">@android:color/white</item>

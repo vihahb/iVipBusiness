@@ -8,7 +8,8 @@
         android:id="@+id/item.spinner.area.txt_name"
         style="@style/textview_normal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_36"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@drawable/edittext_des"
         android:drawableEnd="@drawable/ic_arrow_drop_down_white_36dp"
         android:drawableLeft="@drawable/ic_action_level"
@@ -26,7 +27,7 @@
     <View
         android:id="@+id/item.spinner.area.view"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
         android:background="@android:color/white"

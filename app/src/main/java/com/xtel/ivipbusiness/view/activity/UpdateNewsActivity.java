@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
@@ -334,6 +336,12 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             WidgetHelper.getInstance().setEditTextNoResult(edt_point, String.valueOf(voucher.getPoint()));
         }
 
+        if (obj.is_public())
+            WidgetHelper.getInstance().setTextViewDrawable(txt_public, 2, R.mipmap.ic_world_white_18);
+        else {
+            WidgetHelper.getInstance().setTextViewDrawable(txt_public, 2, R.mipmap.ic_private_gray_18);
+        }
+
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
     }
@@ -422,8 +430,19 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     @Override
     public void onRequestError(Error error) {
         closeProgressBar();
-        menuItem.setIcon(R.drawable.ic_action_edit_line);
-        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
+        showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+                finish();
+            }
+        });
     }
 
     @Override

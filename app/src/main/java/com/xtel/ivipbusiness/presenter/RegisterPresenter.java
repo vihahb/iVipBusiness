@@ -11,6 +11,7 @@ import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
 import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.TextUnit;
 
 /**
  * Created by VULCL on 1/10/2017
@@ -28,8 +29,8 @@ public class RegisterPresenter extends BasicPresenter {
         if (!validateData(username, password, rePassword))
             return;
 
-        if (validateLong(username) != -1) {
-            if (!validatePhone(username)) {
+        if (TextUnit.getInstance().validateLong(username) != -1) {
+            if (!TextUnit.getInstance().validatePhone(username)) {
                 view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
                 return;
             }
@@ -46,13 +47,13 @@ public class RegisterPresenter extends BasicPresenter {
     }
 
     private boolean validateData(String username, String password, String rePassword) {
-        if (!validateText(username)) {
+        if (!TextUnit.getInstance().validateText(username)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_username));
             return false;
-        } else if (!validateText(password)) {
+        } else if (!TextUnit.getInstance().validateText(password)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_password));
             return false;
-        } else if (!validateText(rePassword)) {
+        } else if (!TextUnit.getInstance().validateText(rePassword)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_re_password));
             return false;
         } else if (!password.equals(rePassword)) {

@@ -46,7 +46,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private CallbackManager callbackManager;
 
     private ImageView img_banner, img_logo;
-    private ImageButton img_camera;
+    private ImageButton img_camera, img_location;
     private Spinner sp_type;
     private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
 
@@ -84,7 +84,9 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private void initView() {
         img_banner = findImageView(R.id.add_store_img_banner);
         img_logo = findImageView(R.id.add_store_img_avatar);
+
         img_camera = findImageButton(R.id.add_store_img_camera);
+        img_location = findImageButton(R.id.add_store_img_location);
 
         edt_begin_time = findEditText(R.id.add_store_edt_begin_time);
         edt_end_time = findEditText(R.id.add_store_edt_end_time);
@@ -103,7 +105,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private void initListener() {
         img_camera.setOnClickListener(this);
         img_logo.setOnClickListener(this);
-        edt_address.setOnClickListener(this);
+        img_location.setOnClickListener(this);
         edt_begin_time.setOnClickListener(this);
         edt_end_time.setOnClickListener(this);
     }
@@ -283,7 +285,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
             selectTime(0);
         else if (id == R.id.add_store_edt_end_time)
             selectTime(1);
-        else if (id == R.id.add_store_edt_address) {
+        else if (id == R.id.add_store_img_location) {
             if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, this, REQUEST_LOCATION))
                 startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
         }

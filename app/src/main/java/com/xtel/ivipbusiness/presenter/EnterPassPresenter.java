@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.presenter;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IEnterPassView;
 import com.xtel.nipservicesdk.commons.Cts;
+import com.xtel.sdk.utils.TextUnit;
 
 /**
  * Created by Mr. M.2 on 1/12/2017.
@@ -35,10 +36,10 @@ public class EnterPassPresenter extends BasicPresenter {
     }
 
     private boolean validateData(String password, String rePassword) {
-        if (!validateText(password)) {
+        if (!TextUnit.getInstance().validateText(password)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_new_password));
             return false;
-        } else if (!validateText(rePassword)) {
+        } else if (!TextUnit.getInstance().validateText(rePassword)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_re_password));
             return false;
         } else if (!password.equals(rePassword)) {

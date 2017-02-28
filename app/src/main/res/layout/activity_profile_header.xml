@@ -98,12 +98,19 @@
                 android:layout_weight="1"
                 android:gravity="right|end">
 
-                <com.xtel.ivipbusiness.view.widget.RoundImage
-                    android:id="@+id/profile.img_avatar"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:contentDescription="@null"
-                    android:src="@mipmap/ic_avatar_default" />
+                <FrameLayout
+                    android:layout_width="@dimen/size_56"
+                    android:layout_height="@dimen/size_56"
+                    android:background="@drawable/round_white"
+                    android:padding="@dimen/size_1">
+
+                    <com.xtel.ivipbusiness.view.widget.RoundImage
+                        android:id="@+id/profile.img_avatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/ic_avatar_default" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -22,6 +22,7 @@ import com.xtel.ivipbusiness.view.fragment.MemberFragment;
 import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
+import com.xtel.ivipbusiness.view.fragment.GalleryFragment;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
@@ -30,12 +31,12 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     private ViewStorePresenter presenter;
 
     private ActionBar actionBar;
-    private MenuItem menu_create, menu_choose, menu_add_news, menu_edi_storet;
+    private MenuItem menu_create, menu_choose, menu_add_news, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
     private SortStore sortStore;
-    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
-    private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", LIST_NEAR_NEWS = "list_near_news";
+    private final String STORE_TYPE = "STORE";
+    private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", GALLERY = "gallery";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
                 replaceListNews();
                 break;
             case 4:
-                replaceListNearNews();
+                replaceGallery();
                 break;
             default:
                 break;
@@ -122,41 +123,56 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
 
     //    Hiện menu của tab thông tin cửa hàng
     private void showMenuStoreInfo() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
-            menu_edi_storet.setVisible(true);
             menu_add_news.setVisible(false);
+            menu_setting.setVisible(true);
+            menu_edi_storet.setVisible(true);
         }
     }
 
     //    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
     private void showMenuListNew() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(true);
             menu_choose.setVisible(true);
             menu_edi_storet.setVisible(false);
             menu_add_news.setVisible(false);
+            menu_setting.setVisible(false);
         }
     }
 
     //    Hiện menu của tab bản tin
     private void showMenuNews() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_edi_storet.setVisible(false);
             menu_add_news.setVisible(true);
+            menu_setting.setVisible(false);
+        }
+    }
+
+    //    Hiện menu của tab bản tin
+    private void showMenuGallery() {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
+            menu_create.setVisible(false);
+            menu_choose.setVisible(false);
+            menu_edi_storet.setVisible(false);
+            menu_add_news.setVisible(true);
+            menu_setting.setVisible(false);
         }
     }
 
     //    Ản toàn bộ item trong menu
     private void hideMenuItem() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null) {
+        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_edi_storet.setVisible(false);
             menu_add_news.setVisible(false);
+            menu_setting.setVisible(false);
         }
     }
 
@@ -189,10 +205,10 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     }
 
     //    hiển thị fratment bản tin gần đây
-    private void replaceListNearNews() {
-        actionBar.setTitle(getString(R.string.title_activity_list_fcm_news));
-        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(sortStore), LIST_NEAR_NEWS);
-        hideMenuItem();
+    private void replaceGallery() {
+        actionBar.setTitle(getString(R.string.title_activity_gallery));
+        replaceFragment(R.id.view_store_container, GalleryFragment.newInstance(sortStore.getId()), GALLERY);
+        showMenuGallery();
     }
 
     public RESP_Store getResp_store() {
@@ -210,24 +226,6 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     public void changeMenuIcon(int id) {
         menu_edi_storet.setIcon(id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -275,6 +273,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         menu_create = menu.findItem(R.id.action_view_store_create_store);
         menu_choose = menu.findItem(R.id.action_view_store_choose_store);
         menu_add_news = menu.findItem(R.id.action_view_store_add_news);
+        menu_setting = menu.findItem(R.id.action_view_store_setting_store);
         menu_edi_storet = menu.findItem(R.id.action_view_store_edit_store);
 
         menu_create.setVisible(false);
@@ -305,6 +304,8 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
             startActivityForResult(intent, 21);
         } else if (id == R.id.action_view_store_choose_store) {
             startActivityForResult(ListStoresActivity.class, 22);
+        } else if (id == R.id.action_view_store_setting_store) {
+
         } else if (id == R.id.action_view_store_edit_store) {
             StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
 

@@ -2,9 +2,11 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/update_news.swipe"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
     <include
+        android:fitsSystemWindows="false"
         layout="@layout/activity_add_news_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -5,16 +5,18 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.SortStore;
+import com.xtel.ivipbusiness.model.entity.Gallery;
+import com.xtel.ivipbusiness.presenter.GalleryPresenter;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
-import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
+import com.xtel.ivipbusiness.view.adapter.GalleryAdapter;
+import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.nipservicesdk.CallbackManager;
@@ -23,6 +25,7 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
@@ -31,21 +34,22 @@ import java.util.ArrayList;
  * Created by Mr. M.2 on 1/13/2017
  */
 
-public class StoresFragment extends BasicFragment implements IStoresView {
-    private StoresPresenter presenter;
+public class GalleryFragment extends BasicFragment implements IGalleryView {
+    private GalleryPresenter presenter;
 
-    private StoresAdapter adapter;
-    private ArrayList<SortStore> listData;
+    private GalleryAdapter adapter;
+    private ArrayList<Gallery> listData;
     private ProgressView progressView;
     private CallbackManager callbackManager;
 
     private boolean isClearData = false;
+    private int gallery_position = -1;
 
-    public static StoresFragment newInstance(int store_id) {
+    public static GalleryFragment newInstance(int store_id) {
         Bundle args = new Bundle();
         args.putInt(Constants.MODEL, store_id);
 
-        StoresFragment fragment = new StoresFragment();
+        GalleryFragment fragment = new GalleryFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,18 +65,18 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         super.onViewCreated(view, savedInstanceState);
         callbackManager = CallbackManager.create(getActivity());
 
-        presenter = new StoresPresenter(this);
+        presenter = new GalleryPresenter(this);
         initProgressView(view);
     }
 
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
         progressView = new ProgressView(null, view);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+        progressView.initData(-1, getString(R.string.no_gallery), getString(R.string.click_to_try_again));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         listData = new ArrayList<>();
-        adapter = new StoresAdapter(this, listData);
+        adapter = new GalleryAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
         progressView.onLayoutClicked(new View.OnClickListener() {
@@ -80,7 +84,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores(true);
+                presenter.getGallery(true);
             }
         });
 
@@ -92,7 +96,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores(true);
+                presenter.getGallery(true);
             }
         });
 
@@ -101,12 +105,12 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getStores(true);
+                presenter.getGallery(true);
             }
         });
     }
 
-//    Kiểm tra xem danh sách cửa hàng có trống không
+    //    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
 
@@ -114,7 +118,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+            progressView.initData(-1, getString(R.string.no_gallery), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }
@@ -128,32 +132,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 //    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onGetDataError() {
         progressView.setRefreshing(false);
@@ -162,11 +140,11 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     }
 
     @Override
-    public void getNewSession(final ICmd iCmd) {
+    public void getNewSession(final ICmd iCmd, final Object... parame) {
         callbackManager.getNewSesion(new CallbacListener() {
             @Override
             public void onSuccess(RESP_Login success) {
-                iCmd.execute();
+                iCmd.execute(parame);
             }
 
             @Override
@@ -180,29 +158,25 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
     @Override
     public void onLoadMore() {
-        presenter.getStores(false);
+        presenter.getGallery(false);
     }
 
     //    Sự kiện load danh sách store thành công
     @Override
-    public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
+    public void onGetStoresSuccess(final ArrayList<Gallery> arrayList) {
         if (arrayList.size() < 10)
             adapter.setLoadMore(false);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-                if (isClearData) {
-                    listData.clear();
-                    adapter.setLoadMore(true);
-                    isClearData = false;
-                }
-                listData.addAll(arrayList);
+        if (isClearData) {
+            listData.clear();
+            adapter.setLoadMore(true);
+            isClearData = false;
+        }
+        listData.addAll(arrayList);
 
-                checkListData();
-//            }
-//        }, 1000);
+        checkListData();
     }
+
 
     @Override
     public void onGetStoresError(Error error) {
@@ -221,6 +195,53 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             if (isClearData)
                 isClearData = false;
         }
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+        adapter.deleteGallery(gallery_position);
+
+        closeProgressBar();
+        showMaterialDialog(true, true, null, getString(R.string.success_delete_gallery), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestError(Error error) {
+        gallery_position = -1;
+        closeProgressBar();
+
+        if (error.getCode() == 301)
+            showShortToast(getString(R.string.error_gallery_not_exists));
+        else
+            showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
+    }
+
+    @Override
+    public void onDeleteGallery(final int id, final int position) {
+        showMaterialDialog(false, false, null, getString(R.string.ask_delete_gallery), getString(R.string.delete), getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+                gallery_position = position;
+                showProgressBar(false, false, null, getString(R.string.doing_delete_gallery));
+                presenter.deleteGallery(id);
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+            }
+        });
     }
 
     @Override
@@ -255,4 +276,5 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }}
+    }
+}

@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,6 +65,7 @@ import java.util.Calendar;
 public class StoreInfoFragment extends BasicFragment implements View.OnClickListener, IStoreInfoView {
     private StoreInfoPresenter presenter;
 
+    private FrameLayout layout_logo;
     private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
     private ImageButton img_camera;
     private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
@@ -98,10 +100,10 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
         presenter = new StoreInfoPresenter(this);
         initSwwipe();
-        initView();
+        initView(view);
         initListener();
         setEnableView(false);
-        initAnimationHideImage(view);
+//        initAnimationHideImage(view);
         presenter.getData();
     }
 
@@ -112,7 +114,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
-    private void initView() {
+    private void initView(View view) {
+        layout_logo = (FrameLayout) view.findViewById(R.id.store_info_layout_logo);
         img_banner = findImageView(R.id.store_info_img_banner);
         img_logo = findImageView(R.id.store_info_img_logo);
         img_qr_code = findImageView(R.id.store_info_img_qrCode);
@@ -156,22 +159,22 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
     }
 
-    private void initAnimationHideImage(View view) {
-        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.store_info_app_bar);
-        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateEXPANDED() {
-                isShow = true;
-                showFloatingActionButton(img_logo);
-            }
-
-            @Override
-            public void onStateIDLE() {
-                isShow = false;
-                hideFloatingActionButton(img_logo);
-            }
-        });
-    }
+//    private void initAnimationHideImage(View view) {
+//        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.store_info_app_bar);
+//        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+//            @Override
+//            public void onStateEXPANDED() {
+//                isShow = true;
+//                showFloatingActionButton(layout_logo);
+//            }
+//
+//            @Override
+//            public void onStateIDLE() {
+//                isShow = false;
+//                hideFloatingActionButton(layout_logo);
+//            }
+//        });
+//    }
 
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
 

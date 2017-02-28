@@ -207,6 +207,9 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
     @Override
     public void onGetStoresError(Error error) {
+        adapter.setLoadMore(false);
+        adapter.notifyDataSetChanged();
+
         if (listData.size() > 0)
             showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error)));
         else {

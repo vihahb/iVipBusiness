@@ -16,6 +16,7 @@
     <color name="colorPrimaryKey_60">#99033f22</color>
     <color name="colorPrimaryKey_50">#80033f22</color>
     <color name="colorPrimaryKey_40">#66033f22</color>
+
     <color name="black_40">#66000000</color>
 
     <color name="fab_background">#80C242</color>
@@ -25,6 +26,25 @@
 
     <color name="tablayout">#146535</color>
     <color name="text_color_member">#FFF202</color>
+
     <color name="white_50">#80FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+
     <color name="gray_60">#99BBBDC0</color>
+    
+    <color name="mini_red">#d41f26</color>
+    <color name="mini_pink">#ed1a56</color>
+    <color name="mini_orange">#f26624</color>
+    <color name="fab_orange">#f79521</color>
+
+
+
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
 </resources>

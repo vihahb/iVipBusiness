@@ -60,6 +60,7 @@
         style="@style/edittext_multi_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:drawableLeft="@drawable/ic_action_location"
         android:drawableStart="@drawable/ic_action_location"
         android:gravity="center_vertical"

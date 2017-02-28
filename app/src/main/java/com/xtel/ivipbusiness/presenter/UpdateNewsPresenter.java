@@ -25,6 +25,7 @@ import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.ImageManager;
+import com.xtel.sdk.utils.TextUnit;
 
 import java.io.File;
 
@@ -146,33 +147,33 @@ public class UpdateNewsPresenter extends BasicPresenter {
 //            view.showShortToast(-1, view.getActivity().getString(R.string.error_input_banner));
 //            return;
 //        }
-        if (!validateText(title)) {
+        if (!TextUnit.getInstance().validateText(title)) {
             view.showShortToast(0, view.getActivity().getString(R.string.error_input_title));
             return;
         }
 
         if (isVoucher) {
-            if (!validateText(begin_time)) {
+            if (!TextUnit.getInstance().validateText(begin_time)) {
                 view.showShortToast(-1, view.getActivity().getString(R.string.error_input_begin_time));
                 return;
             }
-            if (!validateText(end_time)) {
+            if (!TextUnit.getInstance().validateText(end_time)) {
                 view.showShortToast(-1, view.getActivity().getString(R.string.error_input_end_time));
                 return;
             }
-            if (!validateText(time_alive)) {
+            if (!TextUnit.getInstance().validateText(time_alive)) {
                 view.showShortToast(-1, view.getActivity().getString(R.string.error_input_alive_time));
                 return;
             }
-            if (validateDouble(point) <= 0) {
+            if (TextUnit.getInstance().validateDouble(point) <= 0) {
                 view.showShortToast(3, view.getActivity().getString(R.string.error_input_exchange_point));
                 return;
             }
-            if (validateInteger(number) <= 0) {
+            if (TextUnit.getInstance().validateInteger(number) <= 0) {
                 view.showShortToast(1, view.getActivity().getString(R.string.error_input_number_of_voucher));
                 return;
             }
-            if (validateDouble(sale) <= 0) {
+            if (TextUnit.getInstance().validateDouble(sale) <= 0) {
                 view.showShortToast(2, view.getActivity().getString(R.string.error_input_sale));
                 return;
             }
@@ -192,13 +193,17 @@ public class UpdateNewsPresenter extends BasicPresenter {
         resp_news.setIs_public(isPublic);
 
         if (isVoucher) {
-            resp_news.getVoucher().setBegin_time(Constants.convertDataToLong(begin_time));
-            resp_news.getVoucher().setFinish_time(Constants.convertDataToLong(end_time));
-            resp_news.getVoucher().setTime_alive(((long) (Integer.parseInt(time_alive) * 60)));
-            resp_news.getVoucher().setNumber_of_voucher(Integer.parseInt(number));
-            resp_news.getVoucher().setSales(Double.parseDouble(sale));
-            resp_news.getVoucher().setSales_type((sale_type + 1));
-            resp_news.getVoucher().setPoint(Integer.parseInt(point));
+            Voucher voucher = new Voucher();
+
+            voucher.setBegin_time(Constants.convertDataToLong(begin_time));
+            voucher.setFinish_time(Constants.convertDataToLong(end_time));
+            voucher.setTime_alive(((long) (Integer.parseInt(time_alive) * 60)));
+            voucher.setNumber_of_voucher(Integer.parseInt(number));
+            voucher.setSales(Double.parseDouble(sale));
+            voucher.setSales_type((sale_type + 1));
+            voucher.setPoint(Integer.parseInt(point));
+
+            resp_news.setVoucher(voucher);
         } else {
             if (resp_news.getVoucher() != null) {
                 resp_news.setVoucher(null);

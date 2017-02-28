@@ -13,7 +13,7 @@ public class RESP_Full_Profile extends RESP_Basic {
     @Expose
     private int gender;
     @Expose
-    private long birthday;
+    private Long birthday;
     @Expose
     private String email;
     @Expose
@@ -49,11 +49,11 @@ public class RESP_Full_Profile extends RESP_Basic {
         this.gender = gender;
     }
 
-    public long getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(long birthday) {
+    public void setBirthday(Long birthday) {
         this.birthday = birthday;
     }
 

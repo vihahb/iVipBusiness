@@ -23,6 +23,13 @@ public abstract class BasicModel {
     protected final String GET_LIST_STORE_IN_CHAIN_PAGE = "/stores?page=";
     protected final String GET_LIST_STORE_IN_CHAIN_PAGESIZE = "&pagesize=";
 
+    protected final String GET_LIST_GALLERY = "/v0.1/store/";
+    protected final String GET_LIST_GALLERY_PAGE = "/gallery?page=";
+    protected final String GET_LIST_GALLERY_PAGESIZE = "&pagesize=";
+
+    protected final String DELETE_GALLERY_STORE_ID = "/v0.1/store/";
+    protected final String DELETE_GALLERY_ID = "/gallery/";
+
     protected final String ADD_STORE = "/v0.1/store/";
     protected final String UPDATE_STORE = "/v0.1/store/";
 

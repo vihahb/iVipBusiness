@@ -20,7 +20,7 @@
     <string name="title_activity_history">Lịch sử giao dịch</string>
     <string name="title_activity_list_member">Danh sách thành viên</string>
     <string name="title_activity_list_news">Bản tin</string>
-    <string name="title_activity_list_fcm_news">Bản tin fcm</string>
+    <string name="title_activity_gallery">Album ảnh</string>
     <string name="title_activity_statistic">Thống kê</string>
     <string name="title_activity_policy">Chính sách</string>
     <string name="title_activity_app_info">Thông tin ứng dụng</string>
@@ -70,6 +70,7 @@
     <string name="doing_delete_news">Đang xóa bản tin…</string>
     <string name="doing_update_news">Đang cập nhật bản tin…</string>
     <string name="doing_send_fcm">Đang gửi bản tin…</string>
+    <string name="doing_delete_gallery">Đang xóa ảnh…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -82,6 +83,7 @@
     <string name="success_add_news">Thêm bản tin thành công</string>
     <string name="success_update_news">Cập nhật bản tin thành công</string>
     <string name="success_send_fcm">Gửi bản tin thành công</string>
+    <string name="success_delete_gallery">Xóa ảnh thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -131,6 +133,8 @@
     <string name="error_not_found_chain">Không tìm thấy chuỗi cửa hàng</string>
     <string name="error_not_found_store">Không tìm thấy cửa hàng</string>
     <string name="error_news_not_exitst">Bản tin không tồn tại</string>
+    <string name="error_gallery_not_exists">Ảnh không tồn tại</string>
+    <string name="error_delete_gallery">Xóa ảnh thất bại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -194,6 +198,7 @@
     <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>
     <string name="no_news">Không có bản tin nào</string>
+    <string name="no_gallery">Không có ảnh nào</string>
     <string name="click_to_try_again">Click để thử lại</string>
     <string name="loading_data">Đang tải dữ liệu</string>
 
@@ -207,6 +212,7 @@
     <string name="delete">Xóa ngay</string>
     <string name="cancel">Hủy bỏ</string>
     <string name="cancel_one">Hủy</string>
+    <string name="ask_delete_gallery">Bạn muốn xóa ảnh này?</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
     <string name="not_update_phone">Chưa cập nhật số điện thoại</string>
@@ -227,7 +233,8 @@
     <string name="create_new_store">Tạo cửa hàng mới</string>
     <string name="create_new_news">Tạo bản tin mới</string>
     <string name="add_exists_store">Thêm cửa hàng đã có</string>
-    <string name="edit_store">Sửa cửa hàng</string>
+    <string name="edit_store">Sửa thông tin</string>
+    <string name="setting_store">Cài đặt</string>
 
     <!-- Spinner -->
     <string-array name="gender">

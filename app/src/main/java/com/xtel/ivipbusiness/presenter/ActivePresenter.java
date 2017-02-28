@@ -29,17 +29,17 @@ public class ActivePresenter extends BasicPresenter {
     }
 
     public void validatePhoneToActive(String phone) {
-        if (!TextUnit.getInstance().validatePhone(phone)) {
+        if (!TextUnit.getInstance().validateText(phone)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_username));
             return;
         }
 
-        if (validateLong(phone) == -1) {
+        if (TextUnit.getInstance().validateLong(phone) == -1) {
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }
 
-        if (!validatePhone(phone)) {
+        if (!TextUnit.getInstance().validatePhone(phone)) {
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }

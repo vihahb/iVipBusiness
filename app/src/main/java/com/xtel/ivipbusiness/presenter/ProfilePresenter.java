@@ -26,6 +26,7 @@ import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.ImageManager;
 import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.TextUnit;
 
 import java.io.File;
 
@@ -169,11 +170,11 @@ public class ProfilePresenter extends BasicPresenter {
     }
 
     private boolean validateInput(String avatar, String fullname, int gender, String birthday, String email, String address) {
-        if (!validateText(avatar)) {
+        if (!TextUnit.getInstance().validateText(avatar)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_avatar));
             return false;
         }
-        if (!validateText(fullname)) {
+        if (!TextUnit.getInstance().validateText(fullname)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_fullname));
             return false;
         }
@@ -181,15 +182,15 @@ public class ProfilePresenter extends BasicPresenter {
             view.onValidateError(view.getActivity().getString(R.string.error_input_gender));
             return false;
         }
-        if (!validateText(birthday)) {
+        if (!TextUnit.getInstance().validateText(birthday)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_birthday));
             return false;
         }
-        if (!validateEmail(email)) {
+        if (!TextUnit.getInstance().validateEmail(email)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_email));
             return false;
         }
-        if (!validateEmail(address)) {
+        if (!TextUnit.getInstance().validateText(address)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_address));
             return false;
         }

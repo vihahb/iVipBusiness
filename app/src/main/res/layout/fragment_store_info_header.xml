@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryKey_80">
@@ -35,22 +36,46 @@
     <LinearLayout
         android:id="@+id/store_info.layout_header_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:gravity="bottom"
-        android:weightSum="3"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/size_4"
+        android:paddingBottom="@dimen/size_24"
         android:paddingLeft="@dimen/size_16"
-        android:paddingRight="@dimen/size_16">
+        android:paddingRight="@dimen/size_16"
+        android:weightSum="3">
 
         <EditText
             android:id="@+id/store_info.edt_fullname"
             style="@style/edittext_no_drawable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/fullname"
             android:layout_weight="2"
+            android:hint="@string/fullname"
             android:inputType="textCapWords" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right|end">
+
+            <FrameLayout
+                android:id="@+id/store_info.layout_logo"
+                android:layout_width="@dimen/size_56"
+                android:layout_height="@dimen/size_56"
+                android:background="@drawable/round_white"
+                android:padding="@dimen/size_1"
+                tools:ignore="UselessParent">
+
+                <com.xtel.ivipbusiness.view.widget.RoundImage
+                    android:id="@+id/store_info.img_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</FrameLayout>

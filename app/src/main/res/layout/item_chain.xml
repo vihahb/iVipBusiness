@@ -13,9 +13,9 @@
     card_view:cardElevation="0dp">
 
     <FrameLayout
-        android:background="@color/black_40"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180">
+        android:layout_height="@dimen/size_180"
+        android:background="@color/black_40">
 
         <ImageView
             android:id="@+id/item.chain.img_banner"
@@ -42,12 +42,19 @@
             android:paddingRight="@dimen/size_16"
             android:paddingTop="@dimen/size_8">
 
-            <com.xtel.ivipbusiness.view.widget.RoundImage
-                android:id="@+id/item.chain.img_avatar"
+            <FrameLayout
                 android:layout_width="@dimen/size_48"
                 android:layout_height="@dimen/size_48"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop" />
+                android:background="@drawable/round_white"
+                android:padding="@dimen/size_1">
+
+                <com.xtel.ivipbusiness.view.widget.RoundImage
+                    android:id="@+id/item.chain.img_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/item.chain.txt_name"
