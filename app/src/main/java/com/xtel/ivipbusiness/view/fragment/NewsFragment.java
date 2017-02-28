@@ -73,7 +73,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
-        adapter = new NewsAdapter(this, listData);
+        adapter = new NewsAdapter(getContext().getApplicationContext(), this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
         progressView.onLayoutClicked(new View.OnClickListener() {

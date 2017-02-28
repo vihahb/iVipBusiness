@@ -1,5 +1,7 @@
 package com.xtel.ivipbusiness.view.adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,11 +37,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private boolean isLoadMore = true;
     private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
 
-    public NewsAdapter(INewsView view, ArrayList<News> arrayList) {
+    public NewsAdapter(Context context, INewsView view, ArrayList<News> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
-        background_item = new int[]{R.drawable.item_background_1, R.drawable.item_background_2, R.drawable.item_background_3, R.drawable.item_background_4, R.drawable.item_background_5,
-                R.drawable.item_background_6, R.drawable.item_background_7, R.drawable.item_background_8, R.drawable.item_background_9};
+        background_item = context.getResources().getIntArray(R.array.news_background);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_private_gray_18);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, news.getBanner());
-            WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, news.getBg_id());
+            WidgetHelper.getInstance().setViewBackgroundColor(viewHolder.img_background, news.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_title, news.getTitle(), _view.getActivity().getString(R.string.not_update_title));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, _view.getActivity().getString(R.string.day_create) + ": ", (news.getCreate_time() * 1000));

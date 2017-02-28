@@ -38,16 +38,26 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/view_store.tablayout"
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/view_store.tablayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:theme="@style/Theme_Tablayout"-->
+            <!--app:tabGravity="fill"-->
+            <!--app:tabIndicatorColor="@android:color/white"-->
+            <!--app:tabIndicatorHeight="@dimen/size_2"-->
+            <!--app:tabMode="scrollable"-->
+            <!--app:theme="@style/Theme_Tablayout" />-->
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/view_store.bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/Theme_Tablayout"
-            app:theme="@style/Theme_Tablayout"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="@dimen/size_2"
-            app:tabMode="scrollable" />
-        <!--app:tabBackground="@drawable/item_tablayout"-->
+            android:layout_height="@dimen/size_56"
+            app:itemBackground="@android:color/transparent"
+            app:itemIconTint="@android:color/white"
+            app:itemTextColor="@android:color/white"
+            app:menu="@menu/bottom_navigation_view_store" />
     </LinearLayout>
 </LinearLayout>
+    <!--app:itemIconTint="@drawable/bottom_navigation_view"-->
+    <!--app:itemTextColor="@drawable/bottom_navigation_view"-->

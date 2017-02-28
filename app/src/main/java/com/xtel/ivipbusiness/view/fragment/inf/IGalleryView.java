@@ -1,9 +1,13 @@
 package com.xtel.ivipbusiness.view.fragment.inf;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import com.xtel.ivipbusiness.model.entity.Gallery;
+import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
@@ -20,13 +24,23 @@ public interface IGalleryView {
     void getNewSession(ICmd iCmd, Object... parame);
 
     void onLoadMore();
-    void onGetStoresSuccess(ArrayList<Gallery> arrayList);
+    void onGetGallerySuccess(ArrayList<Gallery> arrayList);
     void onGetStoresError(Error error);
     void onDeleteSuccess();
     void onRequestError(Error error);
+
+    void onTakePictureGallary(int type, Uri uri);
+    void onTakePictureCamera(int type, Bitmap bitmap);
+    void onPostPictureSuccess(RESP_Image resp_image);
+    void onAddPictureSuccess();
+
     void onDeleteGallery(int id, int position);
+    void closeProgressBar();
+    void showShortToast(String message);
     void onNoNetwork();
+
     void startActivity(Class clazz, String key, Object object);
+    void startActivityForResult(Intent intent, int requestCode);
     Activity getActivity();
     Fragment getFragment();
 }

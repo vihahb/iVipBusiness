@@ -1,6 +1,10 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Gallery;
+import com.xtel.ivipbusiness.model.entity.RESP_Image;
+import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.GalleryPresenter;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
@@ -27,7 +33,9 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -45,9 +53,9 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     private boolean isClearData = false;
     private int gallery_position = -1;
 
-    public static GalleryFragment newInstance(int store_id) {
+    public static GalleryFragment newInstance(SortStore sortStore) {
         Bundle args = new Bundle();
-        args.putInt(Constants.MODEL, store_id);
+        args.putSerializable(Constants.MODEL, sortStore);
 
         GalleryFragment fragment = new GalleryFragment();
         fragment.setArguments(args);
@@ -123,13 +131,26 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         }
     }
 
-//    public void createNewStore() {
-//        startActivityForResult(AddStoreActivity.class, Constants.MODEL REQUEST_CODE_CREATE);
-//    }
-//
-//    public void chooseExistsStore() {
-//        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
-//    }
+    public void addImageView() {
+        presenter.takePicture();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Override
@@ -163,9 +184,11 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
 
     //    Sự kiện load danh sách store thành công
     @Override
-    public void onGetStoresSuccess(final ArrayList<Gallery> arrayList) {
-        if (arrayList.size() < 10)
+    public void onGetGallerySuccess(final ArrayList<Gallery> arrayList) {
+        if (arrayList.size() < 10) {
             adapter.setLoadMore(false);
+            adapter.notifyDataSetChanged();
+        }
 
         if (isClearData) {
             listData.clear();
@@ -222,8 +245,70 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
 
         if (error.getCode() == 301)
             showShortToast(getString(R.string.error_gallery_not_exists));
+        else if (error.getCode() == 101)
+            showShortToast(getString(R.string.error_chain_not_exists));
         else
             showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
+    }
+
+    @Override
+    public void onTakePictureGallary(int type, Uri uri) {
+        if (!NetWorkInfo.isOnline(getActivity())) {
+            showShortToast(getString(R.string.error_no_internet));
+            return;
+        } else if (uri == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
+        showProgressBar(false, false, null, getString(R.string.doing_add_gallery));
+
+        Bitmap bitmap = null;
+
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (bitmap != null) {
+            presenter.postImage(bitmap, type);
+        }
+    }
+
+    @Override
+    public void onTakePictureCamera(int type, Bitmap bitmap) {
+        if (!NetWorkInfo.isOnline(getActivity())) {
+            showShortToast(getString(R.string.error_no_internet));
+            return;
+        } else if (bitmap == null) {
+            showShortToast(getString(R.string.error_get_image));
+            return;
+        }
+
+        showProgressBar(false, false, null, getString(R.string.doing_add_gallery));
+        presenter.postImage(bitmap, type);
+    }
+
+    @Override
+    public void onPostPictureSuccess(RESP_Image resp_image) {
+        presenter.addPicture(resp_image);
+    }
+
+    @Override
+    public void onAddPictureSuccess() {
+        closeProgressBar();
+        showMaterialDialog(true, true, null, getString(R.string.success_add_gallery), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void onClicked(Object object) {
+                closeDialog();
+            }
+
+            @Override
+            public void onCancel() {
+                closeDialog();
+            }
+        });
     }
 
     @Override
@@ -245,6 +330,16 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     }
 
     @Override
+    public void closeProgressBar() {
+        super.closeProgressBar();
+    }
+
+    @Override
+    public void showShortToast(String message) {
+        super.showShortToast(message);
+    }
+
+    @Override
     public void onNoNetwork() {
         progressView.setRefreshing(false);
 
@@ -262,6 +357,11 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     }
 
     @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
     public Fragment getFragment() {
         return this;
     }
@@ -276,5 +376,12 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

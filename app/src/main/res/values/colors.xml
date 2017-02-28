@@ -37,7 +37,15 @@
     <color name="mini_orange">#f26624</color>
     <color name="fab_orange">#f79521</color>
 
-
+    <color name="background_1">#B3F44437</color>
+    <color name="background_2">#B3E92064</color>
+    <color name="background_3">#B39D29B0</color>
+    <color name="background_4">#B3683BB7</color>
+    <color name="background_5">#B305A9F4</color>
+    <color name="background_6">#B34DAF51</color>
+    <color name="background_7">#B3FF9902</color>
+    <color name="background_8">#B3FF5824</color>
+    <color name="background_9">#B3617E8C</color>
 
     <!-- A light Holo shade of green -->
     <color name="holo_green_light">#ff99cc00</color>

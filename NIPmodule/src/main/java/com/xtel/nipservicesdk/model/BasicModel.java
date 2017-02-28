@@ -23,18 +23,24 @@ public abstract class BasicModel {
     protected final String GET_LIST_STORE_IN_CHAIN_PAGE = "/stores?page=";
     protected final String GET_LIST_STORE_IN_CHAIN_PAGESIZE = "&pagesize=";
 
-    protected final String GET_LIST_GALLERY = "/v0.1/store/";
+    protected final String ADD_STORE = "/v0.1/store/";
+    protected final String UPDATE_STORE = "/v0.1/store/";
+
+    protected final String GET_STORE_INFO_ID = "/v0.1/store/";
+    protected final String GET_STORE_INFO_TYPE = "?type=";
+
+    //    Gallery
+    protected final String GET_LIST_GALLERY_STORE = "/v0.1/store/";
+    protected final String GET_LIST_GALLERY_CHAIN = "/v0.1/chain/";
     protected final String GET_LIST_GALLERY_PAGE = "/gallery?page=";
     protected final String GET_LIST_GALLERY_PAGESIZE = "&pagesize=";
 
     protected final String DELETE_GALLERY_STORE_ID = "/v0.1/store/";
     protected final String DELETE_GALLERY_ID = "/gallery/";
 
-    protected final String ADD_STORE = "/v0.1/store/";
-    protected final String UPDATE_STORE = "/v0.1/store/";
-
-    protected final String GET_STORE_INFO_ID = "/v0.1/store/";
-    protected final String GET_STORE_INFO_TYPE = "?type=";
+    protected final String ADD_GALLERY_CHAIN = "/v0.1/chain/";
+    protected final String ADD_GALLERY_STORE = "/v0.1/store/";
+    protected final String ADD_GALLERY_END = "/gallery";
 
 //    Bản tin
     protected final String GET_NEWS_PAGE = "/v0.1/news?page=";

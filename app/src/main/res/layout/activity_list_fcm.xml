@@ -39,23 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:touchGuardDrawable="@color/white_30"
+            android:fitsSystemWindows="false"
+            app:fabBackgroundTint="@color/fab_orange"
             app:fabGravity="bottom_end"
             app:fabMenu="@menu/menu_nav_list_fcm"
             app:miniFabBackgroundTintList="@array/fab_menu_item_colors"
             app:miniFabDrawableTint="@android:color/white"
-            app:miniFabTitleTextColorList="@array/fab_menu_item_colors" />
-
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom|end"-->
-            <!--android:fitsSystemWindows="false"-->
-            <!--app:fabBackgroundTint="@color/fab_orange"-->
-            <!--app:fabGravity="bottom_end"-->
-            <!--app:fabMenu="@menu/menu_nav_list_fcm"-->
-            <!--app:miniFabBackgroundTintList="@array/fab_menu_item_colors"-->
-            <!--app:miniFabDrawableTint="@android:color/white"-->
-            <!--app:miniFabTitleTextColorList="@array/fab_menu_item_colors"-->
-            <!--app:touchGuardDrawable="@color/white_30" />-->
+            app:miniFabTitleTextColorList="@array/fab_menu_item_colors"
+            app:touchGuardDrawable="@color/white_30" />
     </FrameLayout>
 </LinearLayout>

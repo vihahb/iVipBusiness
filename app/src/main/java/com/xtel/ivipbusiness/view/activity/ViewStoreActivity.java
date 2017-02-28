@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
@@ -18,19 +18,20 @@ import com.xtel.ivipbusiness.model.entity.RESP_Store;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ViewStorePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IViewStoreView;
+import com.xtel.ivipbusiness.view.fragment.GalleryFragment;
 import com.xtel.ivipbusiness.view.fragment.MemberFragment;
 import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
-import com.xtel.ivipbusiness.view.fragment.GalleryFragment;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
-public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
+public class ViewStoreActivity extends BasicActivity implements BottomNavigationView.OnNavigationItemSelectedListener, IViewStoreView {
     private ViewStorePresenter presenter;
 
     private ActionBar actionBar;
+    private BottomNavigationView bottomNavigationView;
     private MenuItem menu_create, menu_choose, menu_add_news, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
@@ -44,6 +45,13 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         setContentView(R.layout.activity_view_store);
 
         presenter = new ViewStorePresenter(this);
+        initToolbar();
+        initBottomNavigationView();
+
+//        if (sortStore.getStore_type().equals(STORE_TYPE))
+//            initTablayout(true);
+//        else
+//            initTablayout(false);
         presenter.getData();
     }
 
@@ -59,67 +67,73 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private int currentTab = 0;
-
-    //    Khởi tạo tab chức năng
-    private void initTablayout(final boolean isStore) {
-        int[] icon = new int[]{R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
-
-        for (int i = 0; i < 5; i++) {
-            tabLayout.addTab(tabLayout.newTab().setIcon(icon[i]));
-        }
-
-        if (isStore)
-            //noinspection ConstantConditions
-            tabLayout.getTabAt(1).setIcon(R.mipmap.ic_list_store_gray);
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @SuppressWarnings("ConstantConditions")
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (isStore && tab.getPosition() == 1) {
-                    tabLayout.getTabAt(currentTab).select();
-                    return;
-                }
-
-                currentTab = tab.getPosition();
-                checkTabSelected(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+    private void initBottomNavigationView() {
+        bottomNavigationView = findBottomNavigationView(R.id.view_store_bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setEnabled(false);
     }
 
-    //    lựa chọn chức năng khi tab được chọn
-    private void checkTabSelected(int position) {
-        switch (position) {
-            case 0:
-                replaceStoreInfo();
-                break;
-            case 1:
-                replaceListStore();
-                break;
-            case 2:
-                replaceListMember();
-                break;
-            case 3:
-                replaceListNews();
-                break;
-            case 4:
-                replaceGallery();
-                break;
-            default:
-                break;
-        }
-    }
+//    private int currentTab = 0;
+
+//    //    Khởi tạo tab chức năng
+//    private void initTablayout(final boolean isStore) {
+//        int[] icon = new int[]{R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
+//        final TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
+//
+//        for (int i = 0; i < 5; i++) {
+//            tabLayout.addTab(tabLayout.newTab().setIcon(icon[i]));
+//        }
+//
+//        if (isStore)
+//            //noinspection ConstantConditions
+//            tabLayout.getTabAt(1).setIcon(R.mipmap.ic_list_store_gray);
+//
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @SuppressWarnings("ConstantConditions")
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                if (isStore && tab.getPosition() == 1) {
+//                    tabLayout.getTabAt(currentTab).select();
+//                    return;
+//                }
+//
+//                currentTab = tab.getPosition();
+//                checkTabSelected(tab.getPosition());
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
+//    }
+
+//    //    lựa chọn chức năng khi tab được chọn
+//    private void checkTabSelected(int position) {
+//        switch (position) {
+//            case 0:
+//                replaceStoreInfo();
+//                break;
+//            case 1:
+//                replaceListStore();
+//                break;
+//            case 2:
+//                replaceListMember();
+//                break;
+//            case 3:
+//                replaceListNews();
+//                break;
+//            case 4:
+//                replaceGallery();
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     //    Hiện menu của tab thông tin cửa hàng
     private void showMenuStoreInfo() {
@@ -207,7 +221,7 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
     //    hiển thị fratment bản tin gần đây
     private void replaceGallery() {
         actionBar.setTitle(getString(R.string.title_activity_gallery));
-        replaceFragment(R.id.view_store_container, GalleryFragment.newInstance(sortStore.getId()), GALLERY);
+        replaceFragment(R.id.view_store_container, GalleryFragment.newInstance(sortStore), GALLERY);
         showMenuGallery();
     }
 
@@ -233,14 +247,10 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         this.sortStore = sortStore;
         Log.e(this.getClass().getSimpleName(), "sortStore " + JsonHelper.toJson(sortStore));
 
-        initToolbar();
-
-        if (sortStore.getStore_type().equals(STORE_TYPE))
-            initTablayout(true);
-        else
-            initTablayout(false);
-
         replaceStoreInfo();
+        bottomNavigationView.setEnabled(true);
+        if (sortStore.getStore_type().equals(STORE_TYPE))
+            bottomNavigationView.getMenu().findItem(R.id.nav_view_store_list_store).setIcon(R.mipmap.ic_list_store_gray);
     }
 
     @Override
@@ -317,7 +327,15 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
                 }
             }
         } else if (id == R.id.action_view_store_add_news) {
-            startActivity(AddNewsActivity.class, Constants.MODEL, sortStore);
+            if (getSupportFragmentManager().findFragmentByTag(LIST_NEWS) != null)
+                startActivity(AddNewsActivity.class, Constants.MODEL, sortStore);
+            else {
+                GalleryFragment fragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+                if (fragment != null) {
+                    fragment.addImageView();
+                }
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -328,14 +346,53 @@ public class ViewStoreActivity extends BasicActivity implements IViewStoreView {
         StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
         if (fragment != null)
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+        if (galleryFragment != null)
+            galleryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         debug(requestCode + "   " + resultCode);
+
         StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
         if (fragment != null)
             fragment.onActivityResult(requestCode, resultCode, data);
+
+        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+        if (galleryFragment != null)
+            galleryFragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.nav_view_store_info:
+                replaceStoreInfo();
+                break;
+            case R.id.nav_view_store_list_store:
+                if (sortStore.getStore_type().equals(STORE_TYPE))
+                    return false;
+
+                replaceListStore();
+                break;
+            case R.id.nav_view_store_member:
+                replaceListMember();
+                break;
+            case R.id.nav_view_store_news:
+                replaceListNews();
+                break;
+            case R.id.nav_view_store_gallery:
+                replaceGallery();
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 }

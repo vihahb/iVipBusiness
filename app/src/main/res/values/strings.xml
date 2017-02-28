@@ -56,6 +56,12 @@
     <string name="action_select_puplic">Công khai</string>
     <string name="action_select_private">Chỉ cho thành viên</string>
 
+    <string name="action_store_info">Thông tin</string>
+    <string name="action_stores">Cửa hàng</string>
+    <string name="action_member">Thành viên</string>
+    <string name="action_news">Bản tin</string>
+    <string name="action_galeery">Album ảnh</string>
+
     <!-- Dialog -->
     <string name="doing_register">Đang tạo tài khoản…</string>
     <string name="doing_active">Đang kích hoạt tài khoản…</string>
@@ -71,6 +77,7 @@
     <string name="doing_update_news">Đang cập nhật bản tin…</string>
     <string name="doing_send_fcm">Đang gửi bản tin…</string>
     <string name="doing_delete_gallery">Đang xóa ảnh…</string>
+    <string name="doing_add_gallery">Đang thêm ảnh…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -84,6 +91,7 @@
     <string name="success_update_news">Cập nhật bản tin thành công</string>
     <string name="success_send_fcm">Gửi bản tin thành công</string>
     <string name="success_delete_gallery">Xóa ảnh thành công</string>
+    <string name="success_add_gallery">Thêm ảnh thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -135,6 +143,7 @@
     <string name="error_news_not_exitst">Bản tin không tồn tại</string>
     <string name="error_gallery_not_exists">Ảnh không tồn tại</string>
     <string name="error_delete_gallery">Xóa ảnh thất bại</string>
+    <string name="error_chain_not_exists">Chuỗi cửa hàng không tồn tại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>

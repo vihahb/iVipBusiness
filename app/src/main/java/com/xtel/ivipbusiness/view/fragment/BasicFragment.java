@@ -137,6 +137,10 @@ public class BasicFragment extends IFragment {
         getActivity().startActivityForResult(intent, requestCode);
     }
 
+    public void startActivityForResult(Intent intent, int requestCode) {
+        getActivity().startActivityForResult(intent, requestCode);
+    }
+
     protected void startActivityForResult(Class clazz, String key, Object object, int requestCode) {
         Intent intent = new Intent(getActivity(), clazz);
         intent.putExtra(key, (Serializable) object);

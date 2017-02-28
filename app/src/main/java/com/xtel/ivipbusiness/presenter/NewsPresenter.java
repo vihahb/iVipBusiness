@@ -54,7 +54,8 @@ public class NewsPresenter {
                         NewsModel.getInstance().deleteNews((int) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
                             @Override
                             public void onSuccess(RESP_None obj) {
-                                view.onDeleteNewsSuccess(((int) params[2]));
+                                if (isExists)
+                                    view.onDeleteNewsSuccess(((int) params[2]));
                             }
 
                             @Override

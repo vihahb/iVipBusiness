@@ -65,7 +65,6 @@ import java.util.Calendar;
 public class StoreInfoFragment extends BasicFragment implements View.OnClickListener, IStoreInfoView {
     private StoreInfoPresenter presenter;
 
-    private FrameLayout layout_logo;
     private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
     private ImageButton img_camera;
     private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
@@ -115,7 +114,6 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     private void initView(View view) {
-        layout_logo = (FrameLayout) view.findViewById(R.id.store_info_layout_logo);
         img_banner = findImageView(R.id.store_info_img_banner);
         img_logo = findImageView(R.id.store_info_img_logo);
         img_qr_code = findImageView(R.id.store_info_img_qrCode);

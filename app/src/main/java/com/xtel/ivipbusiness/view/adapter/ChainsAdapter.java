@@ -66,7 +66,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 arrayList.get(position).setBg_id(background_item[bg_pos]);
 
             ViewHolder viewHolder = (ViewHolder) holder;
-            SortStore stores = arrayList.get(position);
+            final SortStore stores = arrayList.get(position);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, stores.getBanner());
             WidgetHelper.getInstance().setAvatarImageURL(viewHolder.img_avatar, stores.getLogo());
@@ -83,7 +83,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         return;
                     }
 
-                    _view.startActivityForResult(ViewStoreActivity.class, Constants.MODEL, arrayList.get(position), 11);
+                    _view.startActivityForResult(ViewStoreActivity.class, Constants.MODEL, stores, 11);
 //                    _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
                 }
             });

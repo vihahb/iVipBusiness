@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:background="@color/colorPrimaryKey_80">
 
     <ImageView
         android:id="@+id/store_info.img_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_180"
-        android:layout_alignBottom="@+id/store_info.layout_header_content"
-        android:layout_alignTop="@+id/store_info.layout_header_content"
         android:alpha="0.9"
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
