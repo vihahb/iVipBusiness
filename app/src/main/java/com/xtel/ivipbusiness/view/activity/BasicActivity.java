@@ -92,8 +92,7 @@ public abstract class BasicActivity extends IActivity {
     }
 
     @SuppressWarnings("ConstantConditions")
-    protected void showMaterialDialog(boolean isTouchOutside, boolean isCancelable, String title, String message,
-                                      String negative, String positive, final DialogListener dialogListener) {
+    protected void showMaterialDialog(boolean isTouchOutside, boolean isCancelable, String title, String message, String negative, String positive, final DialogListener dialogListener) {
         dialog = new Dialog(BasicActivity.this, R.style.Theme_Transparent);
         dialog.setContentView(R.layout.dialog_material);
         dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -129,7 +128,7 @@ public abstract class BasicActivity extends IActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                dialogListener.onCancel();
+                dialogListener.negativeClicked();
             }
         });
 
@@ -137,7 +136,7 @@ public abstract class BasicActivity extends IActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                dialogListener.onClicked(null);
+                dialogListener.positiveClicked();
             }
         });
 

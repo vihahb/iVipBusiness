@@ -3,8 +3,11 @@ package com.xtel.ivipbusiness.view.activity;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Setting;
@@ -23,6 +26,7 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     private CallbackManager callbackManager;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,20 @@ public class SettingActivity extends BasicActivity implements ISettingView {
         presenter = new SettingPresenter(this);
         callbackManager = CallbackManager.create(this);
 
+        initToolbar();
         initSwwipe();
         presenter.getData();
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.setting_toolbar);
+        setSupportActionBar(toolbar);
+
+        actionBar = getSupportActionBar();
+
+        assert actionBar != null;
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     //    Khởi tạo swipeRefreshLayout để hiển thị load thông tin
@@ -59,6 +75,17 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
 
 
+
+
+
+
+
+
+    @Override
+    public void onGetDataSuccess(boolean isChain) {
+        if (isChain)
+            actionBar.setTitle(getString(R.string.title_activity_setting_chain));
+    }
 
     @Override
     public void onGetSettingSuccess(RESP_Setting resp_setting) {
@@ -88,12 +115,13 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
-
+            public void negativeClicked() {
+                closeDialog();
+                finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 finish();
             }
@@ -112,15 +140,17 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     }
 
 
-
-
-
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 }

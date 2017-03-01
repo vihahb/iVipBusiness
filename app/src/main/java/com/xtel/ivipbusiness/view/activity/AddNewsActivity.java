@@ -249,13 +249,13 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 finish();
             }
@@ -311,12 +311,14 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     public void onAddNewsSuccess() {
         showMaterialDialog(false, false, null, getString(R.string.success_add_news), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
+                closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
+                closeDialog();
                 finish();
             }
         });

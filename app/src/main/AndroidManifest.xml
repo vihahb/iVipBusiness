@@ -112,6 +112,10 @@
             android:name=".view.activity.ChooseOptionFcmActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_send_group" />
+        <activity
+            android:name=".view.activity.SettingActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_setting_store" />
 
         <meta-data
             android:name="xtel_service_code"

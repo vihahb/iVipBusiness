@@ -6,6 +6,6 @@ package com.xtel.sdk.callback;
 
 public interface DialogListener {
 
-    void onClicked(Object object);
-    void onCancel();
+    void negativeClicked();
+    void positiveClicked();
 }

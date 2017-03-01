@@ -19,6 +19,7 @@ public class SettingPresenter {
     private ISettingView view;
 
     private SortStore sortStore;
+    private final String STORE_TYPE = "STORE";
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -58,7 +59,9 @@ public class SettingPresenter {
 
         if (sortStore == null)
             view.onGetDataError();
-        else
+        else {
+            view.onGetDataSuccess((!sortStore.getStore_type().equals(STORE_TYPE)));
             iCmd.execute(1);
+        }
     }
 }

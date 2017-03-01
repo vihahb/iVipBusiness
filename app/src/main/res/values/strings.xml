@@ -33,6 +33,8 @@
     <string name="title_activity_send_fcm">Gửi bản tin</string>
     <string name="title_activity_send_group">Gửi theo nhóm</string>
     <string name="title_activity_send_member">Gửi cho thành viên</string>
+    <string name="title_activity_setting_store">Cài đặt cửa hàng</string>
+    <string name="title_activity_setting_chain">Cài đặt chuỗi cửa hàng</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -187,13 +187,13 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 finish();
             }
@@ -217,12 +217,12 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
         closeProgressBar();
         showMaterialDialog(false, false, null, getString(R.string.success_send_fcm), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
             }
         });

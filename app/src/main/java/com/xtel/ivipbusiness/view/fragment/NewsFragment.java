@@ -156,14 +156,14 @@ public class NewsFragment extends BasicFragment implements INewsView {
     public void deleteNews(final int id,final int position) {
         showMaterialDialog(false, false, null, getString(R.string.delete_this_news), getString(R.string.delete), getString(R.string.cancel), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 showProgressBar(false, false, null, getString(R.string.doing_delete_news));
                 presenter.deleteNews(id, position);
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
             }
         });

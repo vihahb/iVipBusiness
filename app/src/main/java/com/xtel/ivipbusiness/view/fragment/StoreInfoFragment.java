@@ -335,14 +335,14 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 getActivity().finish();
             }
 
             @Override
-            public void onCancel() {
-
+            public void positiveClicked() {
+                closeDialog();
             }
         });
     }
@@ -378,12 +378,12 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
         showMaterialDialog(false, false, null, getString(R.string.success_update_store), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
             }
         });
@@ -393,13 +393,13 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     public void onGetStoreInfoError() {
         showMaterialDialog(false, false, null, getString(R.string.can_not_load_data), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 getActivity().finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 getActivity().finish();
             }

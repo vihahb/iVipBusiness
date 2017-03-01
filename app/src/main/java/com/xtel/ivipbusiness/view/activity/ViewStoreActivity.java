@@ -257,13 +257,13 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 finish();
             }
@@ -315,7 +315,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         } else if (id == R.id.action_view_store_choose_store) {
             startActivityForResult(ListStoresActivity.class, 22);
         } else if (id == R.id.action_view_store_setting_store) {
-
+            startActivity(SettingActivity.class, Constants.MODEL, sortStore);
         } else if (id == R.id.action_view_store_edit_store) {
             StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
 
@@ -338,32 +338,6 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
-        if (fragment != null)
-            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
-        if (galleryFragment != null)
-            galleryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        debug(requestCode + "   " + resultCode);
-
-        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
-        if (fragment != null)
-            fragment.onActivityResult(requestCode, resultCode, data);
-
-        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
-        if (galleryFragment != null)
-            galleryFragment.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -394,5 +368,31 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         }
 
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+        if (fragment != null)
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+        if (galleryFragment != null)
+            galleryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        debug(requestCode + "   " + resultCode);
+
+        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+        if (fragment != null)
+            fragment.onActivityResult(requestCode, resultCode, data);
+
+        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+        if (galleryFragment != null)
+            galleryFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

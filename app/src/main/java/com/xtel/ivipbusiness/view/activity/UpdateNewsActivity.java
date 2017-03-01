@@ -297,13 +297,13 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         closeProgressBar();
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 finish();
             }
@@ -395,12 +395,12 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         setEnableView(false);
         showMaterialDialog(false, false, null, getString(R.string.success_update_news), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
             }
         });
@@ -429,13 +429,13 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         closeProgressBar();
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
+            public void positiveClicked() {
                 closeDialog();
                 finish();
             }

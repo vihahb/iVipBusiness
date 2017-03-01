@@ -12,6 +12,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 
 public interface ISettingView {
 
+    void onGetDataSuccess(boolean isChain);
     void onGetSettingSuccess(RESP_Setting resp_setting);
     void getNewSession(ICmd iCmd, Object... params);
 

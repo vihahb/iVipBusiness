@@ -140,14 +140,15 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         closeProgressBar();
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
-
+            public void positiveClicked() {
+                closeDialog();
+                finish();
             }
         });
     }
@@ -205,14 +206,15 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     public void onAddChainSuccess() {
         showMaterialDialog(false, false, null, getString(R.string.success_add_chain), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
-
+            public void positiveClicked() {
+                closeDialog();
+                finish();
             }
         });
     }
@@ -222,14 +224,15 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 //        showShortToast(getString(R.string.success_add_store));
         showMaterialDialog(false, false, null, getString(R.string.success_add_store), null, getString(R.string.back), new DialogListener() {
             @Override
-            public void onClicked(Object object) {
+            public void negativeClicked() {
                 closeDialog();
                 finish();
             }
 
             @Override
-            public void onCancel() {
-
+            public void positiveClicked() {
+                closeDialog();
+                finish();
             }
         });
     }

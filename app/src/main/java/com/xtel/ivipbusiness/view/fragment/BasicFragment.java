@@ -101,7 +101,7 @@ public class BasicFragment extends IFragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                dialogListener.onClicked(null);
+                dialogListener.negativeClicked();
             }
         });
 
@@ -109,7 +109,7 @@ public class BasicFragment extends IFragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                dialogListener.onCancel();
+                dialogListener.positiveClicked();
             }
         });
 
