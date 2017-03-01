@@ -19,7 +19,6 @@ public interface INotifyView {
     void onGetNotifySuccess(ArrayList<Notify> arrayList);
     void onSendFcmSuccess();
     void onRequestError(Error error);
-    void onNewsNotExists();
 
     void getNewSession(ICmd iCmd, Object... params);
     Activity getActivity();

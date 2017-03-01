@@ -53,8 +53,6 @@ public class NotifyPresenter {
                         public void onError(Error error) {
                             if (error.getCode() == 2)
                                 view.getNewSession(iCmd, params);
-                            else if (error.getCode() == 201)
-                                view.onNewsNotExists();
                             else
                                 view.onRequestError(error);
                         }

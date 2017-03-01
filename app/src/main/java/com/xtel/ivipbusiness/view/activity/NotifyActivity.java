@@ -61,7 +61,7 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
     //    Khởi tạo progress view gồm refresh layout và recyclerview
     private void initProgressView() {
         progressView = new ProgressView(this, null);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+        progressView.initData(-1, getString(R.string.no_notify), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -169,7 +169,7 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
             progressView.showData();
             adapter.notifyDataSetChanged();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+            progressView.initData(-1, getString(R.string.no_notify), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }
@@ -181,18 +181,6 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
     private void showBottomView(View view) {
         view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -243,13 +231,11 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
     @Override
     public void onRequestError(Error error) {
         closeProgressBar();
-        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
-    }
 
-    @Override
-    public void onNewsNotExists() {
-        closeProgressBar();
-        showShortToast(getString(R.string.error_news_not_exitst));
+        if (error.getCode() == 201)
+            showShortToast(getString(R.string.error_news_not_exitst));
+        else
+            showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
     }
 
     @Override
