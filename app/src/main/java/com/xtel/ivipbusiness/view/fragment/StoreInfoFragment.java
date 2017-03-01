@@ -66,7 +66,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     private StoreInfoPresenter presenter;
 
     private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
-    private ImageButton img_camera;
+    private ImageButton img_camera, img_location;
     private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -118,7 +118,9 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         img_logo = findImageView(R.id.store_info_img_logo);
         img_qr_code = findImageView(R.id.store_info_img_qrCode);
         img_bar_code = findImageView(R.id.store_info_img_bar_code);
+
         img_camera = findImageButton(R.id.store_info_img_camera);
+        img_location = findImageButton(R.id.store_info_img_location);
 
         edt_begin_time = findEditText(R.id.store_info_edt_begin_time);
         edt_end_time = findEditText(R.id.store_info_edt_end_time);
@@ -136,7 +138,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
         edt_begin_time.setOnClickListener(this);
         edt_end_time.setOnClickListener(this);
-        edt_address.setOnClickListener(this);
+        img_location.setOnClickListener(this);
     }
 
     public void setEnableView(boolean isEnable) {
@@ -148,6 +150,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         edt_des.setEnabled(isEnable);
 
         img_camera.setEnabled(isEnable);
+        img_location.setEnabled(isEnable);
         img_banner.setEnabled(isEnable);
         img_logo.setEnabled(isEnable);
 
@@ -509,7 +512,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             selectBeginTime();
         else if (id == R.id.store_info_edt_end_time)
             selectEndTime();
-        else if (id == R.id.store_info_edt_address) {
+        else if (id == R.id.store_info_img_location) {
             if (PermissionHelper.checkOnlyPermission(Manifest.permission.ACCESS_FINE_LOCATION, getActivity(), REQUEST_LOCATION)) {
                 PlaceModel placeModel = new PlaceModel();
                 placeModel.setAddress(resp_store.getAddress());

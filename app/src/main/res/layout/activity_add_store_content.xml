@@ -53,10 +53,11 @@
             style="@style/edittext_address"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_48"
+            android:layout_marginTop="@dimen/size_8"
             android:drawableLeft="@drawable/ic_action_location"
             android:drawableStart="@drawable/ic_action_location"
             android:hint="@string/store_address"
-            android:inputType="textMultiLine|textCapSentences"
+            android:inputType="textCapSentences"
             android:paddingEnd="@dimen/size_36"
             android:paddingRight="@dimen/size_36" />
 
@@ -67,6 +68,7 @@
             android:layout_alignBottom="@+id/add_store.edt_address"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:paddingBottom="@dimen/size_6"
             android:layout_alignTop="@+id/add_store.edt_address"
             android:background="@drawable/button_transparent"
             android:contentDescription="@null"

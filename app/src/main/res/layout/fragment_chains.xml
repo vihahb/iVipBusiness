@@ -16,12 +16,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:fitsSystemWindows="false"
-        app:fabBackgroundTint="@color/fab_background"
+        app:fabBackgroundTint="@color/fab_orange"
         app:fabGravity="bottom_end"
-        app:fabMenu="@menu/menu_nav_home"
-        app:miniFabBackgroundTint="@android:color/white"
-        app:miniFabDrawableTint="@color/colorPrimary"
-        app:miniFabTitleBackgroundTint="@android:color/white"
-        app:miniFabTitleTextColor="@color/colorPrimary"
-        app:touchGuardDrawable="@color/colorPrimaryKey_80" />
+        app:fabMenu="@menu/menu_nav_chain"
+        app:miniFabBackgroundTintList="@array/fab_menu_item_colors"
+        app:miniFabDrawableTint="@android:color/white"
+        app:miniFabTitleTextColorList="@array/fab_menu_item_colors"
+        app:touchGuardDrawable="@color/white_80" />
 </FrameLayout>
