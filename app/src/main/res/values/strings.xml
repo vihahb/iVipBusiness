@@ -70,6 +70,7 @@
     <string name="doing_add_news">Đang tạo bản tin…</string>
     <string name="can_not_load_data">Không thể tải dữ liệu</string>
     <string name="back">Quay lại</string>
+    <string name="ok">OK</string>
     <string name="uploading_file">Đang tải ảnh…</string>
     <string name="adding_store">Đang tạo cửa hàng…</string>
     <string name="updating_store">Đang cập nhập…</string>
@@ -185,6 +186,7 @@
     <string name="total_point">Tổng điểm</string>
     <string name="remaining_point">Điểm còn lại</string>
     <string name="total_checkin">Số lần checkin</string>
+    <string name="total_money">Số tiền mua hàng</string>
     <string name="total_shopping">Số lần mua hàng</string>
     <string name="total_shopping_in_store">Số lần mua hàng tại store</string>
     <string name="last_checkin">Thồi gian checkin cuối</string>

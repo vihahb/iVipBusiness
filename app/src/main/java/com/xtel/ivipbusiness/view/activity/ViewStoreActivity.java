@@ -207,7 +207,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     //    hiển thị fratment member
     private void replaceListMember() {
         actionBar.setTitle(getString(R.string.title_activity_list_member));
-        replaceFragment(R.id.view_store_container, MemberFragment.newInstance(), LIST_MENBER);
+        replaceFragment(R.id.view_store_container, MemberFragment.newInstance(sortStore), LIST_MENBER);
         hideMenuItem();
     }
 

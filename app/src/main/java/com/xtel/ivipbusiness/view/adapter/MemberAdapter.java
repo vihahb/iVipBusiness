@@ -11,9 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.view.activity.HistoryActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
-import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
@@ -22,7 +22,7 @@ import com.xtel.sdk.utils.WidgetHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Mr. M.2 on 1/19/2017
+ * Created by Mr. M.2 on 1/13/2017
  */
 
 public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -55,17 +55,17 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ViewHolder viewHolder = (ViewHolder) holder;
             final Member member = arrayList.get(position);
 
-            WidgetHelper.getInstance().setImageURL(viewHolder.img_avatar, member.getAvatar());
+            WidgetHelper.getInstance().setAvatarImageURL(viewHolder.img_avatar, member.getAvatar());
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_fullname, member.getFullname(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_point, String.valueOf(member.getTotal_point()));
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_remaining_point, String.valueOf(member.getRemaining_point()));
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_checkin, _view.getActivity().getString(R.string.total_checkin), String.valueOf(member.getTotal_checkin()));
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_shopping, _view.getActivity().getString(R.string.total_shopping), String.valueOf(member.getTotal_shopping()));
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getTotal_shopping_in_store()));
+            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_remaining_point, String.valueOf(member.getCurrent_point()));
+            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_checkin, _view.getActivity().getString(R.string.total_checkin), String.valueOf(member.getCheckin_number()));
+            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_money, _view.getActivity().getString(R.string.total_money), String.valueOf(member.getTotal_money()));
+            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getBuy_number()));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin) + ": ", member.getLast_checkin());
 
             viewHolder.txt_total_checkin.setSelected(true);
-            viewHolder.txt_total_shopping.setSelected(true);
+            viewHolder.txt_total_money.setSelected(true);
             viewHolder.txt_shopping_in_store.setSelected(true);
             viewHolder.txt_last_checkin.setSelected(true);
 
@@ -106,7 +106,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private class ViewHolder extends ViewHolderHelper {
         private ImageView img_avatar;
-        private TextView txt_fullname, txt_total_point, txt_remaining_point, txt_total_checkin, txt_total_shopping, txt_shopping_in_store, txt_last_checkin;
+        private TextView txt_fullname, txt_total_point, txt_remaining_point, txt_total_checkin, txt_total_money, txt_shopping_in_store, txt_last_checkin;
 
         ViewHolder (View itemView) {
             super(itemView);
@@ -116,7 +116,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             txt_total_point = findTextView(R.id.item_member_txt_total_point);
             txt_remaining_point = findTextView(R.id.item_member_txt_remaining_point);
             txt_total_checkin = findTextView(R.id.item_member_txt_total_checkin);
-            txt_total_shopping = findTextView(R.id.item_member_txt_total_shopping);
+            txt_total_money = findTextView(R.id.item_member_txt_total_money);
             txt_shopping_in_store = findTextView(R.id.item_member_txt_total_shopping_in_store);
             txt_last_checkin = findTextView(R.id.item_member_txt_last_checkin);
         }

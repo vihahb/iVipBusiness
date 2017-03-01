@@ -1,6 +1,6 @@
 package com.xtel.ivipbusiness.presenter;
 
-import com.xtel.ivipbusiness.model.FcmModel;
+import com.xtel.ivipbusiness.model.NotifyModel;
 import com.xtel.ivipbusiness.model.entity.NotifyCodition;
 import com.xtel.ivipbusiness.model.entity.RESP_Fcm;
 import com.xtel.ivipbusiness.model.entity.RESP_Notify;
@@ -8,7 +8,6 @@ import com.xtel.ivipbusiness.view.activity.inf.INotifyView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
@@ -29,7 +28,7 @@ public class NotifyPresenter {
                 int type = (int) params[0];
 
                 if (type == 1) {
-                    FcmModel.getInstance().getListNotify(news_d, new ResponseHandle<RESP_Notify>(RESP_Notify.class) {
+                    NotifyModel.getInstance().getListNotify(news_d, new ResponseHandle<RESP_Notify>(RESP_Notify.class) {
                         @Override
                         public void onSuccess(RESP_Notify obj) {
                             view.onGetNotifySuccess(obj.getData());
@@ -44,7 +43,7 @@ public class NotifyPresenter {
                         }
                     });
                 } else if (type == 2) {
-                    FcmModel.getInstance().sendToPeople((String) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
+                    NotifyModel.getInstance().sendToPeople((String) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
                         public void onSuccess(RESP_None obj) {
                             view.onSendFcmSuccess();

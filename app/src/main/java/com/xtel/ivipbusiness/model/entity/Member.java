@@ -10,31 +10,27 @@ import java.io.Serializable;
 
 public class Member implements Serializable {
     @Expose
-    private int id;
-    @Expose
     private String fullname;
     @Expose
     private String avatar;
     @Expose
+    private int level;
+    @Expose
+    private String level_name;
+    @Expose
     private int total_point;
     @Expose
-    private int remaining_point;
+    private int current_point;
     @Expose
-    private int total_checkin;
+    private int checkin_number;
     @Expose
-    private int total_shopping;
+    private double total_money;
     @Expose
-    private int total_shopping_in_store;
+    private Long last_checkin;
     @Expose
-    private long last_checkin;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private Long buy_number;
+    @Expose
+    private String store_address;
 
     public String getFullname() {
         return fullname;
@@ -52,6 +48,22 @@ public class Member implements Serializable {
         this.avatar = avatar;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getLevel_name() {
+        return level_name;
+    }
+
+    public void setLevel_name(String level_name) {
+        this.level_name = level_name;
+    }
+
     public int getTotal_point() {
         return total_point;
     }
@@ -60,43 +72,51 @@ public class Member implements Serializable {
         this.total_point = total_point;
     }
 
-    public int getRemaining_point() {
-        return remaining_point;
+    public int getCurrent_point() {
+        return current_point;
     }
 
-    public void setRemaining_point(int remaining_point) {
-        this.remaining_point = remaining_point;
+    public void setCurrent_point(int current_point) {
+        this.current_point = current_point;
     }
 
-    public int getTotal_checkin() {
-        return total_checkin;
+    public int getCheckin_number() {
+        return checkin_number;
     }
 
-    public void setTotal_checkin(int total_checkin) {
-        this.total_checkin = total_checkin;
+    public void setCheckin_number(int checkin_number) {
+        this.checkin_number = checkin_number;
     }
 
-    public int getTotal_shopping() {
-        return total_shopping;
+    public double getTotal_money() {
+        return total_money;
     }
 
-    public void setTotal_shopping(int total_shopping) {
-        this.total_shopping = total_shopping;
+    public void setTotal_money(double total_money) {
+        this.total_money = total_money;
     }
 
-    public int getTotal_shopping_in_store() {
-        return total_shopping_in_store;
-    }
-
-    public void setTotal_shopping_in_store(int total_shopping_in_store) {
-        this.total_shopping_in_store = total_shopping_in_store;
-    }
-
-    public long getLast_checkin() {
+    public Long getLast_checkin() {
         return last_checkin;
     }
 
-    public void setLast_checkin(long last_checkin) {
+    public void setLast_checkin(Long last_checkin) {
         this.last_checkin = last_checkin;
+    }
+
+    public Long getBuy_number() {
+        return buy_number;
+    }
+
+    public void setBuy_number(Long buy_number) {
+        this.buy_number = buy_number;
+    }
+
+    public String getStore_address() {
+        return store_address;
+    }
+
+    public void setStore_address(String store_address) {
+        this.store_address = store_address;
     }
 }

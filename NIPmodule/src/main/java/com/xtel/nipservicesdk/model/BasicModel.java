@@ -29,6 +29,14 @@ public abstract class BasicModel {
     protected final String GET_STORE_INFO_ID = "/v0.1/store/";
     protected final String GET_STORE_INFO_TYPE = "?type=";
 
+    protected final String GET_SETTING_TYPE = "/v0.1/setting?type=";
+    protected final String GET_SETTING_ID = "&id=";
+
+    protected final String GET_MEMBER_CHAIN_IN = "/v0.1/chain/";
+    protected final String GET_MEMBER_STORE_IN = "/v0.1/store/";
+    protected final String GET_MEMBER_PAGE = "/checkins?page=";
+    protected final String GET_MEMBER_PAGESIZE = "&pagesize=";
+
     //    Notify
     protected final String SEND_NOTIFY = "/v0.1/news/notify";
     protected final String GET_LIST_NOTIFY = "/v0.1/news/notify/";

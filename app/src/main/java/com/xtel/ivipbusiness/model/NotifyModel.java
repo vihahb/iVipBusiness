@@ -10,12 +10,12 @@ import com.xtel.nipservicesdk.model.BasicModel;
  * Created by Vulcl on 2/23/2017
  */
 
-public class FcmModel extends BasicModel {
-    private static FcmModel instance;
+public class NotifyModel extends BasicModel {
+    private static NotifyModel instance;
 
-    public static FcmModel getInstance() {
+    public static NotifyModel getInstance() {
         if (instance == null)
-            instance = new FcmModel();
+            instance = new NotifyModel();
         return instance;
     }
 

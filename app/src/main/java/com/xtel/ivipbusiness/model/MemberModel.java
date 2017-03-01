@@ -29,15 +29,15 @@ public class MemberModel extends BasicModel {
 
         for (int i = 1; i < 21; i++) {
             Member member = new Member();
-            member.setId(i);
-            member.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
-            member.setFullname("Le Cong Long Vu");
-            member.setTotal_point(100000);
-            member.setRemaining_point(1000000);
-            member.setTotal_checkin(1000);
-            member.setTotal_shopping(1000);
-            member.setTotal_shopping_in_store(1000);
-            member.setLast_checkin(1484758800000L);
+//            member.setId(i);
+//            member.setAvatar("http://www.pngget.com/resize/resize-img.php?src=http://img.pngget.com/clip2/5dnm2s5l2ua.png&h=131&w=131");
+//            member.setFullname("Le Cong Long Vu");
+//            member.setTotal_point(100000);
+//            member.setRemaining_point(1000000);
+//            member.setTotal_checkin(1000);
+//            member.setTotal_shopping(1000);
+//            member.setTotal_shopping_in_store(1000);
+//            member.setLast_checkin(1484758800000L);
 
             arrayList.add(member);
         }

@@ -95,12 +95,12 @@
                 android:text="@string/total_checkin" />
 
             <TextView
-                android:id="@+id/item.member.txt_total_shopping"
+                android:id="@+id/item.member.txt_total_money"
                 style="@style/textview_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_4"
-                android:text="@string/total_shopping" />
+                android:text="@string/total_money" />
 
             <TextView
                 android:id="@+id/item.member.txt_total_shopping_in_store"

@@ -387,7 +387,12 @@ public class WidgetHelper {
             view.setText((title + content));
     }
 
-    public void setTextViewDate(TextView view, String content, long milliseconds) {
+    public void setTextViewDate(TextView view, String content, Long milliseconds) {
+        if (milliseconds == null) {
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            return;
+        }
+
         if (milliseconds == 0)
             view.setText((content + MyApplication.context.getString(R.string.updating)));
         else
@@ -518,14 +523,14 @@ public class WidgetHelper {
         dateTime += "/" + mYear;
 
         if (hour < 10)
-            dateTime += " 0" + hour;
+            dateTime += "   0" + hour;
         else
-            dateTime += " " + String.valueOf(hour);
+            dateTime += "   " + String.valueOf(hour);
 
         if (minute < 10)
-            dateTime += " 0" + minute;
+            dateTime += ":0" + minute;
         else
-            dateTime += " " + String.valueOf(minute);
+            dateTime += ":" + String.valueOf(minute);
 
         return dateTime;
     }

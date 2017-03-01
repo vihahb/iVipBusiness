@@ -130,7 +130,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         });
     }
 
-//    Kiểm tra xem danh sách cửa hàng có trống không
+    //    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
 
@@ -150,32 +150,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     private void showBottomView(View view) {
         view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -210,22 +184,19 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
-        if (arrayList.size() < 10)
+        if (arrayList.size() < 10) {
             adapter.setLoadMore(false);
+            adapter.notifyDataSetChanged();
+        }
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-                if (isClearData) {
-                    listData.clear();
-                    adapter.setLoadMore(true);
-                    isClearData = false;
-                }
-                listData.addAll(arrayList);
+        if (isClearData) {
+            listData.clear();
+            adapter.setLoadMore(true);
+            isClearData = false;
+        }
+        listData.addAll(arrayList);
 
-                checkListData();
-//            }
-//        }, 1000);
+        checkListData();
     }
 
     @Override
@@ -279,4 +250,5 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }}
+    }
+}

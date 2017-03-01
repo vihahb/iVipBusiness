@@ -225,7 +225,7 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         adapter.deleteGallery(gallery_position);
 
         closeProgressBar();
-        showMaterialDialog(true, true, null, getString(R.string.success_delete_gallery), null, getString(R.string.back), new DialogListener() {
+        showMaterialDialog(true, true, null, getString(R.string.success_delete_gallery), null, getString(R.string.ok), new DialogListener() {
             @Override
             public void onClicked(Object object) {
                 closeDialog();
@@ -298,7 +298,7 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     @Override
     public void onAddPictureSuccess() {
         closeProgressBar();
-        showMaterialDialog(true, true, null, getString(R.string.success_add_gallery), null, getString(R.string.back), new DialogListener() {
+        showMaterialDialog(true, true, null, getString(R.string.success_add_gallery), null, getString(R.string.ok), new DialogListener() {
             @Override
             public void onClicked(Object object) {
                 closeDialog();
@@ -313,7 +313,7 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
 
     @Override
     public void onDeleteGallery(final int id, final int position) {
-        showMaterialDialog(false, false, null, getString(R.string.ask_delete_gallery), getString(R.string.delete), getString(R.string.back), new DialogListener() {
+        showMaterialDialog(true, true, null, getString(R.string.ask_delete_gallery), getString(R.string.delete), getString(R.string.back), new DialogListener() {
             @Override
             public void onClicked(Object object) {
                 closeDialog();
