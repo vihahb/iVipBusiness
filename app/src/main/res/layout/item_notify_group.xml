@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/size_16"
+    android:paddingRight="@dimen/size_16"
+    android:paddingTop="@dimen/size_16">
+
+    <TextView
+        android:id="@+id/item.notify.txt_group_title"
+        style="@style/textview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_group" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item.notify.txt_group_gender"
+                style="@style/textview_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_right_white_18dp"
+                android:drawableLeft="@drawable/ic_action_gender"
+                android:drawablePadding="@dimen/size_2"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_18dp"
+                android:drawableStart="@drawable/ic_action_gender"
+                android:gravity="center_vertical"
+                android:text="@string/store_des" />
+
+            <TextView
+                android:id="@+id/item.notify.txt_group_area"
+                style="@style/textview_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_right_white_18dp"
+                android:drawableLeft="@drawable/ic_action_location"
+                android:drawablePadding="@dimen/size_2"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_18dp"
+                android:drawableStart="@drawable/ic_action_location"
+                android:gravity="center_vertical"
+                android:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/item.notify.txt_group_age"
+                style="@style/textview_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_action_age"
+                android:drawablePadding="@dimen/size_2"
+                android:drawableStart="@drawable/ic_action_age"
+                android:gravity="center_vertical"
+                android:text="@string/store_des" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/item.notify.txt_group_date"
+        style="@style/textview_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|end"
+        android:layout_marginTop="@dimen/size_10"
+        android:drawablePadding="@dimen/size_6"
+        android:gravity="center_vertical"
+        android:text="@string/day_create" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@android:color/white" />
+</LinearLayout>

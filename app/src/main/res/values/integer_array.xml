@@ -13,8 +13,8 @@
         <item>@color/background_9</item>
     </integer-array>
     <integer-array name="fab_menu_item_colors">
-        <item>@color/holo_red_dark</item>
-        <item>@color/holo_purple</item>
-        <item>@color/holo_green_light</item>
+        <item>@color/mini_red</item>
+        <item>@color/mini_pink</item>
+        <item>@color/mini_orange</item>
     </integer-array>
 </resources>

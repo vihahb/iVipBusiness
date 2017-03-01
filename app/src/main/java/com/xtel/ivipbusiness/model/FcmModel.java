@@ -19,6 +19,14 @@ public class FcmModel extends BasicModel {
         return instance;
     }
 
+    public void getListNotify(int id, ResponseHandle responseHandle) {
+        String url = API_BASE + GET_LIST_NOTIFY + id;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("getListFcm", url + "           " + session);
+        requestServer.getApi(url, session, responseHandle);
+    }
+
     public void sendToPeople(String jsonObject, ResponseHandle responseHandle) {
         String url = API_BASE + SEND_NOTIFY;
         String session = LoginManager.getCurrentSession();

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class NotifyCodition implements Serializable {
     @Expose
-    private Integer[] levels;
+    private Integer[] level;
     @Expose
     private Integer gender;
     @Expose
@@ -20,12 +20,12 @@ public class NotifyCodition implements Serializable {
     @Expose
     private Integer[] areas;
 
-    public Integer[] getLevels() {
-        return levels;
+    public Integer[] getLevel() {
+        return level;
     }
 
-    public void setLevels(Integer[] levels) {
-        this.levels = levels;
+    public void setLevel(Integer[] level) {
+        this.level = level;
     }
 
     public Integer getGender() {

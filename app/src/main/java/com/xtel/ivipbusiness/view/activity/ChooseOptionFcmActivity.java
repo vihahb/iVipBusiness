@@ -78,7 +78,7 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
 
     //    Khởi tạo spinner để chọn giới tính
     private void initGender() {
-        String[] arrayList = getResources().getStringArray(R.array.gender);
+        String[] arrayList = getResources().getStringArray(R.array.gender_notify);
         sp_gender = findSpinner(R.id.option_sp_gender);
         GenderAdapter genderAdapter = new GenderAdapter(this, arrayList);
         genderAdapter.setOutline(true);
@@ -161,7 +161,7 @@ public class ChooseOptionFcmActivity extends BasicActivity implements View.OnCli
         NotifyCodition notifyCodition = new NotifyCodition();
         notifyCodition.setAreas(area);
         notifyCodition.setGender(gender);
-        notifyCodition.setLevels(level);
+        notifyCodition.setLevel(level);
         notifyCodition.setFrom_age(from_age);
         notifyCodition.setTo_age(to_age);
 

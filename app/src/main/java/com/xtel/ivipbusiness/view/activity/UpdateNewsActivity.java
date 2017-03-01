@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,8 +36,6 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
-import com.xtel.nipservicesdk.utils.JsonHelper;
-import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
@@ -510,7 +507,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
             case R.id.action_add_news_send_fcm:
                 if (!swipeRefreshLayout.isRefreshing())
-                    startActivity(ListFcmActivity.class, Constants.MODEL, resp_news.getId());
+                    startActivity(NotifyActivity.class, Constants.MODEL, resp_news.getId());
                 break;
             default:
                 break;

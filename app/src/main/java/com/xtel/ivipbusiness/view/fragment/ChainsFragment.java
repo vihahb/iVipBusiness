@@ -47,7 +47,7 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     private CallbackManager callbackManager;
 
     private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
-    private final int REQUEST_ADD = 99, REQUEST_ADD_STORE = 11;
+    private final int REQUEST_ADD_STORE = 11;
 
     public static ChainsFragment newInstance() {
         return new ChainsFragment();

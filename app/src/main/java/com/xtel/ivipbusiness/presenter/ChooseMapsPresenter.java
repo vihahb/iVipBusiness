@@ -13,7 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.xtel.ivipbusiness.model.ParkingModel;
-import com.xtel.ivipbusiness.model.RESP_Address;
+import com.xtel.ivipbusiness.model.entity.RESP_Address;
 import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.view.activity.inf.IChooseMapsView;
 import com.xtel.nipservicesdk.callback.ResponseHandle;

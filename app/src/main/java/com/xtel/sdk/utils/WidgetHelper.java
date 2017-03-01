@@ -394,6 +394,43 @@ public class WidgetHelper {
             view.setText((content + getDate(milliseconds)));
     }
 
+    public void setTextViewDateTime(TextView view, String content, long milliseconds) {
+        if (milliseconds == 0)
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
+        else
+            view.setText((content + getDateTime(milliseconds)));
+    }
+
+    public void setTextViewGender(TextView view, String content, int gender) {
+        String[] lisst_gender = MyApplication.context.getResources().getStringArray(R.array.gender_notify);
+        lisst_gender[0] = MyApplication.context.getString(R.string.updating);
+        view.setText((content + lisst_gender[gender]));
+    }
+
+    public void setTextViewOneArea(TextView view, String content, Integer[] area) {
+        if (area == null) {
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            return;
+        }
+
+        String[] lisst_area = MyApplication.context.getResources().getStringArray(R.array.area);
+        view.setText((content + lisst_area[area[0]]));
+    }
+
+    public void setTextViewOneLevel(TextView view, String content, Integer[] level) {
+        if (level == null) {
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            return;
+        }
+
+        String[] lisst_level = MyApplication.context.getResources().getStringArray(R.array.level);
+        view.setText((content + lisst_level[level[0]]));
+    }
+
+    public void setTextViewAgeFromTo(TextView view, String content, int from, int to) {
+        view.setText((content + from + "-" + to + " " + MyApplication.context.getResources().getString(R.string.notify_age)));
+    }
+
     public void setTextViewDrawable(TextView view, int position, int resource) {
         switch (position) {
             case 0:
@@ -453,6 +490,44 @@ public class WidgetHelper {
             month = String.valueOf(mMonth);
 
         return day + "-" + month + "-" + mYear;
+    }
+
+    private String getDateTime(long milliseconds) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliseconds);
+
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH) + 1;
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        String dateTime = "";
+
+        if (mDay < 10)
+            dateTime += "0" + mDay;
+        else
+            dateTime += String.valueOf(mDay);
+
+        if (mMonth < 10)
+            dateTime += "/0" + mMonth;
+        else
+            dateTime += "/" + String.valueOf(mMonth);
+
+        dateTime += "/" + mYear;
+
+        if (hour < 10)
+            dateTime += " 0" + hour;
+        else
+            dateTime += " " + String.valueOf(hour);
+
+        if (minute < 10)
+            dateTime += " 0" + minute;
+        else
+            dateTime += " " + String.valueOf(minute);
+
+        return dateTime;
     }
 
     public void setSpinnerGender(Spinner view, int type) {

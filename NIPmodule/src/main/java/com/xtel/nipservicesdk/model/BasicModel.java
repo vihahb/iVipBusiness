@@ -29,6 +29,10 @@ public abstract class BasicModel {
     protected final String GET_STORE_INFO_ID = "/v0.1/store/";
     protected final String GET_STORE_INFO_TYPE = "?type=";
 
+    //    Notify
+    protected final String SEND_NOTIFY = "/v0.1/news/notify";
+    protected final String GET_LIST_NOTIFY = "/v0.1/news/notify/";
+
     //    Gallery
     protected final String GET_LIST_GALLERY_STORE = "/v0.1/store/";
     protected final String GET_LIST_GALLERY_CHAIN = "/v0.1/chain/";
@@ -51,9 +55,6 @@ public abstract class BasicModel {
     protected final String ADD_NEWS = "/v0.1/news";
     protected final String GET_NEWS = "/v0.1/news/";
     protected final String UPDATE_NEWS = "/v0.1/news";
-
-//    Fcm
-    protected final String SEND_NOTIFY = "/v0.1/news/notify";
 
     //    Google
     protected final String GET_ADDRESS_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";

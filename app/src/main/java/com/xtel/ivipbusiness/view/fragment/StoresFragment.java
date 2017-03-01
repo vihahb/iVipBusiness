@@ -3,12 +3,15 @@ package com.xtel.ivipbusiness.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
@@ -17,6 +20,7 @@ import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -33,11 +37,13 @@ import java.util.ArrayList;
 
 public class StoresFragment extends BasicFragment implements IStoresView {
     private StoresPresenter presenter;
+    private CallbackManager callbackManager;
 
     private StoresAdapter adapter;
     private ArrayList<SortStore> listData;
     private ProgressView progressView;
-    private CallbackManager callbackManager;
+
+    private BottomNavigationView bottomNavigationView;
 
     private boolean isClearData = false;
 
@@ -62,6 +68,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         callbackManager = CallbackManager.create(getActivity());
 
         presenter = new StoresPresenter(this);
+        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bottom_navigation);
         initProgressView(view);
     }
 
@@ -104,6 +111,23 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 presenter.getStores(true);
             }
         });
+
+        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onScrollUp() {
+//                hideBottomView(bottomNavigationView);
+            }
+
+            @Override
+            public void onScrollDown() {
+//                showBottomView(bottomNavigationView);
+            }
+
+            @Override
+            public void onLoadMore() {
+//                presenter.getChains();
+            }
+        });
     }
 
 //    Kiểm tra xem danh sách cửa hàng có trống không
@@ -119,13 +143,13 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         }
     }
 
-//    public void createNewStore() {
-//        startActivityForResult(AddStoreActivity.class, Constants.MODEL REQUEST_CODE_CREATE);
-//    }
-//
-//    public void chooseExistsStore() {
-//        startActivityForResult(ListStoresActivity.class, REQUEST_CODE_ADD);
-//    }
+    private void hideBottomView(View view) {
+        view.animate().translationY(view.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start();
+    }
+
+    private void showBottomView(View view) {
+        view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+    }
 
 
 

@@ -199,10 +199,14 @@
     <string name="exchange_point">Điểm quy đổi</string>
     <string name="area">Khu vực</string>
     <string name="age">Độ tuổi</string>
+    <string name="notify_age">tuổi</string>
     <string name="from">Từ</string>
     <string name="to">Đến</string>
     <string name="level">Cấp bậc</string>
 
+    <string name="send_people">Gửi tới tất cả mọi người</string>
+    <string name="send_group">Gửi tới một nhóm</string>
+    <string name="send_member">Gửi tới một nhóm thành viên</string>
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>
@@ -251,6 +255,13 @@
         <item>Nam</item>
         <item>Nữ</item>
         <item>Free</item>
+    </string-array>
+
+    <string-array name="gender_notify">
+        <item>Chọn giới tính</item>
+        <item>Nữ</item>
+        <item>Nam</item>
+        <item>All</item>
     </string-array>
 
     <string-array name="store_type">

@@ -4,13 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.Notify;
 import com.xtel.ivipbusiness.model.entity.NotifyCodition;
-import com.xtel.ivipbusiness.presenter.ListFcmPresenter;
-import com.xtel.ivipbusiness.view.activity.inf.IListFcmView;
+import com.xtel.ivipbusiness.presenter.NotifyPresenter;
+import com.xtel.ivipbusiness.view.activity.inf.INotifyView;
+import com.xtel.ivipbusiness.view.adapter.NotifyAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -20,15 +28,21 @@ import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
+import java.util.ArrayList;
+
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
-public class ListFcmActivity extends BasicActivity implements IListFcmView {
-    private ListFcmPresenter presenter;
+public class NotifyActivity extends BasicActivity implements INotifyView {
+    private NotifyPresenter presenter;
     private CallbackManager callbackManager;
 
+    private NotifyAdapter adapter;
+    private ArrayList<Notify> listData;
     private ProgressView progressView;
+    private FabSpeedDial fabSpeedDial;
 
+    private boolean isClearData = false;
     private final int REQUEST_GROUP = 88, REQUEST_MEMBER = 99;
 
     @Override
@@ -37,19 +51,74 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
         setContentView(R.layout.activity_list_fcm);
         callbackManager = CallbackManager.create(this);
 
-        presenter = new ListFcmPresenter(this);
+        presenter = new NotifyPresenter(this);
         initToolbar(R.id.list_fcm_toolbar, null);
         initProgressView();
         initFloatingActionButton();
         presenter.getData();
     }
 
+    //    Khởi tạo progress view gồm refresh layout và recyclerview
     private void initProgressView() {
         progressView = new ProgressView(this, null);
+        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        listData = new ArrayList<>();
+        adapter = new NotifyAdapter(this, listData);
+        progressView.setUpRecyclerView(layoutManager, adapter);
+
+        progressView.onLayoutClicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getListNotify();
+            }
+        });
+
+        progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isClearData = true;
+//                adapter.setLoadMore(false);
+//                adapter.notifyDataSetChanged();
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getListNotify();
+            }
+        });
+
+        progressView.onSwipeLayoutPost(new Runnable() {
+            @Override
+            public void run() {
+                progressView.setRefreshing(true);
+                progressView.showData();
+                presenter.getListNotify();
+            }
+        });
+
+        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onScrollUp() {
+                hideBottomView(fabSpeedDial);
+            }
+
+            @Override
+            public void onScrollDown() {
+                showBottomView(fabSpeedDial);
+            }
+
+            @Override
+            public void onLoadMore() {
+//                presenter.getChains();
+            }
+        });
     }
 
+    //    Khởi tạo floating action button để lựa chọn gửi notify
     private void initFloatingActionButton() {
-        FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.list_fcm_fab);
+        fabSpeedDial = (FabSpeedDial) findViewById(R.id.list_fcm_fab);
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
@@ -75,6 +144,7 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
         });
     }
 
+    //    hàm gửi notify sau khi lựa chọn option để gửi tới nhóm hoặc member
     private void sendNotify(int type, Intent data) {
         showProgressBar(false, false, null, getString(R.string.doing_send_fcm));
 
@@ -90,6 +160,31 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
         else
             showShortToast(getString(R.string.error_try_again));
     }
+
+    //    Kiểm tra xem danh sách cửa hàng có trống không
+    private void checkListData() {
+        progressView.setRefreshing(false);
+
+        if (listData.size() > 0) {
+            progressView.showData();
+            adapter.notifyDataSetChanged();
+        } else {
+            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+            progressView.hideData();
+        }
+    }
+
+    private void hideBottomView(View view) {
+        view.animate().translationY(view.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start();
+    }
+
+    private void showBottomView(View view) {
+        view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+    }
+
+
+
+
 
 
 
@@ -115,6 +210,18 @@ public class ListFcmActivity extends BasicActivity implements IListFcmView {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onGetNotifySuccess(ArrayList<Notify> arrayList) {
+        if (isClearData) {
+            listData.clear();
+//            adapter.setLoadMore(true);
+            isClearData = false;
+        }
+
+        listData.addAll(arrayList);
+        checkListData();
     }
 
     @Override

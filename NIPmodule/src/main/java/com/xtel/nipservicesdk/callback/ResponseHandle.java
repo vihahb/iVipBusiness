@@ -36,10 +36,12 @@ public abstract class ResponseHandle<T extends RESP_Basic> {
                     onSuccess(t);
                 }
             }
+            return;
         } catch (Exception e) {
-            Log.e("ResponseHandle", "null: " + e);
-            onError(new Error(-1, "ERROR_PARSER_RESPONSE", e.getMessage()));
+            Log.e("ResponseHandle", "error: " + e);
         }
+
+        onError(new Error(-1, "ERROR_PARSER_RESPONSE", "ERROR"));
     }
 
     public void onError(IOException error) {
