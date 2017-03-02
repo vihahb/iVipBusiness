@@ -41,6 +41,7 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected ActionBar actionBar;
     protected EditText edt_money_to_point, edt_money_from_point;
+    private Button btn_add;
 
     protected LevelAdapter levelAdapter;
     protected ArrayList<LevelObject> arrayList;
@@ -58,6 +59,7 @@ public class SettingActivity extends BasicActivity implements ISettingView {
         initView();
         initRecyclerview();
         initListener();
+        setEnableWidget(false);
         presenter.getData();
     }
 
@@ -97,16 +99,22 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     }
 
     protected void initListener() {
-        Button btn_add = findButton(R.id.setting_btn_add_level);
+        btn_add = findButton(R.id.setting_btn_add_level);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!swipeRefreshLayout.isRefreshing()) {
-                    Log.e("level_send", "level " +(arrayList.size() + 1));
+                    Log.e("level_send", "level " + (arrayList.size() + 1));
                     startActivityForResult(AddLevelActivity.class, Constants.MODEL, (arrayList.size() + 1), REQUEST_ADD_LEVEL);
                 }
             }
         });
+    }
+
+    protected void setEnableWidget(boolean isEnable) {
+        edt_money_from_point.setEnabled(isEnable);
+        edt_money_to_point.setEnabled(isEnable);
+        btn_add.setEnabled(isEnable);
     }
 
     protected void onAddLevelSuccess(Intent intent) {
@@ -129,10 +137,6 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     protected void addSetting() {
         presenter.addSetting(edt_money_to_point.getText().toString(), edt_money_from_point.getText().toString(), arrayList);
     }
-
-
-
-
 
 
 
@@ -261,7 +265,6 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_setting, menu);
@@ -273,8 +276,10 @@ public class SettingActivity extends BasicActivity implements ISettingView {
         int id = item.getItemId();
         if (id == android.R.id.home)
             finish();
-        else if (id == R.id.action_setting_done)
-            addSetting();
+        else if (id == R.id.action_setting_done) {
+            if (!swipeRefreshLayout.isRefreshing())
+                addSetting();
+        }
         return super.onOptionsItemSelected(item);
     }
 
