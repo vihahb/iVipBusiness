@@ -59,6 +59,11 @@ public class StoreInfoPresenter {
                     }
 
                     @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
                     public void onError(Error error) {
                         if (isExists) {
                             if (error.getCode() == 2)
@@ -72,14 +77,30 @@ public class StoreInfoPresenter {
                 StoresModel.getInstance().updateStore((RESP_Store) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
                     @Override
                     public void onSuccess(RESP_None obj) {
-                        RESP_Store resp_store = (RESP_Store) params[1];
+                        if (isExists) {
+                            RESP_Store resp_store = (RESP_Store) params[1];
 
-                        if (PATH_BANNER != null)
-                            resp_store.setBanner(URL_BANNER);
-                        if (PATH_LOGO != null)
-                            resp_store.setLogo(URL_LOGO);
+                            if (PATH_BANNER != null)
+                                resp_store.setBanner(URL_BANNER);
+                            if (PATH_LOGO != null)
+                                resp_store.setLogo(URL_LOGO);
 
-                        view.onUpdateStoreInfoSuccess();
+                            view.onUpdateStoreInfoSuccess();
+                        }
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        if (isExists) {
+                            RESP_Store resp_store = (RESP_Store) params[1];
+
+                            if (PATH_BANNER != null)
+                                resp_store.setBanner(URL_BANNER);
+                            if (PATH_LOGO != null)
+                                resp_store.setLogo(URL_LOGO);
+
+                            view.onUpdateStoreInfoSuccess();
+                        }
                     }
 
                     @Override

@@ -29,6 +29,7 @@ public abstract class BasicModel {
     protected final String GET_STORE_INFO_ID = "/v0.1/store/";
     protected final String GET_STORE_INFO_TYPE = "?type=";
 
+    protected final String ADD_SETTING = "/v0.1/setting";
     protected final String GET_SETTING_TYPE = "/v0.1/setting?type=";
     protected final String GET_SETTING_ID = "&id=";
 

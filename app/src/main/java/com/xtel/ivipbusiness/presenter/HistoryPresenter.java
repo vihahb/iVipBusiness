@@ -49,6 +49,11 @@ public class HistoryPresenter {
             }
 
             @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
             public void onError(Error error) {
                 view.onGetHistoryError(error);
             }

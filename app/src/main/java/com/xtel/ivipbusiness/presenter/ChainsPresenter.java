@@ -1,7 +1,7 @@
 package com.xtel.ivipbusiness.presenter;
 
-import com.xtel.ivipbusiness.model.entity.RESP_List_Sort_Store;
 import com.xtel.ivipbusiness.model.StoresModel;
+import com.xtel.ivipbusiness.model.entity.RESP_List_Sort_Store;
 import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
@@ -29,6 +29,11 @@ public class ChainsPresenter extends BasicPresenter {
                         public void onSuccess(RESP_List_Sort_Store obj) {
                             PAGE++;
                             view.onGetStoresSuccess(obj.getData());
+                        }
+
+                        @Override
+                        public void onSuccess() {
+
                         }
 
                         @Override

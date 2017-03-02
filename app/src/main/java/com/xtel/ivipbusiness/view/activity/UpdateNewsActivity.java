@@ -69,7 +69,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         callbackManager = CallbackManager.create(this);
 
         presenter = new UpdateNewsPresenter(this);
-        initToolbar(R.id.add_news_toolbar, null);
+        initToolbar(R.id.update_news_toolbar, null);
         initSwwipe();
         initView();
         initType();
@@ -514,6 +514,12 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.setExists(false);
+        super.onDestroy();
     }
 
     @Override

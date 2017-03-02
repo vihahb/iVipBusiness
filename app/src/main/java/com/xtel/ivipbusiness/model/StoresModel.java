@@ -94,6 +94,15 @@ public class StoresModel extends BasicModel {
         requestServer.getApi(url, session, responseHandle);
     }
 
+    public void addStoreSetting(String jsonObject, ResponseHandle responseHandle) {
+        String url = API_BASE + ADD_SETTING;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("addStoreSetting", "url " + url + "     session " + session);
+        Log.e("addStoreSetting", jsonObject);
+        requestServer.postApi(url, jsonObject, session, responseHandle);
+    }
+
     public void getMemberCheckIn(int store_id, boolean isStore, int page, int pagesize, ResponseHandle responseHandle) {
         String url = API_BASE;
 

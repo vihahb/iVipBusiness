@@ -37,6 +37,11 @@ public class StoresPresenter {
                     }
 
                     @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
                     public void onError(Error error) {
                         if (isExists) {
                             if (error.getCode() == 2)

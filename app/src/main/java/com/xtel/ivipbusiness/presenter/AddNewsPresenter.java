@@ -54,6 +54,11 @@ public class AddNewsPresenter extends BasicPresenter {
                 }
 
                 @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
                 public void onError(Error error) {
                     if (error.getCode() == 2)
                         view.getNewSession(iCmd);

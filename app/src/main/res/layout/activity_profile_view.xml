@@ -1,67 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context="com.xtel.ivipbusiness.view.activity.ProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/profile.toolbar"
+        <include
+            layout="@layout/activity_profile_header"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryKey_90"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/Toolbar_TitleText" />
+            android:layout_height="wrap_content"
+            app:layout_collapseMode="parallax" />
 
-        <ScrollView
+        <include
+            layout="@layout/activity_profile_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include
-                    layout="@layout/activity_profile_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_collapseMode="parallax" />
-
-                <include
-                    layout="@layout/activity_profile_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/profile.btn_logout"
-                    style="@style/button_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_48"
-                    android:background="@drawable/button_transparent"
-                    android:drawableLeft="@drawable/ic_action_log_out"
-                    android:drawablePadding="@dimen/size_26"
-                    android:drawableStart="@drawable/ic_action_log_out"
-                    android:fitsSystemWindows="false"
-                    android:gravity="center_vertical|left|start"
-                    android:paddingLeft="@dimen/size_16"
-                    android:paddingRight="@dimen/size_16"
-                    android:text="@string/logout"
-                    android:theme="@style/Theme_Tablayout" />
-            </LinearLayout>
-        </ScrollView>
+        <Button
+            android:id="@+id/profile.btn_logout"
+            style="@style/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48"
+            android:background="@drawable/button_transparent"
+            android:drawableLeft="@drawable/ic_action_log_out"
+            android:drawablePadding="@dimen/size_26"
+            android:drawableStart="@drawable/ic_action_log_out"
+            android:fitsSystemWindows="false"
+            android:gravity="center_vertical|left|start"
+            android:paddingLeft="@dimen/size_16"
+            android:paddingRight="@dimen/size_16"
+            android:text="@string/logout"
+            android:theme="@style/Theme_Tablayout" />
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

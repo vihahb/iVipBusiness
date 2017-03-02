@@ -35,6 +35,11 @@ public class NotifyPresenter {
                         }
 
                         @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
                         public void onError(Error error) {
                             if (error.getCode() == 2)
                                 view.getNewSession(iCmd, params);
@@ -46,6 +51,11 @@ public class NotifyPresenter {
                     NotifyModel.getInstance().sendToPeople((String) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
                         public void onSuccess(RESP_None obj) {
+                            view.onSendFcmSuccess();
+                        }
+
+                        @Override
+                        public void onSuccess() {
                             view.onSendFcmSuccess();
                         }
 

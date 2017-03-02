@@ -2,11 +2,13 @@ package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by Vulcl on 3/1/2017.
  */
 
-public class LevelObject {
+public class LevelObject implements Serializable {
     @Expose
     private Integer level_limit;
     @Expose

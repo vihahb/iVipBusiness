@@ -221,6 +221,10 @@ public class WidgetHelper {
         view.setBackgroundColor(resource);
     }
 
+    public void setEditTextNoResult(EditText view, int content) {
+        view.setText(String.valueOf(content));
+    }
+
     public void setEditTextNoResult(EditText view, String content) {
         view.setText(content);
     }
@@ -363,6 +367,10 @@ public class WidgetHelper {
             default:
                 break;
         }
+    }
+
+    public void setTextViewNoResult(TextView view, int content) {
+        view.setText(String.valueOf(content));
     }
 
     public void setTextViewNoResult(TextView view, String content) {

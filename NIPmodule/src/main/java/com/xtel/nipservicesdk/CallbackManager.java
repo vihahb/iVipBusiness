@@ -46,10 +46,14 @@ public class CallbackManager {
                 LoginModel.getInstance().getNewSession((String) object.get(1), new ResponseHandle<RESP_Login>(RESP_Login.class) {
                     @Override
                     public void onSuccess(RESP_Login obj) {
-                        Log.e("getNewSession", "succcess " + JsonHelper.toJson(obj));
                         saveLoginInfo(obj);
                         if (callbacListener != null)
                             callbacListener.onSuccess(obj);
+                    }
+
+                    @Override
+                    public void onSuccess() {
+
                     }
 
                     @Override
@@ -67,6 +71,11 @@ public class CallbackManager {
                     }
 
                     @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
                     public void onError(Error error) {
                         callbacListener.onError(error);
                     }
@@ -77,6 +86,11 @@ public class CallbackManager {
                     public void onSuccess(RESP_Login obj) {
                         saveLoginInfo(obj);
                         callbacListener.onSuccess(obj);
+                    }
+
+                    @Override
+                    public void onSuccess() {
+
                     }
 
                     @Override
@@ -93,6 +107,11 @@ public class CallbackManager {
                     }
 
                     @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
                     public void onError(Error error) {
                         callbacListener.onError(error);
                     }
@@ -106,6 +125,11 @@ public class CallbackManager {
                     }
 
                     @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
                     public void onError(Error error) {
                         callbacListenerRegister.onError(error);
                     }
@@ -114,6 +138,11 @@ public class CallbackManager {
                 LoginModel.getInstance().resetPassworf((String) object.get(1), (String) object.get(2), (String) object.get(3), (boolean) object.get(4), (String) object.get(5), new ResponseHandle<RESP_None>(RESP_None.class) {
                     @Override
                     public void onSuccess(RESP_None obj) {
+                        callbackListenerReset.onSuccess();
+                    }
+
+                    @Override
+                    public void onSuccess() {
                         callbackListenerReset.onSuccess();
                     }
 
@@ -302,6 +331,11 @@ public class CallbackManager {
             }
 
             @Override
+            public void onSuccess() {
+                callbackListenerActive.onSuccess();
+            }
+
+            @Override
             public void onError(Error error) {
                 callbackListenerActive.onError(error);
             }
@@ -321,6 +355,11 @@ public class CallbackManager {
             public void onSuccess(RESP_Reactive obj) {
                 SharedUtils.getInstance().putStringValue(Cts.USER_ACTIVATION_CODE, obj.getActivation_code());
                 callbacListener.onSuccess(obj);
+            }
+
+            @Override
+            public void onSuccess() {
+
             }
 
             @Override

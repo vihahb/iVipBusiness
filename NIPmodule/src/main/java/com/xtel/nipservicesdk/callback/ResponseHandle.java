@@ -27,7 +27,7 @@ public abstract class ResponseHandle<T extends RESP_Basic> {
             isJson = !(result == null || result.isEmpty());
 
             if (!isJson) {
-                onSuccess((T) new RESP_None());
+                onSuccess();
             } else {
                 T t = JsonHelper.getObjectNoException(result, clazz);
                 if (t.getError() != null) {
@@ -49,6 +49,8 @@ public abstract class ResponseHandle<T extends RESP_Basic> {
     }
 
     public abstract void onSuccess(T obj);
+
+    public abstract void onSuccess();
 
     public abstract void onError(Error error);
 }

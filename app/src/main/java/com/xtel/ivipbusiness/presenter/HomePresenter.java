@@ -32,6 +32,11 @@ public class HomePresenter {
                 }
 
                 @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
                 public void onError(Error error) {
                     if (error.getCode() == 2)
                         view.getNewSession(iCmd, 1);

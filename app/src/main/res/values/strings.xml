@@ -35,6 +35,7 @@
     <string name="title_activity_send_member">Gửi cho thành viên</string>
     <string name="title_activity_setting_store">Cài đặt cửa hàng</string>
     <string name="title_activity_setting_chain">Cài đặt chuỗi cửa hàng</string>
+    <string name="title_activity_add_level">Thêm cấp bậc</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -81,6 +82,7 @@
     <string name="doing_send_fcm">Đang gửi bản tin…</string>
     <string name="doing_delete_gallery">Đang xóa ảnh…</string>
     <string name="doing_add_gallery">Đang thêm ảnh…</string>
+    <string name="doing_update_setting">Đang cập nhật cài đặt…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -95,6 +97,7 @@
     <string name="success_send_fcm">Gửi bản tin thành công</string>
     <string name="success_delete_gallery">Xóa ảnh thành công</string>
     <string name="success_add_gallery">Thêm ảnh thành công</string>
+    <string name="success_update_setting">Cập nhật cài đặt thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -125,6 +128,11 @@
     <string name="error_input_area">Vui lòng chọn khu vực</string>
     <string name="error_input_level">Vui lòng chọn cấp bậc</string>
     <string name="error_input_age">Vui lòng nhập tuổi</string>
+    <string name="error_input_min_point">Vui lòng nhập số điểm tối thiểu</string>
+    <string name="error_input_level_name">Vui lòng nhập tên cấp bậc</string>
+    <string name="error_input_level_stt">Vui lòng nhập thứ tự cấp bậc</string>
+    <string name="error_input_money">Vui lòng nhập số tiền</string>
+    <string name="error_input_add_level">Vui lòng tạo cấp bậc</string>
 
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
@@ -211,6 +219,14 @@
     <string name="send_people">Gửi tới tất cả mọi người</string>
     <string name="send_group">Gửi tới một nhóm</string>
     <string name="send_member">Gửi tới một nhóm thành viên</string>
+    <string name="setting_exchange_money">Cài đặt quy đổi tiền</string>
+    <string name="setting_exchange_point">Cài đặt quy đổi điểm</string>
+    <string name="setting_level">Cài đặt cấp bậc</string>
+    <string name="add_level">Thêm cấp bậc</string>
+    <string name="min_point">Số điểm tối thiểu</string>
+    <string name="level_name">Tên cấp bậc</string>
+    <string name="level_stt">Thứ tự cấp bậc</string>
+
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>

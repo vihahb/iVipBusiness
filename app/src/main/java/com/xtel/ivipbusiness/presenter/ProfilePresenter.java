@@ -57,6 +57,11 @@ public class ProfilePresenter extends BasicPresenter {
                     }
 
                     @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
                     public void onError(Error error) {
                         if (error.getCode() == 2)
                             view.getNewSession(iCmd, ((int) params[0]));
@@ -68,6 +73,13 @@ public class ProfilePresenter extends BasicPresenter {
                 UserModel.getInstance().updateUserInfo(resp_full_profile, new ResponseHandle<RESP_None>(RESP_None.class) {
                     @Override
                     public void onSuccess(RESP_None obj) {
+                        resp_full_profile.setAvatar(URL_AVATAR);
+                        UserModel.getInstance().saveFullUserInfo(resp_full_profile);
+                        view.onUpdateProfileSuccess();
+                    }
+
+                    @Override
+                    public void onSuccess() {
                         resp_full_profile.setAvatar(URL_AVATAR);
                         UserModel.getInstance().saveFullUserInfo(resp_full_profile);
                         view.onUpdateProfileSuccess();

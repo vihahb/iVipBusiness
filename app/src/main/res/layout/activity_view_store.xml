@@ -53,7 +53,7 @@
             android:id="@+id/view_store.bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_56"
-            app:itemBackground="@android:color/transparent"
+            app:itemBackground="@color/toolbar_background"
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@android:color/white"
             app:menu="@menu/bottom_navigation_view_store" />

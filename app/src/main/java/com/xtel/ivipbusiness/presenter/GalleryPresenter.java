@@ -19,7 +19,6 @@ import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.CallbackImageListener;
@@ -65,6 +64,11 @@ public class GalleryPresenter {
                         }
 
                         @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
                         public void onError(Error error) {
                             if (isExists) {
                                 if (error.getCode() == 2)
@@ -78,15 +82,23 @@ public class GalleryPresenter {
                     GalleryModel.getInstance().deleteGallery((int) params[1], (int) params[2], new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
                         public void onSuccess(RESP_None obj) {
-                            view.onDeleteSuccess();
+                            if (isExists)
+                                view.onDeleteSuccess();
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            if (isExists)
+                                view.onDeleteSuccess();
                         }
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd, params);
-                            else
-                                view.onRequestError(error);
+                            if (isExists)
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd, params);
+                                else
+                                    view.onRequestError(error);
                         }
                     });
                 else if (type == 3) {
@@ -95,15 +107,23 @@ public class GalleryPresenter {
                     GalleryModel.getInstance().addGallery((RESP_Picture) params[1], isStore, new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
                         public void onSuccess(RESP_None obj) {
-                            view.onAddPictureSuccess();
+                            if (isExists)
+                                view.onAddPictureSuccess();
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            if (isExists)
+                                view.onAddPictureSuccess();
                         }
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd, params);
-                            else
-                                view.onRequestError(error);
+                            if (isExists)
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd, params);
+                                else
+                                    view.onRequestError(error);
                         }
                     });
                 }

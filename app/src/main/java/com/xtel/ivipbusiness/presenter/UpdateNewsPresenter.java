@@ -41,8 +41,8 @@ public class UpdateNewsPresenter extends BasicPresenter {
 
     private RESP_News resp_news;
     private News news;
-    private final String CHAIN = "CHAIN";
     private String PATH_BANNER;
+    private boolean isExists = true;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -53,32 +53,47 @@ public class UpdateNewsPresenter extends BasicPresenter {
                     NewsModel.getInstance().getNewsInfo((int) params[1], new ResponseHandle<RESP_News>(RESP_News.class) {
                         @Override
                         public void onSuccess(RESP_News obj) {
-                            resp_news = obj;
-//                            URL_BANNER = obj.getBanner();
-                            view.onGetNewsInfoSuccess(obj);
+                            if (isExists) {
+                                resp_news = obj;
+                                view.onGetNewsInfoSuccess(obj);
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess() {
+
                         }
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd, params);
-                            else
-                                view.onRequestError(error);
+                            if (isExists)
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd, params);
+                                else
+                                    view.onRequestError(error);
                         }
                     });
                 } else if (type == 2) {
                     NewsModel.getInstance().updateNews(news.getId(), (String) params[1], new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
                         public void onSuccess(RESP_None obj) {
-                            view.onUpdateSuccess();
+                            if (isExists)
+                                view.onUpdateSuccess();
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            if (isExists)
+                                view.onUpdateSuccess();
                         }
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd, params);
-                            else
-                                view.onRequestError(error);
+                            if (isExists)
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd, params);
+                                else
+                                    view.onRequestError(error);
                         }
                     });
                 }
@@ -245,5 +260,9 @@ public class UpdateNewsPresenter extends BasicPresenter {
                 }
             }
         }
+    }
+
+    public void setExists(boolean isExists) {
+        this.isExists = isExists;
     }
 }

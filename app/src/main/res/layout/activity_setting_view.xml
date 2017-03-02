@@ -2,16 +2,201 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/size_36"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/size_16"
+    android:paddingRight="@dimen/size_16"
+    android:paddingTop="@dimen/size_16">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/setting.toolbar"
+    <TextView
+        style="@style/textview_normal"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryKey_90"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextAppearance="@style/Toolbar_TitleText" />
+        android:layout_height="wrap_content"
+        android:text="@string/setting_exchange_money" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <EditText
+            android:id="@+id/setting.edt_money_to_point"
+            style="@style/edittext_outline_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_36"
+            android:layout_weight="1.1"
+            android:drawableEnd="@drawable/ic_action_age"
+            android:drawableRight="@drawable/ic_action_age"
+            android:inputType="phone" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_forward_white_24dp"
+                android:drawableRight="@drawable/ic_arrow_forward_white_24dp" />
+        </LinearLayout>
+
+        <EditText
+            style="@style/edittext_outline_disable_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_36"
+            android:layout_weight="1.1"
+            android:drawableEnd="@drawable/ic_action_age"
+            android:drawableRight="@drawable/ic_action_age"
+            android:inputType="phone"
+            android:text="1" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/textview_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="@string/setting_exchange_point" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <EditText
+            style="@style/edittext_outline_disable_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_36"
+            android:layout_weight="1.1"
+            android:drawableEnd="@drawable/ic_action_age"
+            android:drawableRight="@drawable/ic_action_age"
+            android:inputType="phone"
+            android:text="1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_forward_white_24dp"
+                android:drawableRight="@drawable/ic_arrow_forward_white_24dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/setting.edt_money_from_point"
+            style="@style/edittext_outline_center"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_36"
+            android:layout_weight="1.1"
+            android:drawableEnd="@drawable/ic_action_age"
+            android:drawableRight="@drawable/ic_action_age"
+            android:inputType="phone" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/textview_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:text="@string/setting_level" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_36"
+        android:orientation="horizontal"
+        android:background="@color/white_80"
+        android:weightSum="6">
+
+        <View
+            android:layout_width="@dimen/size_1"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_width="0dp"
+            android:text="STT"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="@dimen/size_1"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_width="0dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="match_parent"
+            android:text="ĐIỂM"
+            android:layout_weight="2"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="@dimen/size_1"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="3"
+            android:text="TÊN CẤP BẬC"
+            android:gravity="center"
+            android:paddingRight="@dimen/size_8"
+            android:paddingLeft="@dimen/size_8" />
+
+        <View
+            android:layout_width="@dimen/size_1"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:background="@android:color/white" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/setting.recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/setting.btn_add_level"
+        style="@style/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_48"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@drawable/button_border"
+        android:text="@string/add_level"
+        android:textAllCaps="true" />
 </LinearLayout>

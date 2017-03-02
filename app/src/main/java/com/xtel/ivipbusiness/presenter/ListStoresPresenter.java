@@ -35,6 +35,11 @@ public class ListStoresPresenter {
             }
 
             @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
             public void onError(Error error) {
                 view.onGetListStoresError(error);
             }

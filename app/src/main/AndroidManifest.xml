@@ -105,10 +105,6 @@
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_list_fcm" />
         <activity
-            android:name=".view.activity.SendFcmActivity"
-            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
-            android:label="@string/title_activity_send_fcm" />
-        <activity
             android:name=".view.activity.ChooseOptionFcmActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_send_group" />
@@ -116,6 +112,10 @@
             android:name=".view.activity.SettingActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_setting_store" />
+        <activity
+            android:name=".view.activity.AddLevelActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_add_level" />
 
         <meta-data
             android:name="xtel_service_code"
