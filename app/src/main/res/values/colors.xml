@@ -26,6 +26,7 @@
 
     <color name="tablayout">#146535</color>
     <color name="text_color_member">#FFF202</color>
+    <color name="text_color_yellow">#fef301</color>
 
     <color name="white_80">#CCFFFFFF</color>
     <color name="white_50">#80FFFFFF</color>

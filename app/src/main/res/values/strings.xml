@@ -36,6 +36,8 @@
     <string name="title_activity_setting_store">Cài đặt cửa hàng</string>
     <string name="title_activity_setting_chain">Cài đặt chuỗi cửa hàng</string>
     <string name="title_activity_add_level">Thêm cấp bậc</string>
+    <string name="title_activity_save_point">Tích điểm cho khác hàng</string>
+    <string name="title_activity_show_image">Album ảnh</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -193,7 +195,7 @@
     <string name="news_title">Tiêu đề bản tin</string>
     <string name="news_des">Mô tả bản tin</string>
 
-    <string name="total_point">Tổng điểm</string>
+    <!--<string name="total_point">Tổng điểm</string>-->
     <string name="remaining_point">Điểm còn lại</string>
     <string name="total_checkin">Số lần checkin</string>
     <string name="total_money">Số tiền mua hàng</string>
@@ -226,6 +228,8 @@
     <string name="min_point">Số điểm tối thiểu</string>
     <string name="level_name">Tên cấp bậc</string>
     <string name="level_stt">Thứ tự cấp bậc</string>
+    <string name="code_bill">Mã hóa đơn</string>
+    <string name="total_point">Tổng số điểm</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>

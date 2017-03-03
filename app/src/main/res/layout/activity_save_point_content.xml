@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/size_16"
+    android:paddingLeft="@dimen/size_48"
+    android:paddingRight="@dimen/size_48"
+    android:paddingTop="@dimen/size_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <com.xtel.ivipbusiness.view.widget.SquareImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/textview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:gravity="center_horizontal"
+        android:text="@string/fullname" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/level" />
+
+        <TextView
+            style="@style/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_8"
+            android:layout_marginStart="@dimen/size_8"
+            android:text="@string/level"
+            android:textColor="@color/text_color_yellow" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@color/white_30" />
+
+    <TextView
+        style="@style/textview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:text="@string/total_point" />
+
+    <EditText
+        android:id="@+id/save_point.edt_total_point"
+        style="@style/edittext_colorprimarykey_90_normal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_36"
+        android:layout_marginTop="@dimen/size_8"
+        android:inputType="phone" />
+
+    <TextView
+        style="@style/textview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:text="@string/code_bill" />
+
+    <EditText
+        android:id="@+id/save_point.edt_code_bill"
+        style="@style/edittext_colorprimarykey_90_normal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_36"
+        android:layout_marginTop="@dimen/size_8"
+        android:inputType="phone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_1"
+            android:layout_weight="1"
+            android:background="@color/white_30" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/code_bill" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_1"
+            android:layout_weight="1"
+            android:background="@color/white_30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_16"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <com.xtel.ivipbusiness.view.widget.SquareLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_white_30">
+
+            <ImageView
+                android:id="@+id/save_point.img_bill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/save_point.img_take_bill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_camera_white_48" />
+        </com.xtel.ivipbusiness.view.widget.SquareLayout>
+    </LinearLayout>
+</LinearLayout>

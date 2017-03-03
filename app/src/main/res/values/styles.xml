@@ -139,6 +139,19 @@
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
+    <style name="edittext_colorprimarykey_90_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:background">@color/colorPrimaryKey_90</item>
+    </style>
+
     <style name="edittext_outline">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_12</item>
@@ -160,7 +173,7 @@
         <item name="android:drawablePadding">@dimen/size_4</item>
         <item name="android:background">@drawable/edittext_des</item>
         <item name="android:paddingLeft">24dp</item>
-        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingRight">4dp</item>
     </style>
 
     <style name="edittext_outline_disable_center">

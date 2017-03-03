@@ -116,6 +116,14 @@
             android:name=".view.activity.AddLevelActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_add_level" />
+        <activity
+            android:name=".view.activity.SavePointActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_save_point" />
+        <activity
+            android:name=".view.activity.ShowImageActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_show_image" />
 
         <meta-data
             android:name="xtel_service_code"

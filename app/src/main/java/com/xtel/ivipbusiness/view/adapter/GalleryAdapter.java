@@ -1,5 +1,6 @@
 package com.xtel.ivipbusiness.view.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,11 @@ import android.widget.ProgressBar;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Gallery;
+import com.xtel.ivipbusiness.model.entity.RESP_Gallery;
+import com.xtel.ivipbusiness.view.activity.ShowImageActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
+import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
@@ -63,6 +68,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     }
 
                     _view.onDeleteGallery(gallery.getId(), position);
+                }
+            });
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!NetWorkInfo.isOnline(_view.getActivity())) {
+                        _view.onNoNetwork();
+                        return;
+                    }
+
+                    RESP_Gallery resp_gallery = new RESP_Gallery();
+                    resp_gallery.setData(arrayList);
+                    resp_gallery.setPosition(position);
+                    _view.startActivity(ShowImageActivity.class, Constants.MODEL, JsonHelper.toJson(resp_gallery));
                 }
             });
         } else {

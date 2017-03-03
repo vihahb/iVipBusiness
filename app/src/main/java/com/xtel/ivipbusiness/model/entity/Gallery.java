@@ -2,11 +2,13 @@ package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by Vulcl on 2/27/2017
  */
 
-public class Gallery {
+public class Gallery implements Serializable {
     @Expose
     private Integer id;
     @Expose

@@ -82,6 +82,19 @@ public class WidgetHelper {
                 });
     }
 
+    public void setImageURL(ImageView view, String url, Callback callback) {
+        if (url == null || url.isEmpty())
+            return;
+
+        final String finalUrl = url.replace("https", "http").replace("9191", "9190");
+
+        Picasso.with(MyApplication.context)
+                .load(finalUrl)
+                .noPlaceholder()
+                .error(R.drawable.color_primarykey)
+                .into(view, callback);
+    }
+
     public void setImageBlurURL(final ImageView imageBlur, String url) {
         String finalUrl = url.replace("https", "http").replace("9191", "9190");
         Picasso.with(MyApplication.context)
