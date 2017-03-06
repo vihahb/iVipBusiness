@@ -55,7 +55,7 @@ public abstract class BasicModel {
     protected final String ADD_GALLERY_STORE = "/v0.1/store/";
     protected final String ADD_GALLERY_END = "/gallery";
 
-//    Bản tin
+    //    Bản tin
     protected final String GET_NEWS_PAGE = "/v0.1/news?page=";
     protected final String GET_NEWS_PAGESISE = "&pagesize=";
     protected final String GET_NEWS_ID = "&id=";
@@ -64,6 +64,19 @@ public abstract class BasicModel {
     protected final String ADD_NEWS = "/v0.1/news";
     protected final String GET_NEWS = "/v0.1/news/";
     protected final String UPDATE_NEWS = "/v0.1/news";
+
+    //    Member
+    protected final String GET_MEMBER_INFO_ID = "/v0.1/store/";
+    protected final String GET_MEMBER_INFO_MEMBER_CARD = "/member_card/";
+
+    protected final String SAVE_GET_MEMBER_CARD_TEMPLATE = "/v0.1/store/member_card_template";
+    protected final String CREATE_MEMBER_CARD = "/v0.1/store/member_card";
+    protected final String SAVE_POINT = "/v0.1/store/save_point";
+
+    protected final String GET_MEMBER_HISTORY_STORE = "/v0.1/store/";
+    protected final String GET_MEMBER_HISTORY_MEMBER_CODE = "/history/";
+    protected final String GET_MEMBER_HISTORY_MEMBER_PAGE = "?page=";
+    protected final String GET_MEMBER_HISTORY_MEMBER_PAGESIZE = "&pagesize=";
 
     //    Google
     protected final String GET_ADDRESS_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";

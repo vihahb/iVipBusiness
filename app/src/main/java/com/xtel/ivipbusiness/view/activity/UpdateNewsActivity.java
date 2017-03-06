@@ -116,10 +116,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
 
     //    Khởi tạo spinner chọn loại giảm giá
     private void initTypeSale() {
-        String[] arraylist = getResources().getStringArray(R.array.type_sale);
-
         sp_type_sale = findSpinner(R.id.add_news_sp_type_salse);
-        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this, R.drawable.ic_action_gender, arraylist);
+        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this);
         sp_type_sale.setAdapter(typeAdapter);
     }
 

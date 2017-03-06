@@ -93,6 +93,12 @@ dependencies {
     //noinspection GradleDependency
     compile 'com.google.android.gms:play-services-location:10.0.0'
     //    End Google map
+    //    Quét qr code
+    compile 'me.dm7.barcodescanner:zxing:1.9'
+    //    End quét qr code
+    //    Calculator
+    compile 'net.objecthunter:exp4j:0.4.4'
+    //    End calculator
     //    blur
     compile 'jp.wasabeef:blurry:2.1.0'
     //    End blur

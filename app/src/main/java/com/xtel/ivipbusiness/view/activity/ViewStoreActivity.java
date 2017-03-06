@@ -32,7 +32,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     private ActionBar actionBar;
     private BottomNavigationView bottomNavigationView;
-    private MenuItem menu_create, menu_choose, menu_add_news, menu_setting, menu_edi_storet;
+    private MenuItem menu_save_point, menu_create, menu_choose, menu_add_news, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
     private SortStore sortStore;
@@ -47,11 +47,6 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         presenter = new ViewStorePresenter(this);
         initToolbar();
         initBottomNavigationView();
-
-//        if (sortStore.getStore_type().equals(STORE_TYPE))
-//            initTablayout(true);
-//        else
-//            initTablayout(false);
         presenter.getData();
     }
 
@@ -73,85 +68,27 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         bottomNavigationView.setEnabled(false);
     }
 
-//    private int currentTab = 0;
-
-//    //    Khởi tạo tab chức năng
-//    private void initTablayout(final boolean isStore) {
-//        int[] icon = new int[]{R.mipmap.ic_store_info, R.mipmap.ic_list_store, R.mipmap.ic_member, R.mipmap.ic_news, R.mipmap.ic_news_fcm};
-//        final TabLayout tabLayout = (TabLayout) findViewById(R.id.view_store_tablayout);
-//
-//        for (int i = 0; i < 5; i++) {
-//            tabLayout.addTab(tabLayout.newTab().setIcon(icon[i]));
-//        }
-//
-//        if (isStore)
-//            //noinspection ConstantConditions
-//            tabLayout.getTabAt(1).setIcon(R.mipmap.ic_list_store_gray);
-//
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @SuppressWarnings("ConstantConditions")
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                if (isStore && tab.getPosition() == 1) {
-//                    tabLayout.getTabAt(currentTab).select();
-//                    return;
-//                }
-//
-//                currentTab = tab.getPosition();
-//                checkTabSelected(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//    }
-
-//    //    lựa chọn chức năng khi tab được chọn
-//    private void checkTabSelected(int position) {
-//        switch (position) {
-//            case 0:
-//                replaceStoreInfo();
-//                break;
-//            case 1:
-//                replaceListStore();
-//                break;
-//            case 2:
-//                replaceListMember();
-//                break;
-//            case 3:
-//                replaceListNews();
-//                break;
-//            case 4:
-//                replaceGallery();
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-
     //    Hiện menu của tab thông tin cửa hàng
     private void showMenuStoreInfo() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_add_news.setVisible(false);
             menu_setting.setVisible(true);
             menu_edi_storet.setVisible(true);
+
+            if (sortStore.getStore_type().equals(STORE_TYPE))
+                menu_save_point.setVisible(true);
         }
     }
 
     //    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
     private void showMenuListNew() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(true);
             menu_choose.setVisible(true);
             menu_edi_storet.setVisible(false);
+            menu_save_point.setVisible(false);
             menu_add_news.setVisible(false);
             menu_setting.setVisible(false);
         }
@@ -159,10 +96,11 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Hiện menu của tab bản tin
     private void showMenuNews() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_edi_storet.setVisible(false);
+            menu_save_point.setVisible(false);
             menu_add_news.setVisible(true);
             menu_setting.setVisible(false);
         }
@@ -170,10 +108,11 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Hiện menu của tab bản tin
     private void showMenuGallery() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_edi_storet.setVisible(false);
+            menu_save_point.setVisible(false);
             menu_add_news.setVisible(true);
             menu_setting.setVisible(false);
         }
@@ -181,10 +120,11 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Ản toàn bộ item trong menu
     private void hideMenuItem() {
-        if (menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
             menu_create.setVisible(false);
             menu_choose.setVisible(false);
             menu_edi_storet.setVisible(false);
+            menu_save_point.setVisible(false);
             menu_add_news.setVisible(false);
             menu_setting.setVisible(false);
         }
@@ -280,12 +220,14 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_view_store, menu);
 
+        menu_save_point = menu.findItem(R.id.action_view_store_save_point);
         menu_create = menu.findItem(R.id.action_view_store_create_store);
         menu_choose = menu.findItem(R.id.action_view_store_choose_store);
         menu_add_news = menu.findItem(R.id.action_view_store_add_news);
         menu_setting = menu.findItem(R.id.action_view_store_setting_store);
         menu_edi_storet = menu.findItem(R.id.action_view_store_edit_store);
 
+        menu_save_point.setVisible(true);
         menu_create.setVisible(false);
         menu_choose.setVisible(false);
         menu_add_news.setVisible(false);
@@ -336,6 +278,8 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
                 }
             }
 
+        } else if (id == R.id.action_view_store_save_point) {
+            startActivity(CheckInUserActivity.class, Constants.MODEL, sortStore);
         }
         return super.onOptionsItemSelected(item);
     }

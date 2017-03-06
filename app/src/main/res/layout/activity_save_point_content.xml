@@ -17,15 +17,16 @@
         android:weightSum="3">
 
         <com.xtel.ivipbusiness.view.widget.SquareImageView
+            android:id="@+id/save_point.img_avatar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@null"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+            android:scaleType="fitXY" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/save_point.txt_fullname"
         style="@style/textview_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
             android:text="@string/level" />
 
         <TextView
+            android:id="@+id/save_point.txt_level"
             style="@style/textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,15 +70,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_16"
         android:gravity="center_horizontal"
-        android:text="@string/total_point" />
+        android:text="@string/total_bill_money" />
 
     <EditText
-        android:id="@+id/save_point.edt_total_point"
+        android:id="@+id/save_point.edt_total_money"
         style="@style/edittext_colorprimarykey_90_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
         android:layout_marginTop="@dimen/size_8"
-        android:inputType="phone" />
+        android:inputType="number" />
 
     <TextView
         style="@style/textview_title"
@@ -92,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
         android:layout_marginTop="@dimen/size_8"
-        android:inputType="phone" />
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,7 +135,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/border_white_30">
+            android:background="@drawable/border_white_30"
+            android:padding="@dimen/size_1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_camera_white_48" />
 
             <ImageView
                 android:id="@+id/save_point.img_bill"
@@ -141,15 +153,6 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop" />
-
-            <ImageView
-                android:id="@+id/save_point.img_take_bill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_camera_white_48" />
         </com.xtel.ivipbusiness.view.widget.SquareLayout>
     </LinearLayout>
 </LinearLayout>

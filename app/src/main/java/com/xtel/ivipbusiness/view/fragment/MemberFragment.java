@@ -3,7 +3,6 @@ package com.xtel.ivipbusiness.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +20,6 @@ import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.MemberAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -43,8 +41,7 @@ public class MemberFragment extends BasicFragment implements IMemberView {
     private MemberAdapter adapter;
     private ArrayList<Member> listData;
     private ProgressView progressView;
-
-//    private BottomNavigationView bottomNavigationView;
+    private Integer store_id;
 
     private boolean isClearData = false;
 
@@ -70,17 +67,17 @@ public class MemberFragment extends BasicFragment implements IMemberView {
 
         presenter = new MemberPresenter(this);
 //        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bottom_navigation);
-        initProgressView(view);
+        progressView = new ProgressView(null, view);
+        presenter.getData();
     }
 
     //    Khởi tạo layout và recyclerview
-    private void initProgressView(View view) {
-        progressView = new ProgressView(null, view);
+    private void initProgressView() {
         progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
-        adapter = new MemberAdapter(this, listData);
+        adapter = new MemberAdapter(this, store_id, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
         progressView.onLayoutClicked(new View.OnClickListener() {
@@ -113,22 +110,22 @@ public class MemberFragment extends BasicFragment implements IMemberView {
             }
         });
 
-        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
-            @Override
-            public void onScrollUp() {
-//                hideBottomView(bottomNavigationView);
-            }
-
-            @Override
-            public void onScrollDown() {
-//                showBottomView(bottomNavigationView);
-            }
-
-            @Override
-            public void onLoadMore() {
-//                presenter.getChains();
-            }
-        });
+//        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
+//            @Override
+//            public void onScrollUp() {
+////                hideBottomView(bottomNavigationView);
+//            }
+//
+//            @Override
+//            public void onScrollDown() {
+////                showBottomView(bottomNavigationView);
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+////                presenter.getChains();
+//            }
+//        });
     }
 
     //    Kiểm tra xem danh sách cửa hàng có trống không
@@ -152,6 +149,12 @@ public class MemberFragment extends BasicFragment implements IMemberView {
         view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
     }
 
+
+    @Override
+    public void onGetDataSuccess(int store_id) {
+        this.store_id = store_id;
+        initProgressView();
+    }
 
     @Override
     public void onGetDataError() {

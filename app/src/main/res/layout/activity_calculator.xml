@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_calculator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.xtel.ivipbusiness.view.activity.CalculatorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/calculator.toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryKey_90"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar_TitleText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryKey_80"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/calculator.txt_monitor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right|end|center_vertical"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/size_16"
+                android:paddingRight="@dimen/size_16"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/calculator.txt_result"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right|end|center_vertical"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/size_16"
+                android:paddingRight="@dimen/size_16"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_16"
+            card_view:cardBackgroundColor="@android:color/transparent"
+            card_view:cardCornerRadius="@dimen/size_16">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_ac"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_ac"
+                            android:onClick="AC"
+                            android:text="AC" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_percent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_calculation"
+                            android:onClick="percent"
+                            android:text="%"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_divide"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_calculation"
+                            android:onClick="division"
+                            android:text="/"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/calculator.img_delete"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_delete"
+                            android:contentDescription="@null"
+                            android:onClick="delete"
+                            android:src="@drawable/ic_action_delete"
+                            android:text="AC" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_8" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="seven"
+                            android:text="7"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="eight"
+                            android:text="8"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="nine"
+                            android:text="9"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_multiplication"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_calculation"
+                            android:onClick="multiplication"
+                            android:text="X"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_8" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="four"
+                            android:text="4"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="five"
+                            android:text="5"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="six"
+                            android:text="6"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_subtraction"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_calculation"
+                            android:onClick="subtraction"
+                            android:text="-"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_8" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="one"
+                            android:text="1"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="two"
+                            android:text="2"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="three"
+                            android:text="3"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_addition"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_calculation"
+                            android:onClick="addition"
+                            android:text="+"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_8" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_0"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="zero"
+                            android:text="0"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="doubleZero"
+                            android:text="00"
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_dot"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:onClick="dot"
+                            android:text="."
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+
+                    <View
+                        android:layout_width="@dimen/size_8"
+                        android:layout_height="0dp" />
+
+                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/calculator.btn_equal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/calculator_calculation"
+                            android:onClick="equal"
+                            android:text="="
+                            android:textColor="@color/calculator_number" />
+                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

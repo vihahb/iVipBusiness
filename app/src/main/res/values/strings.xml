@@ -38,6 +38,8 @@
     <string name="title_activity_add_level">Thêm cấp bậc</string>
     <string name="title_activity_save_point">Tích điểm cho khác hàng</string>
     <string name="title_activity_show_image">Album ảnh</string>
+    <string name="title_activity_check_in_user">Chụp ảnh tích điểm</string>
+    <string name="title_activity_calculator">Máy tính</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -85,6 +87,9 @@
     <string name="doing_delete_gallery">Đang xóa ảnh…</string>
     <string name="doing_add_gallery">Đang thêm ảnh…</string>
     <string name="doing_update_setting">Đang cập nhật cài đặt…</string>
+    <string name="doing_save_point">Đang cập nhật cài đặt…</string>
+    <string name="doing_check_in">Đang check in…</string>
+    <string name="doing_create_member_card">Đang tạo thẻ thành viên…</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>
@@ -100,6 +105,9 @@
     <string name="success_delete_gallery">Xóa ảnh thành công</string>
     <string name="success_add_gallery">Thêm ảnh thành công</string>
     <string name="success_update_setting">Cập nhật cài đặt thành công</string>
+    <string name="success_save_point_name">Thành viên</string>
+    <string name="success_save_point_addition">đã được cộng</string>
+    <string name="success_save_point_point">điểm</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -135,6 +143,9 @@
     <string name="error_input_level_stt">Vui lòng nhập thứ tự cấp bậc</string>
     <string name="error_input_money">Vui lòng nhập số tiền</string>
     <string name="error_input_add_level">Vui lòng tạo cấp bậc</string>
+    <string name="error_input_result">Không có kết quả</string>
+    <string name="error_input_member_card">Vui lòng chọn member card</string>
+    <string name="error_input_bill_path">Vui lòng chụp ảnh hóa đơn</string>
 
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
@@ -157,6 +168,9 @@
     <string name="error_gallery_not_exists">Ảnh không tồn tại</string>
     <string name="error_delete_gallery">Xóa ảnh thất bại</string>
     <string name="error_chain_not_exists">Chuỗi cửa hàng không tồn tại</string>
+    <string name="error_store_not_exists">Cửa hàng không tồn tại</string>
+    <string name="error_store_do_not_setting_point">Cửa hàng chưa cài đặt tích điểm</string>
+    <string name="error_member_not_have_card">Thành viên chưa có thẻ. Bạn có muốn tạo thẻ cho thành viên này? </string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -194,8 +208,9 @@
     <string name="close_time">Đóng cửa</string>
     <string name="news_title">Tiêu đề bản tin</string>
     <string name="news_des">Mô tả bản tin</string>
+    <string name="ivip">IVIP</string>
+    <string name="save_point_user">Tích điểm người dùng</string>
 
-    <!--<string name="total_point">Tổng điểm</string>-->
     <string name="remaining_point">Điểm còn lại</string>
     <string name="total_checkin">Số lần checkin</string>
     <string name="total_money">Số tiền mua hàng</string>
@@ -230,10 +245,17 @@
     <string name="level_stt">Thứ tự cấp bậc</string>
     <string name="code_bill">Mã hóa đơn</string>
     <string name="total_point">Tổng số điểm</string>
+    <string name="total_bill_money">Tổng số tiền</string>
+    <string name="add_member_card">Thêm thẻ thành viên</string>
+    <string name="checkin">Checkin</string>
+    <string name="history_save_point">Tích điểm</string>
+    <string name="history_exchange_point">Đổi điểm</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>
     <string name="no_stores">Không có cửa hàng nào</string>
+    <string name="no_member">Không có thành viên nào</string>
+    <string name="no_history">Không có giao dịch nào</string>
     <string name="no_notify">Không có bản tin nào</string>
     <string name="no_news">Không có bản tin nào</string>
     <string name="no_gallery">Không có ảnh nào</string>
@@ -273,6 +295,7 @@
     <string name="add_exists_store">Thêm cửa hàng đã có</string>
     <string name="edit_store">Sửa thông tin</string>
     <string name="setting_store">Cài đặt</string>
+    <string name="save_point">Lưu điểm</string>
 
     <!-- Spinner -->
     <string-array name="gender">

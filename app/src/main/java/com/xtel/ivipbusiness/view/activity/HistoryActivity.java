@@ -1,9 +1,9 @@
 package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MenuItem;
@@ -18,8 +18,11 @@ import com.xtel.ivipbusiness.presenter.HistoryPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHistoryView;
 import com.xtel.ivipbusiness.view.adapter.HistoryAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.WidgetHelper;
@@ -32,6 +35,7 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends BasicActivity implements IHistoryView {
     private HistoryPresenter presenter;
+    private CallbackManager callbackManager;
 
     private HistoryAdapter adapter;
     private ArrayList<History> listData;
@@ -42,6 +46,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        callbackManager = CallbackManager.create(getActivity());
 
         presenter = new HistoryPresenter(this);
         initToolbar(R.id.history_toolbar, null);
@@ -51,7 +56,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
     //    Khởi tạo layout và recyclerview
     private void initProgressView() {
         progressView = new ProgressView(this, null);
-        progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+        progressView.initData(-1, getString(R.string.no_history), getString(R.string.click_to_try_again));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
@@ -63,7 +68,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMemberHistory();
+                presenter.getMemberHistory(true);
             }
         });
 
@@ -75,33 +80,17 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
                 adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMemberHistory();
+                presenter.getMemberHistory(true);
             }
         });
+
 
         progressView.onSwipeLayoutPost(new Runnable() {
             @Override
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMemberHistory();
-            }
-        });
-
-        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
-            @Override
-            public void onScrollUp() {
-//                hideBottomView();
-            }
-
-            @Override
-            public void onScrollDown() {
-//                showBottomView();
-            }
-
-            @Override
-            public void onLoadMore() {
-//                presenter.getMember();
+                presenter.getMemberHistory(false);
             }
         });
     }
@@ -117,14 +106,14 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             adapter.notifyDataSetChanged();
             progressView.showData();
         } else {
-            progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
+            progressView.initData(-1, getString(R.string.no_history), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
     }
 
     @Override
     public void onGetMemberSuccess(Member member) {
-        ImageView imageView = (ImageView) findImageView(R.id.history_img_avatar);
+        ImageView imageView = findImageView(R.id.history_img_avatar);
         TextView textView = findTextView(R.id.history_txt_fullname);
 
         WidgetHelper.getInstance().setImageURL(imageView, member.getAvatar());
@@ -152,7 +141,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
     @Override
     public void onLoadMore() {
-        presenter.getMemberHistory();
+        presenter.getMemberHistory(false);
     }
 
     //    Sự kiện load danh sách member thành công
@@ -173,7 +162,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         }, 1000);
     }
 
-//    Sự kiện load danh sách member thất bại
+    //    Sự kiện load danh sách member thất bại
     @Override
     public void onGetHistoryError(Error error) {
         if (listData.size() > 0)
@@ -188,6 +177,23 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             if (isClearData)
                 isClearData = false;
         }
+    }
+
+    @Override
+    public void getNewSession(final ICmd iCmd) {
+        callbackManager.getNewSesion(new CallbacListener() {
+            @Override
+            public void onSuccess(RESP_Login success) {
+                iCmd.execute(1);
+            }
+
+            @Override
+            public void onError(Error error) {
+                showShortToast(getString(R.string.error_end_of_session));
+                getActivity().finishAffinity();
+                startActivity(LoginActivity.class);
+            }
+        });
     }
 
     @Override
@@ -207,5 +213,11 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

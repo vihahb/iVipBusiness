@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public interface IMemberView {
 
+    void onGetDataSuccess(int store_id);
     void onGetDataError();
     void getNewSession(ICmd iCmd, Object... params);
 

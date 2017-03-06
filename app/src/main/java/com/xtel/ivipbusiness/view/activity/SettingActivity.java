@@ -45,6 +45,8 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
     protected LevelAdapter levelAdapter;
     protected ArrayList<LevelObject> arrayList;
+
+    protected MenuItem menuItem;
     protected final int REQUEST_ADD_LEVEL = 99;
 
     @Override
@@ -94,7 +96,7 @@ public class SettingActivity extends BasicActivity implements ISettingView {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         arrayList = new ArrayList<>();
-        levelAdapter = new LevelAdapter(arrayList);
+        levelAdapter = new LevelAdapter(SettingActivity.this, arrayList);
         recyclerView.setAdapter(levelAdapter);
     }
 
@@ -115,6 +117,7 @@ public class SettingActivity extends BasicActivity implements ISettingView {
         edt_money_from_point.setEnabled(isEnable);
         edt_money_to_point.setEnabled(isEnable);
         btn_add.setEnabled(isEnable);
+        levelAdapter.setEnable(isEnable);
     }
 
     protected void onAddLevelSuccess(Intent intent) {
@@ -133,11 +136,6 @@ public class SettingActivity extends BasicActivity implements ISettingView {
             Log.e("SettingActivity", "add_not_ok");
         }
     }
-
-    protected void addSetting() {
-        presenter.addSetting(edt_money_to_point.getText().toString(), edt_money_from_point.getText().toString(), arrayList);
-    }
-
 
 
 
@@ -173,6 +171,9 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
             arrayList.addAll(resp_setting.getLevels());
             levelAdapter.notifyDataSetChanged();
+        } else {
+            menuItem.setIcon(R.drawable.ic_action_done_2);
+            setEnableWidget(true);
         }
     }
 
@@ -196,6 +197,9 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
     @Override
     public void onAddSettingSuccess() {
+        menuItem.setIcon(R.drawable.ic_action_edit_line);
+        setEnableWidget(false);
+
         closeProgressBar();
         showMaterialDialog(true, true, null, getString(R.string.success_update_setting), null, getString(R.string.ok), new DialogListener() {
             @Override
@@ -265,21 +269,40 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
 
 
+
+
+
+
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_setting, menu);
+        menuItem = menu.findItem(R.id.action_setting_done);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == android.R.id.home)
             finish();
         else if (id == R.id.action_setting_done) {
-            if (!swipeRefreshLayout.isRefreshing())
-                addSetting();
+            if (!swipeRefreshLayout.isRefreshing()) {
+                if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                    menuItem.setIcon(R.drawable.ic_action_done_2);
+                    setEnableWidget(true);
+                } else {
+                    presenter.addSetting(edt_money_to_point.getText().toString(), edt_money_from_point.getText().toString(), arrayList);
+                }
+            }
         }
+
         return super.onOptionsItemSelected(item);
     }
 

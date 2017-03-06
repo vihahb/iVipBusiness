@@ -15,6 +15,8 @@ public class LevelObject implements Serializable {
     private String level_name;
     @Expose
     private Integer level;
+    @Expose
+    private String member_card;
 
     public Integer getLevel_limit() {
         return level_limit;
@@ -38,5 +40,13 @@ public class LevelObject implements Serializable {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public String getMember_card() {
+        return member_card;
+    }
+
+    public void setMember_card(String member_card) {
+        this.member_card = member_card;
     }
 }

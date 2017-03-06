@@ -14,6 +14,7 @@ public class RESP_Image extends RESP_Basic {
     private String server_path;
     @Expose
     private String uri;
+    private String file_path;
 
     public String getName() {
         return name;
@@ -37,5 +38,13 @@ public class RESP_Image extends RESP_Basic {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public String getFile_path() {
+        return file_path;
+    }
+
+    public void setFile_path(String file_path) {
+        this.file_path = file_path;
     }
 }

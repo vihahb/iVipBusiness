@@ -1,22 +1,14 @@
 package com.xtel.ivipbusiness.view.adapter;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Notify;
-import com.xtel.ivipbusiness.model.entity.SortStore;
-import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.activity.inf.INotifyView;
-import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
-import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -31,9 +23,6 @@ public class NotifyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private INotifyView _view;
 
     private final int TYPE_PEOPLE = 1, TYPE_GROUP = 2, TYPE_MEMBER = 3;
-
-//    private boolean isLoadMore = true;
-//    private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
 
     public NotifyAdapter(INotifyView view, ArrayList<Notify> arrayList) {
         this.arrayList = arrayList;
@@ -63,18 +52,22 @@ public class NotifyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if (holder instanceof ViewHolderGroup) {
             ViewHolderGroup viewHolderGroup = (ViewHolderGroup) holder;
 
-            WidgetHelper.getInstance().setTextViewGender(viewHolderGroup.txt_gender, "", notify.getNotify_condition().getGender());
-            WidgetHelper.getInstance().setTextViewOneArea(viewHolderGroup.txt_area, "", notify.getNotify_condition().getAreas());
-            WidgetHelper.getInstance().setTextViewAgeFromTo(viewHolderGroup.txt_age, "", notify.getNotify_condition().getFrom_age(), notify.getNotify_condition().getTo_age());
+            if (notify.getNotify_condition() != null) {
+                WidgetHelper.getInstance().setTextViewGender(viewHolderGroup.txt_gender, "", notify.getNotify_condition().getGender());
+                WidgetHelper.getInstance().setTextViewOneArea(viewHolderGroup.txt_area, "", notify.getNotify_condition().getAreas());
+                WidgetHelper.getInstance().setTextViewAgeFromTo(viewHolderGroup.txt_age, "", notify.getNotify_condition().getFrom_age(), notify.getNotify_condition().getTo_age());
+            }
 
             WidgetHelper.getInstance().setTextViewDateTime(viewHolderGroup.txt_date, "", (notify.getCreate_time() * 1000));
         } else if (holder instanceof ViewHolderMember) {
             ViewHolderMember viewHolderMember = (ViewHolderMember) holder;
 
-            WidgetHelper.getInstance().setTextViewGender(viewHolderMember.txt_gender, "", notify.getNotify_condition().getGender());
-            WidgetHelper.getInstance().setTextViewOneArea(viewHolderMember.txt_area, "", notify.getNotify_condition().getAreas());
-            WidgetHelper.getInstance().setTextViewOneLevel(viewHolderMember.txt_level, "", notify.getNotify_condition().getLevel());
-            WidgetHelper.getInstance().setTextViewAgeFromTo(viewHolderMember.txt_age, "", notify.getNotify_condition().getFrom_age(), notify.getNotify_condition().getTo_age());
+            if (notify.getNotify_condition() != null) {
+                WidgetHelper.getInstance().setTextViewGender(viewHolderMember.txt_gender, "", notify.getNotify_condition().getGender());
+                WidgetHelper.getInstance().setTextViewOneArea(viewHolderMember.txt_area, "", notify.getNotify_condition().getAreas());
+                WidgetHelper.getInstance().setTextViewOneLevel(viewHolderMember.txt_level, "", notify.getNotify_condition().getLevel());
+                WidgetHelper.getInstance().setTextViewAgeFromTo(viewHolderMember.txt_age, "", notify.getNotify_condition().getFrom_age(), notify.getNotify_condition().getTo_age());
+            }
 
             WidgetHelper.getInstance().setTextViewDateTime(viewHolderMember.txt_date, "", (notify.getCreate_time() * 1000));
         }

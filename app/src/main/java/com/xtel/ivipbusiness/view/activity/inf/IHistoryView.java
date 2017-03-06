@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.xtel.ivipbusiness.model.entity.History;
 import com.xtel.ivipbusiness.model.entity.Member;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public interface IHistoryView {
     void onLoadMore();
     void onGetHistorySuccess(ArrayList<History> arrayList);
     void onGetHistoryError(Error error);
+
+    void getNewSession(ICmd iCmd);
     void onNoNetwork();
     Activity getActivity();
 }

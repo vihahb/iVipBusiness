@@ -87,7 +87,13 @@ public class MemberPresenter {
             e.printStackTrace();
         }
 
-        return (sortStore != null);
+        if (sortStore != null) {
+            view.onGetDataSuccess(sortStore.getId());
+            return true;
+        } else {
+            view.onGetDataError();
+            return false;
+        }
     }
 
     public void setExists(boolean isExists) {

@@ -190,6 +190,13 @@ public abstract class BasicActivity extends IActivity {
         finish();
     }
 
+    protected void startActivityAndFinish(Class clazz, String key, Object object) {
+        Intent intent = new Intent(this, clazz);
+        intent.putExtra(key, (Serializable) object);
+        startActivity(intent);
+        finish();
+    }
+
     protected void finishActivity() {
         finish();
     }

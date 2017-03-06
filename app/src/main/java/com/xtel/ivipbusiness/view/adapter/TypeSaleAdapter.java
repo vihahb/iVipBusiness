@@ -9,7 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.Type;
 import com.xtel.sdk.utils.WidgetHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by vulclph03762 on 12/11/2016
@@ -20,24 +23,35 @@ public class TypeSaleAdapter extends BaseAdapter {
     private LayoutInflater inflater;
 
     private boolean isEnable = true;
-    private String[] arrayList;
-    private int drawable;
+    private ArrayList<Type> arrayList;
 
-    public TypeSaleAdapter(Activity activity, int drawable, String[] arrayList) {
+    public TypeSaleAdapter(Activity activity) {
         this.activity = activity;
+
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.arrayList = arrayList;
-        this.drawable = drawable;
+        initArraylist();
+    }
+
+    private void initArraylist() {
+        arrayList = new ArrayList<>();
+
+        String[] type_name = activity.getResources().getStringArray(R.array.store_type);
+        int[] type_resource = {R.drawable.ic_action_fashion, R.drawable.ic_action_food, R.drawable.ic_action_technology, R.drawable.ic_action_hospital, R.drawable.ic_action_view};
+
+        for (int i = 0; i < type_name.length; i++) {
+            Type type = new Type(type_resource[i], type_name[i]);
+            arrayList.add(type);
+        }
     }
 
     @Override
     public int getCount() {
-        return arrayList.length;
+        return arrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return arrayList[position];
+        return arrayList.get(position);
     }
 
     @Override
@@ -58,7 +72,8 @@ public class TypeSaleAdapter extends BaseAdapter {
             viewHolder = (ViewHolderDropdown) convertView.getTag();
         }
 
-        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
+        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, arrayList.get(position).getResource());
+        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList.get(position).getName(), activity.getString(R.string.updating));
 
         return convertView;
     }
@@ -82,8 +97,8 @@ public class TypeSaleAdapter extends BaseAdapter {
         else
             viewHolder.view.setBackgroundColor(activity.getResources().getColor(R.color.line_disable));
 
-        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, drawable);
-        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList[position], activity.getString(R.string.updating));
+        WidgetHelper.getInstance().setTextViewDrawable(viewHolder.textView, 0, arrayList.get(position).getResource());
+        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList.get(position).getName(), activity.getString(R.string.updating));
 
         return convertView;
     }

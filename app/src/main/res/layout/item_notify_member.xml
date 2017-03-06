@@ -37,7 +37,7 @@
                 android:drawableRight="@drawable/ic_keyboard_arrow_right_white_18dp"
                 android:drawableStart="@drawable/ic_action_level"
                 android:gravity="center_vertical"
-                android:text="@string/store_des" />
+                android:text="@string/updating" />
 
             <TextView
                 android:id="@+id/item.notify.txt_member_gender"
@@ -50,7 +50,7 @@
                 android:drawableRight="@drawable/ic_keyboard_arrow_right_white_18dp"
                 android:drawableStart="@drawable/ic_action_gender"
                 android:gravity="center_vertical"
-                android:text="@string/store_des" />
+                android:text="@string/updating" />
 
             <TextView
                 android:id="@+id/item.notify.txt_member_area"
@@ -63,7 +63,7 @@
                 android:drawableRight="@drawable/ic_keyboard_arrow_right_white_18dp"
                 android:drawableStart="@drawable/ic_action_location"
                 android:gravity="center_vertical"
-                android:text="@string/app_name" />
+                android:text="@string/updating" />
 
             <TextView
                 android:id="@+id/item.notify.txt_member_age"
@@ -74,7 +74,7 @@
                 android:drawablePadding="@dimen/size_2"
                 android:drawableStart="@drawable/ic_action_age"
                 android:gravity="center_vertical"
-                android:text="@string/store_des" />
+                android:text="@string/updating" />
         </LinearLayout>
     </HorizontalScrollView>
 

@@ -36,6 +36,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:node="replace">
@@ -121,9 +122,17 @@
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_save_point" />
         <activity
+            android:name=".view.activity.CheckInUserActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_check_in_user" />
+        <activity
             android:name=".view.activity.ShowImageActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_show_image" />
+        <activity
+            android:name=".view.activity.CalculatorActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+            android:label="@string/title_activity_calculator" />
 
         <meta-data
             android:name="xtel_service_code"

@@ -57,4 +57,11 @@
     <color name="holo_orange_dark">#ffff8800</color>
     <!-- A dark Holo shade of red -->
     <color name="holo_red_dark">#ffcc0000</color>
+    
+    <!-- calculator -->
+    <color name="calculator_ac">#fbaf3f</color>
+    <color name="calculator_delete">#ed1c24</color>
+    <color name="calculator_calculation">#e6e7e8</color>
+    <color name="calculator_equal">#939597</color>
+    <color name="calculator_number">#033f22</color>
 </resources>

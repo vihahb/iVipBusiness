@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.StoresModel;
-import com.xtel.ivipbusiness.model.UserModel;
 import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
@@ -56,7 +55,7 @@ public class AddStorePresenter extends BasicPresenter {
                     if (STOREY_TYPE.equals(CHAIN)) {
                         view.onAddChainSuccess();
                     } else {
-                        UserModel.getInstance().addNewStore();
+                        StoresModel.getInstance().addNewStore();
                         view.onAddStoreSuccess();
                     }
                 }

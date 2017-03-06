@@ -29,10 +29,12 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private ArrayList<Member> arrayList;
     private IMemberView _view;
 
+    private Integer store_id;
     private boolean isLoadMore = true;
     private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
 
-    public MemberAdapter(IMemberView view, ArrayList<Member> arrayList) {
+    public MemberAdapter(IMemberView view, Integer store_id, ArrayList<Member> arrayList) {
+        this.store_id = store_id;
         this.arrayList = arrayList;
         this._view = view;
     }
@@ -77,6 +79,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         return;
                     }
 
+                    member.setStore_id(store_id);
                     Intent intent = new Intent(_view.getActivity(), HistoryActivity.class);
                     intent.putExtra(Constants.MODEL, member);
                     _view.getActivity().startActivity(intent);

@@ -82,10 +82,4 @@ public class UserModel extends BasicModel {
 
         return resp_full_profile;
     }
-
-    public void addNewStore() {
-        int store_number = SharedPreferencesUtils.getInstance().getIntValue(USER_STORE_NUMBER);
-        store_number++;
-        SharedPreferencesUtils.getInstance().putIntValue(USER_STORE_NUMBER, store_number);
-    }
 }

@@ -4,14 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +26,8 @@ import android.widget.TextView;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.AddNewsPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IAddNewsView;
-import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.ivipbusiness.view.adapter.TypeAdapter;
+import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -101,10 +99,8 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
 
     //    Khởi tạo spinner chọn loại giảm giá
     private void initTypeSale() {
-        String[] arraylist = getResources().getStringArray(R.array.type_sale);
-
         sp_type_sale = findSpinner(R.id.add_news_sp_type_salse);
-        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this, R.drawable.ic_action_gender, arraylist);
+        TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this);
         sp_type_sale.setAdapter(typeAdapter);
     }
 

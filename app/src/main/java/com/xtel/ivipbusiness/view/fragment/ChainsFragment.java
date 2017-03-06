@@ -18,7 +18,6 @@ import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.ChainsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IChainsView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -65,24 +64,9 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
 
         callbackManager = CallbackManager.create(getActivity());
         presenter = new ChainsPresenter(this);
-//        initFloatingActionButton();
         initProgressView(view);
         initFloatingActionButton(view);
     }
-
-//    private void initFloatingActionButton() {
-//        FloatingActionButton fab = findFloatingActionButton(R.id.chain_fab_add);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!NetWorkInfo.isOnline(getContext())) {
-//                    showShortToast(getString(R.string.error_no_internet));
-//                    return;
-//                }
-//                startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD);
-//            }
-//        });
-//    }
 
     //    Khởi tạo layout và recyclerview
     private void initProgressView(View view) {
@@ -121,23 +105,6 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
                 progressView.setRefreshing(true);
                 progressView.showData();
                 presenter.getChains(true);
-            }
-        });
-
-        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
-            @Override
-            public void onScrollUp() {
-//                hideBottomView();
-            }
-
-            @Override
-            public void onScrollDown() {
-//                showBottomView();
-            }
-
-            @Override
-            public void onLoadMore() {
-//                presenter.getChains();
             }
         });
     }

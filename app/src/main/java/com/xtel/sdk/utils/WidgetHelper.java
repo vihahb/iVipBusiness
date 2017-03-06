@@ -386,6 +386,19 @@ public class WidgetHelper {
         view.setText(String.valueOf(content));
     }
 
+    public void setTextViewHistoryType(TextView view, int type) {
+        String content = MyApplication.context.getString(R.string.updating);
+
+        if (type == 1)
+            content = MyApplication.context.getString(R.string.checkin);
+        else if (type == 2)
+            content = MyApplication.context.getString(R.string.history_save_point);
+        else if (type == 3)
+            content = MyApplication.context.getString(R.string.history_exchange_point);
+
+        view.setText(String.valueOf(content));
+    }
+
     public void setTextViewNoResult(TextView view, String content) {
         view.setText(content);
     }
@@ -418,6 +431,18 @@ public class WidgetHelper {
             view.setText((content + MyApplication.context.getString(R.string.updating)));
         else
             view.setText((content + getDate(milliseconds)));
+    }
+
+    public void setTextViewTime(TextView view, String content, Long milliseconds) {
+        if (milliseconds == null) {
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            return;
+        }
+
+        if (milliseconds == 0)
+            view.setText((content + MyApplication.context.getString(R.string.updating)));
+        else
+            view.setText((content + getTime(milliseconds)));
     }
 
     public void setTextViewDateTime(TextView view, String content, long milliseconds) {
@@ -516,6 +541,28 @@ public class WidgetHelper {
             month = String.valueOf(mMonth);
 
         return day + "-" + month + "-" + mYear;
+    }
+
+    private String getTime(long milliseconds) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliseconds);
+
+        int mHour = calendar.get(Calendar.HOUR_OF_DAY) + 1;
+        int mMinute = calendar.get(Calendar.MINUTE);
+
+        String hour;
+        if (mHour < 10)
+            hour = "0" + mHour;
+        else
+            hour = String.valueOf(mHour);
+
+        String minute;
+        if (mMinute < 10)
+            minute = "0" + mMinute;
+        else
+            minute = String.valueOf(mMinute);
+
+        return hour + ":" + minute;
     }
 
     private String getDateTime(long milliseconds) {

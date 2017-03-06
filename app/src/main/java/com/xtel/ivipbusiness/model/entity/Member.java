@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 
 public class Member implements Serializable {
+    private Integer store_id;
     @Expose
     private String fullname;
     @Expose
@@ -31,6 +32,16 @@ public class Member implements Serializable {
     private Long buy_number;
     @Expose
     private String store_address;
+    @Expose
+    private String member_code;
+
+    public Integer getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(Integer store_id) {
+        this.store_id = store_id;
+    }
 
     public String getFullname() {
         return fullname;
@@ -118,5 +129,13 @@ public class Member implements Serializable {
 
     public void setStore_address(String store_address) {
         this.store_address = store_address;
+    }
+
+    public String getMember_code() {
+        return member_code;
+    }
+
+    public void setMember_code(String member_code) {
+        this.member_code = member_code;
     }
 }

@@ -9,6 +9,7 @@ import com.xtel.nipservicesdk.LoginManager;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.BasicModel;
 import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.sdk.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 
@@ -115,6 +116,21 @@ public class StoresModel extends BasicModel {
         String session = LoginManager.getCurrentSession();
 
         Log.e("getMemberCheckIn", "url " + url + "     session " + session);
+        requestServer.getApi(url, session, responseHandle);
+    }
+
+    public void addNewStore() {
+        int store_number = SharedPreferencesUtils.getInstance().getIntValue(USER_STORE_NUMBER);
+        store_number++;
+        SharedPreferencesUtils.getInstance().putIntValue(USER_STORE_NUMBER, store_number);
+    }
+
+    public void getHistoryInStore(int store_id, String member_code, int page, int page_size, ResponseHandle responseHandle) {
+        String url = API_BASE + GET_MEMBER_HISTORY_STORE + store_id + GET_MEMBER_HISTORY_MEMBER_CODE + member_code +
+                GET_MEMBER_HISTORY_MEMBER_PAGE + page + GET_MEMBER_HISTORY_MEMBER_PAGESIZE + page_size;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("getHistoryInStore", "url " + url + "     session " + session);
         requestServer.getApi(url, session, responseHandle);
     }
 }

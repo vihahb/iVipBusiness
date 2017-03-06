@@ -52,8 +52,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ViewHolder viewHolder = (ViewHolder) holder;
             History history = arrayList.get(position);
 
-            WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date, "", history.getDate());
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_content, history.getContent());
+            WidgetHelper.getInstance().setTextViewTime(viewHolder.txt_date, "", (history.getAction_time() * 1000));
+            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_content, history.getAction_name(), _view.getActivity().getString(R.string.updating ));
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,7 +89,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
 
             txt_date = findTextView(R.id.item_history_txt_date);
-            txt_content = findTextView(R.id.item_history_txt_content);
+            txt_content = findTextView(R.id.item_history_txt_name);
         }
     }
 
