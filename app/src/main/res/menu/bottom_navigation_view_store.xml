@@ -24,6 +24,6 @@
     <item
         android:id="@+id/nav.view_store.gallery"
         android:enabled="true"
-        android:icon="@mipmap/ic_news_fcm"
+        android:icon="@mipmap/ic_gallery_white"
         android:title="@string/action_galeery" />
 </menu>

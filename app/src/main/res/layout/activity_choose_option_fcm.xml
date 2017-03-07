@@ -16,15 +16,22 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/option.toolbar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryKey_90"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/Toolbar_TitleText" />
+            android:background="@color/toolbar_background"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/option.toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryKey_90"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextAppearance="@style/Toolbar_TitleText" />
+        </android.support.design.widget.AppBarLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -113,7 +120,7 @@
 
                             <EditText
                                 android:id="@+id/option.edt_from"
-                                style="@style/edittext_outline"
+                                style="@style/edittext_outline_2"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/size_36"
                                 android:layout_marginEnd="@dimen/size_8"
@@ -131,7 +138,7 @@
 
                             <EditText
                                 android:id="@+id/option.edt_to"
-                                style="@style/edittext_outline"
+                                style="@style/edittext_outline_2"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/size_36"
                                 android:layout_marginLeft="@dimen/size_8"

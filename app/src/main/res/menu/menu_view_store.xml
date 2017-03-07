@@ -19,8 +19,7 @@
         android:icon="@drawable/ic_action_setting"
         android:orderInCategory="100"
         android:title="@string/save_point"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action.view_store.setting_store"

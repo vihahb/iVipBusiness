@@ -22,7 +22,7 @@
 
         <EditText
             android:id="@+id/add_level.edt_limit"
-            style="@style/edittext_outline"
+            style="@style/edittext_outline_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:layout_marginLeft="@dimen/size_16"
@@ -41,7 +41,7 @@
 
         <EditText
             android:id="@+id/add_level.edt_name"
-            style="@style/edittext_outline"
+            style="@style/edittext_outline_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:layout_marginLeft="@dimen/size_16"

@@ -182,34 +182,6 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
         int id = v.getId();

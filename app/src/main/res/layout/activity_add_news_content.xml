@@ -20,8 +20,6 @@
         android:drawablePadding="@dimen/size_26"
         android:drawableStart="@drawable/ic_action_note"
         android:gravity="center_vertical"
-        android:paddingLeft="-2dp"
-        android:paddingStart="-2dp"
         android:text="@string/news_des" />
 
     <EditText
@@ -43,15 +41,17 @@
         style="@style/checkbox_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
+        android:layout_marginTop="@dimen/size_16"
         android:layout_marginLeft="-2dp"
         android:layout_marginStart="-2dp"
-        android:layout_marginTop="@dimen/size_16"
         android:text="@string/create_voucher" />
 
     <LinearLayout
         android:id="@+id/add_news.layout_voucher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
         android:layout_marginTop="@dimen/size_16"
         android:animateLayoutChanges="true"
         android:orientation="vertical">
@@ -63,36 +63,24 @@
 
             <EditText
                 android:id="@+id/add_news.edt_number_of_voucher"
-                style="@style/edittext_normal"
+                style="@style/edittext_outline"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
-                android:layout_marginEnd="-4dp"
-                android:layout_marginRight="-4dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_time"
-                android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/number_voucher"
                 android:inputType="number" />
 
             <EditText
                 android:id="@+id/add_news.edt_sale"
-                style="@style/edittext_normal"
+                style="@style/edittext_outline"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
-                android:layout_marginLeft="-5dp"
-                android:layout_marginStart="-5dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginStart="-1dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_end_time"
-                android:drawableStart="@drawable/ic_action_end_time"
                 android:hint="@string/sale_percent"
                 android:inputType="number" />
         </LinearLayout>
-
-        <Spinner
-            android:id="@+id/add_news.sp_type_salse"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40"
-            android:background="@android:color/transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,28 +90,22 @@
 
             <EditText
                 android:id="@+id/add_news.edt_begin_time"
-                style="@style/edittext_disable"
+                style="@style/edittext_outline"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
-                android:layout_marginEnd="-4dp"
-                android:layout_marginRight="-4dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_time"
-                android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/start_time"
                 android:inputType="textCapSentences"
                 android:longClickable="false" />
 
             <EditText
                 android:id="@+id/add_news.edt_end_time"
-                style="@style/edittext_disable"
+                style="@style/edittext_outline"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
-                android:layout_marginLeft="-5dp"
-                android:layout_marginStart="-5dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginStart="-1dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_end_time"
-                android:drawableStart="@drawable/ic_action_end_time"
                 android:hint="@string/end_time"
                 android:inputType="textCapSentences"
                 android:longClickable="false" />
@@ -132,34 +114,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_8"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/add_news.edt_alive_time"
-                style="@style/edittext_normal"
+                style="@style/edittext_outline"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
-                android:layout_marginEnd="-4dp"
-                android:layout_marginRight="-4dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_time"
-                android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/time_take_effect"
                 android:inputType="textCapSentences"
                 android:longClickable="false" />
 
             <EditText
                 android:id="@+id/add_news.edt_exchange_point"
-                style="@style/edittext_normal"
+                style="@style/edittext_outline"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
-                android:layout_marginLeft="-4dp"
-                android:layout_marginStart="-4dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginStart="-1dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_action_time"
-                android:drawableStart="@drawable/ic_action_time"
                 android:hint="@string/exchange_point"
                 android:inputType="textCapSentences" />
         </LinearLayout>
+
+        <Spinner
+            android:id="@+id/add_news.sp_type_salse"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48"
+            android:layout_marginTop="@dimen/size_8"
+            android:background="@android:color/transparent" />
     </LinearLayout>
 </LinearLayout>

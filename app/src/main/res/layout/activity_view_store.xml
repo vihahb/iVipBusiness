@@ -37,17 +37,6 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/view_store.tablayout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:theme="@style/Theme_Tablayout"-->
-            <!--app:tabGravity="fill"-->
-            <!--app:tabIndicatorColor="@android:color/white"-->
-            <!--app:tabIndicatorHeight="@dimen/size_2"-->
-            <!--app:tabMode="scrollable"-->
-            <!--app:theme="@style/Theme_Tablayout" />-->
-
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/view_store.bottom_navigation"
             android:layout_width="match_parent"

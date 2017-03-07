@@ -18,16 +18,14 @@ import java.util.ArrayList;
  * Created by vulclph03762 on 12/11/2016
  */
 
-public class TypeSaleAdapter extends BaseAdapter {
+public class TypeNewsAdapter extends BaseAdapter {
+    private ArrayList<Type> arrayList;
     private Activity activity;
     private LayoutInflater inflater;
-
     private boolean isEnable = true;
-    private ArrayList<Type> arrayList;
 
-    public TypeSaleAdapter(Activity activity) {
+    public TypeNewsAdapter(Activity activity) {
         this.activity = activity;
-
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         initArraylist();
     }
@@ -72,7 +70,9 @@ public class TypeSaleAdapter extends BaseAdapter {
             viewHolder = (ViewHolderDropdown) convertView.getTag();
         }
 
-        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList.get(position).getName(), activity.getString(R.string.updating));
+        Type type = arrayList.get(position);
+        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, type.getName(), activity.getString(R.string.updating));
+
         return convertView;
     }
 
@@ -90,11 +90,13 @@ public class TypeSaleAdapter extends BaseAdapter {
         }
 
         if (isEnable)
-            viewHolder.textView.setBackground(activity.getResources().getDrawable(R.drawable.edittext_outline));
-        else
             viewHolder.textView.setBackground(activity.getResources().getDrawable(R.drawable.edittext_outline_disable));
+        else
+            viewHolder.textView.setBackground(activity.getResources().getDrawable(R.drawable.edittext_outline));
 
-        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, arrayList.get(position).getName(), activity.getString(R.string.updating));
+        Type type = arrayList.get(position);
+        WidgetHelper.getInstance().setTextViewWithResult(viewHolder.textView, type.getName(), activity.getString(R.string.updating));
+
         return convertView;
     }
 

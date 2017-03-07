@@ -5,6 +5,11 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryKey_80">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_124"
+        android:background="@color/black_40" />
+
     <ImageView
         android:id="@+id/add_news.img_banner"
         android:layout_width="match_parent"
@@ -14,9 +19,9 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:background="@color/black_40"
-        android:id="@+id/view" />
+        android:layout_height="@dimen/size_56"
+        android:layout_gravity="bottom"
+        android:background="@color/black_40" />
 
     <ImageButton
         android:id="@+id/add_news.img_camera"
@@ -35,23 +40,32 @@
     <TextView
         android:id="@+id/add_news.txt_public"
         android:layout_width="wrap_content"
-        android:padding="@dimen/size_16"
+        android:background="@drawable/round_black_24"
         android:layout_height="wrap_content"
         android:layout_gravity="right|end"
         android:drawableEnd="@mipmap/ic_world_white_18"
         android:drawableRight="@mipmap/ic_world_white_18"
-        android:gravity="top" />
+        android:gravity="top"
+        android:padding="@dimen/size_2"
+        android:layout_margin="@dimen/size_16" />
 
-    <EditText
-        android:id="@+id/add_news.edt_title"
-        style="@style/edittext_no_drawable"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_40"
+        android:layout_height="@dimen/size_56"
+        android:gravity="center_vertical"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/size_8"
-        android:layout_marginLeft="@dimen/size_16"
-        android:layout_marginRight="@dimen/size_16"
-        android:hint="@string/news_title"
-        android:inputType="textCapWords"
-        tools:ignore="LabelFor" />
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <EditText
+            android:id="@+id/add_news.edt_title"
+            style="@style/edittext_title_no_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/news_title"
+            android:inputType="textCapWords"
+            tools:ignore="LabelFor" />
+    </LinearLayout>
 </FrameLayout>

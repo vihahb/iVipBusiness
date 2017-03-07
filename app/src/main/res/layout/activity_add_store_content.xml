@@ -72,7 +72,7 @@
             android:layout_alignTop="@+id/add_store.edt_address"
             android:background="@drawable/button_transparent"
             android:contentDescription="@null"
-            android:src="@drawable/ic_action_location" />
+            android:src="@drawable/ic_action_map" />
     </RelativeLayout>
 
     <EditText

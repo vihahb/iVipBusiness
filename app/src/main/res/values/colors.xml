@@ -17,7 +17,10 @@
     <color name="colorPrimaryKey_50">#80033f22</color>
     <color name="colorPrimaryKey_40">#66033f22</color>
 
+    <color name="black_30">#4D000000</color>
     <color name="black_40">#66000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_80">#CC000000</color>
 
     <color name="fab_background">#80C242</color>
     <color name="fab_title">#eff6e4</color>

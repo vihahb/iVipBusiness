@@ -15,15 +15,22 @@
         android:fitsSystemWindows="false"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/check_in_user.toolbar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryKey_90"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/Toolbar_TitleText" />
+            android:background="@color/toolbar_background"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/check_in_user.toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryKey_90"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextAppearance="@style/Toolbar_TitleText" />
+        </android.support.design.widget.AppBarLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -52,11 +59,11 @@
         </LinearLayout>
 
         <TextView
+            style="@style/textview_normal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            style="@style/textview_normal"
-            android:gravity="bottom|center_horizontal"
-            android:text="@string/save_point_user"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/save_point_user" />
     </LinearLayout>
 </LinearLayout>
