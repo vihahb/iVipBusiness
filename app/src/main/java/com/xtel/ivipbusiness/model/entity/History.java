@@ -7,6 +7,9 @@ import com.google.gson.annotations.Expose;
  */
 
 public class History {
+    private boolean isTitle = false;
+    private String date;
+    private String time;
     @Expose
     private Long action_time;
     @Expose
@@ -19,6 +22,35 @@ public class History {
     private Long money;
     @Expose
     private Long point;
+
+    public History(boolean isTitle, String date) {
+        this.isTitle = isTitle;
+        this.date = date;
+    }
+
+    public boolean isTitle() {
+        return isTitle;
+    }
+
+    public void setTitle(boolean title) {
+        isTitle = title;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public Long getAction_time() {
         return action_time;

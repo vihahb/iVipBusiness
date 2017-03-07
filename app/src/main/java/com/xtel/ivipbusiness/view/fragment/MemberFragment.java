@@ -9,8 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Member;
@@ -109,23 +107,6 @@ public class MemberFragment extends BasicFragment implements IMemberView {
                 presenter.getMember(true);
             }
         });
-
-//        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
-//            @Override
-//            public void onScrollUp() {
-////                hideBottomView(bottomNavigationView);
-//            }
-//
-//            @Override
-//            public void onScrollDown() {
-////                showBottomView(bottomNavigationView);
-//            }
-//
-//            @Override
-//            public void onLoadMore() {
-////                presenter.getChains();
-//            }
-//        });
     }
 
     //    Kiểm tra xem danh sách cửa hàng có trống không
@@ -140,15 +121,6 @@ public class MemberFragment extends BasicFragment implements IMemberView {
             progressView.hideData();
         }
     }
-
-    private void hideBottomView(View view) {
-        view.animate().translationY(view.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start();
-    }
-
-    private void showBottomView(View view) {
-        view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
-    }
-
 
     @Override
     public void onGetDataSuccess(int store_id) {
@@ -188,18 +160,17 @@ public class MemberFragment extends BasicFragment implements IMemberView {
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetMemberSuccess(final ArrayList<Member> arrayList) {
-        if (arrayList.size() < 10) {
-            adapter.setLoadMore(false);
-            adapter.notifyDataSetChanged();
-        }
-
         if (isClearData) {
             listData.clear();
             adapter.setLoadMore(true);
             isClearData = false;
         }
-        listData.addAll(arrayList);
 
+        if (arrayList.size() < 10) {
+            adapter.setLoadMore(false);
+        }
+
+        listData.addAll(arrayList);
         checkListData();
     }
 

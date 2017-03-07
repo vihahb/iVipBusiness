@@ -12,6 +12,7 @@ import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.utils.WidgetHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +36,7 @@ public class HistoryPresenter {
                 @Override
                 public void onSuccess(RESP_History obj) {
                     PAGE++;
-                    view.onGetHistorySuccess(obj.getData());
+                    new SortHistory().execute(obj.getData());
                 }
 
                 @Override
@@ -87,11 +88,21 @@ public class HistoryPresenter {
         @SafeVarargs
         @Override
         protected final ArrayList<History> doInBackground(ArrayList<History>... params) {
-            Collections.sort(params[0], new Comparator<History>() {
-                public int compare(History o1, History o2) {
-                    return o1.getAction_time().compareTo(o2.getAction_time());
+
+            for (History history : params[0]) {
+                history.setDate(WidgetHelper.getInstance().getDate((history.getAction_time() * 1000)));
+                history.setTime(WidgetHelper.getInstance().getTime((history.getAction_time() * 1000)));
+            }
+
+            for (int i = params[0].size() - 1; i > 0; i--) {
+                if (!params[0].get(i).getDate().equals(params[0].get((i - 1)).getDate())) {
+                    params[0].add(i, new History(true, params[0].get(i).getDate()));
                 }
-            });
+            }
+
+            History history = params[0].get(0);
+            params[0].add(0, new History(true, history.getDate()));
+
             return params[0];
         }
 

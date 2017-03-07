@@ -35,8 +35,10 @@ public class MemberPresenter {
                 StoresModel.getInstance().getMemberCheckIn(sortStore.getId(), store_type, PAGE, PAGESIZE, new ResponseHandle<RESP_Member>(RESP_Member.class) {
                     @Override
                     public void onSuccess(RESP_Member obj) {
-                        if (isExists)
+                        if (isExists) {
+                            PAGE ++;
                             view.onGetMemberSuccess(obj.getData());
+                        }
                     }
 
                     @Override

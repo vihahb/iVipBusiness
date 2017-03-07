@@ -11,6 +11,7 @@ import com.google.zxing.Result;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.CheckInUserPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ICheckInUserView;
+import com.xtel.ivipbusiness.view.widget.CustomViewFinderView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -52,7 +53,7 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         mScannerView = new ZXingScannerView(getApplicationContext()) {
             @Override
             protected IViewFinder createViewFinderView(Context context) {
-                return new ViewFinderView(context);
+                return new CustomViewFinderView(context);
             }
         };
         contentFrame.addView(mScannerView);
@@ -173,13 +174,18 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         else
             showCheckInError(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
 
-
     }
 
     @Override
     public Activity getActivity() {
         return this;
     }
+
+
+
+
+
+
 
 
 

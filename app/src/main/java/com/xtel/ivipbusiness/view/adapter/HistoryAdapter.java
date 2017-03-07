@@ -24,9 +24,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<History> arrayList;
     private IHistoryView _view;
 
-
     private boolean isLoadMore = true;
-    private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
+    private final int TYPE_TITLE = 1, TYPE_VIEW = 2, TYPE_LOAD = 3;
 
     public HistoryAdapter(IHistoryView view, ArrayList<History> arrayList) {
         this.arrayList = arrayList;
@@ -35,11 +34,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_VIEW)
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false));
+        if (viewType == TYPE_TITLE)
+            return new ViewHolderTitle(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_title, parent, false));
+        else if (viewType == TYPE_VIEW)
+            return new ViewHolderView(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false));
         else if (viewType == TYPE_LOAD)
             return new ViewProgressBar(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progressbar, parent, false));
-
         return null;
     }
 
@@ -48,12 +48,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (position == arrayList.size())
             _view.onLoadMore();
 
-        if (holder instanceof ViewHolder) {
-            ViewHolder viewHolder = (ViewHolder) holder;
+        if (holder instanceof ViewHolderTitle) {
+            ViewHolderTitle viewHolder = (ViewHolderTitle) holder;
+
+            WidgetHelper.getInstance().setTextViewHistoryDate(viewHolder.txt_date, viewHolder.view_line, arrayList.get(position).getDate());
+        } else if (holder instanceof ViewHolderView) {
+            ViewHolderView viewHolder = (ViewHolderView) holder;
             History history = arrayList.get(position);
 
-            WidgetHelper.getInstance().setTextViewTime(viewHolder.txt_date, "", (history.getAction_time() * 1000));
-            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_content, history.getAction_name(), _view.getActivity().getString(R.string.updating ));
+            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_date, arrayList.get(position).getTime(), _view.getActivity().getString(R.string.updating));
+            WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_content, history.getAction_name(), _view.getActivity().getString(R.string.updating));
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,6 +74,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemViewType(int position) {
         if (position == arrayList.size())
             return TYPE_LOAD;
+        else if (arrayList.get(position).isTitle())
+            return TYPE_TITLE;
         else
             return TYPE_VIEW;
     }
@@ -82,10 +88,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return arrayList.size();
     }
 
-    private class ViewHolder extends ViewHolderHelper {
+    private class ViewHolderTitle extends ViewHolderHelper {
+        private TextView txt_date;
+        private View view_line;
+
+        ViewHolderTitle(View itemView) {
+            super(itemView);
+
+            txt_date = findTextView(R.id.item_history_title_txt_date);
+            view_line = findView(R.id.item_history_title_view);
+        }
+    }
+
+    private class ViewHolderView extends ViewHolderHelper {
         private TextView txt_date, txt_content;
 
-        ViewHolder(View itemView) {
+        ViewHolderView(View itemView) {
             super(itemView);
 
             txt_date = findTextView(R.id.item_history_txt_date);

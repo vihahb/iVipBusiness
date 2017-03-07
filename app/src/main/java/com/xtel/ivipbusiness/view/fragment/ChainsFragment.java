@@ -159,14 +159,14 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
-        if (arrayList.size() < 10)
-            adapter.setLoadMore(false);
-
         if (isClearData) {
             listData.clear();
             adapter.setLoadMore(true);
             isClearData = false;
         }
+
+        if (arrayList.size() < 10)
+            adapter.setLoadMore(false);
 
         listData.addAll(arrayList);
         checkListData();

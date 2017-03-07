@@ -15,13 +15,13 @@ import me.dm7.barcodescanner.core.ViewFinderView;
  */
 
 public class CustomViewFinderView extends ViewFinderView {
-//    public static final String TRADE_MARK_TEXT = "Đưa QR Code vào đúng khung hình";
+    //    public static final String TRADE_MARK_TEXT = "Đưa QR Code vào đúng khung hình";
     public static final int TRADE_MARK_TEXT_SIZE_SP = 40;
     public final Paint PAINT = new Paint();
 
     public CustomViewFinderView(Context context) {
         super(context);
-        init();
+//        init();
     }
 
     public CustomViewFinderView(Context context, AttributeSet attrs) {
@@ -30,12 +30,12 @@ public class CustomViewFinderView extends ViewFinderView {
     }
 
     private void init() {
-//        PAINT.setColor(Color.WHITE);
-//        PAINT.setAntiAlias(true);
-//        float textPixelSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-//                TRADE_MARK_TEXT_SIZE_SP, getResources().getDisplayMetrics());
-//        PAINT.setTextSize(textPixelSize);
-//        setSquareViewFinder(true);
+        PAINT.setColor(Color.WHITE);
+        PAINT.setAntiAlias(true);
+        float textPixelSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+                TRADE_MARK_TEXT_SIZE_SP, getResources().getDisplayMetrics());
+        PAINT.setTextSize(textPixelSize);
+        setSquareViewFinder(true);
     }
 
     @Override

@@ -189,6 +189,30 @@ public class WidgetHelper {
                 });
     }
 
+    public void setRoundImageURL(ImageView view, String url) {
+        if (url == null || url.isEmpty())
+            return;
+
+        final String finalUrl = url.replace("https", "http").replace("9191", "9190");
+
+        Picasso.with(MyApplication.context)
+                .load(finalUrl)
+                .noPlaceholder()
+                .transform(new CircleTransform())
+                .error(R.mipmap.ic_avatar_default)
+                .into(view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.e("WidgetHelper", "load ok " + finalUrl);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("WidgetHelper", "load error " + finalUrl);
+                    }
+                });
+    }
+
     public void setAvatarImageFile(ImageView view, final File file) {
         if (file == null)
             return;
@@ -279,20 +303,7 @@ public class WidgetHelper {
     }
 
     public void setEditTextDate(EditText view, int day, int month, int year) {
-        String mDate, mMonth;
-
-        if (day < 10)
-            mDate = "0" + day;
-        else
-            mDate = String.valueOf(day);
-
-        month = month + 1;
-        if (month < 10)
-            mMonth = "0" + month;
-        else
-            mMonth = String.valueOf(month);
-
-        view.setText(day + "-" + mMonth + "-" + year);
+        view.setText(day + "-" + month + "-" + year);
     }
 
     public void setEditTextDateWithResult(EditText view, long milliseconds, String result) {
@@ -414,6 +425,22 @@ public class WidgetHelper {
             view.setText(content);
     }
 
+    public void setTextViewHistoryDate(TextView textView, View view, String content) {
+        if (!TextUnit.getInstance().validateText(content)) {
+            textView.setText(MyApplication.context.getString(R.string.updating));
+            view.setBackgroundColor(MyApplication.context.getResources().getColor(R.color.line_history_date));
+        } else if (content.equals(getToday())) {
+            textView.setText(MyApplication.context.getString(R.string.today));
+            view.setBackgroundColor(MyApplication.context.getResources().getColor(R.color.line_history_today));
+        } else if (content.equals(getYesterday())) {
+            textView.setText(MyApplication.context.getString(R.string.yesterday));
+            view.setBackgroundColor(MyApplication.context.getResources().getColor(R.color.line_history_yesterday));
+        } else {
+            textView.setText(content);
+            view.setBackgroundColor(MyApplication.context.getResources().getColor(R.color.line_history_date));
+        }
+    }
+
     public void setTextViewWithResult(TextView view, String title, String content, String result) {
         if (content == null || content.isEmpty())
             view.setText((title + result));
@@ -520,7 +547,18 @@ public class WidgetHelper {
         }
     }
 
-    private String getDate(long milliseconds) {
+    private String getToday() {
+        Calendar calendar = Calendar.getInstance();
+        return (calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.YEAR));
+    }
+
+    private String getYesterday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis((System.currentTimeMillis() - 86400000));
+        return (calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.YEAR));
+    }
+
+    public String getDate(long milliseconds) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliseconds);
 
@@ -528,22 +566,10 @@ public class WidgetHelper {
         int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        String day;
-        if (mDay < 10)
-            day = "0" + mDay;
-        else
-            day = String.valueOf(mDay);
-
-        String month;
-        if (mMonth < 10)
-            month = "0" + mMonth;
-        else
-            month = String.valueOf(mMonth);
-
-        return day + "-" + month + "-" + mYear;
+        return mDay + "-" + mMonth + "-" + mYear;
     }
 
-    private String getTime(long milliseconds) {
+    public String getTime(long milliseconds) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliseconds);
 
@@ -576,19 +602,7 @@ public class WidgetHelper {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
-        String dateTime = "";
-
-        if (mDay < 10)
-            dateTime += "0" + mDay;
-        else
-            dateTime += String.valueOf(mDay);
-
-        if (mMonth < 10)
-            dateTime += "/0" + mMonth;
-        else
-            dateTime += "/" + String.valueOf(mMonth);
-
-        dateTime += "/" + mYear;
+        String dateTime = mDay + "-" + mMonth + "-" + mYear;
 
         if (hour < 10)
             dateTime += "   0" + hour;

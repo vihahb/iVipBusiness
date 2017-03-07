@@ -2,7 +2,6 @@ package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,6 +65,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         progressView.onLayoutClicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isClearData = true;
                 progressView.setRefreshing(true);
                 progressView.showData();
                 presenter.getMemberHistory(true);
@@ -84,27 +84,23 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             }
         });
 
-
         progressView.onSwipeLayoutPost(new Runnable() {
             @Override
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getMemberHistory(false);
+                presenter.getMemberHistory(true);
             }
         });
     }
 
-//    Kiểm tra xem danh sách member có trống không
+    //    Kiểm tra xem danh sách member có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
-            if (listData.size() < 20)
-                adapter.setLoadMore(false);
-
-            adapter.notifyDataSetChanged();
             progressView.showData();
+            adapter.notifyDataSetChanged();
         } else {
             progressView.initData(-1, getString(R.string.no_history), getString(R.string.click_to_try_again));
             progressView.hideData();
@@ -116,7 +112,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         ImageView imageView = findImageView(R.id.history_img_avatar);
         TextView textView = findTextView(R.id.history_txt_fullname);
 
-        WidgetHelper.getInstance().setImageURL(imageView, member.getAvatar());
+        WidgetHelper.getInstance().setAvatarImageURL(imageView, member.getAvatar());
         WidgetHelper.getInstance().setTextViewWithResult(textView, member.getFullname(), getString(R.string.not_update_name));
 
         initProgressView();
@@ -147,19 +143,18 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
     //    Sự kiện load danh sách member thành công
     @Override
     public void onGetHistorySuccess(final ArrayList<History> arrayList) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (isClearData) {
-                    listData.clear();
-                    adapter.setLoadMore(true);
-                    isClearData = false;
-                }
-                listData.addAll(arrayList);
+        if (isClearData) {
+            listData.clear();
+            adapter.setLoadMore(true);
+            isClearData = false;
+        }
 
-                checkListData();
-            }
-        }, 1000);
+        if (arrayList.size() < 10) {
+            adapter.setLoadMore(false);
+        }
+
+        listData.addAll(arrayList);
+        checkListData();
     }
 
     //    Sự kiện load danh sách member thất bại

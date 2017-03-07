@@ -64,4 +64,8 @@
     <color name="calculator_calculation">#e6e7e8</color>
     <color name="calculator_equal">#939597</color>
     <color name="calculator_number">#033f22</color>
+
+    <color name="line_history_today">#F6EE32</color>
+    <color name="line_history_yesterday">#02ADEF</color>
+    <color name="line_history_date">#BF202F</color>
 </resources>

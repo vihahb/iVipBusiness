@@ -250,6 +250,8 @@
     <string name="checkin">Checkin</string>
     <string name="history_save_point">Tích điểm</string>
     <string name="history_exchange_point">Đổi điểm</string>
+    <string name="today">Hôm nay</string>
+    <string name="yesterday">Hôm qua</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>

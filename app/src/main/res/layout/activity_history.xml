@@ -31,15 +31,25 @@
             android:layout_gravity="bottom"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/size_16">
+            android:paddingBottom="@dimen/size_8"
+            android:paddingLeft="@dimen/size_16"
+            android:paddingRight="@dimen/size_16"
+            android:paddingTop="@dimen/size_16">
 
-            <com.xtel.ivipbusiness.view.widget.RoundImage
-                android:id="@+id/history.img_avatar"
+            <FrameLayout
                 android:layout_width="@dimen/size_48"
                 android:layout_height="@dimen/size_48"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:background="@drawable/round_white"
+                android:padding="@dimen/size_1">
+
+                <com.xtel.ivipbusiness.view.widget.RoundImage
+                    android:id="@+id/history.img_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/history.txt_fullname"
@@ -54,8 +64,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1"
-            android:layout_marginLeft="@dimen/size_6"
-            android:layout_marginRight="@dimen/size_6"
+            android:layout_marginLeft="@dimen/size_8"
+            android:layout_marginRight="@dimen/size_8"
             android:background="@android:color/white" />
 
         <include
