@@ -89,6 +89,9 @@ public class HistoryPresenter {
         @Override
         protected final ArrayList<History> doInBackground(ArrayList<History>... params) {
 
+            if (params[0].size() == 0)
+                return params[0];
+
             for (History history : params[0]) {
                 history.setDate(WidgetHelper.getInstance().getDate((history.getAction_time() * 1000)));
                 history.setTime(WidgetHelper.getInstance().getTime((history.getAction_time() * 1000)));

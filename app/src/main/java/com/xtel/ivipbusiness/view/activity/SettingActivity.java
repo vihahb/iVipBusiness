@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -106,13 +105,18 @@ public class SettingActivity extends BasicActivity implements ISettingView {
             @Override
             public void onClick(View v) {
                 if (!swipeRefreshLayout.isRefreshing()) {
-                    Log.e("level_send", "level " + (arrayList.size() + 1));
-                    startActivityForResult(AddLevelActivity.class, Constants.MODEL, (arrayList.size() + 1), REQUEST_ADD_LEVEL);
+                    if (arrayList.size() == 0)
+                        startActivityForResult(AddLevelActivity.class, Constants.MODEL, 1, REQUEST_ADD_LEVEL);
+                    else if (arrayList.get(0).getLevel_limit() > 0)
+                        startActivityForResult(AddLevelActivity.class, Constants.MODEL, 1, REQUEST_ADD_LEVEL);
+                    else
+                        startActivityForResult(AddLevelActivity.class, Constants.MODEL, 2, REQUEST_ADD_LEVEL);
                 }
             }
         });
     }
 
+    //    cài đặt cho pháp người dùng có thể chỉnh sửa thông tin
     protected void setEnableWidget(boolean isEnable) {
         edt_money_from_point.setEnabled(isEnable);
         edt_money_to_point.setEnabled(isEnable);
@@ -131,27 +135,23 @@ public class SettingActivity extends BasicActivity implements ISettingView {
 
         if (levelObject != null) {
             levelAdapter.addLevel(levelObject);
-            Log.e("SettingActivity", "add_ok");
-        } else {
-            Log.e("SettingActivity", "add_not_ok");
         }
     }
 
+    public void deleteLevel(final int position) {
+        showMaterialDialog(true, true, null, getString(R.string.error_permission), getString(R.string.delete), getString(R.string.cancel), new DialogListener() {
+            @Override
+            public void negativeClicked() {
+                closeDialog();
+                levelAdapter.deleteLevel(position);
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            @Override
+            public void positiveClicked() {
+                closeDialog();
+            }
+        });
+    }
 
 
     @Override
@@ -170,7 +170,7 @@ public class SettingActivity extends BasicActivity implements ISettingView {
             WidgetHelper.getInstance().setEditTextNoResult(edt_money_from_point, resp_setting.getPoint2Moneys().get(0).getValue());
 
             arrayList.addAll(resp_setting.getLevels());
-            levelAdapter.notifyDataSetChanged();
+            levelAdapter.changeAdapter();
         } else {
             menuItem.setIcon(R.drawable.ic_action_done_2);
             setEnableWidget(true);
@@ -256,27 +256,6 @@ public class SettingActivity extends BasicActivity implements ISettingView {
     public Activity getActivity() {
         return this;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override

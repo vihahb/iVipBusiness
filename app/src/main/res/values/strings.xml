@@ -252,6 +252,9 @@
     <string name="history_exchange_point">Đổi điểm</string>
     <string name="today">Hôm nay</string>
     <string name="yesterday">Hôm qua</string>
+    
+    <!-- message -->
+    <string name="message_mandatory_level">Đây là cấp bậc bắt buộc</string>
 
     <!-- Activity -->
     <string name="sselect_image">Chọn ảnh</string>

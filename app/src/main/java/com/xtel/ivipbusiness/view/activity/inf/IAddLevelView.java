@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public interface IAddLevelView {
 
-    void onGetDataSuccess();
+    void onGetDataSuccess(int level);
     void onGetDataError();
 
     void onGetCardDefaultSuccess(ArrayList<Card> arrayList);

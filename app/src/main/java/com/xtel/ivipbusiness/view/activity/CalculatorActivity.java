@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
@@ -24,6 +25,7 @@ public class CalculatorActivity extends BasicActivity {
 
         initToolbar(R.id.calculator_toolbar, null);
         initView();
+        initDelete();
     }
 
     private void initView() {
@@ -31,13 +33,29 @@ public class CalculatorActivity extends BasicActivity {
         txt_result = findTextView(R.id.calculator_txt_result);
     }
 
+    private void initDelete() {
+        ImageButton imageButton = findImageButton(R.id.calculator_img_delete);
+        imageButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                txt_monitor.setText(null);
+                return false;
+            }
+        });
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String monitor = txt_monitor.getText().toString();
 
+                if (monitor.length() > 0) {
+                    StringBuilder sb = new StringBuilder(monitor);
+                    sb.deleteCharAt((sb.length() - 1));
 
-
-
-
-
-
+                    txt_monitor.setText(sb);
+                }
+            }
+        });
+    }
 
     public void AC(View view) {
         txt_monitor.setText(null);
@@ -103,26 +121,15 @@ public class CalculatorActivity extends BasicActivity {
     }
 
     public void equal(View view) {
-        if (TextUnit.getInstance().validateDouble(txt_monitor.getText().toString()) == -1) {
-            try {
-                Expression expression = new ExpressionBuilder(txt_monitor.getText().toString()).build();
+        try {
+            Expression expression = new ExpressionBuilder(txt_monitor.getText().toString()).build();
 
-                double result = expression.evaluate();
-                txt_result.setText(String.valueOf(result));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            showShortToast("Không phải text rồi");
+            double result = expression.evaluate();
+            txt_result.setText(("= " + result));
+            txt_monitor.setText(null);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }
-
-    public void delete(View view) {
-        String monitor = txt_monitor.getText().toString();
-        StringBuilder sb = new StringBuilder(monitor);
-        sb.deleteCharAt((sb.length() - 1));
-
-        txt_monitor.setText(sb);
     }
 
     public void zero(View view) {

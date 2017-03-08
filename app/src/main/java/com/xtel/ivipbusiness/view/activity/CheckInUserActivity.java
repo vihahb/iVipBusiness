@@ -22,7 +22,6 @@ import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 import me.dm7.barcodescanner.core.IViewFinder;
-import me.dm7.barcodescanner.core.ViewFinderView;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class CheckInUserActivity extends BasicActivity implements ZXingScannerView.ResultHandler, ICheckInUserView {

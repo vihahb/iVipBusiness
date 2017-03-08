@@ -42,6 +42,8 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
     protected ArrayList<Card> arrayList;
     protected MemberCardAdapter adapter;
 
+    protected int LEVEL = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,13 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
     protected void initView() {
         edt_limit = findEditText(R.id.add_level_edt_limit);
         edt_name = findEditText(R.id.add_level_edt_name);
+
+        if (LEVEL == 1) {
+            edt_limit.setText("0");
+            edt_limit.setEnabled(false);
+            edt_limit.setError(getString(R.string.message_mandatory_level));
+            edt_limit.requestFocus();
+        }
     }
 
     protected void initRecyclerview() {
@@ -94,10 +103,13 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
     }
 
     @Override
-    public void onGetDataSuccess() {
+    public void onGetDataSuccess(int level) {
+        this.LEVEL = level;
+
         initSwwipe();
         initView();
         initListener();
+
 
     }
 

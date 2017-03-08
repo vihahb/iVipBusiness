@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.MemberModel;
+import com.xtel.ivipbusiness.model.entity.Card;
 import com.xtel.ivipbusiness.model.entity.LevelObject;
 import com.xtel.ivipbusiness.model.entity.RESP_Card;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
@@ -75,21 +76,22 @@ public class AddLevelPresenter {
         }
 
         if (LEVEL != -1) {
-            view.onGetDataSuccess();
+            view.onGetDataSuccess(LEVEL);
             iCmd.execute();
         } else
             view.onGetDataError();
     }
 
-    public void done(String limit, String name, String member_card) {
+    public void done(String limit, String name, Card card) {
         int limit_point = TextUnit.getInstance().validateInteger(limit);
 
-        if (checkData(limit_point, name, member_card)) {
+        if (checkData(limit_point, name, card)) {
             LevelObject levelObject = new LevelObject();
             levelObject.setLevel_limit(limit_point);
             levelObject.setLevel_name(name);
-            levelObject.setLevel(LEVEL);
-            levelObject.setMember_card(member_card);
+            levelObject.setLevel(null);
+            levelObject.setMember_card(card.getCard_path());
+            levelObject.setUrl_card(card.getCard_url());
 
             Intent intent = new Intent();
             intent.putExtra(Constants.MODEL, levelObject);
@@ -98,7 +100,7 @@ public class AddLevelPresenter {
         }
     }
 
-    private boolean checkData(int limit, String name, String member_card) {
+    private boolean checkData(int limit, String name, Card member_card) {
         if (limit == -1) {
             view.showShortToast(view.getActivity().getString(R.string.error_input_min_point));
             return false;
@@ -107,7 +109,7 @@ public class AddLevelPresenter {
             view.showShortToast(view.getActivity().getString(R.string.error_input_level_name));
             return false;
         }
-        if (!TextUnit.getInstance().validateText(member_card)) {
+        if (member_card == null) {
             view.showShortToast(view.getActivity().getString(R.string.error_input_member_card));
             return false;
         }

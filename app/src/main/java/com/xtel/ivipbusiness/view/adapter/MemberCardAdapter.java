@@ -258,9 +258,9 @@ public class MemberCardAdapter extends RecyclerView.Adapter<MemberCardAdapter.Vi
         return false;
     }
 
-    public String getMemberCard() {
+    public Card getMemberCard() {
         if (position >= 0)
-            return arrayList.get(position).getCard_url();
+            return arrayList.get(position);
         else
             return null;
     }

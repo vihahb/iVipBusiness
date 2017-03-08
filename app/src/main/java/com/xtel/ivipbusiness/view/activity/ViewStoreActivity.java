@@ -1,7 +1,9 @@
 package com.xtel.ivipbusiness.view.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,6 +26,7 @@ import com.xtel.ivipbusiness.view.fragment.NewsFragment;
 import com.xtel.ivipbusiness.view.fragment.StoreInfoFragment;
 import com.xtel.ivipbusiness.view.fragment.StoresFragment;
 import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 
@@ -36,6 +39,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     private RESP_Store resp_store = null;
     private SortStore sortStore;
+    private final int REQUEST_CAMERA = 33;
     private final String STORE_TYPE = "STORE";
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", GALLERY = "gallery";
 
@@ -277,9 +281,9 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
                     fragment.addImageView();
                 }
             }
-
         } else if (id == R.id.action_view_store_save_point) {
-            startActivity(CheckInUserActivity.class, Constants.MODEL, sortStore);
+            if (PermissionHelper.checkOnlyPermission(Manifest.permission.CAMERA, this, REQUEST_CAMERA))
+                startActivity(CheckInUserActivity.class, Constants.MODEL, sortStore);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -295,7 +299,6 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             case R.id.nav_view_store_list_store:
                 if (sortStore.getStore_type().equals(STORE_TYPE))
                     return false;
-
                 replaceListStore();
                 break;
             case R.id.nav_view_store_member:
@@ -317,13 +320,21 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
-        if (fragment != null)
-            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
-        if (galleryFragment != null)
-            galleryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                startActivity(CheckInUserActivity.class, Constants.MODEL, sortStore);
+            else
+                showShortToast(getString(R.string.error_permission));
+        } else {
+            StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+            if (fragment != null)
+                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+            if (galleryFragment != null)
+                galleryFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override

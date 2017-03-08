@@ -21,12 +21,12 @@ public class CustomViewFinderView extends ViewFinderView {
 
     public CustomViewFinderView(Context context) {
         super(context);
-//        init();
+        init();
     }
 
     public CustomViewFinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
-//        init();
+        init();
     }
 
     private void init() {

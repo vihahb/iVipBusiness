@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.view.adapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.view.activity.HistoryActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IMemberView;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
@@ -57,12 +59,14 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ViewHolder viewHolder = (ViewHolder) holder;
             final Member member = arrayList.get(position);
 
+            Log.e("MemberAdapter", JsonHelper.toJson(member));
+
             WidgetHelper.getInstance().setAvatarImageURL(viewHolder.img_avatar, member.getAvatar());
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_fullname, member.getFullname(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_point, String.valueOf(member.getTotal_point()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_remaining_point, String.valueOf(member.getCurrent_point()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_checkin, _view.getActivity().getString(R.string.total_checkin), String.valueOf(member.getCheckin_number()));
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_money, _view.getActivity().getString(R.string.total_money), String.valueOf(member.getTotal_money()) + " đ");
+            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_money, _view.getActivity().getString(R.string.total_money), (member.getTotal_money() + " đ"));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getBuy_number()));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin) + ": ", member.getLast_checkin());
 

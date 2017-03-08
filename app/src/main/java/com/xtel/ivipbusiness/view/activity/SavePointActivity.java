@@ -35,7 +35,7 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     private SavePointPresenter presenter;
     private CallbackManager callbackManager;
 
-    private ImageView img_avatar, img_bill;
+    private ImageView img_avatar, img_background, img_bill;
     private TextView txt_fullname, txt_level;
     private EditText edt_total_money, edt_bill_code;
 
@@ -54,6 +54,7 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
 
     protected void initView() {
         img_avatar = findImageView(R.id.save_point_img_avatar);
+        img_background = findImageView(R.id.save_point_img_background);
         img_bill = findImageView(R.id.save_point_img_bill);
 
         txt_fullname = findTextView(R.id.save_point_txt_fullname);
@@ -82,6 +83,7 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     @Override
     public void onGetDataSuccess(RESP_Member_Info resp_member_info) {
         WidgetHelper.getInstance().setAvatarImageURL(img_avatar, resp_member_info.getAvatar());
+        WidgetHelper.getInstance().setImageBlurURL(img_background, resp_member_info.getMember_card());
         WidgetHelper.getInstance().setTextViewWithResult(txt_fullname, resp_member_info.getFull_name(), getString(R.string.updating));
         WidgetHelper.getInstance().setTextViewWithResult(txt_level, resp_member_info.getLevel_name(), getString(R.string.updating));
     }

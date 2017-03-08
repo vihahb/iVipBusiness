@@ -11,13 +11,15 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
         android:orientation="vertical"
+        android:paddingLeft="@dimen/size_20"
+        android:paddingRight="@dimen/size_20"
         tools:ignore="UselessParent">
 
         <TextView
             style="@style/textview_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_16"
             android:text="@string/min_point" />
 
         <EditText
@@ -25,8 +27,7 @@
             style="@style/edittext_outline_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_16"
             android:drawableLeft="@drawable/ic_action_age"
             android:drawableStart="@drawable/ic_action_age"
             android:inputType="number" />
@@ -35,7 +36,6 @@
             style="@style/textview_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_16"
             android:layout_marginTop="@dimen/size_16"
             android:text="@string/level_name" />
 
@@ -44,8 +44,7 @@
             style="@style/edittext_outline_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_16"
             android:drawableLeft="@drawable/ic_action_age"
             android:drawableStart="@drawable/ic_action_age"
             android:inputType="textCapSentences" />
@@ -55,10 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/size_16"
-            android:layout_marginEnd="@dimen/size_8"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_8"
-            android:layout_marginStart="@dimen/size_16"
             android:layout_marginTop="@dimen/size_16" />
 
         <Button
@@ -84,22 +79,21 @@
             android:layout_height="@dimen/size_36"
             android:layout_gravity="right|end"
             android:layout_marginBottom="@dimen/size_8"
-            android:layout_marginEnd="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_16"
             android:background="@drawable/button_transparent"
             android:text="@string/action_done" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:background="@android:color/transparent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <com.xtel.ivipbusiness.view.widget.TouchImageView
             android:id="@+id/add_level.expanded_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:visibility="invisible" />
 
         <TextView
@@ -108,9 +102,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|end"
             android:layout_margin="@dimen/size_16"
+            android:background="@drawable/round_black_24"
             android:drawableEnd="@drawable/ic_action_done"
             android:drawableRight="@drawable/ic_action_done"
-            android:padding="@dimen/size_8"
+            android:padding="@dimen/size_2"
             android:visibility="gone" />
     </FrameLayout>
 </FrameLayout>

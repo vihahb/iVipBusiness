@@ -36,456 +36,407 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryKey_80"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/calculator.txt_monitor"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:gravity="right|end|center_vertical"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/size_16"
-                android:paddingRight="@dimen/size_16"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/calculator.txt_result"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:gravity="right|end|center_vertical"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/size_16"
-                android:paddingRight="@dimen/size_16"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_16"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            card_view:cardCornerRadius="@dimen/size_16">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="6">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:layout_weight="2"
+                android:background="@color/colorPrimaryKey_80"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/calculator.txt_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:ellipsize="end"
+                    android:gravity="right|end|center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/size_16"
+                    android:paddingRight="@dimen/size_16"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/calculator.txt_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_48"
+                    android:ellipsize="end"
+                    android:gravity="right|end|center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/size_16"
+                    android:paddingRight="@dimen/size_16"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/size_16"
+                android:layout_weight="4"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardCornerRadius="@dimen/size_8">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/calculator.btn_ac"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_ac"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="AC"
-                            android:text="AC" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:text="AC"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_percent"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_calculation"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="percent"
                             android:text="%"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_divide"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_calculation"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="division"
                             android:text="/"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <ImageButton
                             android:id="@+id/calculator.img_delete"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_delete"
                             android:contentDescription="@null"
-                            android:onClick="delete"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:src="@drawable/ic_action_delete"
-                            android:text="AC" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
-                </LinearLayout>
+                            android:text="AC"
+                            android:theme="@style/Theme_Tablayout" />
+                    </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_8" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                    <View
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_height="@dimen/size_8" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/calculator.btn_7"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="seven"
                             android:text="7"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_8"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="eight"
                             android:text="8"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_9"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="nine"
                             android:text="9"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_multiplication"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_calculation"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="multiplication"
                             android:text="X"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
-                </LinearLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
+                    </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_8" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                    <View
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_height="@dimen/size_8" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/calculator.btn_4"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="four"
                             android:text="4"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_5"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="five"
                             android:text="5"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_6"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="six"
                             android:text="6"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_subtraction"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_calculation"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="subtraction"
                             android:text="-"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
-                </LinearLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
+                    </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_8" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                    <View
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_height="@dimen/size_8" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/calculator.btn_1"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="one"
                             android:text="1"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_2"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="two"
                             android:text="2"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_3"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="three"
                             android:text="3"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_addition"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_calculation"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="addition"
                             android:text="+"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
-                </LinearLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
+                    </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_8" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
+                    <View
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_height="@dimen/size_8" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/calculator.btn_0"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="zero"
                             android:text="0"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_00"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="doubleZero"
                             android:text="00"
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_dot"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:layout_weight="1"
+                            android:background="@drawable/calculator_number"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="dot"
                             android:text="."
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
 
-                    <View
-                        android:layout_width="@dimen/size_8"
-                        android:layout_height="0dp" />
-
-                    <com.xtel.ivipbusiness.view.widget.SquareLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <View
+                            android:layout_width="@dimen/size_8"
+                            android:layout_height="0dp" />
 
                         <Button
                             android:id="@+id/calculator.btn_equal"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/calculator_calculation"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="equal"
                             android:text="="
-                            android:textColor="@color/calculator_number" />
-                    </com.xtel.ivipbusiness.view.widget.SquareLayout>
+                            android:textColor="@color/calculator_number"
+                            android:theme="@style/Theme_Tablayout" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
