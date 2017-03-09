@@ -17,7 +17,6 @@ public class StoresPresenter {
     private IStoresView view;
 
     private boolean isExists = true;
-    private int store_id = -1;
 
     private final String TYPE = "ALL";
     private int PAGE = 1;
@@ -27,7 +26,7 @@ public class StoresPresenter {
         @Override
         public void execute(Object... params) {
             if (((int) params[0]) == 1)
-                StoresModel.getInstance().getListStoreInChain(store_id, PAGE, PAGESIZE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
+                StoresModel.getInstance().getListStoreInChain(Constants.SORT_STORE.getId(), PAGE, PAGESIZE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
                     @Override
                     public void onSuccess(RESP_List_Sort_Store obj) {
                         if (isExists) {
@@ -74,17 +73,7 @@ public class StoresPresenter {
     }
 
     public boolean getData() {
-
-        if (store_id != -1)
-            return true;
-
-        try {
-            store_id = view.getFragment().getArguments().getInt(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return (store_id != -1);
+        return  (Constants.SORT_STORE != null);
     }
 
     public void setExists(boolean isExists) {

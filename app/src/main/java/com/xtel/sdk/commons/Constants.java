@@ -1,5 +1,7 @@
 package com.xtel.sdk.commons;
 
+import com.xtel.ivipbusiness.model.entity.SortStore;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +18,7 @@ public class Constants {
     public static final String FCM_TOKEN = "fcm_token";
 
     public static final String MODEL = "model";
+    public static SortStore SORT_STORE = null;
     public static final String ID = "id";
 
     public static int randInt(int min, int max) {

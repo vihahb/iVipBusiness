@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-import com.xtel.ivipbusiness.model.entity.RESP_Point;
+import com.xtel.ivipbusiness.model.entity.RESP_Member_Info;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 

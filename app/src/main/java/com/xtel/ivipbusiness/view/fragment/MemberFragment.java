@@ -43,13 +43,8 @@ public class MemberFragment extends BasicFragment implements IMemberView {
 
     private boolean isClearData = false;
 
-    public static MemberFragment newInstance(SortStore sortStore) {
-        Bundle args = new Bundle();
-        args.putSerializable(Constants.MODEL, sortStore);
-
-        MemberFragment fragment = new MemberFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static MemberFragment newInstance() {
+        return new MemberFragment();
     }
 
     @Nullable
@@ -64,7 +59,6 @@ public class MemberFragment extends BasicFragment implements IMemberView {
         callbackManager = CallbackManager.create(getActivity());
 
         presenter = new MemberPresenter(this);
-//        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bottom_navigation);
         progressView = new ProgressView(null, view);
         presenter.getData();
     }

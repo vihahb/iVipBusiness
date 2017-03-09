@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class MemberCardAdapter extends RecyclerView.Adapter<MemberCardAdapter.Vi
     private Animator mCurrentAnimator;
     private Activity activity;
 
+    private FrameLayout layout_image;
     private TextView txt_done;
     private ImageView expandedImageView;
     private int mShortAnimationDuration;
@@ -42,6 +44,7 @@ public class MemberCardAdapter extends RecyclerView.Adapter<MemberCardAdapter.Vi
         this.activity = activity;
         this.arrayList = arrayList;
 
+        layout_image = (FrameLayout) activity.findViewById(R.id.add_level_layout_image);
         txt_done = (TextView) activity.findViewById(R.id.add_level_txt_done);
         expandedImageView = (ImageView) activity.findViewById(R.id.add_level_expanded_image);
         mShortAnimationDuration = activity.getResources().getInteger(android.R.integer.config_shortAnimTime);
@@ -177,12 +180,14 @@ public class MemberCardAdapter extends RecyclerView.Adapter<MemberCardAdapter.Vi
             public void onAnimationEnd(Animator animation) {
                 mCurrentAnimator = null;
                 txt_done.setVisibility(View.VISIBLE);
+                layout_image.setBackgroundColor(activity.getResources().getColor(android.R.color.white));
             }
 
             @Override
             public void onAnimationCancel(Animator animation) {
                 mCurrentAnimator = null;
                 txt_done.setVisibility(View.VISIBLE);
+                layout_image.setBackgroundColor(activity.getResources().getColor(android.R.color.white));
             }
         });
         set.start();
@@ -200,6 +205,7 @@ public class MemberCardAdapter extends RecyclerView.Adapter<MemberCardAdapter.Vi
                 }
 
                 txt_done.setVisibility(View.GONE);
+                layout_image.setBackgroundColor(activity.getResources().getColor(android.R.color.transparent));
 
                 // Animate the four positioning/sizing properties in parallel,
                 // back to their original values.

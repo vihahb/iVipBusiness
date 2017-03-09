@@ -1,9 +1,7 @@
 package com.xtel.ivipbusiness.view.adapter;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +81,8 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         return;
                     }
 
+                    Constants.SORT_STORE = stores;
                     _view.startActivityForResult(ViewStoreActivity.class, Constants.MODEL, stores, 11);
-//                    _view.getActivity().startActivity(new Intent(_view.getActivity(), ViewStoreActivity.class));
                 }
             });
         } else {

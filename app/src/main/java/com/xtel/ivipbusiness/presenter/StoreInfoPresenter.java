@@ -38,7 +38,6 @@ public class StoreInfoPresenter {
     private IStoreInfoView view;
 
     private boolean isExists = true;
-    private SortStore sortStore;
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
     private String STOREY_TYPE, URL_BANNER, PATH_BANNER, URL_LOGO, PATH_LOGO;
@@ -52,7 +51,7 @@ public class StoreInfoPresenter {
                     @Override
                     public void onSuccess(RESP_Store obj) {
                         if (isExists) {
-                            obj.setId(sortStore.getId());
+                            obj.setId(Constants.SORT_STORE.getId());
                             ((ViewStoreActivity) view.getActivity()).setResp_store(obj);
                             view.onGetStoreInfoSuccess(obj);
                         }
@@ -124,13 +123,7 @@ public class StoreInfoPresenter {
 
     //    Kiểm tra xem có data truyền vào hay không
     public void getData() {
-        try {
-            sortStore = (SortStore) view.getFragment().getArguments().getSerializable(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (sortStore != null) {
+        if (Constants.SORT_STORE != null) {
             if (((ViewStoreActivity) view.getActivity()).getResp_store() == null)
                 getStoreInfo();
             else
@@ -140,7 +133,7 @@ public class StoreInfoPresenter {
     }
 
     private void getStoreInfo() {
-        iCmd.execute(1, sortStore.getId(), sortStore.getStore_type());
+        iCmd.execute(1, Constants.SORT_STORE.getId(), Constants.SORT_STORE.getStore_type());
     }
 
     public void postImage(Bitmap bitmap, final int type) {

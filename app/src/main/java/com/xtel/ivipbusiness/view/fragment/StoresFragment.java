@@ -47,13 +47,8 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
     private boolean isClearData = false;
 
-    public static StoresFragment newInstance(int store_id) {
-        Bundle args = new Bundle();
-        args.putInt(Constants.MODEL, store_id);
-
-        StoresFragment fragment = new StoresFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static StoresFragment newInstance() {
+        return new StoresFragment();
     }
 
     @Nullable
@@ -142,15 +137,6 @@ public class StoresFragment extends BasicFragment implements IStoresView {
             progressView.hideData();
         }
     }
-
-    private void hideBottomView(View view) {
-        view.animate().translationY(view.getHeight()).setInterpolator(new AccelerateInterpolator(2)).start();
-    }
-
-    private void showBottomView(View view) {
-        view.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
-    }
-
 
     @Override
     public void onGetDataError() {

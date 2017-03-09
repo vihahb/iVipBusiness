@@ -53,13 +53,8 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     private boolean isClearData = false;
     private int gallery_position = -1;
 
-    public static GalleryFragment newInstance(SortStore sortStore) {
-        Bundle args = new Bundle();
-        args.putSerializable(Constants.MODEL, sortStore);
-
-        GalleryFragment fragment = new GalleryFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static GalleryFragment newInstance() {
+        return new GalleryFragment();
     }
 
     @Nullable

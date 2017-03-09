@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.SavePointPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ISavePointView;
-import com.xtel.ivipbusiness.view.activity.inf.RESP_Member_Info;
+import com.xtel.ivipbusiness.model.entity.RESP_Member_Info;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -83,7 +83,7 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     @Override
     public void onGetDataSuccess(RESP_Member_Info resp_member_info) {
         WidgetHelper.getInstance().setAvatarImageURL(img_avatar, resp_member_info.getAvatar());
-        WidgetHelper.getInstance().setImageBlurURL(img_background, resp_member_info.getMember_card());
+        WidgetHelper.getInstance().setImageURL(img_background, resp_member_info.getMember_card());
         WidgetHelper.getInstance().setTextViewWithResult(txt_fullname, resp_member_info.getFull_name(), getString(R.string.updating));
         WidgetHelper.getInstance().setTextViewWithResult(txt_level, resp_member_info.getLevel_name(), getString(R.string.updating));
     }

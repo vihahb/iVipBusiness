@@ -1,4 +1,4 @@
-package com.xtel.ivipbusiness.view.activity.inf;
+package com.xtel.ivipbusiness.model.entity;
 
 import com.google.gson.annotations.Expose;
 import com.xtel.nipservicesdk.model.entity.RESP_Basic;

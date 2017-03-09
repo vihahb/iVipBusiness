@@ -19,6 +19,18 @@ public class LevelObject implements Serializable {
     private String member_card;
     @Expose
     private String url_card;
+    private boolean isSelected = false;
+
+    public LevelObject() {
+    }
+
+    public LevelObject(Integer level_limit, String level_name, Integer level, String member_card, String url_card) {
+        this.level_limit = level_limit;
+        this.level_name = level_name;
+        this.level = level;
+        this.member_card = member_card;
+        this.url_card = url_card;
+    }
 
     public Integer getLevel_limit() {
         return level_limit;
@@ -58,5 +70,13 @@ public class LevelObject implements Serializable {
 
     public void setUrl_card(String url_card) {
         this.url_card = url_card;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

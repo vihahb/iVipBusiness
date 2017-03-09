@@ -40,7 +40,6 @@ public class AddNewsPresenter extends BasicPresenter {
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
-    private SortStore sortStore;
     private final String CHAIN = "CHAIN";
     private String PATH_BANNER;
 
@@ -64,7 +63,7 @@ public class AddNewsPresenter extends BasicPresenter {
                         view.getNewSession(iCmd);
                     else if (error.getCode() == 101) {
                         view.closeProgressBar();
-                        if (sortStore.getStore_type().equals(CHAIN))
+                        if (Constants.SORT_STORE.getStore_type().equals(CHAIN))
                             view.showShortToast(-1, view.getActivity().getString(R.string.error_not_found_chain));
                         else
                             view.showShortToast(-1, view.getActivity().getString(R.string.error_not_found_store));
@@ -82,13 +81,7 @@ public class AddNewsPresenter extends BasicPresenter {
     }
 
     public void getData() {
-        try {
-            sortStore = (SortStore) view.getActivity().getIntent().getSerializableExtra(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (sortStore == null)
+        if (Constants.SORT_STORE == null)
             view.onGetDataError();
     }
 
@@ -170,10 +163,10 @@ public class AddNewsPresenter extends BasicPresenter {
 
         RESP_News resp_news = new RESP_News();
 
-        if (sortStore.getStore_type().equals(CHAIN))
-            resp_news.setChain_store_id(sortStore.getId());
+        if (Constants.SORT_STORE.getStore_type().equals(CHAIN))
+            resp_news.setChain_store_id(Constants.SORT_STORE.getId());
         else
-            resp_news.setStore_id(sortStore.getId());
+            resp_news.setStore_id(Constants.SORT_STORE.getId());
 
         resp_news.setNews_type((news_type + 1));
         resp_news.setBanner(PATH_BANNER);

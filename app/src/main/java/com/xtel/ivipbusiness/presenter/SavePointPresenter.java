@@ -15,7 +15,7 @@ import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.model.entity.RESP_Point;
 import com.xtel.ivipbusiness.model.entity.RESP_Save_Point;
 import com.xtel.ivipbusiness.view.activity.inf.ISavePointView;
-import com.xtel.ivipbusiness.view.activity.inf.RESP_Member_Info;
+import com.xtel.ivipbusiness.model.entity.RESP_Member_Info;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;

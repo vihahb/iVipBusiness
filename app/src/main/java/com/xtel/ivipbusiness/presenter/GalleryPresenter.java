@@ -36,7 +36,6 @@ public class GalleryPresenter {
     private IGalleryView view;
 
     private boolean isExists = true;
-    private SortStore sortStore;
 
     private int PAGE = 1;
     private int PAGESIZE = 10;
@@ -52,9 +51,9 @@ public class GalleryPresenter {
             if (params.length > 0) {
                 int type = ((int) params[0]);
                 if (type == 1) {
-                    boolean isStore = (sortStore.getStore_type().equals(STORE_TYPE));
+                    boolean isStore = (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE));
 
-                    GalleryModel.getInstance().getListGallery(sortStore.getId(), PAGE, PAGESIZE, isStore, new ResponseHandle<RESP_Gallery>(RESP_Gallery.class) {
+                    GalleryModel.getInstance().getListGallery(Constants.SORT_STORE.getId(), PAGE, PAGESIZE, isStore, new ResponseHandle<RESP_Gallery>(RESP_Gallery.class) {
                         @Override
                         public void onSuccess(RESP_Gallery obj) {
                             if (isExists) {
@@ -102,7 +101,7 @@ public class GalleryPresenter {
                         }
                     });
                 else if (type == 3) {
-                    boolean isStore = (sortStore.getStore_type().equals(STORE_TYPE));
+                    boolean isStore = (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE));
 
                     GalleryModel.getInstance().addGallery((RESP_Picture) params[1], isStore, new ResponseHandle<RESP_None>(RESP_None.class) {
                         @Override
@@ -151,21 +150,11 @@ public class GalleryPresenter {
     }
 
     public void deleteGallery(int gallery_id) {
-        iCmd.execute(2, sortStore.getId(), gallery_id);
+        iCmd.execute(2, Constants.SORT_STORE.getId(), gallery_id);
     }
 
     public boolean getData() {
-
-        if (sortStore != null)
-            return true;
-
-        try {
-            sortStore = (SortStore) view.getFragment().getArguments().getSerializable(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return (sortStore != null);
+        return  (Constants.SORT_STORE != null);
     }
 
     public void takePicture() {
@@ -211,7 +200,7 @@ public class GalleryPresenter {
 
     public void addPicture(RESP_Image resp_image) {
         RESP_Picture resp_picture = new RESP_Picture();
-        resp_picture.setId(sortStore.getId());
+        resp_picture.setId(Constants.SORT_STORE.getId());
         resp_picture.setUrl(resp_image.getUri());
 
         iCmd.execute(3, resp_picture);

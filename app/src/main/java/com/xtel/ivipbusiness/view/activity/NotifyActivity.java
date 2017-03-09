@@ -130,10 +130,10 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
                         presenter.sendNotify(1, null);
                         break;
                     case R.id.nav_list_fcm_send_group:
-                        startActivityForResult(ChooseOptionFcmActivity.class, Constants.MODEL, 1, REQUEST_GROUP);
+                        startActivityForResult(SendFcmActivity.class, Constants.MODEL, 1, REQUEST_GROUP);
                         break;
                     case R.id.nav_list_fcm_send_member:
-                        startActivityForResult(ChooseOptionFcmActivity.class, Constants.MODEL, 2, REQUEST_MEMBER);
+                        startActivityForResult(SendFcmActivity.class, Constants.MODEL, 2, REQUEST_MEMBER);
                         break;
                     default:
                         break;

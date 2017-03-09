@@ -7,7 +7,7 @@ import com.xtel.ivipbusiness.model.MemberModel;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.SavePointActivity;
 import com.xtel.ivipbusiness.view.activity.inf.ICheckInUserView;
-import com.xtel.ivipbusiness.view.activity.inf.RESP_Member_Info;
+import com.xtel.ivipbusiness.model.entity.RESP_Member_Info;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;

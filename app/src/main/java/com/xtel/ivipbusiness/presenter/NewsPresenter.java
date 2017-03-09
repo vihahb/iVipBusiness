@@ -19,7 +19,6 @@ public class NewsPresenter {
     private INewsView view;
 
     private boolean isExists = true;
-    private SortStore sortStore;
 
     private int PAGE = 1;
     private int PAGESIZE = 10;
@@ -30,7 +29,7 @@ public class NewsPresenter {
             if (params.length > 0) {
                 switch (((int) params[0])) {
                     case 1:
-                        NewsModel.getInstance().getNews(PAGE, PAGESIZE, sortStore.getId(), sortStore.getStore_type(), new ResponseHandle<RESP_List_News>(RESP_List_News.class) {
+                        NewsModel.getInstance().getNews(PAGE, PAGESIZE, Constants.SORT_STORE.getId(), Constants.SORT_STORE.getStore_type(), new ResponseHandle<RESP_List_News>(RESP_List_News.class) {
                             @Override
                             public void onSuccess(RESP_List_News obj) {
                                 if (isExists) {
@@ -107,16 +106,8 @@ public class NewsPresenter {
     }
 
     public boolean getData() {
-        if (sortStore != null)
-            return true;
+        return Constants.SORT_STORE != null;
 
-        try {
-            sortStore = (SortStore) view.getFragment().getArguments().getSerializable(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return (sortStore != null);
     }
 
     public void deleteNews(int id, int position) {

@@ -16,15 +16,8 @@ public class ViewStorePresenter {
     }
 
     public void getData() {
-        SortStore sortStore = null;
-        try {
-            sortStore = (SortStore) view.getActivity().getIntent().getSerializableExtra(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (sortStore != null)
-            view.onGetDataSuccess(sortStore);
+        if (Constants.SORT_STORE != null)
+            view.onGetDataSuccess();
         else
             view.onGetDataError();
     }

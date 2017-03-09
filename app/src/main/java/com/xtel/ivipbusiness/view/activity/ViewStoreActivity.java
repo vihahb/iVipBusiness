@@ -17,7 +17,6 @@ import android.view.MenuItem;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.ViewStorePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IViewStoreView;
 import com.xtel.ivipbusiness.view.fragment.GalleryFragment;
@@ -38,7 +37,6 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     private MenuItem menu_save_point, menu_create, menu_choose, menu_add_news, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
-    private SortStore sortStore;
     private final int REQUEST_CAMERA = 33;
     private final String STORE_TYPE = "STORE";
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", GALLERY = "gallery";
@@ -81,7 +79,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             menu_setting.setVisible(true);
             menu_edi_storet.setVisible(true);
 
-            if (sortStore.getStore_type().equals(STORE_TYPE))
+            if (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE))
                 menu_save_point.setVisible(true);
         }
     }
@@ -137,35 +135,35 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     //    hiển thị fratment thông tin store
     private void replaceStoreInfo() {
         actionBar.setTitle(getString(R.string.title_activity_view_store));
-        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(sortStore), STORE_INFO);
+        replaceFragment(R.id.view_store_container, StoreInfoFragment.newInstance(), STORE_INFO);
         showMenuStoreInfo();
     }
 
     //    hiển thị fratment danh sách chuỗi store
     private void replaceListStore() {
         actionBar.setTitle(getString(R.string.title_activity_list_store));
-        replaceFragment(R.id.view_store_container, StoresFragment.newInstance(sortStore.getId()), LIST_STORE);
+        replaceFragment(R.id.view_store_container, StoresFragment.newInstance(), LIST_STORE);
         showMenuListNew();
     }
 
     //    hiển thị fratment member
     private void replaceListMember() {
         actionBar.setTitle(getString(R.string.title_activity_list_member));
-        replaceFragment(R.id.view_store_container, MemberFragment.newInstance(sortStore), LIST_MENBER);
+        replaceFragment(R.id.view_store_container, MemberFragment.newInstance(), LIST_MENBER);
         hideMenuItem();
     }
 
     //    hiển thị fratment bản tin
     private void replaceListNews() {
         actionBar.setTitle(getString(R.string.title_activity_list_news));
-        replaceFragment(R.id.view_store_container, NewsFragment.newInstance(sortStore), LIST_NEWS);
+        replaceFragment(R.id.view_store_container, NewsFragment.newInstance(), LIST_NEWS);
         showMenuNews();
     }
 
     //    hiển thị fratment bản tin gần đây
     private void replaceGallery() {
         actionBar.setTitle(getString(R.string.title_activity_gallery));
-        replaceFragment(R.id.view_store_container, GalleryFragment.newInstance(sortStore), GALLERY);
+        replaceFragment(R.id.view_store_container, GalleryFragment.newInstance(), GALLERY);
         showMenuGallery();
     }
 
@@ -187,13 +185,12 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
 
     @Override
-    public void onGetDataSuccess(SortStore sortStore) {
-        this.sortStore = sortStore;
-        Log.e(this.getClass().getSimpleName(), "sortStore " + JsonHelper.toJson(sortStore));
+    public void onGetDataSuccess() {
+        Log.e(this.getClass().getSimpleName(), "sortStore " + JsonHelper.toJson(Constants.SORT_STORE));
 
         replaceStoreInfo();
         bottomNavigationView.setEnabled(true);
-        if (sortStore.getStore_type().equals(STORE_TYPE))
+        if (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE))
             bottomNavigationView.getMenu().findItem(R.id.nav_view_store_list_store).setIcon(R.mipmap.ic_list_store_gray);
     }
 
@@ -255,13 +252,13 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             finish();
         else if (id == R.id.action_view_store_create_store) {
             Intent intent = new Intent(this, AddStoreActivity.class);
-            intent.putExtra(Constants.ID, sortStore.getId());
+            intent.putExtra(Constants.ID, Constants.SORT_STORE.getId());
             intent.putExtra(Constants.MODEL, STORE_TYPE);
             startActivityForResult(intent, 21);
         } else if (id == R.id.action_view_store_choose_store) {
             startActivityForResult(ListStoresActivity.class, 22);
         } else if (id == R.id.action_view_store_setting_store) {
-            startActivity(SettingActivity.class, Constants.MODEL, sortStore);
+            startActivity(SettingActivity.class, Constants.MODEL, Constants.SORT_STORE);
         } else if (id == R.id.action_view_store_edit_store) {
             StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
 
@@ -274,7 +271,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             }
         } else if (id == R.id.action_view_store_add_news) {
             if (getSupportFragmentManager().findFragmentByTag(LIST_NEWS) != null)
-                startActivity(AddNewsActivity.class, Constants.MODEL, sortStore);
+                startActivity(AddNewsActivity.class, Constants.MODEL, Constants.SORT_STORE);
             else {
                 GalleryFragment fragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
                 if (fragment != null) {
@@ -283,7 +280,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             }
         } else if (id == R.id.action_view_store_save_point) {
             if (PermissionHelper.checkOnlyPermission(Manifest.permission.CAMERA, this, REQUEST_CAMERA))
-                startActivity(CheckInUserActivity.class, Constants.MODEL, sortStore);
+                startActivity(CheckInUserActivity.class, Constants.MODEL, Constants.SORT_STORE);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -297,7 +294,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
                 replaceStoreInfo();
                 break;
             case R.id.nav_view_store_list_store:
-                if (sortStore.getStore_type().equals(STORE_TYPE))
+                if (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE))
                     return false;
                 replaceListStore();
                 break;
@@ -323,7 +320,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
         if (requestCode == REQUEST_CAMERA) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                startActivity(CheckInUserActivity.class, Constants.MODEL, sortStore);
+                startActivity(CheckInUserActivity.class, Constants.MODEL, Constants.SORT_STORE);
             else
                 showShortToast(getString(R.string.error_permission));
         } else {

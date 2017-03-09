@@ -77,13 +77,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     private final int REQUEST_LOCATION = 99;
     private boolean isShow = true;
 
-    public static StoreInfoFragment newInstance(SortStore sortStore) {
-        Bundle args = new Bundle();
-        args.putSerializable(Constants.MODEL, sortStore);
-
-        StoreInfoFragment fragment = new StoreInfoFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static StoreInfoFragment newInstance() {
+        return new StoreInfoFragment();
     }
 
     @Nullable

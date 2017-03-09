@@ -171,6 +171,7 @@
     <string name="error_store_not_exists">Cửa hàng không tồn tại</string>
     <string name="error_store_do_not_setting_point">Cửa hàng chưa cài đặt tích điểm</string>
     <string name="error_member_not_have_card">Thành viên chưa có thẻ. Bạn có muốn tạo thẻ cho thành viên này? </string>
+    <string name="error_not_have_level">Chưa cài đặt cấp bậc cho cửa hàng</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>

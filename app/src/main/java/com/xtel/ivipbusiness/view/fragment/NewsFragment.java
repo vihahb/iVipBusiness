@@ -42,13 +42,8 @@ public class NewsFragment extends BasicFragment implements INewsView {
     private ProgressView progressView;
     private boolean isClearData = false;
 
-    public static NewsFragment newInstance(SortStore sortStore) {
-        Bundle args = new Bundle();
-        args.putSerializable(Constants.MODEL, sortStore);
-
-        NewsFragment fragment = new NewsFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static NewsFragment newInstance() {
+        return new NewsFragment();
     }
 
     @Nullable

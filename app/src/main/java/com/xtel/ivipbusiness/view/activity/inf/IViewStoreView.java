@@ -9,7 +9,7 @@ import com.xtel.ivipbusiness.model.entity.SortStore;
  */
 
 public interface IViewStoreView {
-    void onGetDataSuccess(SortStore sortStore);
+    void onGetDataSuccess();
     void onGetDataError();
     Activity getActivity();
 }

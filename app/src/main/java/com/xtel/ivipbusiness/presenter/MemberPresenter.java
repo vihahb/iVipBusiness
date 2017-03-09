@@ -17,9 +17,7 @@ import com.xtel.sdk.utils.NetWorkInfo;
 public class MemberPresenter {
     private IMemberView view;
 
-    private SortStore sortStore;
     private boolean isExists = true;
-
     private final String STORE_TYPE = "STORE";
 
     private final String TYPE = "ALL";
@@ -30,9 +28,9 @@ public class MemberPresenter {
         @Override
         public void execute(final Object... params) {
             if (((int) params[0]) == 1) {
-                boolean store_type = (sortStore.getStore_type().equals(STORE_TYPE));
+                boolean store_type = (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE));
 
-                StoresModel.getInstance().getMemberCheckIn(sortStore.getId(), store_type, PAGE, PAGESIZE, new ResponseHandle<RESP_Member>(RESP_Member.class) {
+                StoresModel.getInstance().getMemberCheckIn(Constants.SORT_STORE.getId(), store_type, PAGE, PAGESIZE, new ResponseHandle<RESP_Member>(RESP_Member.class) {
                     @Override
                     public void onSuccess(RESP_Member obj) {
                         if (isExists) {
@@ -80,17 +78,11 @@ public class MemberPresenter {
     }
 
     public boolean getData() {
-        if (sortStore != null)
+        if (Constants.SORT_STORE != null)
             return true;
 
-        try {
-            sortStore = (SortStore) view.getFragment().getArguments().getSerializable(Constants.MODEL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (sortStore != null) {
-            view.onGetDataSuccess(sortStore.getId());
+        if (Constants.SORT_STORE != null) {
+            view.onGetDataSuccess(Constants.SORT_STORE.getId());
             return true;
         } else {
             view.onGetDataError();

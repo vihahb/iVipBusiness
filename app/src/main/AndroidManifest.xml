@@ -106,7 +106,7 @@
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_list_fcm" />
         <activity
-            android:name=".view.activity.ChooseOptionFcmActivity"
+            android:name=".view.activity.SendFcmActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_send_group" />
         <activity
