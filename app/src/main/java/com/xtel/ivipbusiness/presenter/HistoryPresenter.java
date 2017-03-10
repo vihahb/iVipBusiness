@@ -36,7 +36,7 @@ public class HistoryPresenter {
                 @Override
                 public void onSuccess(RESP_History obj) {
                     PAGE++;
-                    new SortHistory().execute(obj.getData());
+                    view.onGetHistorySuccess(obj.getData());
                 }
 
                 @Override
@@ -81,39 +81,5 @@ public class HistoryPresenter {
             PAGE = 1;
 
         iCmd.execute();
-    }
-
-    private class SortHistory extends AsyncTask<ArrayList<History>, Void, ArrayList<History>> {
-
-        @SafeVarargs
-        @Override
-        protected final ArrayList<History> doInBackground(ArrayList<History>... params) {
-
-            if (params[0].size() == 0)
-                return params[0];
-
-            for (History history : params[0]) {
-                history.setDate(WidgetHelper.getInstance().getDate((history.getAction_time() * 1000)));
-                history.setTime(WidgetHelper.getInstance().getTime((history.getAction_time() * 1000)));
-            }
-
-            for (int i = params[0].size() - 1; i > 0; i--) {
-                if (!params[0].get(i).getDate().equals(params[0].get((i - 1)).getDate())) {
-                    params[0].add(i, new History(true, params[0].get(i).getDate()));
-                }
-            }
-
-            History history = params[0].get(0);
-            params[0].add(0, new History(true, history.getDate()));
-
-            return params[0];
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<History> histories) {
-            super.onPostExecute(histories);
-
-            view.onGetHistorySuccess(histories);
-        }
     }
 }

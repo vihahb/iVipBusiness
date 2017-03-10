@@ -37,8 +37,6 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         setContentView(R.layout.activity_check_in_user);
         callbackManager = CallbackManager.create(this);
 
-        startActivity(CalculatorActivity.class);
-
         presenter = new CheckInUserPresenter(this);
         initToolbar(R.id.check_in_user_toolbar, null);
         initView();

@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_show_image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context="com.xtel.ivipbusiness.view.activity.ShowImageActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/show_image.viewpager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:background="@android:color/white"
         android:fitsSystemWindows="false" />
-</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_56"
+        android:layout_gravity="bottom"
+        android:background="@color/black_40" />
+
+    <Button
+        android:id="@+id/show_image.btn_close"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_36"
+        android:layout_gravity="bottom|right|end"
+        android:layout_marginBottom="@dimen/size_8"
+        android:layout_marginEnd="@dimen/size_8"
+        android:layout_marginRight="@dimen/size_8"
+        android:background="@drawable/button_transparent"
+        android:minWidth="@dimen/size_64"
+        android:paddingLeft="@dimen/size_8"
+        android:paddingRight="@dimen/size_8"
+        android:text="@string/close"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_13" />
+</FrameLayout>

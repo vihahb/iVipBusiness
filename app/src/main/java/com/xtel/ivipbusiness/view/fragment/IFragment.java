@@ -20,6 +20,8 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.xtel.ivipbusiness.view.widget.ProgressView;
+
 /**
  * Created by Lê Công Long Vũ on 1/3/2017
  */
@@ -28,6 +30,10 @@ public abstract class IFragment extends Fragment {
 
     protected Toolbar findToolbar(int id) {
         return (Toolbar) getView().findViewById(id);
+    }
+
+    protected ProgressView findProgressView() {
+        return new ProgressView(null, getView());
     }
 
     protected DrawerLayout findDrawerLayout(int id) {

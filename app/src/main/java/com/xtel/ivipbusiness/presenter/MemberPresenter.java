@@ -78,9 +78,6 @@ public class MemberPresenter {
     }
 
     public boolean getData() {
-        if (Constants.SORT_STORE != null)
-            return true;
-
         if (Constants.SORT_STORE != null) {
             view.onGetDataSuccess(Constants.SORT_STORE.getId());
             return true;

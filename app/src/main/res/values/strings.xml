@@ -142,10 +142,12 @@
     <string name="error_input_level_name">Vui lòng nhập tên cấp bậc</string>
     <string name="error_input_level_stt">Vui lòng nhập thứ tự cấp bậc</string>
     <string name="error_input_money">Vui lòng nhập số tiền</string>
+    <string name="error_money">Số tiền không hợp lệ</string>
     <string name="error_input_add_level">Vui lòng tạo cấp bậc</string>
     <string name="error_input_result">Không có kết quả</string>
     <string name="error_input_member_card">Vui lòng chọn member card</string>
     <string name="error_input_bill_path">Vui lòng chụp ảnh hóa đơn</string>
+    <string name="error_big_result">Kết quả quá lớn</string>
 
     <string name="error_invalidate_passwordd">Mật khẩu không khớp</string>
     <string name="error_not_alllow_permission">Không thể thực hiện chức năng do bạn chưa cấp quyền</string>
@@ -207,6 +209,7 @@
     <string name="store_type">Loại cửa hàng</string>
     <string name="open_time">Mở cửa</string>
     <string name="close_time">Đóng cửa</string>
+    <string name="close">Đóng</string>
     <string name="news_title">Tiêu đề bản tin</string>
     <string name="news_des">Mô tả bản tin</string>
     <string name="ivip">IVIP</string>
@@ -253,7 +256,8 @@
     <string name="history_exchange_point">Đổi điểm</string>
     <string name="today">Hôm nay</string>
     <string name="yesterday">Hôm qua</string>
-    
+    <string name="enter_hint">Nhập gợi ý</string>
+
     <!-- message -->
     <string name="message_mandatory_level">Đây là cấp bậc bắt buộc</string>
 

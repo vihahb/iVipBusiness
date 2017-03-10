@@ -126,12 +126,15 @@ public class SavePointPresenter {
     }
 
     public void savePoint(String money, String bill_code) {
-        int total_money = TextUnit.getInstance().validateInteger(money);
-        if (total_money == -1) {
+        if (money == null) {
             view.showShortToast(1, view.getActivity().getString(R.string.error_input_money));
             return;
         }
-
+        int total_money = TextUnit.getInstance().validateInteger(money);
+        if (total_money == -1) {
+            view.showShortToast(1, view.getActivity().getString(R.string.error_money));
+            return;
+        }
         if (!TextUnit.getInstance().validateText(BILL_PATH)) {
             view.showShortToast(1, view.getActivity().getString(R.string.error_input_bill_path));
             return;

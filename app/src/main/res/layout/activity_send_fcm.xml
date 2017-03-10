@@ -35,8 +35,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:fillViewport="true"
             android:orientation="vertical">
 
@@ -45,13 +44,14 @@
                 android:layout_height="wrap_content"
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/size_48"
-                android:paddingTop="@dimen/size_48">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:paddingBottom="@dimen/size_48"
+                    android:paddingTop="@dimen/size_48"
+                    android:layout_weight="1"
                     android:baselineAligned="false"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
@@ -70,11 +70,20 @@
                             android:layout_height="wrap_content"
                             android:text="@string/area" />
 
+                        <AutoCompleteTextView
+                            android:id="@+id/option.edt_area"
+                            style="@style/edittext_outline_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_36"
+                            android:hint="@string/enter_hint"
+                            android:layout_marginTop="@dimen/size_6" />
+
                         <Spinner
                             android:id="@+id/option.sp_area"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_36"
                             android:layout_marginTop="@dimen/size_6"
+                            android:visibility="gone"
                             android:background="@android:color/transparent" />
 
                         <TextView
@@ -153,42 +162,19 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/option.btn_done"
+                    style="@style/button_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_36"
+                    android:layout_gravity="right|end"
+                    android:layout_marginBottom="@dimen/size_8"
+                    android:layout_marginEnd="@dimen/size_16"
+                    android:layout_marginRight="@dimen/size_16"
+                    android:background="@drawable/button_transparent"
+                    android:text="@string/action_done" />
             </LinearLayout>
         </ScrollView>
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingBottom="@dimen/size_8"-->
-        <!--android:paddingLeft="@dimen/size_16"-->
-        <!--android:paddingRight="@dimen/size_16">-->
-
-        <!--<Button-->
-        <!--android:id="@+id/option.btn_cancel"-->
-        <!--style="@style/button_login"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="@dimen/size_36"-->
-        <!--android:background="@drawable/button_transparent"-->
-        <!--android:text="@string/cancel_one" />-->
-
-        <!--<View-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@android:color/transparent" />-->
-
-        <Button
-            android:id="@+id/option.btn_done"
-            style="@style/button_login"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_36"
-            android:layout_gravity="right|end"
-            android:layout_marginBottom="@dimen/size_8"
-            android:layout_marginEnd="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_16"
-            android:background="@drawable/button_transparent"
-            android:text="@string/action_done" />
-        <!--</LinearLayout>-->
     </LinearLayout>
 </LinearLayout>

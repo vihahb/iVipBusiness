@@ -5,87 +5,88 @@
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardBackgroundColor="@android:color/transparent"
-    card_view:cardCornerRadius="@dimen/size_2">
+    card_view:cardCornerRadius="@dimen/size_2"
+    card_view:cardElevation="@dimen/size_8">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/size_180">
 
         <ImageView
             android:id="@+id/save_point.img_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:layout_alignBottom="@+id/save_point.header.layout_content"
             android:layout_alignEnd="@+id/save_point.header.layout_content"
             android:layout_alignLeft="@+id/save_point.header.layout_content"
             android:layout_alignRight="@+id/save_point.header.layout_content"
             android:layout_alignStart="@+id/save_point.header.layout_content"
             android:layout_alignTop="@+id/save_point.header.layout_content"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:id="@+id/save_point.header.layout_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/size_8"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_16">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:weightSum="8">
-
-                <com.xtel.ivipbusiness.view.widget.SquareLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:background="@drawable/round_green"
-                    android:padding="@dimen/size_1">
-
-                    <com.xtel.ivipbusiness.view.widget.RoundImage
-                        android:id="@+id/save_point.img_avatar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@null"
-                        android:scaleType="centerCrop" />
-                </com.xtel.ivipbusiness.view.widget.SquareLayout>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/save_point.txt_fullname"
-                style="@style/textview_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_8"
-                android:gravity="center_horizontal"
-                android:text="@string/fullname" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_8"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/save_point.txt_fullname"
                     style="@style/textview_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/level" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:text="@string/fullname" />
 
-                <TextView
-                    android:id="@+id/save_point.txt_level"
-                    style="@style/textview_title"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/size_8"
-                    android:layout_marginStart="@dimen/size_8"
-                    android:text="@string/level"
-                    android:textColor="@color/text_color_yellow" />
-            </LinearLayout>
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/size_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textview_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/level" />
+
+                    <TextView
+                        android:id="@+id/save_point.txt_level"
+                        style="@style/textview_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_8"
+                        android:layout_marginStart="@dimen/size_8"
+                        android:text="@string/level"
+                        android:textColor="@color/text_color_yellow" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="@dimen/size_56"
+                android:layout_height="@dimen/size_56"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/round_white"
+                android:padding="@dimen/size_1">
+
+                <com.xtel.ivipbusiness.view.widget.RoundImage
+                    android:id="@+id/save_point.img_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

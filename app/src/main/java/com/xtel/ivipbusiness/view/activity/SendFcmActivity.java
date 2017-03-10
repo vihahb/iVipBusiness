@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,9 +18,10 @@ import com.xtel.ivipbusiness.model.entity.Area;
 import com.xtel.ivipbusiness.model.entity.LevelObject;
 import com.xtel.ivipbusiness.presenter.SendFcmPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ISendFcmView;
-import com.xtel.ivipbusiness.view.adapter.AreaAdapter;
+import com.xtel.ivipbusiness.view.adapter.AreaSpinnerAdapter;
 import com.xtel.ivipbusiness.view.adapter.GenderAdapter;
 import com.xtel.ivipbusiness.view.adapter.LevelSpinnerAdapter;
+import com.xtel.ivipbusiness.view.adapter.AreaAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -100,9 +102,13 @@ public class SendFcmActivity extends BasicActivity implements View.OnClickListen
             arrayList_area.add(new Area(false, aList));
         }
 
+        AutoCompleteTextView etProductSearch = (AutoCompleteTextView) findViewById(R.id.option_edt_area);
+        AreaAdapter adapter = new AreaAdapter(getActivity(), R.layout.item_spinner_area_dropdown, arrayList_area);
+        etProductSearch.setAdapter(adapter);
+
         Spinner sp_area = findSpinner(R.id.option_sp_area);
-        AreaAdapter areaAdapter = new AreaAdapter(getApplicationContext(), true, arrayList_area);
-        sp_area.setAdapter(areaAdapter);
+        AreaSpinnerAdapter areaSpinnerAdapter = new AreaSpinnerAdapter(getApplicationContext(), true, arrayList_area);
+        sp_area.setAdapter(areaSpinnerAdapter);
     }
 
     //    Khởi tạo spinner chọn level

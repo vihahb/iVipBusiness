@@ -23,14 +23,35 @@
         android:gravity="center_horizontal"
         android:text="@string/total_bill_money" />
 
-    <EditText
-        android:id="@+id/save_point.edt_total_money"
-        style="@style/edittext_colorprimarykey_90_normal"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_36"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_8"
-        android:inputType="number"
-        android:maxLength="9" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/save_point.edt_total_money"
+            style="@style/edittext_colorprimarykey_90_normal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_36"
+            android:inputType="number"
+            android:maxLength="9"
+            android:paddingEnd="@dimen/size_36"
+            android:paddingRight="@dimen/size_36" />
+
+        <ImageButton
+            android:id="@+id/save_point.img_calculator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/save_point.edt_total_money"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/save_point.edt_total_money"
+            android:background="@drawable/button_transparent"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_action_calculator" />
+    </RelativeLayout>
 
     <TextView
         style="@style/textview_title"

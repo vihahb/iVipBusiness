@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -35,9 +37,12 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     private SavePointPresenter presenter;
     private CallbackManager callbackManager;
 
+    private ImageButton img_calculator;
     private ImageView img_avatar, img_background, img_bill;
     private TextView txt_fullname, txt_level;
     private EditText edt_total_money, edt_bill_code;
+
+    private final int REQUEST_CALCULATOR = 55;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     }
 
     protected void initView() {
+        img_calculator = findImageButton(R.id.save_point_img_calculator);
         img_avatar = findImageView(R.id.save_point_img_avatar);
         img_background = findImageView(R.id.save_point_img_background);
         img_bill = findImageView(R.id.save_point_img_bill);
@@ -64,6 +70,13 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     }
 
     protected void initListener() {
+        img_calculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(CalculatorActivity.class, REQUEST_CALCULATOR);
+            }
+        });
+
         img_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +84,32 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
             }
         });
     }
+
+    protected void getDataCalculator(Intent data) {
+        int calculator = -1;
+
+        try {
+            calculator = data.getIntExtra(Constants.MODEL, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (calculator != -1)
+            edt_total_money.setText(String.valueOf(calculator));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -226,6 +265,21 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save_point, menu);
@@ -253,6 +307,10 @@ public class SavePointActivity extends BasicActivity implements ISavePointView {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CALCULATOR) {
+            if (resultCode == RESULT_OK)
+                getDataCalculator(data);
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -34,7 +34,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     private ActionBar actionBar;
     private BottomNavigationView bottomNavigationView;
-    private MenuItem menu_save_point, menu_create, menu_choose, menu_add_news, menu_setting, menu_edi_storet;
+    private MenuItem menu_save_point, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
     private final int REQUEST_CAMERA = 33;
@@ -72,10 +72,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Hiện menu của tab thông tin cửa hàng
     private void showMenuStoreInfo() {
-        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
-            menu_create.setVisible(false);
-            menu_choose.setVisible(false);
-            menu_add_news.setVisible(false);
+        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
             menu_setting.setVisible(true);
             menu_edi_storet.setVisible(true);
 
@@ -86,48 +83,36 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
     private void showMenuListNew() {
-        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
-            menu_create.setVisible(true);
-            menu_choose.setVisible(true);
+        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
             menu_save_point.setVisible(false);
-            menu_add_news.setVisible(false);
             menu_setting.setVisible(false);
         }
     }
 
     //    Hiện menu của tab bản tin
     private void showMenuNews() {
-        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
-            menu_create.setVisible(false);
-            menu_choose.setVisible(false);
+        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
             menu_save_point.setVisible(false);
-            menu_add_news.setVisible(true);
             menu_setting.setVisible(false);
         }
     }
 
     //    Hiện menu của tab bản tin
     private void showMenuGallery() {
-        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
-            menu_create.setVisible(false);
-            menu_choose.setVisible(false);
+        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
             menu_save_point.setVisible(false);
-            menu_add_news.setVisible(true);
             menu_setting.setVisible(false);
         }
     }
 
     //    Ản toàn bộ item trong menu
     private void hideMenuItem() {
-        if (menu_save_point != null && menu_create != null && menu_choose != null && menu_add_news != null && menu_edi_storet != null && menu_setting != null) {
-            menu_create.setVisible(false);
-            menu_choose.setVisible(false);
+        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
             menu_save_point.setVisible(false);
-            menu_add_news.setVisible(false);
             menu_setting.setVisible(false);
         }
     }
@@ -191,7 +176,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         replaceStoreInfo();
         bottomNavigationView.setEnabled(true);
         if (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE))
-            bottomNavigationView.getMenu().findItem(R.id.nav_view_store_list_store).setIcon(R.mipmap.ic_list_store_gray);
+            bottomNavigationView.getMenu().findItem(R.id.nav_view_store_list_store).setEnabled(false);
     }
 
     @Override
@@ -222,25 +207,11 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         getMenuInflater().inflate(R.menu.menu_view_store, menu);
 
         menu_save_point = menu.findItem(R.id.action_view_store_save_point);
-        menu_create = menu.findItem(R.id.action_view_store_create_store);
-        menu_choose = menu.findItem(R.id.action_view_store_choose_store);
-        menu_add_news = menu.findItem(R.id.action_view_store_add_news);
         menu_setting = menu.findItem(R.id.action_view_store_setting_store);
         menu_edi_storet = menu.findItem(R.id.action_view_store_edit_store);
 
         menu_save_point.setVisible(true);
-        menu_create.setVisible(false);
-        menu_choose.setVisible(false);
-        menu_add_news.setVisible(false);
         menu_edi_storet.setVisible(true);
-
-        SpannableString s = new SpannableString(menu_create.getTitle());
-        s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
-        menu_create.setTitle(s);
-
-        SpannableString s2 = new SpannableString(menu_choose.getTitle());
-        s2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, s.length(), 0);
-        menu_choose.setTitle(s2);
 
         return true;
     }
@@ -250,14 +221,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         int id = item.getItemId();
         if (id == android.R.id.home)
             finish();
-        else if (id == R.id.action_view_store_create_store) {
-            Intent intent = new Intent(this, AddStoreActivity.class);
-            intent.putExtra(Constants.ID, Constants.SORT_STORE.getId());
-            intent.putExtra(Constants.MODEL, STORE_TYPE);
-            startActivityForResult(intent, 21);
-        } else if (id == R.id.action_view_store_choose_store) {
-            startActivityForResult(ListStoresActivity.class, 22);
-        } else if (id == R.id.action_view_store_setting_store) {
+        else if (id == R.id.action_view_store_setting_store) {
             startActivity(SettingActivity.class, Constants.MODEL, Constants.SORT_STORE);
         } else if (id == R.id.action_view_store_edit_store) {
             StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
@@ -267,15 +231,6 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
                     fragment.enableToEdit();
                 } else {
                     fragment.updateStore();
-                }
-            }
-        } else if (id == R.id.action_view_store_add_news) {
-            if (getSupportFragmentManager().findFragmentByTag(LIST_NEWS) != null)
-                startActivity(AddNewsActivity.class, Constants.MODEL, Constants.SORT_STORE);
-            else {
-                GalleryFragment fragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
-                if (fragment != null) {
-                    fragment.addImageView();
                 }
             }
         } else if (id == R.id.action_view_store_save_point) {

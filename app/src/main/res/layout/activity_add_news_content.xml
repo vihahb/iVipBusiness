@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:padding="@dimen/size_16">
 
@@ -41,9 +43,9 @@
         style="@style/checkbox_normal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
-        android:layout_marginTop="@dimen/size_16"
         android:layout_marginLeft="-2dp"
         android:layout_marginStart="-2dp"
+        android:layout_marginTop="@dimen/size_16"
         android:text="@string/create_voucher" />
 
     <LinearLayout

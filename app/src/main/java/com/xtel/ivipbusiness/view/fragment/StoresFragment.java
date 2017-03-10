@@ -1,21 +1,22 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoresPresenter;
+import com.xtel.ivipbusiness.view.activity.AddStoreActivity;
+import com.xtel.ivipbusiness.view.activity.ListStoresActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.StoresAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
@@ -28,8 +29,12 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
+
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
 /**
  * Created by Mr. M.2 on 1/13/2017
@@ -43,8 +48,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     private ArrayList<SortStore> listData;
     private ProgressView progressView;
 
-    private BottomNavigationView bottomNavigationView;
-
+    private final String STORE_TYPE = "STORE";
     private boolean isClearData = false;
 
     public static StoresFragment newInstance() {
@@ -63,8 +67,9 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         callbackManager = CallbackManager.create(getActivity());
 
         presenter = new StoresPresenter(this);
-        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bottom_navigation);
+//        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.view_store_bottom_navigation);
         initProgressView(view);
+        initFloatingActionButton(view);
     }
 
     //    Khởi tạo layout và recyclerview
@@ -106,21 +111,30 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 presenter.getStores(true);
             }
         });
+    }
 
-        progressView.onScrollRecyclerview(new RecyclerOnScrollListener(layoutManager) {
+    private void initFloatingActionButton(View view) {
+        FabSpeedDial fabSpeedDial = (FabSpeedDial) view.findViewById(R.id.store_fab_add);
+        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
-            public void onScrollUp() {
-//                hideBottomView(bottomNavigationView);
-            }
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
 
-            @Override
-            public void onScrollDown() {
-//                showBottomView(bottomNavigationView);
-            }
+                switch (id) {
+                    case R.id.nav_store_create_store:
+                        Intent intent = new Intent(getActivity(), AddStoreActivity.class);
+                        intent.putExtra(Constants.ID, Constants.SORT_STORE.getId());
+                        intent.putExtra(Constants.MODEL, STORE_TYPE);
+                        startActivityForResult(intent, 21);
+                        break;
+                    case R.id.nav_store_choose_store:
+                        startActivityForResult(ListStoresActivity.class, 22);
+                        break;
+                    default:
+                        break;
+                }
 
-            @Override
-            public void onLoadMore() {
-//                presenter.getChains();
+                return super.onMenuItemSelected(menuItem);
             }
         });
     }

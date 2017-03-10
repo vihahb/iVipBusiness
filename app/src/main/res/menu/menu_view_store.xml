@@ -3,20 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action.view_store.create_store"
-        android:orderInCategory="100"
-        android:title="@string/create_new_store"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action.view_store.choose_store"
-        android:orderInCategory="100"
-        android:title="@string/add_exists_store"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action.view_store.save_point"
-        android:icon="@drawable/ic_action_setting"
+        android:icon="@drawable/ic_action_qr_code"
         android:orderInCategory="100"
         android:title="@string/save_point"
         app:showAsAction="always" />
@@ -33,12 +21,5 @@
         android:icon="@drawable/ic_action_edit_line"
         android:orderInCategory="100"
         android:title="@string/edit_store"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action.view_store.add_news"
-        android:icon="@mipmap/ic_add_store"
-        android:orderInCategory="100"
-        android:title="@string/create_new_news"
         app:showAsAction="always" />
 </menu>

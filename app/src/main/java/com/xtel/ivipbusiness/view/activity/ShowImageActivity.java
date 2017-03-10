@@ -4,6 +4,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Gallery;
@@ -22,6 +24,11 @@ public class ShowImageActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_image);
 
+        getData();
+        initListener();
+    }
+
+    protected void getData() {
         String jsonObject = null;
 
         try {
@@ -35,6 +42,16 @@ public class ShowImageActivity extends BasicActivity {
             initViewPager(resp_gallery);
         } else
             onGetDataError();
+    }
+
+    protected void initListener() {
+        Button button = findButton(R.id.show_image_btn_close);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     protected void initViewPager(RESP_Gallery resp_gallery) {

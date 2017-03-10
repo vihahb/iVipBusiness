@@ -1,11 +1,11 @@
 package com.xtel.ivipbusiness.model.entity;
 
 /**
- * Created by Vulcl on 2/23/2017.
+ * Created by Vulcl on 2/23/2017
  */
 
 public class Area {
-    private boolean isSelected;
+    private boolean isSelected = false;
     private String name;
 
     public Area(boolean isSelected, String name) {

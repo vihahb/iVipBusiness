@@ -59,8 +59,6 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ViewHolder viewHolder = (ViewHolder) holder;
             final Member member = arrayList.get(position);
 
-            Log.e("MemberAdapter", JsonHelper.toJson(member));
-
             WidgetHelper.getInstance().setAvatarImageURL(viewHolder.img_avatar, member.getAvatar());
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_fullname, member.getFullname(), _view.getActivity().getString(R.string.not_update_name));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_point, String.valueOf(member.getTotal_point()));

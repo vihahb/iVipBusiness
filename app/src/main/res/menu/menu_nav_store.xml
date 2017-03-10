@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav.store.create_store"
+        android:icon="@mipmap/ic_store_not_line"
+        android:orderInCategory="0"
+        android:title="@string/create_new_store" />
+
+    <item
+        android:id="@+id/nav.store.choose_store"
+        android:icon="@mipmap/ic_store_not_line"
+        android:orderInCategory="2"
+        android:title="@string/add_exists_store" />
+</menu>

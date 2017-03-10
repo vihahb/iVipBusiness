@@ -3,6 +3,7 @@ package com.xtel.ivipbusiness.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.News;
 import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.NewsPresenter;
+import com.xtel.ivipbusiness.view.activity.AddNewsActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.NewsAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
@@ -59,6 +61,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
 
         presenter = new NewsPresenter(this);
         initProgressView(view);
+        initFloatingActionButton();
     }
 
     //    Khởi tạo layout và recyclerview
@@ -116,6 +119,16 @@ public class NewsFragment extends BasicFragment implements INewsView {
             progressView.initData(-1, getString(R.string.no_news), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
+    }
+
+    protected void initFloatingActionButton() {
+        FloatingActionButton fab = findFloatingActionButton(R.id.news_fab_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(AddNewsActivity.class);
+            }
+        });
     }
 
     @Override

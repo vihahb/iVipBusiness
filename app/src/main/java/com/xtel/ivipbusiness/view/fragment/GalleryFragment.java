@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,13 +18,10 @@ import android.view.ViewGroup;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Gallery;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.GalleryPresenter;
-import com.xtel.ivipbusiness.presenter.StoresPresenter;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.GalleryAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
-import com.xtel.ivipbusiness.view.fragment.inf.IStoresView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
@@ -32,7 +30,6 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
-import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.io.IOException;
@@ -57,10 +54,9 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         return new GalleryFragment();
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_store, container, false);
+        return inflater.inflate(R.layout.fragment_gallery, container, false);
     }
 
     @Override
@@ -69,12 +65,13 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         callbackManager = CallbackManager.create(getActivity());
 
         presenter = new GalleryPresenter(this);
-        initProgressView(view);
+        initProgressView();
+        initFloatingActionButton();
     }
 
     //    Khởi tạo layout và recyclerview
-    private void initProgressView(View view) {
-        progressView = new ProgressView(null, view);
+    private void initProgressView() {
+        progressView = findProgressView();
         progressView.initData(-1, getString(R.string.no_gallery), getString(R.string.click_to_try_again));
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
@@ -113,6 +110,16 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         });
     }
 
+    protected void initFloatingActionButton() {
+        FloatingActionButton fab = findFloatingActionButton(R.id.gallery_fab_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.takePicture();
+            }
+        });
+    }
+
     //    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
@@ -124,10 +131,6 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
             progressView.initData(-1, getString(R.string.no_gallery), getString(R.string.click_to_try_again));
             progressView.hideData();
         }
-    }
-
-    public void addImageView() {
-        presenter.takePicture();
     }
 
 

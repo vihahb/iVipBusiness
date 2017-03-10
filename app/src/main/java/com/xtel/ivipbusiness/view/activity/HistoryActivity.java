@@ -77,7 +77,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             public void onRefresh() {
                 isClearData = true;
                 adapter.setLoadMore(false);
-                adapter.notifyDataSetChanged();
+                adapter.notifyChange();
                 progressView.setRefreshing(true);
                 progressView.showData();
                 presenter.getMemberHistory(true);
@@ -100,7 +100,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
 
         if (listData.size() > 0) {
             progressView.showData();
-            adapter.notifyDataSetChanged();
+            adapter.notifyChange();
         } else {
             progressView.initData(-1, getString(R.string.no_history), getString(R.string.click_to_try_again));
             progressView.hideData();
@@ -168,7 +168,7 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
             progressView.hideData();
 
             listData.clear();
-            adapter.notifyDataSetChanged();
+            adapter.notifyChange();
             if (isClearData)
                 isClearData = false;
         }

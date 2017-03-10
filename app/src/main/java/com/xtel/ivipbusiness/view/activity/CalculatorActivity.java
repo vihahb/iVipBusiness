@@ -215,8 +215,23 @@ public class CalculatorActivity extends BasicActivity {
             return;
         }
 
+        String result = txt_result.getText().toString().replace("= ", "");
+
+        int calculator = -1;
+
+        try {
+            calculator = (int) Double.parseDouble(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (calculator == -1) {
+            showShortToast(getString(R.string.error_big_result));
+            return;
+        }
+
         Intent intent = new Intent();
-        intent.putExtra(Constants.MODEL, txt_result.getText().toString());
+        intent.putExtra(Constants.MODEL, calculator);
         setResult(RESULT_OK, intent);
         finish();
     }

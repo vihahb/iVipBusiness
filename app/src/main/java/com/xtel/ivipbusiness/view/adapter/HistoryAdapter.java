@@ -1,6 +1,7 @@
 package com.xtel.ivipbusiness.view.adapter;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,5 +123,46 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public void setLoadMore(boolean isLoadMore) {
         this.isLoadMore = isLoadMore;
+    }
+
+    public void notifyChange() {
+        new SortHistory().execute();
+    }
+
+    private class SortHistory extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            if (arrayList.size() == 0)
+                return null;
+
+            for (int i = arrayList.size() - 1; i >= 0; i--) {
+                if (arrayList.get(i).getAction_time() == null)
+                    arrayList.remove(i);
+            }
+
+            for (int i = arrayList.size() - 1; i >= 0; i--) {
+                arrayList.get(i).setDate(WidgetHelper.getInstance().getDate((arrayList.get(i).getAction_time() * 1000)));
+                arrayList.get(i).setTime(WidgetHelper.getInstance().getTime((arrayList.get(i).getAction_time() * 1000)));
+            }
+
+            for (int i = arrayList.size() - 1; i > 0; i--) {
+                if (!arrayList.get(i).getDate().equals(arrayList.get((i - 1)).getDate())) {
+                    arrayList.add(i, new History(true, arrayList.get(i).getDate()));
+                }
+            }
+
+            History history = arrayList.get(0);
+            arrayList.add(0, new History(true, history.getDate()));
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            notifyDataSetChanged();
+        }
     }
 }
