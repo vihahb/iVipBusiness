@@ -13,6 +13,7 @@
         android:descendantFocusability="beforeDescendants"
         android:fitsSystemWindows="false"
         android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingBottom="@dimen/size_24"
         android:paddingLeft="@dimen/size_48"
