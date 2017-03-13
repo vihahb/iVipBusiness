@@ -4,30 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
+        <include
+            android:id="@+id/statistic.layout_header"
+            layout="@layout/fragment_statistic_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/statistic.content"
             layout="@layout/fragment_statistic_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/size_52" />
+            android:layout_above="@+id/statistic.sp_store"
+            android:layout_below="@+id/statistic.layout_header" />
 
         <Spinner
             android:id="@+id/statistic.sp_store"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
-            android:layout_gravity="bottom"
-            android:layout_margin="@dimen/size_8"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/size_8"
+            android:layout_marginRight="@dimen/size_8"
+            android:layout_marginTop="@dimen/size_8"
             android:background="@android:color/transparent" />
-        <!--</LinearLayout>-->
 
         <TextView
             android:id="@+id/statistic.noti.txt"
@@ -38,5 +40,5 @@
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white" />
-    </FrameLayout>
+    </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -72,4 +72,6 @@
     <color name="line_history_today">#F6EE32</color>
     <color name="line_history_yesterday">#02ADEF</color>
     <color name="line_history_date">#BF202F</color>
+
+    <color name="chart_background">#CCCCCC</color>
 </resources>

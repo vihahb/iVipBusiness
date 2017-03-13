@@ -14,6 +14,13 @@ public class DataObj {
     @Expose
     private ArrayList<ValueObj> values;
 
+    public DataObj() {
+    }
+
+    public DataObj(ArrayList<ValueObj> values) {
+        this.values = values;
+    }
+
     public Long getAction_time() {
         return action_time;
     }

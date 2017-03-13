@@ -46,9 +46,9 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
 
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected ImageView img_seven, img_thirday;
-    protected TextView noti_textview;
+    protected TextView noti_textview, txt_checkin_title, txt_buy_title, txt_compare_title;
     protected Spinner sp_store;
-    protected LinearLayout layout_day;
+    protected View layout_day;
     protected LineChartView chart_checkin, chart_buy, chart_all;
 
     protected int DAY = 7;
@@ -81,9 +81,14 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
     //    Khởi tạo các view
     protected void initView() {
         swipeRefreshLayout = findSwipeRefreshLayout(R.id.statistic_swipe);
+
         noti_textview = findTextView(R.id.statistic_noti_txt);
+        txt_checkin_title = findTextView(R.id.statistic_txt_checkin_title);
+        txt_buy_title = findTextView(R.id.statistic_txt_buy_title);
+        txt_compare_title = findTextView(R.id.statistic_txt_compare_title);
+
         sp_store = findSpinner(R.id.statistic_sp_store);
-        layout_day = findLinearLayout(R.id.statistic_layout_day);
+        layout_day = findLinearLayout(R.id.statistic_layout_header);
 
         img_seven = findImageView(R.id.statistic_img_seven);
         img_thirday = findImageView(R.id.statistic_img_thirty);
@@ -93,6 +98,12 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         btn_seven.setOnClickListener(this);
         btn_thirty.setOnClickListener(this);
         noti_textview.setOnClickListener(this);
+    }
+
+    protected void initLineChart(View view) {
+        chart_checkin = new LineChartView((LineChart) view.findViewById(R.id.statistic_chart_checkin));
+        chart_buy = new LineChartView((LineChart) view.findViewById(R.id.statistic_chart_buy));
+        chart_all = new LineChartView((LineChart) view.findViewById(R.id.statistic_chart_all));
     }
 
     //    Khởi tạo layout với swipe
@@ -137,12 +148,6 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         });
     }
 
-    protected void initLineChart(View view) {
-        chart_checkin = new LineChartView((LineChart) view.findViewById(R.id.statistic_chart_checkin));
-        chart_buy = new LineChartView((LineChart) view.findViewById(R.id.statistic_chart_buy));
-        chart_all = new LineChartView((LineChart) view.findViewById(R.id.statistic_chart_all));
-    }
-
     protected void getStatistic() {
         if (!NetWorkInfo.isOnline(getActivity())) {
             onNoInternet();
@@ -160,6 +165,11 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         chart_checkin.setVisibility(View.VISIBLE);
         chart_buy.setVisibility(View.VISIBLE);
         chart_all.setVisibility(View.VISIBLE);
+        txt_checkin_title.setVisibility(View.VISIBLE);
+        txt_buy_title.setVisibility(View.VISIBLE);
+        txt_compare_title.setVisibility(View.VISIBLE);
+
+
         sp_store.setVisibility(View.VISIBLE);
 
         noti_textview.setVisibility(View.GONE);
@@ -172,6 +182,10 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         chart_checkin.setVisibility(View.GONE);
         chart_buy.setVisibility(View.GONE);
         chart_all.setVisibility(View.GONE);
+        txt_checkin_title.setVisibility(View.GONE);
+        txt_buy_title.setVisibility(View.GONE);
+        txt_compare_title.setVisibility(View.GONE);
+
         noti_textview.setVisibility(View.VISIBLE);
 
         if (arrayList.size() == 0)

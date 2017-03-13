@@ -11,84 +11,48 @@
         android:paddingLeft="@dimen/size_8"
         android:paddingRight="@dimen/size_8">
 
-        <LinearLayout
-            android:id="@+id/statistic.layout_day"
+        <TextView
+            android:id="@+id/statistic.txt_checkin_title"
+            style="@style/textview_statistic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_8"
-            android:gravity="right|end"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/statistic.btn_seven"
-                    style="@style/button_outline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/size_36"
-                    android:paddingLeft="@dimen/size_28"
-                    android:paddingRight="@dimen/size_28"
-                    android:text="7 ngày" />
-
-                <ImageView
-                    android:id="@+id/statistic.img_seven"
-                    android:layout_width="@dimen/size_12"
-                    android:layout_height="@dimen/size_12"
-                    android:layout_margin="@dimen/size_4"
-                    android:contentDescription="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_round_circle_white_18dp" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/statistic.btn_thirty"
-                    style="@style/button_outline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/size_36"
-                    android:layout_marginLeft="-1dp"
-                    android:layout_marginStart="-1dp"
-                    android:paddingLeft="@dimen/size_28"
-                    android:paddingRight="@dimen/size_28"
-                    android:text="30 ngày" />
-
-                <ImageView
-                    android:id="@+id/statistic.img_thirty"
-                    android:layout_width="@dimen/size_12"
-                    android:layout_height="@dimen/size_12"
-                    android:layout_margin="@dimen/size_4"
-                    android:contentDescription="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_round_circle_white_18dp"
-                    android:visibility="gone" />
-            </FrameLayout>
-        </LinearLayout>
+            android:text="@string/statistic_checkin"
+            android:visibility="gone" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/statistic.chart_checkin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_210"
-            android:layout_marginTop="@dimen/size_8"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/statistic.txt_buy_title"
+            style="@style/textview_statistic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_16"
+            android:text="@string/statistic_buy"
             android:visibility="gone" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/statistic.chart_buy"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_210"
-            android:layout_marginTop="@dimen/size_8"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/statistic.txt_compare_title"
+            style="@style/textview_statistic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_16"
+            android:text="@string/statistic_compare"
             android:visibility="gone" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/statistic.chart_all"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_210"
-            android:layout_marginTop="@dimen/size_8"
             android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

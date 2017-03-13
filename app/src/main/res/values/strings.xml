@@ -259,8 +259,13 @@
     <string name="yesterday">Hôm qua</string>
     <string name="enter_hint">Nhập gợi ý</string>
     <string name="buy">Mua sắm</string>
-    <string name="statistic_checkin">Số lượt check in</string>
-    <string name="statistic_buy">Số lượt mua hàng</string>
+    <string name="statistic_count_checkin">Số lượt check in</string>
+    <string name="statistic_count_buy">Số lượt mua hàng</string>
+    <string name="statistic_checkin">Biểu đồ check in</string>
+    <string name="statistic_buy">Biểu đồ người mua hàng</string>
+    <string name="statistic_compare">Biểu đồ so sánh</string>
+    <string name="seven_day">7 NGÀY</string>
+    <string name="thirty_day">30 NGÀY</string>
 
     <!-- message -->
     <string name="message_mandatory_level">Đây là cấp bậc bắt buộc</string>

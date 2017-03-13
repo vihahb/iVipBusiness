@@ -92,21 +92,31 @@ public class LineChartView {
 //
 //        YAxis rightAxis = lineChart.getAxisRight();
 //        rightAxis.setEnabled(false);
+
+        lineChart.setAutoScaleMinMaxEnabled(true);
     }
 
     public void updateDay(int Day) {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-        xAxis.setDrawAxisLine(true);
+        xAxis.setDrawAxisLine(false);
         xAxis.setAxisMaximum(Day);
-        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMinimum(1);
 
         YAxis rightAxis = lineChart.getAxisRight();
         rightAxis.setEnabled(false);
     }
 
     public void setData(int action, ArrayList<DataObj> arrayList) {
+        DataObj dataObj = new DataObj();
+
+        ArrayList<ValueObj> valueObjs = new ArrayList<>();
+        valueObjs.add(new ValueObj(action, 0d));
+
+        dataObj.setValues(valueObjs);
+        arrayList.add(0, dataObj);
+
         ArrayList<Entry> yVals1 = new ArrayList<>();
 
         for (int i = 0; i < arrayList.size(); i++) {
@@ -124,9 +134,9 @@ public class LineChartView {
             String at = null;
 
             if (action == 1)
-                at = MyApplication.context.getString(R.string.statistic_checkin);
+                at = MyApplication.context.getString(R.string.statistic_count_checkin);
             else if (action == 2)
-                at = MyApplication.context.getString(R.string.statistic_buy);
+                at = MyApplication.context.getString(R.string.statistic_count_buy);
 
             // create a dataset and give it a type
             set1 = new LineDataSet(yVals1, at);
@@ -170,6 +180,15 @@ public class LineChartView {
     }
 
     public void setDoubleData(ArrayList<DataObj> arrayList) {
+        DataObj dataObj = new DataObj();
+
+        ArrayList<ValueObj> valueObj = new ArrayList<>();
+        valueObj.add(new ValueObj(1, 0d));
+        valueObj.add(new ValueObj(2, 0d));
+
+        dataObj.setValues(valueObj);
+        arrayList.add(0, dataObj);
+
         ArrayList<Entry> yVals1 = new ArrayList<>();
         ArrayList<Entry> yVals2 = new ArrayList<>();
 
@@ -198,7 +217,7 @@ public class LineChartView {
             lineChart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(yVals1, MyApplication.context.getString(R.string.statistic_checkin));
+            set1 = new LineDataSet(yVals1, MyApplication.context.getString(R.string.statistic_count_checkin));
             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
             set1.setColor(ColorTemplate.getHoloBlue());
             set1.setCircleColor(Color.WHITE);
@@ -210,7 +229,7 @@ public class LineChartView {
             set1.setDrawCircleHole(false);
 
             // create a dataset and give it a type
-            set2 = new LineDataSet(yVals2, MyApplication.context.getString(R.string.statistic_buy));
+            set2 = new LineDataSet(yVals2, MyApplication.context.getString(R.string.statistic_count_buy));
             set2.setAxisDependency(YAxis.AxisDependency.LEFT);
             set2.setColor(Color.RED);
             set2.setCircleColor(Color.WHITE);

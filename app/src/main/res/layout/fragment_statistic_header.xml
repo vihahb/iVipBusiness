@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right|end"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/size_8"
+    android:paddingTop="@dimen/size_8"
+    android:visibility="gone">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/statistic.btn_seven"
+            style="@style/button_outline"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_36"
+            android:paddingLeft="@dimen/size_28"
+            android:paddingRight="@dimen/size_28"
+            android:text="@string/seven_day" />
+
+        <ImageView
+            android:id="@+id/statistic.img_seven"
+            android:layout_width="@dimen/size_12"
+            android:layout_height="@dimen/size_12"
+            android:layout_margin="@dimen/size_4"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_round_circle_white_18dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/statistic.btn_thirty"
+            style="@style/button_outline"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_36"
+            android:layout_marginLeft="-1dp"
+            android:layout_marginStart="-1dp"
+            android:paddingLeft="@dimen/size_28"
+            android:paddingRight="@dimen/size_28"
+            android:text="@string/thirty_day" />
+
+        <ImageView
+            android:id="@+id/statistic.img_thirty"
+            android:layout_width="@dimen/size_12"
+            android:layout_height="@dimen/size_12"
+            android:layout_margin="@dimen/size_4"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_round_circle_white_18dp"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

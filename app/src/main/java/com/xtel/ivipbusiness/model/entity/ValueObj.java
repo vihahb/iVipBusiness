@@ -12,6 +12,11 @@ public class ValueObj {
     @Expose
     private Double value;
 
+    public ValueObj(Integer action, Double value) {
+        this.action = action;
+        this.value = value;
+    }
+
     public Integer getAction() {
         return action;
     }

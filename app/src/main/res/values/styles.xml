@@ -296,6 +296,18 @@
         <!--<item name="android:ellipsize">end</item>-->
     <!--</style>-->
 
+    <style name="textview_statistic">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/size_8</item>
+        <item name="android:paddingTop">@dimen/size_8</item>
+        <item name="android:paddingRight">@dimen/size_8</item>
+        <item name="android:background">@color/chart_background</item>
+    </style>
+
     <style name="textview_normal">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_13</item>
