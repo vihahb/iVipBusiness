@@ -114,6 +114,7 @@
     <string name="error_validate_phone">Số điện thoại không hợp lệ</string>
     <string name="error_input_username">Vui lòng nhập số điện thoại</string>
     <string name="error_input_password">Vui lòng nhập mật khẩu</string>
+    <string name="error_input_length_password">Mật khẩu phải từ 6 ký tự trở lên</string>
     <string name="error_input_new_password">Vui lòng nhập mật khẩu mới</string>
     <string name="error_input_re_password">Vui lòng nhập lại mật khẩu</string>
     <string name="error_input_fullname">Vui lòng nhập tên</string>

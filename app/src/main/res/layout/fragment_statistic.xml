@@ -12,7 +12,8 @@
             android:id="@+id/statistic.layout_header"
             layout="@layout/fragment_statistic_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <include
             layout="@layout/fragment_statistic_view"

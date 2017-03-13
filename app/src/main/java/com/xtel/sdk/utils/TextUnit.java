@@ -19,6 +19,10 @@ public class TextUnit {
         return (text != null && !text.isEmpty());
     }
 
+    public boolean validateLengthText(String text, int number) {
+        return (text.length() >= number);
+    }
+
     public int validateInteger(String _long) {
         try {
             return Integer.parseInt(_long);

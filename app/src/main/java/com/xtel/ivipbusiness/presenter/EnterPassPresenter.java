@@ -6,7 +6,7 @@ import com.xtel.nipservicesdk.commons.Cts;
 import com.xtel.sdk.utils.TextUnit;
 
 /**
- * Created by Mr. M.2 on 1/12/2017.
+ * Created by Mr. M.2 on 1/12/2017
  */
 
 public class EnterPassPresenter extends BasicPresenter {
@@ -39,10 +39,16 @@ public class EnterPassPresenter extends BasicPresenter {
         if (!TextUnit.getInstance().validateText(password)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_new_password));
             return false;
-        } else if (!TextUnit.getInstance().validateText(rePassword)) {
+        }
+        if (!TextUnit.getInstance().validateLengthText(password, 6)) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_length_password));
+            return false;
+        }
+        if (!TextUnit.getInstance().validateText(rePassword)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_re_password));
             return false;
-        } else if (!password.equals(rePassword)) {
+        }
+        if (!password.equals(rePassword)) {
             view.onValidateError(view.getActivity().getString(R.string.error_invalidate_passwordd));
             return false;
         }

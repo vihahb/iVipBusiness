@@ -9,10 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:descendantFocusability="beforeDescendants"
         android:fillViewport="true"
         android:fitsSystemWindows="false"
-        android:focusableInTouchMode="true"
         tools:context="com.xtel.ivipbusiness.view.activity.LoginActivity">
 
         <LinearLayout
@@ -48,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
                 android:paddingLeft="@dimen/size_48"
                 android:paddingRight="@dimen/size_48">
 

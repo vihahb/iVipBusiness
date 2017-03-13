@@ -37,15 +37,16 @@ public class LoginPresenter extends BasicPresenter {
     public void loginAccount(String phone, String password) {
         if (!validateData(phone, password))
             return;
-
-        if (TextUnit.getInstance().validateLong(phone) == -1) {
-            debug("6");
+//        if (TextUnit.getInstance().validateLong(phone) == -1) {
+//            view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
+//            return;
+//        }
+        if (!TextUnit.getInstance().validatePhone(phone)) {
             view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
             return;
         }
-
-        if (!TextUnit.getInstance().validatePhone(phone)) {
-            view.onValidateError(view.getActivity().getString(R.string.error_validate_phone));
+        if (!TextUnit.getInstance().validateLengthText(password, 6)) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_length_password));
             return;
         }
 
@@ -71,6 +72,9 @@ public class LoginPresenter extends BasicPresenter {
         return true;
     }
 
+    /*
+    * Bắt đầu validate số điện thoại
+    * */
     public void startValidatePhone() {
         if (!PermissionHelper.checkListPermission(PermissionListAccKit, view.getActivity(), PERMISSION_REQUEST_CODE)) {
             return;
@@ -84,6 +88,9 @@ public class LoginPresenter extends BasicPresenter {
         resetPhone();
     }
 
+    /*
+    * Gọi account kit để validate phone
+    * */
     private void resetPhone() {
         Intent intent = new Intent(view.getActivity(), AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.CODE);
@@ -95,6 +102,7 @@ public class LoginPresenter extends BasicPresenter {
         intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
         view.startActivityForResult(intent, ACCOUNT_KIT_REQUEST_CODE);
     }
+
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_CODE) {

@@ -50,13 +50,20 @@ public class RegisterPresenter extends BasicPresenter {
         if (!TextUnit.getInstance().validateText(username)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_username));
             return false;
-        } else if (!TextUnit.getInstance().validateText(password)) {
+        }
+        if (!TextUnit.getInstance().validateText(password)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_password));
             return false;
-        } else if (!TextUnit.getInstance().validateText(rePassword)) {
+        }
+        if (!TextUnit.getInstance().validateLengthText(password, 6)) {
+            view.onValidateError(view.getActivity().getString(R.string.error_input_length_password));
+            return false;
+        }
+        if (!TextUnit.getInstance().validateText(rePassword)) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_re_password));
             return false;
-        } else if (!password.equals(rePassword)) {
+        }
+        if (!password.equals(rePassword)) {
             view.onValidateError(view.getActivity().getString(R.string.error_invalidate_passwordd));
             return false;
         }

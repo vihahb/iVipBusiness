@@ -35,6 +35,9 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         initView();
     }
 
+    /*
+    * Khởi tạo các view trong layout
+    * */
     private void initView() {
         edt_username = findEditText(R.id.register_edt_username);
         edt_pass = findEditText(R.id.register_edt_pass);
@@ -56,11 +59,17 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
             finish();
     }
 
+    /*
+    * Thông báo lỗi khi check input data
+    * */
     @Override
     public void onValidateError(String error) {
         showShortToast(error);
     }
 
+    /*
+    * Đăng ký tài khoản với server
+    * */
     @Override
     public void onRegisterAccount(final String phone, String password) {
         showProgressBar(false, false, null, getString(R.string.doing_register));
@@ -69,7 +78,6 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
             @Override
             public void onSuccess(final RESP_Register register) {
                 closeProgressBar();
-                debug(JsonHelper.toJson(register));
 //                showShortToast(getString(R.string.success_register));
                 presenter.startValidatePhone(phone);
             }
@@ -77,18 +85,23 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
             @Override
             public void onError(final Error error) {
                 closeProgressBar();
-                debug(JsonHelper.toJson(error));
                 showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_register_phone)));
             }
         });
     }
 
+    /*
+    * Đăng ký tài khoản thành công
+    * */
     @Override
     public void onRegisterAccountSuccess() {
         showShortToast(getString(R.string.success_register));
         finish();
     }
 
+    /*
+    * Validate số điện thoại bằng account kit thành công
+    * */
     @Override
     public void onValidatePhoneToActiveSuccess(String auth_id) {
         debug("active now");
@@ -108,11 +121,17 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         });
     }
 
+    /*
+    * Thông báo không có internet
+    * */
     @Override
     public void onNoInternet() {
         showShortToast(getString(R.string.error_no_internet));
     }
 
+    /*
+    * Gọi activity mới và lắng nghe kết quả trả về
+    * */
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
@@ -129,6 +148,9 @@ public class RegisterActivity extends BasicActivity implements View.OnClickListe
         finish();
     }
 
+    /*
+    * Lắng nghe sự kiện khi hỏi quyền
+    * */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
