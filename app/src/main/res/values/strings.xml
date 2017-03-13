@@ -166,6 +166,7 @@
     <string name="error_user_not_exists">Tài khoản không tồn tại</string>
     <string name="error_not_found_chain">Không tìm thấy chuỗi cửa hàng</string>
     <string name="error_not_found_store">Không tìm thấy cửa hàng</string>
+    <string name="error_not_store">Không có cửa hàng</string>
     <string name="error_news_not_exitst">Bản tin không tồn tại</string>
     <string name="error_gallery_not_exists">Ảnh không tồn tại</string>
     <string name="error_delete_gallery">Xóa ảnh thất bại</string>
@@ -257,6 +258,9 @@
     <string name="today">Hôm nay</string>
     <string name="yesterday">Hôm qua</string>
     <string name="enter_hint">Nhập gợi ý</string>
+    <string name="buy">Mua sắm</string>
+    <string name="statistic_checkin">Số lượt check in</string>
+    <string name="statistic_buy">Số lượt mua hàng</string>
 
     <!-- message -->
     <string name="message_mandatory_level">Đây là cấp bậc bắt buộc</string>

@@ -83,7 +83,7 @@ dependencies {
     //    End Firebae
     //    Floating action button slide
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
-//    compile 'com.github.florent37:diagonallayout:1.0.2'
+    //    compile 'com.github.florent37:diagonallayout:1.0.2'
     //    End Floating action button slide
     //    Google map
     //noinspection GradleDependency
@@ -107,6 +107,7 @@ dependencies {
         transitive = true;
     }
     compile project(':NIPmodule')
+    compile project(':MPChartLib')
 }
 
 apply plugin: 'com.google.gms.google-services'

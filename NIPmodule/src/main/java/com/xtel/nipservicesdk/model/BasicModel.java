@@ -17,7 +17,7 @@ public abstract class BasicModel {
 //    Store
     protected final String GET_LIST_CHAIN_TYPE = "/v0.1/store?type=";
     protected final String GET_LIST_CHAIN_PAGE = "&page=";
-    protected final String GET_LIST_CHAIN_PAGE_SIZE = "&pagesize=";
+    protected final String GET_LIST_CHAIN_PAGE_SIZE = "&pagesize=10";
 
     protected final String GET_LIST_STORE_IN_CHAIN = "/v0.1/chain/";
     protected final String GET_LIST_STORE_IN_CHAIN_PAGE = "/stores?page=";
@@ -54,6 +54,13 @@ public abstract class BasicModel {
     protected final String ADD_GALLERY_CHAIN = "/v0.1/chain/";
     protected final String ADD_GALLERY_STORE = "/v0.1/store/";
     protected final String ADD_GALLERY_END = "/gallery";
+
+//    Statistic
+    protected final String GET_STATISTIC_STORE_ID = "/v0.1/report?store_id=";
+    protected final String GET_STATISTIC_CHAIN_ID = "/v0.1/report?chain_id=";
+    protected final String GET_STATISTIC_TYPE = "&type=";
+    protected final String GET_STATISTIC_ACTION = "&action=";
+    protected final String GET_STATISTIC_DAY = "&day=";
 
     //    Bản tin
     protected final String GET_NEWS_PAGE = "/v0.1/news?page=";

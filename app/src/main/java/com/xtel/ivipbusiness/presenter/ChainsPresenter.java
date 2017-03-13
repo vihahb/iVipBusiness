@@ -17,14 +17,13 @@ public class ChainsPresenter extends BasicPresenter {
 
     private final String TYPE = "ALL";
     private int PAGE = 1;
-    private int PAGESIZE = 10;
 
     private ICmd iCmd = new ICmd() {
         @Override
         public void execute(Object... params) {
             if (params.length > 0) {
                 if ((int) params[0] == 1)
-                    StoresModel.getInstance().getListChains(TYPE, PAGE, PAGESIZE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
+                    StoresModel.getInstance().getListChains(TYPE, PAGE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
                         @Override
                         public void onSuccess(RESP_List_Sort_Store obj) {
                             PAGE++;

@@ -12,7 +12,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_1"
-        android:layout_marginTop="@dimen/size_16"
         android:background="@color/white_30" />
 
     <TextView
@@ -22,7 +21,6 @@
         android:layout_marginTop="@dimen/size_16"
         android:gravity="center_horizontal"
         android:text="@string/total_bill_money" />
-
 
     <RelativeLayout
         android:layout_width="match_parent"

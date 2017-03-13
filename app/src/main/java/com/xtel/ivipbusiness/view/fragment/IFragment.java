@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -38,6 +39,10 @@ public abstract class IFragment extends Fragment {
 
     protected DrawerLayout findDrawerLayout(int id) {
         return (DrawerLayout) getView().findViewById(id);
+    }
+
+    protected LinearLayout findLinearLayout(int id) {
+        return (LinearLayout) getView().findViewById(id);
     }
 
     protected NavigationView findNavigationView(int id) {

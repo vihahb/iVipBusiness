@@ -64,7 +64,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_point, String.valueOf(member.getTotal_point()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_remaining_point, String.valueOf(member.getCurrent_point()));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_checkin, _view.getActivity().getString(R.string.total_checkin), String.valueOf(member.getCheckin_number()));
-            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_money, _view.getActivity().getString(R.string.total_money), (member.getTotal_money() + " đ"));
+            WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_total_money, _view.getActivity().getString(R.string.total_money), (Double.toString(member.getTotal_money()) + " đ"));
             WidgetHelper.getInstance().setTextViewNoResult(viewHolder.txt_shopping_in_store, _view.getActivity().getString(R.string.total_shopping_in_store), String.valueOf(member.getBuy_number()));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_last_checkin,  _view.getActivity().getString(R.string.last_checkin) + ": ", member.getLast_checkin());
 

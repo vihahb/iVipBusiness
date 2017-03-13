@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/statistic.swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+
+        <include
+            android:id="@+id/statistic.content"
+            layout="@layout/fragment_statistic_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/size_52" />
+
+        <Spinner
+            android:id="@+id/statistic.sp_store"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_36"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/size_8"
+            android:background="@android:color/transparent" />
+        <!--</LinearLayout>-->
+
+        <TextView
+            android:id="@+id/statistic.noti.txt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

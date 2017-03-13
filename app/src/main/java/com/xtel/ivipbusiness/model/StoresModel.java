@@ -49,8 +49,8 @@ public class StoresModel extends BasicModel {
         requestServer.postApi(url, null, session, responseHandle);
     }
 
-    public void getListChains(String type, int page, int pagesize, ResponseHandle responseHandle) {
-        String url = API_BASE + GET_LIST_CHAIN_TYPE + type + GET_LIST_CHAIN_PAGE + page + GET_LIST_CHAIN_PAGE_SIZE + pagesize;
+    public void getListChains(String type, int page, ResponseHandle responseHandle) {
+        String url = API_BASE + GET_LIST_CHAIN_TYPE + type + GET_LIST_CHAIN_PAGE + page + GET_LIST_CHAIN_PAGE_SIZE;
         String session = LoginManager.getCurrentSession();
 
         Log.e("GET_LIST_CHAIN", "url " + url + "     session " + session);

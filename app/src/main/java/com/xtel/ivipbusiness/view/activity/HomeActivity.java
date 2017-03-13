@@ -23,6 +23,7 @@ import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
+import com.xtel.ivipbusiness.view.fragment.StatisticFragment;
 import com.xtel.ivipbusiness.view.widget.CircleTransform;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
@@ -91,7 +92,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     //    Hiển thị thống kê
     private void replaceStatistic() {
         actionBar.setTitle(getString(R.string.title_activity_statistic));
-        replaceFragment(R.id.home_container, ChainsFragment.newInstance(), STATISTIC);
+        replaceFragment(R.id.home_container, StatisticFragment.newInstance(), STATISTIC);
     }
 
     //    Hiển thị chính sách
