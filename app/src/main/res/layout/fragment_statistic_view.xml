@@ -30,7 +30,7 @@
             style="@style/textview_statistic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_8"
             android:text="@string/statistic_buy"
             android:visibility="gone" />
 
@@ -45,7 +45,7 @@
             style="@style/textview_statistic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_8"
             android:text="@string/statistic_compare"
             android:visibility="gone" />
 

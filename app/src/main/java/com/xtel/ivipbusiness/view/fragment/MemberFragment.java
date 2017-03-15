@@ -6,14 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Member;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.MemberPresenter;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.adapter.MemberAdapter;
@@ -24,9 +22,7 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
-import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
 

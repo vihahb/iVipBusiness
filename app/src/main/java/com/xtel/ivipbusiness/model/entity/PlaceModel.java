@@ -3,7 +3,7 @@ package com.xtel.ivipbusiness.model.entity;
 import java.io.Serializable;
 
 /**
- * Created by Lê Công Long Vũ on 11/17/2016.
+ * Created by Lê Công Long Vũ on 11/17/2016
  */
 
 public class PlaceModel implements Serializable {

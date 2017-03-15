@@ -25,7 +25,7 @@ public class Member implements Serializable {
     @Expose
     private int checkin_number;
     @Expose
-    private double total_money;
+    private Double total_money;
     @Expose
     private Long last_checkin;
     @Expose
@@ -99,11 +99,11 @@ public class Member implements Serializable {
         this.checkin_number = checkin_number;
     }
 
-    public double getTotal_money() {
+    public Double getTotal_money() {
         return total_money;
     }
 
-    public void setTotal_money(double total_money) {
+    public void setTotal_money(Double total_money) {
         this.total_money = total_money;
     }
 
