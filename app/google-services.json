@@ -15,11 +15,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "186392832842-25ihp5r5mml37gslt23d1ehpnuv7qtvh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xtel.ivipbusiness",
+            "certificate_hash": "8a3ea64006dd81de35c2d81962b384130969b6f0"
+          }
+        },
+        {
+          "client_id": "186392832842-9kltjgtcg697bntcv55d473te1sutr5n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xtel.ivipbusiness",
+            "certificate_hash": "978195a753c1d9508fc983e1aa0f9e39495d5fed"
+          }
+        },
+        {
           "client_id": "186392832842-g4d4nvmio760tmltf2nhm8o5g91o6q5q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.xtel.ivipbusiness",
-            "certificate_hash": "54875B6B5AA8089DC16C333209C79EEEA26C3244"
+            "certificate_hash": "54875b6b5aa8089dc16c333209c79eeea26c3244"
           }
         },
         {
@@ -29,7 +45,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdFLagcy-uAhVKjdzJxNWMNCKe7XQ81ZE"
+          "current_key": "AIzaSyCoQJYk9eqvtcIaFNagy7O_QHp24RUKDJM"
         }
       ],
       "services": {

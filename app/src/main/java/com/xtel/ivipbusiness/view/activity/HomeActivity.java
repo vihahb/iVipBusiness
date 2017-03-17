@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +29,6 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
-import com.xtel.nipservicesdk.utils.JsonHelper;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -157,8 +155,13 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     }
 
     @Override
-    public void onGetShortUserDataError(Error error) {
+    public void onGetUserDataError() {
         presenter.getFullUserData();
+    }
+
+    @Override
+    public void onRegisterFcmError() {
+        presenter.registerFCm();
     }
 
     @Override

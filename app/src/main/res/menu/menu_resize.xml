@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action.resize_image.rotate"
+        android:icon="@drawable/ic_action_account"
+        android:orderInCategory="100"
+        android:title="@string/action_rotate"
+        app:showAsAction="always" />
+
+    <!--<item-->
+        <!--android:id="@+id/action.resize_image.crop"-->
+        <!--android:icon="@drawable/ic_action_account"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_crop"-->
+        <!--app:showAsAction="always" />-->
+
+    <item
+        android:id="@+id/action.resize_image.done"
+        android:icon="@drawable/ic_action_done_2"
+        android:orderInCategory="100"
+        android:title="@string/action_done"
+        app:showAsAction="always" />
+</menu>

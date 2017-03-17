@@ -42,6 +42,9 @@ public abstract class BasicModel {
     protected final String SEND_NOTIFY = "/v0.1/news/notify";
     protected final String GET_LIST_NOTIFY = "/v0.1/news/notify/";
 
+    protected final String REGISTER_FCM = "/v0.1/user/fcm";
+    protected final String FCM_CLOUD_KEY = "fcm_cloud_key";
+
     //    Gallery
     protected final String GET_LIST_GALLERY_STORE = "/v0.1/store/";
     protected final String GET_LIST_GALLERY_CHAIN = "/v0.1/chain/";

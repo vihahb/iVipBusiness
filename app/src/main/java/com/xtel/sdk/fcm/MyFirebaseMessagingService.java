@@ -45,7 +45,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 
             Message message = JsonHelper.getObjectNoException(remoteMessage.getNotification().getBody(), Message.class);
-            sendNotification(message);
+
+            if (message != null)
+                sendNotification(message);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -54,12 +56,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // [END receive_message]
 
     private void sendNotification(Message message) {
+        Log.e("sendNotification", JsonHelper.toJson(message));
+
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(message.getTitle())

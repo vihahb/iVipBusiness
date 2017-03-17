@@ -1,74 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryKey_80">
 
-    <ImageView
-        android:id="@+id/add_store.img_banner"
+    <com.xtel.ivipbusiness.view.widget.RectangleLayout
+        android:id="@+id/add_store.rectangle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop" />
+        android:layout_height="wrap_content" />
 
-    <View
+    <FrameLayout
+        android:layout_alignTop="@+id/add_store.rectangle"
+        android:layout_alignBottom="@+id/add_store.rectangle"
+        android:layout_alignLeft="@+id/add_store.rectangle"
+        android:layout_alignEnd="@+id/add_store.rectangle"
+        android:layout_alignRight="@+id/add_store.rectangle"
+        android:layout_alignStart="@+id/add_store.rectangle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:background="@color/black_40" />
+        android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/add_store.img_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_16"
-        android:layout_marginStart="@dimen/size_16"
-        android:layout_marginTop="@dimen/size_12"
-        android:background="@drawable/button_transparent"
-        android:clickable="true"
-        android:contentDescription="@null"
-        android:foreground="?attr/selectableItemBackground"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_action_camera" />
+        <ImageView
+            android:id="@+id/add_store.img_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/size_16"
-        android:paddingLeft="@dimen/size_16"
-        android:paddingRight="@dimen/size_16"
-        android:paddingTop="@dimen/size_16"
-        android:weightSum="3">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_40" />
 
-        <EditText
-            android:id="@+id/add_store.edt_name"
-            style="@style/edittext_no_drawable"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_40"
-            android:layout_marginEnd="@dimen/size_16"
-            android:layout_marginRight="@dimen/size_16"
-            android:layout_weight="2"
-            android:hint="@string/store_name"
-            android:inputType="textCapWords"
-            tools:ignore="LabelFor" />
+        <ImageButton
+            android:id="@+id/add_store.img_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_12"
+            android:background="@drawable/button_transparent"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:foreground="?attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_action_camera" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right|end"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/size_16"
+            android:paddingLeft="@dimen/size_16"
+            android:paddingRight="@dimen/size_16"
+            android:paddingTop="@dimen/size_16"
+            android:weightSum="3">
 
-            <com.xtel.ivipbusiness.view.widget.RoundImage
-                android:id="@+id/add_store.img_avatar"
-                android:layout_width="@dimen/size_60"
-                android:layout_height="@dimen/size_60"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_logo_store" />
+            <EditText
+                android:id="@+id/add_store.edt_name"
+                style="@style/edittext_no_drawable"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_40"
+                android:layout_marginEnd="@dimen/size_16"
+                android:layout_marginRight="@dimen/size_16"
+                android:layout_weight="2"
+                android:hint="@string/store_name"
+                android:inputType="textCapWords"
+                tools:ignore="LabelFor" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|end"
+                android:orientation="horizontal">
+
+                <com.xtel.ivipbusiness.view.widget.RoundImage
+                    android:id="@+id/add_store.img_avatar"
+                    android:layout_width="@dimen/size_60"
+                    android:layout_height="@dimen/size_60"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_logo_store" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+    </FrameLayout>
+</RelativeLayout>

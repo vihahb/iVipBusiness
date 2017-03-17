@@ -37,8 +37,8 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public ChainsAdapter(IChainsView view, ArrayList<SortStore> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
-        background_item = new int[]{R.drawable.item_background_1, R.drawable.item_background_2, R.drawable.item_background_3, R.drawable.item_background_4, R.drawable.item_background_5,
-                R.drawable.item_background_6, R.drawable.item_background_7, R.drawable.item_background_8, R.drawable.item_background_9};
+        background_item = new int[]{R.drawable.item_list_store_1, R.drawable.item_list_store_2, R.drawable.item_list_store_3, R.drawable.item_list_store_4, R.drawable.item_list_store_5,
+                R.drawable.item_list_store_6, R.drawable.item_list_store_7, R.drawable.item_list_store_8, R.drawable.item_list_store_9};
     }
 
     @Override
@@ -54,6 +54,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (position == arrayList.size())
+
             _view.onLoadMore();
 
         if (holder instanceof ViewHolder) {

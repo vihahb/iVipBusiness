@@ -13,7 +13,8 @@ import com.xtel.nipservicesdk.model.entity.Error;
 public interface IHomeView {
 
     void onGetShortUserDataSuccess(RESP_Full_Profile obj);
-    void onGetShortUserDataError(Error error);
+    void onGetUserDataError();
+    void onRegisterFcmError();
     void getNewSession(ICmd iCmd, int type);
     Activity getActivity();
 }

@@ -38,19 +38,18 @@ public class MyApplication extends Application {
         FirebaseApp.initializeApp(this);
         NipApplication.context = this;
         context = this;
-        getKeyHash(context.getPackageName());
     }
 
-    private void getKeyHash(String pkg_name) {
-        try {
-            @SuppressLint("PackageManagerGetSignatures") PackageInfo info = getPackageManager().getPackageInfo(pkg_name, PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void getKeyHash(String pkg_name) {
+//        try {
+//            @SuppressLint("PackageManagerGetSignatures") PackageInfo info = getPackageManager().getPackageInfo(pkg_name, PackageManager.GET_SIGNATURES);
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

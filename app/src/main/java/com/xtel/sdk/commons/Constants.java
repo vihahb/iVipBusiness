@@ -17,6 +17,13 @@ public class Constants {
     public static final String SHARED_NAME = "share_business";
     public static final String FCM_TOKEN = "fcm_token";
 
+    public static final String TYPE = "type";
+    public static final String URI = "uri";
+    public static final String BITMAP = "bitmap";
+
+    public static final String SERVER_PATH = "server_path";
+    public static final String FILE = "file";
+
     public static final String MODEL = "model";
     public static SortStore SORT_STORE = null;
     public static final String ID = "id";

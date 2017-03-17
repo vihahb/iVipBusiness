@@ -20,7 +20,7 @@ public interface IAddStoreView {
     void onGetDataError();
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
-    void onLoadPicture(File url, int type);
+//    void onLoadPicture(File url, int type);
     void onAddChainSuccess();
     void onAddStoreSuccess();
     void getNewSession(ICmd iCmd);

@@ -16,274 +16,364 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <!--<style name="PopupMenu.MyAppTheme" parent="Widget.AppCompat.PopupMenu.Overflow">-->
-        <!--<item name="android:popupBackground">@android:color/white</item>-->
+    <style name="PopupMenu.MyAppTheme" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppLoginTheme" parent="Theme.AccountKit">
+        <item name="com_accountkit_title_text_color">@android:color/white</item>
+        <item name="com_accountkit_primary_text_color">@android:color/white</item>
+        <item name="com_accountkit_primary_color">@android:color/white</item>
+        <item name="com_accountkit_status_bar_color">@color/colorPrimary</item>
+        <item name="com_accountkit_header_text_color">@android:color/white</item>
+        <item name="com_accountkit_text_color">@android:color/white</item>
+        <item name="com_accountkit_background_color">@mipmap/background_window</item>
+        <item name="com_accountkit_input_background_color">@android:color/transparent</item>
+        <item name="com_accountkit_input_text_color">@android:color/white</item>
+        <item name="com_accountkit_input_border_color">@android:color/white</item>
+        <item name="com_accountkit_button_background_color">@android:color/transparent</item>
+        <item name="com_accountkit_button_border_color">@android:color/white</item>
+        <item name="com_accountkit_header_background_color">@color/colorPrimary</item>
+        <item name="com_accountkit_background">@mipmap/background_window</item>
+    </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <!--<item name="android:textColorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="android:background">@color/colorPrimary</item>-->
+    </style>
+
+    <style name="Theme_Transparent" parent="@style/AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+    </style>
+
+    <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/MaterialDialogSheetAnimation</item>
+    </style>
+
+    <style name="MaterialDialogSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
+    </style>
+
+    <style name="Navigation_View" parent="@style/AppTheme">
+        <item name="android:listDivider">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="actionBarStyle">@style/Theme.MyApp.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Toolbar_TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/font_15</item>
+    </style>
+
+    <style name="Theme.MyApp.ActionBar" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <!-- remove shadow below action bar -->
+        <!-- <item name="android:elevation">0dp</item> -->
+        <!-- Support library compatibility -->
+        <item name="elevation">@dimen/size_8</item>
+    </style>
+
+    <!-- Login -->
+    <style name="button_login">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:background">@drawable/button_border</item>
+    </style>
+
+    <style name="edittext_no_drawable">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_title_no_drawable">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_15</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_no_drawable_low">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingBottom">@dimen/size_8</item>
+        <item name="android:paddingTop">@dimen/size_8</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_multi_line">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_colorprimarykey_90_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingStart">@dimen/size_8</item>
+        <item name="android:paddingEnd">@dimen/size_8</item>
+        <item name="android:background">@color/colorPrimaryKey_90</item>
+    </style>
+
+    <style name="edittext_outline">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_4</item>
+        <item name="android:background">@drawable/edittext_des</item>
+        <item name="android:paddingStart">@dimen/size_8</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <style name="edittext_outline_2">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_4</item>
+        <item name="android:background">@drawable/edittext_des</item>
+        <item name="android:paddingStart">@dimen/size_8</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <style name="edittext_outline_2_center">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">@dimen/size_4</item>
+        <item name="android:background">@drawable/edittext_des</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">4dp</item>
+    </style>
+
+    <style name="edittext_outline_2_disable_center">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/edittext_des</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:enabled">false</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
+    <style name="edittext_low">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_8</item>
+        <item name="android:paddingTop">@dimen/size_8</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_disable">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:focusable">false</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_address_disable">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:focusable">false</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_address">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="edittext_des">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">top</item>
+        <item name="android:drawablePadding">@dimen/size_26</item>
+        <item name="android:paddingBottom">@dimen/size_16</item>
+        <item name="android:paddingStart">@dimen/size_8</item>
+        <item name="android:paddingEnd">@dimen/size_8</item>
+        <item name="android:theme">@style/Theme_Edittext</item>
+    </style>
+
+    <style name="Theme_Edittext" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+    </style>
+
+    <style name="textview_title">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_15</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!--<style name="textview_profile">-->
+    <!--<item name="android:maxLines">1</item>-->
+    <!--<item name="android:textSize">@dimen/font_13</item>-->
+    <!--<item name="android:textColor">@android:color/white</item>-->
+    <!--<item name="android:ellipsize">end</item>-->
     <!--</style>-->
 
-    <!--<style name="AppLoginTheme" parent="Theme.AccountKit">-->
-        <!--<item name="com_accountkit_title_text_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_primary_text_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_primary_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_status_bar_color">@color/colorPrimary</item>-->
-        <!--<item name="com_accountkit_header_text_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_text_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_background_color">@mipmap/background_window</item>-->
-        <!--<item name="com_accountkit_input_background_color">@android:color/transparent</item>-->
-        <!--<item name="com_accountkit_input_text_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_input_border_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_button_background_color">@android:color/transparent</item>-->
-        <!--<item name="com_accountkit_button_border_color">@android:color/white</item>-->
-        <!--<item name="com_accountkit_header_background_color">@color/colorPrimary</item>-->
-        <!--<item name="com_accountkit_background">@mipmap/background_window</item>-->
-    <!--</style>-->
+    <style name="textview_statistic">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/size_8</item>
+        <item name="android:paddingTop">@dimen/size_8</item>
+        <item name="android:paddingEnd">@dimen/size_8</item>
+        <item name="android:background">@color/chart_background</item>
+    </style>
 
-    <!--<style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">-->
-        <!--<item name="colorAccent">@color/colorPrimary</item>-->
-        <!--&lt;!&ndash;<item name="android:textColorPrimary">@color/colorPrimary</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:background">@color/colorPrimary</item>&ndash;&gt;-->
-    <!--</style>-->
+    <style name="textview_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingStart">0dp</item>
+    </style>
 
-    <!--<style name="Theme_Transparent" parent="@style/AppTheme">-->
-        <!--<item name="android:windowIsTranslucent">true</item>-->
-        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
-        <!--<item name="android:windowContentOverlay">@null</item>-->
-        <!--<item name="android:windowNoTitle">true</item>-->
-        <!--<item name="android:windowIsFloating">true</item>-->
-        <!--<item name="android:backgroundDimEnabled">true</item>-->
-        <!--<item name="android:windowMinWidthMajor">100%</item>-->
-    <!--</style>-->
+    <style name="textview_horizontal">
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
 
-    <!--<style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">-->
-        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
-        <!--<item name="android:windowNoTitle">true</item>-->
-        <!--<item name="android:windowAnimationStyle">@style/MaterialDialogSheetAnimation</item>-->
-    <!--</style>-->
+    <style name="textview_small">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_10</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
-    <!--<style name="MaterialDialogSheetAnimation">-->
-        <!--<item name="android:windowEnterAnimation">@anim/popup_show</item>-->
-        <!--<item name="android:windowExitAnimation">@anim/popup_hide</item>-->
-    <!--</style>-->
+    <style name="textview_des">
+        <item name="android:maxLines">4</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
-    <!--<style name="Navigation_View" parent="@style/AppTheme">-->
-        <!--<item name="android:listDivider">@android:color/white</item>-->
-    <!--</style>-->
+    <style name="checkbox_normal">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingStart">@dimen/size_26</item>
+        <item name="android:theme">@style/Theme_Checkbox</item>
+    </style>
 
-    <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
-        <!--<item name="actionBarStyle">@style/Theme.MyApp.ActionBar</item>-->
-    <!--</style>-->
+    <style name="Theme_Checkbox" parent="Base.Theme.AppCompat">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorAccent">#c5c5c5</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
 
-    <!--<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+    <style name="Theme_Checkbox_PrimaryKey" parent="Base.Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
 
-    <!--<style name="Toolbar_TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
-        <!--<item name="android:textSize">@dimen/font_15</item>-->
-    <!--</style>-->
+    <style name="Theme_Tablayout" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+    </style>
 
-    <!--<style name="Theme.MyApp.ActionBar" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">-->
-        <!--&lt;!&ndash; remove shadow below action bar &ndash;&gt;-->
-        <!--&lt;!&ndash; <item name="android:elevation">0dp</item> &ndash;&gt;-->
-        <!--&lt;!&ndash; Support library compatibility &ndash;&gt;-->
-        <!--<item name="elevation">@dimen/size_8</item>-->
-    <!--</style>-->
-
-    <!--&lt;!&ndash; Login &ndash;&gt;-->
-    <!--<style name="button_login">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-        <!--<item name="android:foreground">?android:attr/selectableItemBackground</item>-->
-        <!--<item name="android:textAllCaps">false</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textSize">@dimen/font_13</item>-->
-        <!--<item name="android:background">@drawable/button_border</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_no_drawable">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_no_drawable_low">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_8</item>-->
-        <!--<item name="android:paddingTop">@dimen/size_8</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_normal">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-        <!--<item name="android:paddingEnd">0dp</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_multi_line">-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-        <!--<item name="android:paddingEnd">0dp</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_low">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_8</item>-->
-        <!--<item name="android:paddingTop">@dimen/size_8</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_disable">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:longClickable">false</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:focusable">false</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_address_disable">-->
-        <!--<item name="android:longClickable">false</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:focusable">false</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_address">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-        <!--<item name="android:singleLine">true</item>-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">center_vertical</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="edittext_des">-->
-        <!--<item name="android:textSize">@dimen/font_12</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:textColorHint">@android:color/white</item>-->
-        <!--<item name="android:gravity">top</item>-->
-        <!--<item name="android:drawablePadding">@dimen/size_26</item>-->
-        <!--<item name="android:paddingBottom">@dimen/size_16</item>-->
-        <!--<item name="android:paddingStart">@dimen/size_8</item>-->
-        <!--<item name="android:paddingEnd">@dimen/size_8</item>-->
-        <!--<item name="android:theme">@style/Theme_Edittext</item>-->
-    <!--</style>-->
-
-    <!--<style name="Theme_Edittext" parent="Theme.AppCompat.Light.DarkActionBar">-->
-        <!--<item name="colorControlNormal">@android:color/white</item>-->
-        <!--<item name="colorControlActivated">@android:color/white</item>-->
-        <!--<item name="colorControlHighlight">@android:color/white</item>-->
-    <!--</style>-->
-
-    <!--<style name="textview_title">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_16</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-    <!--</style>-->
-
-    <!--&lt;!&ndash;<style name="textview_profile">&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:maxLines">1</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:textSize">@dimen/font_13</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:textColor">@android:color/white</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:ellipsize">end</item>&ndash;&gt;-->
-    <!--&lt;!&ndash;</style>&ndash;&gt;-->
-
-    <!--<style name="textview_normal">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_13</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-        <!--<item name="android:paddingStart">0dp</item>-->
-    <!--</style>-->
-
-    <!--<style name="textview_horizontal">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:singleLine">true</item>-->
-        <!--<item name="android:textSize">@dimen/font_13</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:ellipsize">marquee</item>-->
-        <!--<item name="android:marqueeRepeatLimit">marquee_forever</item>-->
-        <!--<item name="android:scrollHorizontally">true</item>-->
-    <!--</style>-->
-
-    <!--<style name="textview_small">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_10</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-    <!--</style>-->
-
-    <!--<style name="textview_des">-->
-        <!--<item name="android:maxLines">4</item>-->
-        <!--<item name="android:textSize">@dimen/font_13</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-    <!--</style>-->
-
-    <!--<style name="checkbox_normal">-->
-        <!--<item name="android:maxLines">1</item>-->
-        <!--<item name="android:textSize">@dimen/font_13</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:ellipsize">end</item>-->
-        <!--<item name="android:paddingStart">@dimen/size_26</item>-->
-        <!--<item name="android:theme">@style/Theme_Checkbox</item>-->
-    <!--</style>-->
-
-    <!--<style name="Theme_Checkbox" parent="Base.Theme.AppCompat">-->
-        <!--<item name="colorControlNormal">#c5c5c5</item>-->
-        <!--<item name="colorAccent">#c5c5c5</item>-->
-        <!--<item name="android:textColorSecondary">@android:color/white</item>-->
-    <!--</style>-->
-
-    <!--<style name="Theme_Checkbox_PrimaryKey" parent="Base.Theme.AppCompat">-->
-        <!--<item name="colorControlNormal">@color/colorPrimary</item>-->
-        <!--<item name="colorAccent">@color/colorPrimary</item>-->
-        <!--<item name="android:textColorSecondary">@color/colorPrimary</item>-->
-    <!--</style>-->
-
-    <!--<style name="Theme_Tablayout" parent="Theme.AppCompat.Light.DarkActionBar">-->
-        <!--<item name="colorControlNormal">@android:color/white</item>-->
-        <!--<item name="colorControlActivated">@android:color/white</item>-->
-        <!--<item name="colorControlHighlight">@android:color/white</item>-->
-    <!--</style>-->
+    <style name="button_outline">
+        <item name="android:background">@drawable/button_outline</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 </resources>

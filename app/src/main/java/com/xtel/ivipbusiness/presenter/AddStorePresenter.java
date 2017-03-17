@@ -135,10 +135,10 @@ public class AddStorePresenter extends BasicPresenter {
             public void onSuccess(RESP_Image resp_image, File file) {
                 if (type == 0) {
                     URL_BANNER = resp_image.getServer_path();
-                    view.onLoadPicture(file, type);
+//                    view.onLoadPicture(file, type);
                 } else {
                     URL_LOGO = resp_image.getServer_path();
-                    view.onLoadPicture(file, type);
+//                    view.onLoadPicture(file, type);
                 }
             }
 
@@ -148,6 +148,14 @@ public class AddStorePresenter extends BasicPresenter {
                 view.showShortToast(view.getActivity().getString(R.string.error_try_again));
             }
         });
+    }
+
+    public void getImageResise(String server_path, int type) {
+        if (type == 0) {
+            URL_BANNER = server_path;
+        } else {
+            URL_LOGO = server_path;
+        }
     }
 
     public void addStore(String name, PlaceModel placeModel, String phone, String des, String begin_time, String end_time, int type) {

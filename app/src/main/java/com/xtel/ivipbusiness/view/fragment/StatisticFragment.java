@@ -70,11 +70,11 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         presenter = new StatisticPresenter(this);
         callbackManager = CallbackManager.create(getActivity());
 
+        arrayList = new ArrayList<>();
         initView();
         initLineChart(view);
         initSwipeLayout();
 
-        arrayList = new ArrayList<>();
         presenter.getListStore();
     }
 
@@ -169,9 +169,7 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         txt_buy_title.setVisibility(View.VISIBLE);
         txt_compare_title.setVisibility(View.VISIBLE);
 
-
         sp_store.setVisibility(View.VISIBLE);
-
         noti_textview.setVisibility(View.GONE);
     }
 
@@ -192,6 +190,19 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
             sp_store.setVisibility(View.GONE);
     }
 
+    protected void changeDay(int day) {
+        if (day == 7) {
+            DAY = 7;
+            img_seven.setVisibility(View.VISIBLE);
+            img_thirday.setVisibility(View.GONE);
+        } else {
+            DAY = 30;
+            img_seven.setVisibility(View.GONE);
+            img_thirday.setVisibility(View.VISIBLE);
+        }
+
+        getStatistic();
+    }
 
     @Override
     public void onClick(View v) {
@@ -201,18 +212,12 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
             case R.id.statistic_btn_seven:
                 if (swipeRefreshLayout.isRefreshing())
                     break;
-                DAY = 7;
-                img_seven.setVisibility(View.VISIBLE);
-                img_thirday.setVisibility(View.GONE);
-                getStatistic();
+                changeDay(7);
                 break;
             case R.id.statistic_btn_thirty:
                 if (swipeRefreshLayout.isRefreshing())
                     break;
-                DAY = 30;
-                img_seven.setVisibility(View.GONE);
-                img_thirday.setVisibility(View.VISIBLE);
-                getStatistic();
+                changeDay(30);
                 break;
             case R.id.statistic_noti_txt:
                 getStatistic();

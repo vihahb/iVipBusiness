@@ -155,12 +155,11 @@ public class ImageManager {
                 FileOutputStream fOut = new FileOutputStream(file);
 
                 if (bitmap != null) {
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
                 }
 
                 fOut.flush();
                 fOut.close();
-
                 return file;
             } catch (Exception e) {
                 e.printStackTrace();

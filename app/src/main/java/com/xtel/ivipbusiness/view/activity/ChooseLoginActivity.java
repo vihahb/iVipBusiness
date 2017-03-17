@@ -17,14 +17,14 @@ public class ChooseLoginActivity extends BasicActivity implements View.OnClickLi
         checkLoged();
     }
 
-    private void checkLoged() {
+    protected void checkLoged() {
         if (!LoginManager.getCurrentAuthenticationId().isEmpty())
             startActivityAndFinish(HomeActivity.class);
         else
             initView();
     }
 
-    private void initView() {
+    protected void initView() {
         Button button = findButton(R.id.choose_btn_phone_number);
         button.setOnClickListener(this);
     }

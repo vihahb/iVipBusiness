@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,8 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     private final int REQUEST_LOCATION = 99;
     private PlaceModel placeModel;
 //    private String BEGIN_TIME, END_TIME;
+
+    protected final int REQUEST_RESIZE_IMAGE = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +158,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onTakePictureGallary(int type, Uri uri) {
-        if (!NetWorkInfo.isOnline(this)) {
+        if (!NetWorkInfo.isOnline(AddStoreActivity.this)) {
             showShortToast(getString(R.string.error_no_internet));
             return;
         } else if (uri == null) {
@@ -163,24 +166,30 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, type);
 
-        Bitmap bitmap = null;
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
 
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap, type);
-        }
+//        showProgressBar(false, false, null, getString(R.string.uploading_file));
+//
+//        Bitmap bitmap = null;
+//
+//        try {
+//            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        if (bitmap != null) {
+//            presenter.postImage(bitmap, type);
+//        }
     }
 
     @Override
     public void onTakePictureCamera(int type, Bitmap bitmap) {
-        if (!NetWorkInfo.isOnline(this)) {
+        if (!NetWorkInfo.isOnline(AddStoreActivity.this)) {
             showShortToast(getString(R.string.error_no_internet));
             return;
         } else if (bitmap == null) {
@@ -188,13 +197,45 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
-        presenter.postImage(bitmap, type);
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, type);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
+//        showProgressBar(false, false, null, getString(R.string.uploading_file));
+//        presenter.postImage(bitmap, type);
     }
 
-    @Override
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            File file = new File(data.getStringExtra(Constants.FILE));
+
+            Log.e("getImageResize", "file path " + file.getAbsolutePath());
+            Log.e("getImageResize", "type " + type);
+            Log.e("getImageResize", "server_path " + server_path);
+
+            if (type != -1 && server_path != null && file.exists()) {
+                presenter.getImageResise(server_path, type);
+                onLoadPicture(file, type);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
     public void onLoadPicture(File file, int type) {
-        closeProgressBar();
+//        closeProgressBar();
+
+        Log.e("onLoadPicture", "file_path " + file.getAbsolutePath());
+        Log.e("onLoadPicture", "type " + type);
 
         if (type == 0)
             WidgetHelper.getInstance().setImageFile(img_banner, file);
@@ -334,6 +375,8 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
                 placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
                 edt_address.setText(placeModel.getAddress());
             }
+        } else if (requestCode == REQUEST_RESIZE_IMAGE) {
+            getImageResize(data);
         } else
             presenter.onActivityResult(requestCode, resultCode, data);
     }

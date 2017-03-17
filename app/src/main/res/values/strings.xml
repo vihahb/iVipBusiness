@@ -40,6 +40,7 @@
     <string name="title_activity_show_image">Album ảnh</string>
     <string name="title_activity_check_in_user">Chụp ảnh tích điểm</string>
     <string name="title_activity_calculator">Máy tính</string>
+    <string name="title_activity_resize_image">Chọn ảnh</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -68,6 +69,9 @@
     <string name="action_member">Thành viên</string>
     <string name="action_news">Bản tin</string>
     <string name="action_galeery">Album ảnh</string>
+
+    <string name="action_rotate">Quay ảnh</string>
+    <string name="action_crop">Crop</string>
 
     <!-- Dialog -->
     <string name="doing_register">Đang tạo tài khoản…</string>
@@ -176,6 +180,7 @@
     <string name="error_store_do_not_setting_point">Cửa hàng chưa cài đặt tích điểm</string>
     <string name="error_member_not_have_card">Thành viên chưa có thẻ. Bạn có muốn tạo thẻ cho thành viên này? </string>
     <string name="error_not_have_level">Chưa cài đặt cấp bậc cho cửa hàng</string>
+    <string name="error_resize_image">Vui lòng chọn ảnh</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>

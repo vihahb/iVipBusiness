@@ -134,9 +134,6 @@ public class WidgetHelper {
         Bitmap bitmap = BitmapFactory.decodeFile(file.getPath(), options);
 
         Blurry.with(MyApplication.context).from(bitmap).into(imageBlur);
-
-//        Bitmap blurredBitmap = BlurBuilder.blur(MyApplication.context, bitmap);
-//        imageBlur.setImageDrawable(new BitmapDrawable(MyApplication.context.getResources(), blurredBitmap));
     }
 
     public void setSmallImageURL(ImageView view, String url) {
@@ -239,11 +236,11 @@ public class WidgetHelper {
     }
 
     private void deleteFile(File file) {
-        try {
-            boolean delete = file.delete();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            boolean delete = file.delete();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     public void setImageResource(ImageView view, int resource) {

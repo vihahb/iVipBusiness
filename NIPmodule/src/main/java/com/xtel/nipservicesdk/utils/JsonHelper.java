@@ -13,7 +13,8 @@ public class JsonHelper {
     private static Gson gson;
 
     static {
-        gson = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
+        if (gson == null)
+            gson = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
     }
 
     public static String toJson(Object object) {

@@ -2,6 +2,7 @@ package com.xtel.ivipbusiness.model;
 
 import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.xtel.nipservicesdk.LoginManager;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.BasicModel;
@@ -34,5 +35,17 @@ public class NotifyModel extends BasicModel {
         Log.e("sendToPeople", url + "           " + session);
         Log.e("sendToPeople", jsonObject);
         requestServer.postApi(url, jsonObject, session, responseHandle);
+    }
+
+    public void registerFCM(String fcm_key, ResponseHandle responseHandle) {
+        String url = API_BASE + REGISTER_FCM;
+        String session = LoginManager.getCurrentSession();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(FCM_CLOUD_KEY, fcm_key);
+
+        Log.e("registerFCM", url + "        session   " + session);
+        Log.e("registerFCM", jsonObject.toString());
+        requestServer.postApi(url, jsonObject.toString(), session, responseHandle);
     }
 }
