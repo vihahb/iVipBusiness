@@ -12,9 +12,7 @@ import android.util.Log;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.UserModel;
-import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
-import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
@@ -22,13 +20,9 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
-import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.ImageManager;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.TextUnit;
-
-import java.io.File;
 
 /**
  * Created by Vulcl on 1/17/2017
@@ -139,25 +133,30 @@ public class ProfilePresenter extends BasicPresenter {
         view.startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
 
-    public void postImage(Bitmap bitmap, final int type) {
-        ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
-            @Override
-            public void onSuccess(RESP_Image resp_image, File file) {
-//                if (type == 0) {
-//                    PATH_BANNER = resp_image.getServer_path();
-//                    view.onLoadPicture(file, type);
-//                } else {
-                PATH_AVATAR = resp_image.getServer_path();
-                URL_AVATAR = resp_image.getUri();
-                view.onLoadPicture(file, type);
-//                }
-            }
+//    public void postImage(Bitmap bitmap, final int type) {
+//        ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
+//            @Override
+//            public void onSuccess(RESP_Image resp_image, File file) {
+////                if (type == 0) {
+////                    PATH_BANNER = resp_image.getServer_path();
+////                    view.onLoadPicture(file, type);
+////                } else {
+//                PATH_AVATAR = resp_image.getServer_path();
+//                URL_AVATAR = resp_image.getUri();
+//                view.onLoadPicture(file, type);
+////                }
+//            }
+//
+//            @Override
+//            public void onError() {
+//                view.onValidateError(view.getActivity().getString(R.string.error_try_again));
+//            }
+//        });
+//    }
 
-            @Override
-            public void onError() {
-                view.onValidateError(view.getActivity().getString(R.string.error_try_again));
-            }
-        });
+    public void getImageResise(String server_path, String uri) {
+        PATH_AVATAR = server_path;
+        URL_AVATAR = uri;
     }
 
     public void updateUser(String fullname, int gender, String birthday, String email, String address) {

@@ -8,11 +8,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,26 +33,23 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 
 public class AddStoreActivity extends BasicActivity implements View.OnClickListener, IAddStoreView {
-    private AddStorePresenter presenter;
-    private CallbackManager callbackManager;
+    protected AddStorePresenter presenter;
+    protected CallbackManager callbackManager;
 
-    private ImageView img_banner, img_logo;
-    private ImageButton img_camera, img_location;
-    private Spinner sp_type;
-    private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
+    protected ImageView img_banner, img_logo;
+    protected ImageButton img_camera, img_location;
+    protected Spinner sp_type;
+    protected EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
 
-    private ActionBar actionBar;
-    private final int REQUEST_LOCATION = 99;
-    private PlaceModel placeModel;
-//    private String BEGIN_TIME, END_TIME;
+    protected ActionBar actionBar;
+    protected final int REQUEST_LOCATION = 99;
+    protected PlaceModel placeModel;
 
     protected final int REQUEST_RESIZE_IMAGE = 8;
 
@@ -73,7 +68,10 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         presenter.getData();
     }
 
-    private void initToolbar() {
+    /*
+    * Khởi tạo toolbar
+    * */
+    protected void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.add_store_toolbar);
         setSupportActionBar(toolbar);
 
@@ -84,7 +82,10 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void initView() {
+    /*
+    * Khởi tạo view
+    * */
+    protected void initView() {
         img_banner = findImageView(R.id.add_store_img_banner);
         img_logo = findImageView(R.id.add_store_img_avatar);
 
@@ -99,13 +100,19 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         edt_des = findEditText(R.id.add_store_edt_des);
     }
 
-    private void initType() {
+    /*
+    * Khởi tạo spinner chọn loại cửa hàng và chuỗi cửa hàng
+    * */
+    protected void initType() {
         sp_type = findSpinner(R.id.add_store_sp_type);
         TypeAdapter typeAdapter = new TypeAdapter(this);
         sp_type.setAdapter(typeAdapter);
     }
 
-    private void initListener() {
+    /*
+    * Lắng nghe sự kiện thi click vào view
+    * */
+    protected void initListener() {
         img_camera.setOnClickListener(this);
         img_logo.setOnClickListener(this);
         img_location.setOnClickListener(this);
@@ -113,22 +120,44 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         edt_end_time.setOnClickListener(this);
     }
 
-    private void selectTime(final int type) {
+    /*
+    * Chọn thời gian mở cửa và đóng cửa
+    * */
+    protected void selectTime(final int type) {
         Calendar calendar = Calendar.getInstance();
         new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 if (type == 0) {
                     WidgetHelper.getInstance().setEditTextTime(edt_begin_time, hourOfDay, minute);
-//                    BEGIN_TIME = hourOfDay + ":" + minute;
                 } else {
                     WidgetHelper.getInstance().setEditTextTime(edt_end_time, hourOfDay, minute);
-//                    END_TIME = hourOfDay + ":" + minute;
                 }
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
     }
 
+    /*
+    * Lấy ảnh đã đưuọc resize
+    * */
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            File file = new File(data.getStringExtra(Constants.FILE));
+
+            if (type != -1 && server_path != null && file.exists()) {
+                presenter.getImageResise(server_path, type);
+                onLoadPicture(file, type);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    * Set thông tin cho phù hợp thêm cửa hàng hay thêm chuỗi cửa hàng
+    * */
     @Override
     public void onGetDataChain() {
         WidgetHelper.getInstance().setImageResource(img_logo, R.mipmap.ic_logo_chain);
@@ -138,6 +167,9 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         edt_des.setHint(getString(R.string.chain_des));
     }
 
+    /*
+    * Không có data truyền sang
+    * */
     @Override
     public void onGetDataError() {
         closeProgressBar();
@@ -156,12 +188,13 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         });
     }
 
+    /*
+    * Chọn ảnh từ gallery thành công
+    * Resize ảnh để up lên server
+    * */
     @Override
     public void onTakePictureGallary(int type, Uri uri) {
-        if (!NetWorkInfo.isOnline(AddStoreActivity.this)) {
-            showShortToast(getString(R.string.error_no_internet));
-            return;
-        } else if (uri == null) {
+        if (uri == null) {
             showShortToast(getString(R.string.error_get_image));
             return;
         }
@@ -171,28 +204,15 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         intent.putExtra(Constants.TYPE, type);
 
         startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
-
-//        showProgressBar(false, false, null, getString(R.string.uploading_file));
-//
-//        Bitmap bitmap = null;
-//
-//        try {
-//            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        if (bitmap != null) {
-//            presenter.postImage(bitmap, type);
-//        }
     }
 
+    /*
+    * Chọn ảnh bằng camera thành công
+    * Resize ảnh để up lên server
+    * */
     @Override
     public void onTakePictureCamera(int type, Bitmap bitmap) {
-        if (!NetWorkInfo.isOnline(AddStoreActivity.this)) {
-            showShortToast(getString(R.string.error_no_internet));
-            return;
-        } else if (bitmap == null) {
+        if (bitmap == null) {
             showShortToast(getString(R.string.error_get_image));
             return;
         }
@@ -202,68 +222,24 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         intent.putExtra(Constants.TYPE, type);
 
         startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
-//        showProgressBar(false, false, null, getString(R.string.uploading_file));
-//        presenter.postImage(bitmap, type);
     }
 
-    protected void getImageResize(Intent data) {
-        try {
-            int type = data.getIntExtra(Constants.TYPE, -1);
-            String server_path = data.getStringExtra(Constants.SERVER_PATH);
-            File file = new File(data.getStringExtra(Constants.FILE));
-
-            Log.e("getImageResize", "file path " + file.getAbsolutePath());
-            Log.e("getImageResize", "type " + type);
-            Log.e("getImageResize", "server_path " + server_path);
-
-            if (type != -1 && server_path != null && file.exists()) {
-                presenter.getImageResise(server_path, type);
-                onLoadPicture(file, type);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-
+    /*
+    * Set lại ảnh khi người dùng chọn ảnh mới
+    * */
     public void onLoadPicture(File file, int type) {
-//        closeProgressBar();
-
-        Log.e("onLoadPicture", "file_path " + file.getAbsolutePath());
-        Log.e("onLoadPicture", "type " + type);
-
         if (type == 0)
             WidgetHelper.getInstance().setImageFile(img_banner, file);
         else
             WidgetHelper.getInstance().setAvatarImageFile(img_logo, file);
     }
 
+    /*
+    * Tạo cửa hàng hoặc chuỗi cửa hàng thành công
+    * */
     @Override
-    public void onAddChainSuccess() {
-        showMaterialDialog(false, false, null, getString(R.string.success_add_chain), null, getString(R.string.back), new DialogListener() {
-            @Override
-            public void negativeClicked() {
-                closeDialog();
-                finish();
-            }
-
-            @Override
-            public void positiveClicked() {
-                closeDialog();
-                finish();
-            }
-        });
-    }
-
-    @Override
-    public void onAddStoreSuccess() {
-//        showShortToast(getString(R.string.success_add_store));
-        showMaterialDialog(false, false, null, getString(R.string.success_add_store), null, getString(R.string.back), new DialogListener() {
+    public void onAddStoreSuccess(String message) {
+        showMaterialDialog(false, false, null, message, null, getString(R.string.back), new DialogListener() {
             @Override
             public void negativeClicked() {
                 closeDialog();
@@ -288,6 +264,9 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
         super.closeProgressBar();
     }
 
+    /*
+    * Lấy session mới khi session cũ hết hạn
+    * */
     @Override
     public void getNewSession(final ICmd iCmd) {
         callbackManager.getNewSesion(new CallbacListener() {

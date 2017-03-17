@@ -53,10 +53,10 @@ public class AddStorePresenter extends BasicPresenter {
                     view.closeProgressBar();
 
                     if (STOREY_TYPE.equals(CHAIN)) {
-                        view.onAddChainSuccess();
+                        view.onAddStoreSuccess(view.getActivity().getString(R.string.success_add_chain));
                     } else {
                         StoresModel.getInstance().addNewStore();
-                        view.onAddStoreSuccess();
+                        view.onAddStoreSuccess(view.getActivity().getString(R.string.success_add_store));
                     }
                 }
 

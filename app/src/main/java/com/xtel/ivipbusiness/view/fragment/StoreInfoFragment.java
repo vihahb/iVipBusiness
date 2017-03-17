@@ -10,14 +10,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,10 +20,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,13 +30,12 @@ import android.widget.TimePicker;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.StoreInfoPresenter;
 import com.xtel.ivipbusiness.view.activity.ChooseMapsActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
+import com.xtel.ivipbusiness.view.activity.ResizeImageActivity;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
-import com.xtel.ivipbusiness.view.widget.AppBarStateChangeListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -55,7 +47,6 @@ import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 
 /**
@@ -63,19 +54,17 @@ import java.util.Calendar;
  */
 
 public class StoreInfoFragment extends BasicFragment implements View.OnClickListener, IStoreInfoView {
-    private StoreInfoPresenter presenter;
+    protected StoreInfoPresenter presenter;
 
-    private ImageView img_banner, img_logo, img_qr_code, img_bar_code;
-    private ImageButton img_camera, img_location;
-    private EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
+    protected ImageView img_banner, img_logo, img_qr_code, img_bar_code;
+    protected ImageButton img_camera, img_location;
+    protected EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private CallbackManager callbackManager;
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    protected CallbackManager callbackManager;
 
-    private RESP_Store resp_store;
-    //    private PlaceModel placeModel;
-    private final int REQUEST_LOCATION = 99;
-    private boolean isShow = true;
+    protected RESP_Store resp_store;
+    protected final int REQUEST_LOCATION = 99, REQUEST_RESIZE_IMAGE = 8;
 
     public static StoreInfoFragment newInstance() {
         return new StoreInfoFragment();
@@ -94,7 +83,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
         presenter = new StoreInfoPresenter(this);
         initSwwipe();
-        initView(view);
+        initView();
         initListener();
         setEnableView(false);
 //        initAnimationHideImage(view);
@@ -102,13 +91,13 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     //    Khởi tạo swipeRefreshLayout để hiển thị load thông tin
-    private void initSwwipe() {
+    protected void initSwwipe() {
         swipeRefreshLayout = findSwipeRefreshLayout(R.id.store_info_swipe);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
-    private void initView(View view) {
+    protected void initView() {
         img_banner = findImageView(R.id.store_info_img_banner);
         img_logo = findImageView(R.id.store_info_img_logo);
         img_qr_code = findImageView(R.id.store_info_img_qrCode);
@@ -125,7 +114,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         edt_des = findEditText(R.id.store_info_edt_des);
     }
 
-    private void initListener() {
+    protected void initListener() {
         img_qr_code.setOnClickListener(this);
         img_bar_code.setOnClickListener(this);
         img_camera.setOnClickListener(this);
@@ -155,7 +144,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
     }
 
-//    private void initAnimationHideImage(View view) {
+//    protected void initAnimationHideImage(View view) {
 //        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.store_info_app_bar);
 //        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
 //            @Override
@@ -172,32 +161,32 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 //        });
 //    }
 
-    private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
+//    protected static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
 
-    private void hideFloatingActionButton(View view) {
-        debug("hide");
-        ViewCompat.animate(view).scaleX(0.0F).scaleY(0.0F).alpha(0.0F).setInterpolator(INTERPOLATOR).withLayer()
-                .setListener(new ViewPropertyAnimatorListener() {
-                    public void onAnimationStart(View view) {
-                    }
+//    protected void hideFloatingActionButton(View view) {
+//        debug("hide");
+//        ViewCompat.animate(view).scaleX(0.0F).scaleY(0.0F).alpha(0.0F).setInterpolator(INTERPOLATOR).withLayer()
+//                .setListener(new ViewPropertyAnimatorListener() {
+//                    public void onAnimationStart(View view) {
+//                    }
+//
+//                    public void onAnimationCancel(View view) {
+//                    }
+//
+//                    public void onAnimationEnd(View view) {
+//                        if (!isShow)
+//                            view.setVisibility(View.GONE);
+//                    }
+//                }).start();
+//    }
 
-                    public void onAnimationCancel(View view) {
-                    }
+//    protected void showFloatingActionButton(View view) {
+//        debug("show");
+//        view.setVisibility(View.VISIBLE);
+//        ViewCompat.animate(view).scaleX(1.0F).scaleY(1.0F).alpha(1.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(null).start();
+//    }
 
-                    public void onAnimationEnd(View view) {
-                        if (!isShow)
-                            view.setVisibility(View.GONE);
-                    }
-                }).start();
-    }
-
-    private void showFloatingActionButton(View view) {
-        debug("show");
-        view.setVisibility(View.VISIBLE);
-        ViewCompat.animate(view).scaleX(1.0F).scaleY(1.0F).alpha(1.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(null).start();
-    }
-
-    private void selectBeginTime() {
+    protected void selectBeginTime() {
         Calendar calendar = Calendar.getInstance();
         new TimePickerDialog(getContext(), R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -209,7 +198,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
     }
 
-    private void selectEndTime() {
+    protected void selectEndTime() {
         Calendar calendar = Calendar.getInstance();
         new TimePickerDialog(getContext(), R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -222,7 +211,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     @SuppressWarnings("ConstantConditions")
-    private void showQrCode() {
+    protected void showQrCode() {
         if (resp_store.getQr_code() == null || resp_store.getQr_code().isEmpty()) {
             showShortToast(getString(R.string.error_view_code));
             return;
@@ -256,7 +245,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     @SuppressWarnings("ConstantConditions")
-    private void showBarCode() {
+    protected void showBarCode() {
         if (resp_store.getBar_code() == null || resp_store.getBar_code().isEmpty()) {
             showShortToast(getString(R.string.error_view_code));
             return;
@@ -297,7 +286,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         presenter.updateStore(resp_store);
     }
 
-    private void setAddress(PlaceModel placeModel) {
+    protected void setAddress(PlaceModel placeModel) {
         edt_address.setText(placeModel.getAddress());
 
         resp_store.setAddress(placeModel.getAddress());
@@ -313,7 +302,25 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         ((ViewStoreActivity) getActivity()).changeMenuIcon(R.drawable.ic_action_done_2);
     }
 
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            String server_uri = data.getStringExtra(Constants.URI);
+            File file = new File(data.getStringExtra(Constants.FILE));
 
+            Log.e("getImageResize", "file path " + file.getAbsolutePath());
+            Log.e("getImageResize", "type " + type);
+            Log.e("getImageResize", "server_path " + server_path);
+
+            if (type != -1 && server_path != null && file.exists()) {
+                presenter.getImageResise(server_path, server_uri, type);
+                onLoadPicture(file, type);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -414,21 +421,27 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             return;
         }
 
-        Log.e("111111111", "11111");
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        Intent intent = new Intent(getActivity(), ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, type);
 
-        Bitmap bitmap = null;
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
 
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap, type);
-        } else
-            closeProgressBar();
+//        Log.e("111111111", "11111");
+//        showProgressBar(false, false, null, getString(R.string.uploading_file));
+//
+//        Bitmap bitmap = null;
+//
+//        try {
+//            bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        if (bitmap != null) {
+//            presenter.postImage(bitmap, type);
+//        } else
+//            closeProgressBar();
     }
 
     @Override
@@ -438,8 +451,14 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
-        presenter.postImage(bitmap, type);
+        Intent intent = new Intent(getActivity(), ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, type);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
+
+//        showProgressBar(false, false, null, getString(R.string.uploading_file));
+//        presenter.postImage(bitmap, type);
     }
 
     @Override
@@ -555,7 +574,9 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
                 PlaceModel placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
                 setAddress(placeModel);
             }
-        } else
+        } else if (requestCode == REQUEST_RESIZE_IMAGE) {
+            getImageResize(data);
+        }  else
             presenter.onActivityResult(requestCode, resultCode, data);
     }
 

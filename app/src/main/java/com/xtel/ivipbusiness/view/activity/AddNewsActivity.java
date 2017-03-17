@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,25 +33,26 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 
 public class AddNewsActivity extends BasicActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, IAddNewsView {
-    private AddNewsPresenter presenter;
-    private CallbackManager callbackManager;
+    protected AddNewsPresenter presenter;
+    protected CallbackManager callbackManager;
 
-    private ImageView img_banner, img_camera;
-    private EditText edt_title, edt_des, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
-    private TextView txt_public;
-    private CheckBox chk_voucher;
-    private Spinner sp_news_type, sp_type_sale;
-    private LinearLayout layout_voucher;
+    protected ImageView img_banner, img_camera;
+    protected EditText edt_title, edt_des, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
+    protected TextView txt_public;
+    protected CheckBox chk_voucher;
+    protected Spinner sp_news_type, sp_type_sale;
+    protected LinearLayout layout_voucher;
 
-    private boolean isPublic = true;
+    protected final int REQUEST_RESIZE_IMAGE = 8;
+    protected boolean isPublic = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     //    Lấy toàn bộ view
-    private void initView() {
+    protected void initView() {
         img_banner = findImageView(R.id.add_news_img_banner);
         img_camera = findImageButton(R.id.add_news_img_camera);
 
@@ -91,20 +91,20 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     //    Khởi tạo spinner chọn type
-    private void initType() {
+    protected void initType() {
         sp_news_type = findSpinner(R.id.add_news_sp_type);
         TypeAdapter typeAdapter = new TypeAdapter(this);
         sp_news_type.setAdapter(typeAdapter);
     }
 
     //    Khởi tạo spinner chọn loại giảm giá
-    private void initTypeSale() {
+    protected void initTypeSale() {
         sp_type_sale = findSpinner(R.id.add_news_sp_type_salse);
         TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this);
         sp_type_sale.setAdapter(typeAdapter);
     }
 
-    private void initListener() {
+    protected void initListener() {
         img_camera.setOnClickListener(this);
         chk_voucher.setOnCheckedChangeListener(this);
 
@@ -113,7 +113,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         edt_end_time.setOnClickListener(this);
     }
 
-    private void selectDate(final int type) {
+    protected void selectDate(final int type) {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(this, R.style.AppCompatAlertDialogStyle, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -126,8 +126,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void setPublic(View view) {
-//        Context wrapper = new ContextThemeWrapper(getApplicationContext(), R.style.MyPopupMenu);
+    protected void setPublic(View view) {
         final PopupMenu popup = new PopupMenu(getApplicationContext(), view);
         popup.getMenuInflater().inflate(R.menu.menu_nav_add_news, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -151,7 +150,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         popup.show();
     }
 
-    private void showLayout() {
+    protected void showLayout() {
 //             Prepare the View for the animation
         layout_voucher.setVisibility(View.VISIBLE);
         layout_voucher.setAlpha(0.0f);
@@ -168,7 +167,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 });
     }
 
-    private void hideLayout() {
+    protected void hideLayout() {
         layout_voucher.animate()
                 .translationY(-layout_voucher.getHeight())
                 .alpha(0.0f)
@@ -179,6 +178,24 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                         layout_voucher.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    /*
+    * Lấy ảnh đã đưuọc resize
+    * */
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            File file = new File(data.getStringExtra(Constants.FILE));
+
+            if (type != -1 && server_path != null && file.exists()) {
+                presenter.getImageResise(server_path);
+                onLoadPicture(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -240,19 +257,11 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, 0);
 
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap);
-        }
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
     @Override
@@ -265,8 +274,11 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
-        presenter.postImage(bitmap);
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, 0);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
     @Override
@@ -384,6 +396,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_RESIZE_IMAGE) {
+            getImageResize(data);
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -21,8 +21,7 @@ public interface IAddStoreView {
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
 //    void onLoadPicture(File url, int type);
-    void onAddChainSuccess();
-    void onAddStoreSuccess();
+    void onAddStoreSuccess(String message);
     void getNewSession(ICmd iCmd);
 
     void showShortToast(String message);

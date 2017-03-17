@@ -21,6 +21,7 @@ import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,6 +43,9 @@ public class ResizeImageActivity extends BasicActivity {
         getData();
     }
 
+    /*
+    * Kiểm tra data truyền vào
+    * */
     protected void getData() {
         Uri uri = null;
         Bitmap bitmap = null;
@@ -71,6 +75,10 @@ public class ResizeImageActivity extends BasicActivity {
         }
     }
 
+    /*
+    * Khởi tạo các view
+    * Kiểm tra data truyền sang để cấu hình view cho phù hợp
+    * */
     protected void initView(Uri uri, Bitmap bitmap, int type) {
         cropImageView = (CropImageView) findViewById(R.id.resize_image_img_cropImageView);
 
@@ -112,10 +120,11 @@ public class ResizeImageActivity extends BasicActivity {
             case R.id.action_resize_image_rotate:
                 cropImageView.rotateImage(90);
                 break;
-//            case R.id.action_resize_image_crop:
-//                cropImageView.getCroppedImageAsync();
-//                break;
             case R.id.action_resize_image_done:
+                if (!NetWorkInfo.isOnline(getApplicationContext())) {
+                    showShortToast(getString(R.string.error_no_internet));
+                    break;
+                }
                 new TakePicture().execute(cropImageView.getCroppedImage());
                 break;
             default:
@@ -125,14 +134,23 @@ public class ResizeImageActivity extends BasicActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+    * Resize image và up lên server
+    * */
     protected class TakePicture extends AsyncTask<Bitmap, Integer, File> {
 
+        /*
+        * Hiển thị progress thông báo đang up ảnh
+        * */
         @Override
         protected void onPreExecute() {
-            showProgressBar(false, false, null, getString(R.string.uploading_file));
             super.onPreExecute();
+            showProgressBar(false, false, null, getString(R.string.uploading_file));
         }
 
+        /*
+        * Bắt đầu resize ảnh và up lên server
+        * */
         @SuppressWarnings("WrongThread")
         @Override
         protected File doInBackground(Bitmap... params) {
@@ -150,19 +168,28 @@ public class ResizeImageActivity extends BasicActivity {
             return saveImageFile(bitmap);
         }
 
+        /*
+        * Kiểm tra up ảnh lên server thành công hay không
+        * Nếu thành công thì truyền lại data và kết thúc activity
+        * */
         @Override
         protected void onPostExecute(File file) {
             super.onPostExecute(file);
+            closeProgressBar();
 
             if (file != null) {
+                if (!NetWorkInfo.isOnline(getApplicationContext())) {
+                    showShortToast(getString(R.string.error_no_internet));
+                    return;
+                }
+
                 postImageToServer(file, ResizeImageActivity.this, new CallbackImageListener() {
                     @Override
                     public void onSuccess(final RESP_Image resp_image, final File file) {
-                        closeProgressBar();
-
                         Intent intent = new Intent();
                         intent.putExtra(Constants.SERVER_PATH, resp_image.getServer_path());
                         intent.putExtra(Constants.FILE, file.getAbsolutePath());
+                        intent.putExtra(Constants.URI, resp_image.getUri());
                         intent.putExtra(Constants.TYPE, type);
 
                         setResult(RESULT_OK, intent);
@@ -171,13 +198,11 @@ public class ResizeImageActivity extends BasicActivity {
 
                     @Override
                     public void onError() {
-                        closeProgressBar();
                         showShortToast(getString(R.string.error_try_again));
                         finish();
                     }
                 });
             } else {
-                closeProgressBar();
                 showShortToast(getString(R.string.error_resize_image));
             }
         }
@@ -191,6 +216,9 @@ public class ResizeImageActivity extends BasicActivity {
 //                return null;
 //        }
 
+        /*
+        * Resize ảnh nhỏ
+        * */
         Bitmap getSmallBitmap(Bitmap bitmap) {
             try {
                 double width = bitmap.getWidth(), height = bitmap.getHeight();
@@ -211,6 +239,9 @@ public class ResizeImageActivity extends BasicActivity {
             return null;
         }
 
+        /*
+        * Resize ảnh lớn
+        * */
         Bitmap getBigBitmap(Bitmap bitmap) {
             try {
                 double width = bitmap.getWidth(), height = bitmap.getHeight();
@@ -231,6 +262,9 @@ public class ResizeImageActivity extends BasicActivity {
             return null;
         }
 
+        /*
+        * Lưu ảnh thành file để up lên server
+        * */
         @SuppressWarnings("ResultOfMethodCallIgnored")
         File saveImageFile(Bitmap bitmap) {
             if (bitmap == null)
@@ -257,6 +291,9 @@ public class ResizeImageActivity extends BasicActivity {
         }
     }
 
+    /*
+    * Up ảnh lên server
+    * */
     private void postImageToServer(final File file, final Context context, final CallbackImageListener callbackImageListener) {
         Ion.with(context)
                 .load(SERVER_API)

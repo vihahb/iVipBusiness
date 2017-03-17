@@ -4,114 +4,128 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryKey_80">
 
-    <ImageView
-        android:id="@+id/profile.img_banner"
+    <com.xtel.ivipbusiness.view.widget.RectangleLayout
+        android:id="@+id/profile.rectanglayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:layout_alignBottom="@+id/profile.layout_header_content"
-        android:layout_alignTop="@+id/profile.layout_header_content"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_avatar_default" />
+        android:layout_height="wrap_content" />
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:background="@color/black_40" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profile.rectanglayout"
+        android:layout_alignEnd="@+id/profile.rectanglayout"
+        android:layout_alignLeft="@+id/profile.rectanglayout"
+        android:layout_alignRight="@+id/profile.rectanglayout"
+        android:layout_alignStart="@+id/profile.rectanglayout"
+        android:layout_alignTop="@+id/profile.rectanglayout">
 
-    <LinearLayout
-        android:id="@+id/profile.layout_header_content"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_180"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/size_18"
-        android:paddingRight="@dimen/size_18">
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/profile.img_banner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/size_12"
-            android:paddingTop="@dimen/size_8">
-
-            <TextView
-                android:id="@+id/profile.txt_date_create"
-                style="@style/textview_normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/day_create" />
-
-            <TextView
-                android:id="@+id/profile.txt_total_store"
-                style="@style/textview_normal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginStart="@dimen/size_16"
-                android:layout_weight="1"
-                android:gravity="right|end"
-                android:text="@string/store_number" />
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_avatar_default" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_1"
-            android:background="@android:color/white" />
+            android:layout_height="match_parent"
+            android:background="@color/black_40" />
 
         <LinearLayout
+            android:id="@+id/profile.layout_header_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/size_10"
-            android:weightSum="3">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/size_18"
+            android:paddingRight="@dimen/size_18">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/size_12"
+                android:paddingTop="@dimen/size_8">
 
                 <TextView
-                    android:id="@+id/profile.txt_fullname"
-                    style="@style/textview_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/fullname"
-                    android:textColor="@android:color/white" />
-
-                <TextView
-                    android:id="@+id/profile.txt_email"
+                    android:id="@+id/profile.txt_date_create"
                     style="@style/textview_normal"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_8"
-                    android:hint="@string/email" />
+                    android:text="@string/day_create" />
+
+                <TextView
+                    android:id="@+id/profile.txt_total_store"
+                    style="@style/textview_normal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_16"
+                    android:layout_marginStart="@dimen/size_16"
+                    android:layout_weight="1"
+                    android:gravity="right|end"
+                    android:text="@string/store_number" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1"
+                android:background="@android:color/white" />
+
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right|end">
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/size_10"
+                android:weightSum="3">
 
-                <FrameLayout
-                    android:layout_width="@dimen/size_56"
-                    android:layout_height="@dimen/size_56"
-                    android:background="@drawable/round_white"
-                    android:padding="@dimen/size_1">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:weightSum="2">
 
-                    <com.xtel.ivipbusiness.view.widget.RoundImage
-                        android:id="@+id/profile.img_avatar"
+                    <TextView
+                        android:id="@+id/profile.txt_fullname"
+                        style="@style/textview_title"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@null"
-                        android:src="@mipmap/ic_avatar_default" />
-                </FrameLayout>
+                        android:layout_height="wrap_content"
+                        android:hint="@string/fullname"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/profile.txt_email"
+                        style="@style/textview_normal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8"
+                        android:hint="@string/email" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right|end">
+
+                    <FrameLayout
+                        android:layout_width="@dimen/size_56"
+                        android:layout_height="@dimen/size_56"
+                        android:background="@drawable/round_white"
+                        android:padding="@dimen/size_1">
+
+                        <com.xtel.ivipbusiness.view.widget.RoundImage
+                            android:id="@+id/profile.img_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:src="@mipmap/ic_avatar_default" />
+                    </FrameLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </RelativeLayout>

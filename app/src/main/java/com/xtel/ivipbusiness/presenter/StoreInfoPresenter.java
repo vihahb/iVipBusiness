@@ -40,7 +40,7 @@ public class StoreInfoPresenter {
     private boolean isExists = true;
     private int TAKE_PICTURE_TYPE = 0;
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
-    private String STOREY_TYPE, URL_BANNER, PATH_BANNER, URL_LOGO, PATH_LOGO;
+    private String URL_BANNER, PATH_BANNER, URL_LOGO, PATH_LOGO;
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     private ICmd iCmd = new ICmd() {
@@ -136,31 +136,31 @@ public class StoreInfoPresenter {
         iCmd.execute(1, Constants.SORT_STORE.getId(), Constants.SORT_STORE.getStore_type());
     }
 
-    public void postImage(Bitmap bitmap, final int type) {
-        boolean isBigImage;
-        isBigImage = type == 0;
-
-        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
-            @Override
-            public void onSuccess(RESP_Image resp_image, File file) {
-                if (type == 0) {
-                    PATH_BANNER = resp_image.getServer_path();
-                    URL_BANNER = resp_image.getUri();
-                    view.onLoadPicture(file, type);
-                } else {
-                    PATH_LOGO = resp_image.getServer_path();
-                    URL_LOGO = resp_image.getUri();
-                    view.onLoadPicture(file, type);
-                }
-            }
-
-            @Override
-            public void onError() {
-                view.closeProgressBar();
-                view.onValidateError(view.getActivity().getString(R.string.error_try_again));
-            }
-        });
-    }
+//    public void postImage(Bitmap bitmap, final int type) {
+//        boolean isBigImage;
+//        isBigImage = type == 0;
+//
+//        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
+//            @Override
+//            public void onSuccess(RESP_Image resp_image, File file) {
+//                if (type == 0) {
+//                    PATH_BANNER = resp_image.getServer_path();
+//                    URL_BANNER = resp_image.getUri();
+//                    view.onLoadPicture(file, type);
+//                } else {
+//                    PATH_LOGO = resp_image.getServer_path();
+//                    URL_LOGO = resp_image.getUri();
+//                    view.onLoadPicture(file, type);
+//                }
+//            }
+//
+//            @Override
+//            public void onError() {
+//                view.closeProgressBar();
+//                view.onValidateError(view.getActivity().getString(R.string.error_try_again));
+//            }
+//        });
+//    }
 
     //    Kiểm tra cấp quyền camera
     public void takePicture(int type) {
@@ -211,20 +211,22 @@ public class StoreInfoPresenter {
             return;
         }
 
-//        if (PATH_BANNER != null)
-            resp_store.setBanner(PATH_BANNER);
-//        else
-//            resp_store.setBanner(null);
-//        if (PATH_LOGO != null)
-            resp_store.setLogo(PATH_LOGO);
-//        else
-//            resp_store.setLogo(null);
-
+        resp_store.setBanner(PATH_BANNER);
+        resp_store.setLogo(PATH_LOGO);
 
         view.showProgressBar(false, false, null, view.getActivity().getString(R.string.updating_store));
         iCmd.execute(2, resp_store);
     }
 
+    public void getImageResise(String server_path, String uri, int type) {
+        if (type == 0) {
+            PATH_BANNER = server_path;
+            URL_BANNER = uri;
+        } else {
+            PATH_LOGO = server_path;
+            URL_LOGO = uri;
+        }
+    }
 
     //    Lắng nghe người dùng cấp quyền truy cập camera hay không
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

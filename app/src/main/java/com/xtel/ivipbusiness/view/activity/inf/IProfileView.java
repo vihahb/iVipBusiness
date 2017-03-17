@@ -24,7 +24,6 @@ public interface IProfileView {
 
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
-    void onLoadPicture(File file, int type);
 
     void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message);
     void closeProgressBar();

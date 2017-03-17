@@ -1,10 +1,8 @@
 package com.xtel.ivipbusiness.view.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.PlaceModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
 import com.xtel.ivipbusiness.presenter.ProfilePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IProfileView;
@@ -34,7 +31,6 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -43,19 +39,18 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class ProfileActivity extends BasicActivity implements View.OnClickListener, IProfileView {
-    private ProfilePresenter presenter;
-    private CallbackManager callbackManager;
+    protected ProfilePresenter presenter;
+    protected CallbackManager callbackManager;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private ImageView img_avatar, img_banner;
-    private TextView txt_total_stores, txt_date_create, txt_fullname, txt_email;
-    private EditText edt_fullname, edt_email, edt_birthday, edt_phone, edt_address;
-    private Spinner sp_gender;
-    private GenderAdapter typeAdapter;
-    private MenuItem menuItem;
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    protected ImageView img_avatar, img_banner;
+    protected TextView txt_total_stores, txt_date_create, txt_fullname, txt_email;
+    protected EditText edt_fullname, edt_email, edt_birthday, edt_phone, edt_address;
+    protected Spinner sp_gender;
+    protected GenderAdapter typeAdapter;
+    protected MenuItem menuItem;
 
-//    private final int REQUEST_LOCATION = 99;
-//    private PlaceModel placeModel;
+    protected final int REQUEST_RESIZE_IMAGE = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +72,14 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     }
 
     //    Khởi tạo swipeRefreshLayout để hiển thị load thông tin
-    private void initSwwipe() {
+    protected void initSwwipe() {
         swipeRefreshLayout = findSwipeRefreshLayout(R.id.profile_view_swipe);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
     //    Khởi tạo view
-    private void initView() {
+    protected void initView() {
         img_avatar = findImageView(R.id.profile_img_avatar);
         img_banner = findImageView(R.id.profile_img_banner);
 
@@ -101,14 +96,14 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     }
 
     //    Khởi tạo spinner để chọn giới tính
-    private void initGender() {
+    protected void initGender() {
         String[] arrayList = getResources().getStringArray(R.array.gender);
         sp_gender = findSpinner(R.id.profile_sp_gender);
         typeAdapter = new GenderAdapter(this, arrayList);
         sp_gender.setAdapter(typeAdapter);
     }
 
-    private void initListener() {
+    protected void initListener() {
         edt_birthday.setOnClickListener(this);
 //        edt_address.setOnClickListener(this);
 
@@ -116,12 +111,12 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     }
 
     //    Khởi tạo sự kiện logout
-    private void initLogout() {
+    protected void initLogout() {
         Button btn_logout = (findButton(R.id.profile_btn_logout));
         btn_logout.setOnClickListener(this);
     }
 
-    private void selectDate() {
+    protected void selectDate() {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(this, R.style.AppCompatAlertDialogStyle, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -149,16 +144,24 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         sp_gender.setEnabled(isEnable);
     }
 
+    /*
+    * Lấy ảnh đã đưuọc resize
+    * */
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            String server_uri = data.getStringExtra(Constants.URI);
+            File file = new File(data.getStringExtra(Constants.FILE));
 
-
-
-
-
-
-
-
-
-
+            if (type != -1 && server_path != null && file.exists()) {
+                presenter.getImageResise(server_path, server_uri);
+                onLoadPicture(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -251,19 +254,11 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, type);
 
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap, type);
-        }
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
     @Override
@@ -273,19 +268,17 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
-        presenter.postImage(bitmap, type);
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, type);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
-    @Override
-    public void onLoadPicture(File file, int type) {
+    public void onLoadPicture(File file) {
         closeProgressBar();
-
-//        if (type == 0)
-//            WidgetHelper.getInstance().setImageFile(img_banner, file);
-//        else
-            WidgetHelper.getInstance().setAvatarImageFile(img_avatar, file);
-            WidgetHelper.getInstance().setImageBlurFile(img_banner, file);
+        WidgetHelper.getInstance().setAvatarImageFile(img_avatar, file);
+        WidgetHelper.getInstance().setImageBlurFile(img_banner, file);
     }
 
     @Override
@@ -352,26 +345,14 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
         presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-//        if (requestCode == REQUEST_LOCATION) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-//                startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
-//            else
-//                showShortToast(getString(R.string.error_permission));
-//        } else
-//            presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-//        if (requestCode == REQUEST_LOCATION && resultCode == RESULT_OK) {
-//            if (data != null) {
-//                placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
-//                edt_address.setText(placeModel.getAddress());
-//            }
-//        } else
+        if (requestCode == REQUEST_RESIZE_IMAGE) {
+            getImageResize(data);
+        } else
             presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

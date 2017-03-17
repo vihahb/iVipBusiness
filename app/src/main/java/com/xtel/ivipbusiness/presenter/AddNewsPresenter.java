@@ -108,20 +108,24 @@ public class AddNewsPresenter extends BasicPresenter {
         view.startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
 
-    public void postImage(Bitmap bitmap) {
-        ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
-            @Override
-            public void onSuccess(RESP_Image resp_image, File file) {
-                PATH_BANNER = resp_image.getServer_path();
-                view.onLoadPicture(file);
-            }
+//    public void postImage(Bitmap bitmap) {
+//        ImageManager.getInstance().postImage(view.getActivity(), bitmap, true, new CallbackImageListener() {
+//            @Override
+//            public void onSuccess(RESP_Image resp_image, File file) {
+//                PATH_BANNER = resp_image.getServer_path();
+//                view.onLoadPicture(file);
+//            }
+//
+//            @Override
+//            public void onError() {
+//                view.closeProgressBar();
+//                view.showShortToast(-1, view.getActivity().getString(R.string.error_try_again));
+//            }
+//        });
+//    }
 
-            @Override
-            public void onError() {
-                view.closeProgressBar();
-                view.showShortToast(-1, view.getActivity().getString(R.string.error_try_again));
-            }
-        });
+    public void getImageResise(String server_path) {
+        PATH_BANNER = server_path;
     }
 
     public void addNews(String title, int news_type, String des, boolean isPublic, boolean isVoucher, String begin_time, String end_time, String time_alive, String point, String number, String sale, int sale_type) {
