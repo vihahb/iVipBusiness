@@ -22,6 +22,7 @@ import com.xtel.ivipbusiness.model.entity.History;
 import com.xtel.ivipbusiness.model.entity.LevelObject;
 import com.xtel.ivipbusiness.view.activity.SettingActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -62,7 +63,10 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.ViewHolder> 
         holder.txt_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEnable)
+                if (!NetWorkInfo.isOnline(context)) {
+                    Toast.makeText(context, context.getResources().getString(R.string.error_no_internet), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                     showMemberCard(levelObject);
             }
         });

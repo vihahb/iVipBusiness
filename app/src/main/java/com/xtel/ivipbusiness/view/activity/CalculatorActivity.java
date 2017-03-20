@@ -16,7 +16,7 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class CalculatorActivity extends BasicActivity {
-    private TextView txt_monitor, txt_result;
+    protected TextView txt_monitor, txt_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class CalculatorActivity extends BasicActivity {
         initDelete();
     }
 
-    private void initView() {
+    protected void initView() {
         txt_monitor = findTextView(R.id.calculator_txt_monitor);
         txt_result = findTextView(R.id.calculator_txt_result);
     }
 
-    private void initDelete() {
+    protected void initDelete() {
         ImageButton imageButton = findImageButton(R.id.calculator_img_delete);
         imageButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -106,7 +106,15 @@ public class CalculatorActivity extends BasicActivity {
     }
 
     public void percent(View view) {
+        try {
+            Expression expression = new ExpressionBuilder(txt_monitor.getText().toString()).build();
 
+            double result = expression.evaluate() / 100;
+            txt_result.setText(("= " + result));
+            txt_monitor.setText(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void dot(View view) {

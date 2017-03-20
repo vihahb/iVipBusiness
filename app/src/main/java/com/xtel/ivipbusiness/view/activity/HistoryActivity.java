@@ -52,7 +52,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         presenter.getMemberInfo();
     }
 
-    //    Khởi tạo layout và recyclerview
+    /*
+    * Khởi tạo progress View
+    * */
     private void initProgressView() {
         progressView = new ProgressView(this, null);
         progressView.initData(-1, getString(R.string.no_history), getString(R.string.click_to_try_again));
@@ -94,7 +96,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         });
     }
 
-    //    Kiểm tra xem danh sách member có trống không
+    /*
+    * Kiểm tra xem danh sách member có trống không
+    * */
     private void checkListData() {
         progressView.setRefreshing(false);
 
@@ -107,6 +111,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         }
     }
 
+    /*
+    * Lấy dữ liệu member truyền sang thành công
+    * */
     @Override
     public void onGetMemberSuccess(Member member) {
         ImageView imageView = findImageView(R.id.history_img_avatar);
@@ -118,6 +125,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         initProgressView();
     }
 
+    /*
+    * Lấy dữ liệu member truyền sang thất bại hoặc không có dữ liệu truyền sang
+    * */
     @Override
     public void onGetMemberError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
@@ -135,12 +145,17 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         });
     }
 
+    /*
+    * Load tiếp data
+    * */
     @Override
     public void onLoadMore() {
         presenter.getMemberHistory(false);
     }
 
-    //    Sự kiện load danh sách member thành công
+    /*
+    * Sự kiện load lịch sử của member thành công
+    * */
     @Override
     public void onGetHistorySuccess(final ArrayList<History> arrayList) {
         if (isClearData) {
@@ -157,7 +172,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         checkListData();
     }
 
-    //    Sự kiện load danh sách member thất bại
+    /*
+    * Sự kiện load lịch sử member thất bại
+    * */
     @Override
     public void onGetHistoryError(Error error) {
         if (listData.size() > 0)
@@ -174,6 +191,9 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         }
     }
 
+    /*
+    * Lấy session mới khi session cũ hết hạn
+    * */
     @Override
     public void getNewSession(final ICmd iCmd) {
         callbackManager.getNewSesion(new CallbacListener() {
@@ -191,11 +211,19 @@ public class HistoryActivity extends BasicActivity implements IHistoryView {
         });
     }
 
+    /*
+    * Thông báo không có mạng internet
+    * */
     @Override
     public void onNoNetwork() {
         progressView.setRefreshing(false);
-        progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
-        progressView.hideData();
+
+        if (listData.size() > 0)
+            showShortToast(getString(R.string.error_no_internet));
+        else {
+            progressView.updateData(-1, getString(R.string.error_no_internet), getString(R.string.click_to_try_again));
+            progressView.hideData();
+        }
     }
 
     @Override

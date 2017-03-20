@@ -28,8 +28,10 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -43,6 +45,7 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
     protected MemberCardAdapter adapter;
 
     protected int LEVEL = -1;
+    protected final int REQUEST_RESIZE_IMAGE = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +58,18 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         presenter.getData();
     }
 
-    //    Khởi tạo swipeRefreshLayout để hiển thị load thông tin
+    /*
+    * Khởi tạo swipeRefreshLayout để hiển thị load thông tin
+    * */
     private void initSwwipe() {
         swipeRefreshLayout = findSwipeRefreshLayout(R.id.add_level_swipe);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3);
     }
 
+    /*
+    * Khởi tạo các view trong layout
+    * */
     protected void initView() {
         edt_limit = findEditText(R.id.add_level_edt_limit);
         edt_name = findEditText(R.id.add_level_edt_name);
@@ -74,6 +82,9 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         }
     }
 
+    /*
+    * Khởi tạo recyclerview đẻ hiển thị danh sách các level
+    * */
     protected void initRecyclerview() {
         RecyclerView recyclerView = findRecyclerView(R.id.add_level_recyclerview);
         recyclerView.setHasFixedSize(false);
@@ -83,6 +94,9 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         recyclerView.setAdapter(adapter);
     }
 
+    /*
+    * Lắng nghe sự kiện khi view được click
+    * */
     protected void initListener() {
         Button btn_done = findButton(R.id.add_level_btn_done);
         Button btn_add_card = findButton(R.id.add_level_btn_add_member_card);
@@ -102,6 +116,31 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         });
     }
 
+    /*
+    * Lấy ảnh đã đưuọc resize
+    * */
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            String server_uri = data.getStringExtra(Constants.URI);
+            String file_path = data.getStringExtra(Constants.FILE);
+
+            if (type != -1 && server_path != null && file_path != null) {
+                onPostImageSuccess(file_path, server_path, server_uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    /*
+    * Lấy dữ liệu truyền sang thành công
+    * */
     @Override
     public void onGetDataSuccess(int level) {
         this.LEVEL = level;
@@ -109,10 +148,12 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         initSwwipe();
         initView();
         initListener();
-
-
     }
 
+    /*
+    * Lấy dữ liệu truyền sang thất bại hoặc không có dữ liệu truyền sang
+    * Hiển thị thông báo và trờ về activity trước
+    * */
     @Override
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
@@ -129,6 +170,10 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         });
     }
 
+    /*
+    * Lấy danh sách các member card mặc định thành công
+    * Hiển thị danh sách lên màn hình
+    * */
     @Override
     public void onGetCardDefaultSuccess(ArrayList<Card> arrayList) {
         swipeRefreshLayout.setRefreshing(false);
@@ -138,6 +183,10 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         initRecyclerview();
     }
 
+    /*
+    * Chọn ảnh từ Gallery thành công
+    * Bắt đầu resize ảnh
+    * */
     @Override
     public void onTakePictureGallary(Uri uri) {
         if (!NetWorkInfo.isOnline(this)) {
@@ -148,21 +197,17 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, 0);
 
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap, true);
-        }
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
+    /*
+    * Chọn ảnh từ Camera thành công
+    * Bắt đầu resize ảnh
+    * */
     @Override
     public void onTakePictureCamera(Bitmap bitmap) {
         if (!NetWorkInfo.isOnline(this)) {
@@ -173,22 +218,31 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
-        presenter.postImage(bitmap, true);
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, 0);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
-    @Override
-    public void onPostImageSuccess(RESP_Image resp_image) {
+    /*
+    * Thêm member card thành công
+    * Thêm ảnh vào list member card
+    * */
+    public void onPostImageSuccess(String file_path, String server_path, String server_uri) {
         Card card = new Card();
-        card.setFile_path(resp_image.getFile_path());
+        card.setFile_path(file_path);
         card.setCard_name(getString(R.string.updating));
-        card.setCard_path(resp_image.getServer_path());
-        card.setCard_url(resp_image.getUri());
+        card.setCard_path(server_path);
+        card.setCard_url(server_uri);
 
         closeProgressBar();
         adapter.addMemberCard(card);
     }
 
+    /*
+    * Lấy session mới khi session cũ hết hạn
+    * */
     @Override
     public void getNewSession(final ICmd iCmd, final Object... params) {
         callbackManager.getNewSesion(new CallbacListener() {
@@ -207,6 +261,9 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
         });
     }
 
+    /*
+    * Request api lên server bị lỗi
+    * */
     @Override
     public void onRequestError(Error error) {
         swipeRefreshLayout.setRefreshing(false);
@@ -265,6 +322,9 @@ public class AddLevelActivity extends BasicActivity implements IAddLevelView {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == RESULT_OK) {
+            getImageResize(data);
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

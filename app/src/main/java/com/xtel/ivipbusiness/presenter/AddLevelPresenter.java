@@ -140,22 +140,22 @@ public class AddLevelPresenter {
         view.getActivity().startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
 
-    public void postImage(Bitmap bitmap, boolean isBigImage) {
-
-        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
-            @Override
-            public void onSuccess(RESP_Image resp_image, File file) {
-                resp_image.setFile_path(file.getPath());
-                view.onPostImageSuccess(resp_image);
-            }
-
-            @Override
-            public void onError() {
-                view.closeProgressBar();
-                view.showShortToast(view.getActivity().getString(R.string.error_try_again));
-            }
-        });
-    }
+//    public void postImage(Bitmap bitmap, boolean isBigImage) {
+//
+//        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
+//            @Override
+//            public void onSuccess(RESP_Image resp_image, File file) {
+//                resp_image.setFile_path(file.getPath());
+//                view.onPostImageSuccess(resp_image);
+//            }
+//
+//            @Override
+//            public void onError() {
+//                view.closeProgressBar();
+//                view.showShortToast(view.getActivity().getString(R.string.error_try_again));
+//            }
+//        });
+//    }
 
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

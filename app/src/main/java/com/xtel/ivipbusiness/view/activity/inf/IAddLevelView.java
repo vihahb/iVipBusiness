@@ -23,7 +23,7 @@ public interface IAddLevelView {
     void onGetCardDefaultSuccess(ArrayList<Card> arrayList);
     void onTakePictureGallary(Uri uri);
     void onTakePictureCamera(Bitmap bitmap);
-    void onPostImageSuccess(RESP_Image resp_image);
+//    void onPostImageSuccess(RESP_Image resp_image);
 
     void getNewSession(ICmd iCmd, Object... params);
     void onRequestError(Error error);

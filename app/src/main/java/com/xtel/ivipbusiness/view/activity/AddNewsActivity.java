@@ -70,7 +70,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         hideLayout();
     }
 
-    //    Lấy toàn bộ view
+    /*
+    * Khởi tạo các view trong layout
+    * */
     protected void initView() {
         img_banner = findImageView(R.id.add_news_img_banner);
         img_camera = findImageButton(R.id.add_news_img_camera);
@@ -90,20 +92,27 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         layout_voucher = findLinearLayout(R.id.add_news_layout_voucher);
     }
 
-    //    Khởi tạo spinner chọn type
+    /*
+    * Khởi tạo spinner chọn type của bản tin
+    * */
     protected void initType() {
         sp_news_type = findSpinner(R.id.add_news_sp_type);
         TypeAdapter typeAdapter = new TypeAdapter(this);
         sp_news_type.setAdapter(typeAdapter);
     }
 
-    //    Khởi tạo spinner chọn loại giảm giá
+    /*
+    * Khởi tạo spinner chọn loại giảm giá
+    * */
     protected void initTypeSale() {
         sp_type_sale = findSpinner(R.id.add_news_sp_type_salse);
         TypeSaleAdapter typeAdapter = new TypeSaleAdapter(this);
         sp_type_sale.setAdapter(typeAdapter);
     }
 
+    /*
+    * Lắng nghe sự kiện khi view được click
+    * */
     protected void initListener() {
         img_camera.setOnClickListener(this);
         chk_voucher.setOnCheckedChangeListener(this);
@@ -113,6 +122,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         edt_end_time.setOnClickListener(this);
     }
 
+    /*
+    * Chọn ngày
+    * */
     protected void selectDate(final int type) {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(this, R.style.AppCompatAlertDialogStyle, new DatePickerDialog.OnDateSetListener() {
@@ -126,6 +138,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    /*
+    * Lựa chọn để bản tin public hoặc private
+    * */
     protected void setPublic(View view) {
         final PopupMenu popup = new PopupMenu(getApplicationContext(), view);
         popup.getMenuInflater().inflate(R.menu.menu_nav_add_news, popup.getMenu());
@@ -150,6 +165,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         popup.show();
     }
 
+    /*
+    * Hiển thị layout thêm voucher
+    * */
     protected void showLayout() {
 //             Prepare the View for the animation
         layout_voucher.setVisibility(View.VISIBLE);
@@ -167,6 +185,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 });
     }
 
+    /*
+    * Ẩn thị layout thêm voucher
+    * */
     protected void hideLayout() {
         layout_voucher.animate()
                 .translationY(-layout_voucher.getHeight())
@@ -198,7 +219,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }
     }
 
-
+    /*
+    * Lắng nghe khi có view được click
+    * */
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -221,6 +244,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }
     }
 
+    /*
+    * Sự kiện khi người dùng click vào "Tạo mã khuyến mãi"
+    * */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
@@ -230,6 +256,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         }
     }
 
+    /*
+    * Thông báo lỗi khi nhận data truyền sang hoặc không có data truyền sang
+    * */
     @Override
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
@@ -247,6 +276,10 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         });
     }
 
+    /*
+    * Chọn ảnh từ Gallery thành công
+    * Bắt đầu resize ảnh đã chọn
+    * */
     @Override
     public void onTakePictureGallary(Uri uri) {
         if (!NetWorkInfo.isOnline(this)) {
@@ -264,6 +297,10 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
+    /*
+    * Chọn ảnh từ Camera thành công
+    * Bắt đầu resize ảnh đã chọn
+    * */
     @Override
     public void onTakePictureCamera(Bitmap bitmap) {
         if (!NetWorkInfo.isOnline(this)) {
@@ -281,12 +318,18 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
-    @Override
+    /*
+    * Chọn ảnh làm banner thành công
+    * Hiển thị ảnh lên banner
+    * */
     public void onLoadPicture(File file) {
         closeProgressBar();
         WidgetHelper.getInstance().setImageFile(img_banner, file);
     }
 
+    /*
+    * Thêm bản tin thành công
+    * */
     @Override
     public void onAddNewsSuccess() {
         showMaterialDialog(false, false, null, getString(R.string.success_add_news), null, getString(R.string.back), new DialogListener() {
@@ -306,6 +349,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         });
     }
 
+    /*
+    * Lấy session mới khi session cũ hết hạn
+    * */
     @Override
     public void getNewSession(final ICmd iCmd) {
         callbackManager.getNewSesion(new CallbacListener() {
@@ -324,6 +370,10 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         });
     }
 
+    /*
+    * Hiển thị thông báo
+    * Nếu có type truyền vào sẽ check type để focus đén edittext tương ứng
+    * */
     @Override
     public void showShortToast(int type, String message) {
         switch (type) {

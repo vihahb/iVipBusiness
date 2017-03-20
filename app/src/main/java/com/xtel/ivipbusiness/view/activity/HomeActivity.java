@@ -35,18 +35,16 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
  */
 
 public class HomeActivity extends BasicActivity implements NavigationView.OnNavigationItemSelectedListener, IHomeView {
-    private HomePresenter presenter;
-    private CallbackManager callbackManager;
+    protected HomePresenter presenter;
+    protected CallbackManager callbackManager;
 
-    private DrawerLayout drawer;
-    private NavigationView navigationView;
-    private ActionBar actionBar;
-    private MenuItem menu_avatar;
+    protected DrawerLayout drawer;
+    protected NavigationView navigationView;
+    protected ActionBar actionBar;
+    protected MenuItem menu_avatar, menu_coupons;
 
-    //    private final int REQUEST_ADD_STORE = 11;
-//    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
-    private final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
-    private final int REQUEST_STORE_INFO = 11, REQUEST_PROFILE = 22, REQUEST_ADD_STORE = 33;
+    protected final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
+    protected final int REQUEST_STORE_INFO = 11, REQUEST_PROFILE = 22, REQUEST_ADD_STORE = 33;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +58,19 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         replaceListStore();
     }
 
-    //     Khởi tạo view`
-    private void initView() {
+    /*
+    * Khởi tạo các view trong layout
+    * */
+    protected void initView() {
         drawer = findDrawerLayout(R.id.drawer_layout);
         navigationView = findNavigationView(R.id.nav_view);
     }
 
-    //    Khởi tạo navigation
+    /*
+    * Khởi tạo navigation
+    * */
     @SuppressWarnings("deprecation")
-    private void initNavigationView() {
+    protected void initNavigationView() {
         Toolbar toolbar = findToolbar(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -81,39 +83,77 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    //    Hiển thị danh sách cửa hàng
-    private void replaceListStore() {
+    /*
+    * Hiển thị menu item cho layout danh sách cửa hàng
+    * */
+    protected void showMenuListStore() {
+        if (menu_avatar != null && menu_coupons != null) {
+            menu_avatar.setVisible(true);
+            menu_coupons.setVisible(true);
+        }
+    }
+
+    /*
+    * Ẩn tất cả các menu item
+    * */
+    protected void hideMenuItem() {
+        menu_avatar.setVisible(false);
+        menu_coupons.setVisible(false);
+    }
+
+    /*
+    * Hiển thị màn hình danh sách cửa hàng
+    * */
+    protected void replaceListStore() {
+        showMenuListStore();
         actionBar.setTitle(getString(R.string.title_activity_list_chain));
         replaceFragment(R.id.home_container, ChainsFragment.newInstance(), LIST_STORE);
     }
 
-    //    Hiển thị thống kê
-    private void replaceStatistic() {
+    /*
+    * Hiển thị màn hình thống kê
+    * */
+    protected void replaceStatistic() {
+        hideMenuItem();
         actionBar.setTitle(getString(R.string.title_activity_statistic));
         replaceFragment(R.id.home_container, StatisticFragment.newInstance(), STATISTIC);
     }
 
-    //    Hiển thị chính sách
-    private void replacePolicy() {
+    /*
+    * Hiển thị màn hình chính sách
+    * */
+    protected void replacePolicy() {
+        hideMenuItem();
         actionBar.setTitle(getString(R.string.title_activity_policy));
         replaceFragment(R.id.home_container, ChainsFragment.newInstance(), POLICY);
     }
 
-    //    Hiển thị thông tin ứng dụng
-    private void replaceAppInfo() {
+    /*
+    * Hiển thị màn hình thông tin ứng dụng
+    * */
+    protected void replaceAppInfo() {
+        hideMenuItem();
         actionBar.setTitle(getString(R.string.title_activity_app_info));
         replaceFragment(R.id.home_container, ChainsFragment.newInstance(), APP_INFO);
     }
 
-    //    Hiển thị faq
-    private void replaceFaq() {
+    /*
+    * Hiển thị màn hình faq
+    * */
+    protected void replaceFaq() {
+        hideMenuItem();
         actionBar.setTitle(getString(R.string.title_activity_faq));
         replaceFragment(R.id.home_container, ChainsFragment.newInstance(), FAQ);
     }
 
 
-    private ImageView img_avatar;
 
+
+    /*
+    * Lấy thông tin user thành công
+    * Load avatar lên menu item
+    * */
+    protected ImageView img_avatar;
     @Override
     public void onGetShortUserDataSuccess(RESP_Full_Profile obj) {
         if (obj != null)
@@ -143,16 +183,25 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
             }
     }
 
+    /*
+    * Lấy thông tin data thất bại
+    * */
     @Override
     public void onGetUserDataError() {
         presenter.getFullUserData();
     }
 
+    /*
+    * Đăng ký fcm thất bại
+    * */
     @Override
     public void onRegisterFcmError() {
         presenter.registerFCm();
     }
 
+    /*
+    * Lấy session mới khi session cũ hết hạn
+    * */
     @Override
     public void getNewSession(final ICmd iCmd, final int type) {
         callbackManager.getNewSesion(new CallbacListener() {
@@ -170,6 +219,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
             }
         });
     }
+
 
     @Override
     public Activity getActivity() {
@@ -191,8 +241,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         getMenuInflater().inflate(R.menu.menu_home, menu);
 
         menu_avatar = menu.findItem(R.id.action_home_user_info);
-//        menu_create_store = menu.findItem(R.id.action_home_create_store);
-//        menu_create_chain = menu.findItem(R.id.action_home_create_chain);
+        menu_coupons = menu.findItem(R.id.action_home_coupons);
 
         presenter.getFullUserData();
         return true;
@@ -204,18 +253,9 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
 
         if (id == R.id.action_home_user_info)
             startActivityForResult(ProfileActivity.class, REQUEST_PROFILE);
-//        else if (id == R.id.action_home_create_store) {
-//            if (!NetWorkInfo.isOnline(getApplicationContext())) {
-//                showShortToast(getString(R.string.error_no_internet));
-//            } else
-//            startActivityForResult(AddStoreActivity.class, Constants.MODEL, STORE_TYPE, REQUEST_ADD_STORE);
-//        } else if (id == R.id.action_home_create_chain) {
-//            if (!NetWorkInfo.isOnline(getApplicationContext())) {
-//                showShortToast(getString(R.string.error_no_internet));
-//            } else
-//                startActivityForResult(AddStoreActivity.class, Constants.MODEL, CHAIN_TYPE, REQUEST_ADD_STORE);
-//        }
-
+        else if (id == R.id.action_home_coupons) {
+            showShortToast("Dang xay dung");
+        }
         return super.onOptionsItemSelected(item);
     }
 

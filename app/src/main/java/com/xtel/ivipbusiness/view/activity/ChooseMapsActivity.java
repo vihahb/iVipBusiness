@@ -54,12 +54,18 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         presenter.initGoogleApi();
     }
 
+    /*
+    * Khởi tạo layout hiển thị map
+    * */
     private void initGoogle() {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+    /*
+    * Load map thành công
+    * */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -77,6 +83,9 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
     }
 
+    /*
+    * Khởi tạo các view trong layout
+    * */
     private void initView() {
         Button btn_choose_location = (Button) findViewById(R.id.btn_map_choose_location);
         btn_choose_location.setOnClickListener(this);
@@ -85,6 +94,9 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         fab_mylocation.setOnClickListener(this);
     }
 
+    /*
+    * Khởi tạo view tìm kiếm địa điểm
+    * */
     private void initSearchView() {
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment_map);
         autocompleteFragment.setBoundsBias(new LatLngBounds(new LatLng(20.725517, 104.634451), new LatLng(21.937487, 106.759183)));
@@ -118,11 +130,7 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.choose_map, menu);
-//        return true;
-//    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -134,6 +142,9 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+    * Sự kiện khi camera di chuyển
+    * */
     @Override
     public void onCameraMove() {
         if (marker != null)
@@ -141,6 +152,9 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         placeModel = null;
     }
 
+    /*
+    * Sự kiện khi người dùng di chuyển camera sang 1 điểm khác
+    * */
     @Override
     public void onCameraIdle() {
         if (marker != null)
@@ -170,11 +184,18 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         super.onDestroy();
     }
 
+    /*
+    * Lấy dữ liệu truyền sang thành công
+    * */
     @Override
     public void onGetData(PlaceModel placeModel) {
         this.placeModel = placeModel;
     }
 
+    /*
+    * Lấy dữ liệu của địa điểm được chọn thành công
+    * Hiển thị dữ liệu lên marker
+    * */
     @Override
     public void onGetAddressSucces(double lat, double lng, String address) {
         double new_latitude = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter().latitude;
@@ -198,6 +219,9 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         }
     }
 
+    /*
+    * Lấy thông tin địa chỉ thất bại
+    * */
     @Override
     public void onGetAddressError(double lat, double lng) {
         double new_latitude = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter().latitude;
@@ -210,6 +234,9 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
         }
     }
 
+    /*
+    * Lấy được vị trí của người dùng hiện tại
+    * */
     @Override
     public void onGetMyLocation(LatLng latLng) {
         if (mMap != null)
@@ -220,73 +247,4 @@ public class ChooseMapsActivity extends BasicActivity implements OnMapReadyCallb
     public Activity getActivity() {
         return this;
     }
-
-//    private class LoadPlace extends AsyncTask<Void, Void, String> {
-//        double latitude = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter().latitude;
-//        double longtitude = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter().longitude;
-//
-//        @Override
-//        protected void onPreExecute() {
-////            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected String doInBackground(Void... params) {
-//
-//            try {
-//                Geocoder geocoder = new Geocoder(ChooseMapsActivity.this, Locale.getDefault());
-//                List<Address> addresses = geocoder.getFromLocation(latitude, longtitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-//
-//                String address = addresses.get(0).getAddressLine(0);
-//                String city = addresses.get(0).getLocality();
-//                String country = addresses.get(0).getCountryName();
-//                String knownName = addresses.get(0).getFeatureName();
-//
-//                String place = "";
-//                if (address != null && knownName != null)
-//                    if (!address.contains(knownName))
-//                        place += knownName;
-//
-//                if (address != null) {
-//                    if (place.isEmpty())
-//                        place += address;
-//                    else
-//                        place += ", " + address;
-//                }
-//                if (city != null)
-//                    place += ", " + city;
-//                if (country != null)
-//                    place += ", " + country;
-//
-//                return place;
-//            } catch (Exception e) {
-//                debug("error: " + e.toString());
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String aVoid) {
-//            super.onPostExecute(aVoid);
-//
-//            double new_latitude = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter().latitude;
-//            double new_longtitude = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter().longitude;
-//
-//            if (new_latitude == latitude && new_longtitude == longtitude) {
-//                if (aVoid != null) {
-//                    marker = mMap.addMarker(new MarkerOptions()
-//                            .position(new LatLng(latitude, longtitude))
-//                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_red))
-//                            .title(aVoid));
-//                    marker.showInfoWindow();
-//
-//                    placeModel = new Place();
-//                    placeModel.setAddress(aVoid);
-//                    placeModel.setLatitude(latitude);
-//                    placeModel.setLongtitude(longtitude);
-//                }
-//            }
-//        }
-//    }
 }

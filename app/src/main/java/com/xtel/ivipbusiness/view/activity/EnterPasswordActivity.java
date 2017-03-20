@@ -15,6 +15,7 @@ import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbackListenerReset;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.callback.DialogListener;
 
 public class EnterPasswordActivity extends BasicActivity implements View.OnClickListener, IEnterPassView {
     private EditText edt_new_pass, edt_re_passs;
@@ -33,6 +34,9 @@ public class EnterPasswordActivity extends BasicActivity implements View.OnClick
         presenter.getData();
     }
 
+    /*
+    * Khởi tạo các view trong layout
+    * */
     private void initView() {
         edt_new_pass = findEditText(R.id.enter_pass_edt_new_pass);
         edt_re_passs = findEditText(R.id.enter_pass_edt_re_pass);
@@ -48,17 +52,37 @@ public class EnterPasswordActivity extends BasicActivity implements View.OnClick
         }
     }
 
+    /*
+    * Thông báo lỗi khi nhận data hoặc không có data truyền sang
+    * */
     @Override
     public void onGetDataError() {
         showShortToast(getString(R.string.error_can_not_resett));
-        startActivityAndFinish(LoginActivity.class);
+        showMaterialDialog(false, false, null, getString(R.string.error_can_not_resett), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void negativeClicked() {
+
+            }
+
+            @Override
+            public void positiveClicked() {
+                closeDialog();
+                startActivityAndFinish(LoginActivity.class);
+            }
+        });
     }
 
+    /*
+    * Thông báo lỗi khi kiểm tra dữ liệu
+    * */
     @Override
     public void onValidateError(String error) {
         showShortToast(error);
     }
 
+    /*
+    * Lấy lại mật khẩu
+    * */
     @Override
     public void onResetPassWord(String auth_id, String password) {
         showProgressBar(false, false, null, getString(R.string.doing_reset));

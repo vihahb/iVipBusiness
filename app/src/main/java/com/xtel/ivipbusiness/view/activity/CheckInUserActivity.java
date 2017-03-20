@@ -39,16 +39,15 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
 
         presenter = new CheckInUserPresenter(this);
         initToolbar(R.id.check_in_user_toolbar, null);
-        initView();
         initScannerView();
         presenter.getData();
     }
 
-    protected void initView() {
-        contentFrame = (ViewGroup) findViewById(R.id.check_in_user_zxing);
-    }
-
+    /*
+    * Khởi tạo Scanner View để quét mã QR code
+    * */
     protected void initScannerView() {
+        contentFrame = (ViewGroup) findViewById(R.id.check_in_user_zxing);
         mScannerView = new ZXingScannerView(getApplicationContext()) {
             @Override
             protected IViewFinder createViewFinderView(Context context) {
@@ -58,6 +57,9 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         contentFrame.addView(mScannerView);
     }
 
+    /*
+    * Hiển thị thông báo lỗi khi check in
+    * */
     protected void showCheckInError(String message) {
         showMaterialDialog(false, false, null, message, null, getString(R.string.ok), new DialogListener() {
             @Override
@@ -74,6 +76,9 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         });
     }
 
+    /*
+    * Hiển thị lỗi khi thành viên chưa có thẻ thành viên
+    * */
     protected void showCheckInError501(final String member_code) {
         closeProgressBar();
 
@@ -102,6 +107,10 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
 
 
 
+    /*
+    * Lấy được mã QR code
+    * Kiểm tra mã QR code
+    * */
     @Override
     public void handleResult(Result result) {
         if (NetWorkInfo.isOnline(this)) {
@@ -114,6 +123,9 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         }
     }
 
+    /*
+    * Thông báo lỗi khi nhận data bị lỗi, hoặc không có data truyền sang
+    * */
     @Override
     public void onGetDataError() {
         showMaterialDialog(false, false, null, getString(R.string.error_try_again), null, getString(R.string.back), new DialogListener() {
@@ -130,6 +142,9 @@ public class CheckInUserActivity extends BasicActivity implements ZXingScannerVi
         });
     }
 
+    /*
+    * Lấy session mới khi session cũ đã hết hạn
+    * */
     public void getNewSession(final ICmd iCmd, final Object... params) {
         callbackManager.getNewSesion(new CallbacListener() {
             @Override

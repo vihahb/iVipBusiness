@@ -45,18 +45,30 @@ public abstract class BasicActivity extends IActivity {
             actionBar.setTitle(title);
     }
 
+    /*
+    * Hiển thị log
+    * */
     protected void debug(String message) {
         Log.e(this.getClass().getSimpleName(), message);
     }
 
+    /*
+    * Hiển thị thông báo snackbar 2s
+    * */
     protected void showShortSnackBar(View view, String message) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
     }
 
+    /*
+    * Hiển thị thông báo snackbar 3.5s
+    * */
     protected void showLongSnackBar(View view, String message) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 
+    /*
+    * Hiển thị thông báo 3.5s
+    * */
     protected void showLongToast(String message) {
         if (toast != null)
             toast.cancel();
@@ -65,6 +77,9 @@ public abstract class BasicActivity extends IActivity {
         toast.show();
     }
 
+    /*
+    * Hiển thị thông báo 2s
+    * */
     protected void showShortToast(String message) {
         if (toast != null)
             toast.cancel();
@@ -73,6 +88,9 @@ public abstract class BasicActivity extends IActivity {
         toast.show();
     }
 
+    /*
+    * Hiển thị tiến trình (đang thực hiện)
+    * */
     protected void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {
         progressDialog = new ProgressDialog(BasicActivity.this, R.style.AppCompatAlertDialogStyle);
         progressDialog.setCanceledOnTouchOutside(isTouchOutside);
@@ -86,11 +104,17 @@ public abstract class BasicActivity extends IActivity {
         progressDialog.show();
     }
 
+    /*
+    * Kết thúc hiển thị tiến trình (đang thực hiện)
+    * */
     protected void closeProgressBar() {
         if (progressDialog != null)
             progressDialog.dismiss();
     }
 
+    /*
+    * Hiển thị thông báo (chuẩn material)
+    * */
     @SuppressWarnings("ConstantConditions")
     protected void showMaterialDialog(boolean isTouchOutside, boolean isCancelable, String title, String message, String negative, String positive, final DialogListener dialogListener) {
         dialog = new Dialog(BasicActivity.this, R.style.Theme_Transparent);
@@ -144,12 +168,17 @@ public abstract class BasicActivity extends IActivity {
             dialog.show();
     }
 
+    /*
+    * Kết thúc thông báo
+    * */
     public void closeDialog() {
         if (dialog != null)
             dialog.dismiss();
     }
 
-    //    Khởi chạy fragment giao diện và add vào stack
+    /*
+    * Khởi tạo fragment vào 1 view layout (FrameLayout)
+    * */
     protected void replaceFragment(int id, Fragment fragment, String tag) {
         if (getSupportFragmentManager().findFragmentByTag(tag) == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

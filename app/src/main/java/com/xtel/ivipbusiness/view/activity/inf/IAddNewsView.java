@@ -18,7 +18,6 @@ public interface IAddNewsView {
     void onGetDataError();
     void onTakePictureGallary(Uri uri);
     void onTakePictureCamera(Bitmap bitmap);
-    void onLoadPicture(File url);
     void onAddNewsSuccess();
     void getNewSession(ICmd iCmd);
 
