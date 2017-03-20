@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import com.xtel.ivipbusiness.view.activity.LoginActivity;
 import com.xtel.ivipbusiness.view.activity.ResizeImageActivity;
 import com.xtel.ivipbusiness.view.adapter.GalleryAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
-import com.xtel.ivipbusiness.view.widget.ProgressView;
+import com.xtel.ivipbusiness.view.widget.ProgressViewGrid2;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -44,7 +43,7 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
 
     private GalleryAdapter adapter;
     private ArrayList<Gallery> listData;
-    private ProgressView progressView;
+    private ProgressViewGrid2 progressView;
     private CallbackManager callbackManager;
 
     private boolean isClearData = false;
@@ -67,19 +66,18 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         callbackManager = CallbackManager.create(getActivity());
 
         presenter = new GalleryPresenter(this);
-        initProgressView();
+        initProgressView(view);
         initFloatingActionButton();
     }
 
     //    Khởi tạo layout và recyclerview
-    private void initProgressView() {
-        progressView = findProgressView();
+    private void initProgressView(View view) {
+        progressView = new ProgressViewGrid2(null, view);
         progressView.initData(-1, getString(R.string.no_gallery), getString(R.string.click_to_try_again));
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         listData = new ArrayList<>();
         adapter = new GalleryAdapter(this, listData);
-        progressView.setUpRecyclerView(layoutManager, adapter);
+        progressView.setUpRecyclerView(getContext().getApplicationContext(), adapter);
 
         progressView.onLayoutClicked(new View.OnClickListener() {
             @Override

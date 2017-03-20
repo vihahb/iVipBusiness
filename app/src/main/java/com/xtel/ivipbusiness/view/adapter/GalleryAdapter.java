@@ -45,12 +45,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gallery, parent, false));
         else if (viewType == TYPE_LOAD)
             return new ViewProgressBar(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progressbar, parent, false));
-
         return null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final int _position = position;
         if (isLoadMore && position == arrayList.size())
             _view.onLoadMore();
 
@@ -67,7 +67,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         return;
                     }
 
-                    _view.onDeleteGallery(gallery.getId(), position);
+                    _view.onDeleteGallery(gallery.getId(), _position);
                 }
             });
 
@@ -81,7 +81,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     RESP_Gallery resp_gallery = new RESP_Gallery();
                     resp_gallery.setData(arrayList);
-                    resp_gallery.setPosition(position);
+                    resp_gallery.setPosition(_position);
                     _view.startActivity(ShowImageActivity.class, Constants.MODEL, JsonHelper.toJson(resp_gallery));
                 }
             });
