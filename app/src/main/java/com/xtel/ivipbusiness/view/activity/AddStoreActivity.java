@@ -239,15 +239,17 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
     * */
     @Override
     public void onAddStoreSuccess(String message) {
-        showMaterialDialog(false, false, null, message, null, getString(R.string.back), new DialogListener() {
+        showMaterialDialog(false, false, null, message, null, getString(R.string.ok), new DialogListener() {
             @Override
             public void negativeClicked() {
+                setResult(RESULT_OK);
                 closeDialog();
                 finish();
             }
 
             @Override
             public void positiveClicked() {
+                setResult(RESULT_OK);
                 closeDialog();
                 finish();
             }
@@ -354,7 +356,7 @@ public class AddStoreActivity extends BasicActivity implements View.OnClickListe
                 placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
                 edt_address.setText(placeModel.getAddress());
             }
-        } else if (requestCode == REQUEST_RESIZE_IMAGE) {
+        } else if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == RESULT_OK) {
             getImageResize(data);
         } else
             presenter.onActivityResult(requestCode, resultCode, data);

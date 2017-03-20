@@ -175,10 +175,10 @@ public class ResizeImageActivity extends BasicActivity {
         @Override
         protected void onPostExecute(File file) {
             super.onPostExecute(file);
-            closeProgressBar();
 
             if (file != null) {
                 if (!NetWorkInfo.isOnline(getApplicationContext())) {
+                    closeProgressBar();
                     showShortToast(getString(R.string.error_no_internet));
                     return;
                 }
@@ -186,6 +186,8 @@ public class ResizeImageActivity extends BasicActivity {
                 postImageToServer(file, ResizeImageActivity.this, new CallbackImageListener() {
                     @Override
                     public void onSuccess(final RESP_Image resp_image, final File file) {
+                        closeProgressBar();
+
                         Intent intent = new Intent();
                         intent.putExtra(Constants.SERVER_PATH, resp_image.getServer_path());
                         intent.putExtra(Constants.FILE, file.getAbsolutePath());
@@ -203,6 +205,7 @@ public class ResizeImageActivity extends BasicActivity {
                     }
                 });
             } else {
+                closeProgressBar();
                 showShortToast(getString(R.string.error_resize_image));
             }
         }

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 /**
  * Created by Mr. M.2 on 1/13/2017
  */
-
 public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<SortStore> arrayList;
     private IChainsView _view;
@@ -72,6 +71,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, stores.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_name, stores.getName(), _view.getActivity().getString(R.string.not_update_name));
+            WidgetHelper.getInstance().setTextViewType(viewHolder.txt_type, stores.getStore_type());
 
             bg_pos++;
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +111,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private class ViewHolder extends ViewHolderHelper {
         private ImageView img_banner, img_avatar;
         private View img_background;
-        private TextView txt_name;
+        private TextView txt_name, txt_type;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -120,6 +120,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             img_banner = findImageView(R.id.item_chain_img_banner);
             img_avatar = findImageView(R.id.item_chain_img_avatar);
             txt_name = findTextView(R.id.item_chain_txt_name);
+            txt_type = findTextView(R.id.item_chain_txt_type);
         }
     }
 

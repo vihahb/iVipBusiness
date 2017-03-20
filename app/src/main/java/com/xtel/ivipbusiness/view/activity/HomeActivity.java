@@ -46,7 +46,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     //    private final int REQUEST_ADD_STORE = 11;
 //    private final String CHAIN_TYPE = "CHAIN", STORE_TYPE = "STORE";
     private final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
-    private final int REQUEST_PROFILE = 11;
+    private final int REQUEST_STORE_INFO = 11, REQUEST_PROFILE = 22, REQUEST_ADD_STORE = 33;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,17 +110,6 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         actionBar.setTitle(getString(R.string.title_activity_faq));
         replaceFragment(R.id.home_container, ChainsFragment.newInstance(), FAQ);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     private ImageView img_avatar;
@@ -254,7 +243,11 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_PROFILE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_STORE_INFO || requestCode == REQUEST_ADD_STORE) {
+            ChainsFragment fragment = (ChainsFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
+            if (fragment != null)
+                fragment.onActivityResult(requestCode, resultCode, data);
+        } else if (requestCode == REQUEST_PROFILE && resultCode == RESULT_OK) {
             presenter.getFullUserData();
         }
     }

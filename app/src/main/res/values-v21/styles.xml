@@ -75,7 +75,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Toolbar_TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">@dimen/font_15</item>
+        <item name="android:textSize">@dimen/font_18</item>
     </style>
 
     <style name="Theme.MyApp.ActionBar" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -108,7 +108,7 @@
 
     <style name="edittext_title_no_drawable">
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/font_15</item>
+        <item name="android:textSize">@dimen/font_18</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
@@ -287,7 +287,7 @@
 
     <style name="textview_title">
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/font_15</item>
+        <item name="android:textSize">@dimen/font_18</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:ellipsize">end</item>
     </style>

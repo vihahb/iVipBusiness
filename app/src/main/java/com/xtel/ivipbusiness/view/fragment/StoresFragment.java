@@ -1,5 +1,6 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,6 +51,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
 
     private final String STORE_TYPE = "STORE";
     private boolean isClearData = false;
+    private final int REQUEST_ADD_STORE = 11;
 
     public static StoresFragment newInstance() {
         return new StoresFragment();
@@ -94,12 +96,7 @@ public class StoresFragment extends BasicFragment implements IStoresView {
         progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                isClearData = true;
-                adapter.setLoadMore(false);
-                adapter.notifyDataSetChanged();
-                progressView.setRefreshing(true);
-                progressView.showData();
-                presenter.getStores(true);
+                getDataAgain();
             }
         });
 
@@ -125,10 +122,10 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                         Intent intent = new Intent(getActivity(), AddStoreActivity.class);
                         intent.putExtra(Constants.ID, Constants.SORT_STORE.getId());
                         intent.putExtra(Constants.MODEL, STORE_TYPE);
-                        startActivityForResult(intent, 21);
+                        startActivityForResult(intent, REQUEST_ADD_STORE);
                         break;
                     case R.id.nav_store_choose_store:
-                        startActivityForResult(ListStoresActivity.class, 22);
+                        startActivityForResult(ListStoresActivity.class, REQUEST_ADD_STORE);
                         break;
                     default:
                         break;
@@ -137,6 +134,18 @@ public class StoresFragment extends BasicFragment implements IStoresView {
                 return super.onMenuItemSelected(menuItem);
             }
         });
+    }
+
+    /*
+    * Load lại danh sách cửa hàng
+    * */
+    protected void getDataAgain() {
+        isClearData = true;
+        adapter.setLoadMore(false);
+        adapter.notifyDataSetChanged();
+        progressView.setRefreshing(true);
+        progressView.showData();
+        presenter.getStores(true);
     }
 
     //    Kiểm tra xem danh sách cửa hàng có trống không
@@ -184,18 +193,18 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     //    Sự kiện load danh sách store thành công
     @Override
     public void onGetStoresSuccess(final ArrayList<SortStore> arrayList) {
-        if (arrayList.size() < 10) {
-            adapter.setLoadMore(false);
-            adapter.notifyDataSetChanged();
-        }
-
         if (isClearData) {
             listData.clear();
             adapter.setLoadMore(true);
             isClearData = false;
         }
-        listData.addAll(arrayList);
 
+        if (arrayList.size() < 10) {
+            adapter.setLoadMore(false);
+            adapter.notifyDataSetChanged();
+        }
+
+        listData.addAll(arrayList);
         checkListData();
     }
 
@@ -250,5 +259,14 @@ public class StoresFragment extends BasicFragment implements IStoresView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_ADD_STORE && resultCode == Activity.RESULT_OK) {
+            getDataAgain();
+        }
     }
 }

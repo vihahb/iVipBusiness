@@ -1,10 +1,10 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Gallery;
-import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.presenter.GalleryPresenter;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
+import com.xtel.ivipbusiness.view.activity.ResizeImageActivity;
 import com.xtel.ivipbusiness.view.adapter.GalleryAdapter;
 import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
@@ -30,9 +30,9 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -49,6 +49,8 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
 
     private boolean isClearData = false;
     private int gallery_position = -1;
+
+    protected final int REQUEST_RESIZE_IMAGE = 8;
 
     public static GalleryFragment newInstance() {
         return new GalleryFragment();
@@ -91,12 +93,7 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                isClearData = true;
-                adapter.setLoadMore(false);
-                adapter.notifyDataSetChanged();
-                progressView.setRefreshing(true);
-                progressView.showData();
-                presenter.getGallery(true);
+                getDataAgain();
             }
         });
 
@@ -120,6 +117,15 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         });
     }
 
+    protected void getDataAgain() {
+        isClearData = true;
+        adapter.setLoadMore(false);
+        adapter.notifyDataSetChanged();
+        progressView.setRefreshing(true);
+        progressView.showData();
+        presenter.getGallery(true);
+    }
+
     //    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
@@ -133,22 +139,22 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
         }
     }
 
+    /*
+    * Lấy ảnh đã đưuọc resize
+    * */
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_uri = data.getStringExtra(Constants.URI);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            if (type != -1 && server_uri != null) {
+                showProgressBar(false, false, null, getString(R.string.doing_add_gallery));
+                presenter.addPicture(server_uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -259,19 +265,11 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.doing_add_gallery));
+        Intent intent = new Intent(getActivity(), ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, type);
 
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap, type);
-        }
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
     @Override
@@ -284,14 +282,17 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.doing_add_gallery));
-        presenter.postImage(bitmap, type);
+        Intent intent = new Intent(getActivity(), ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, type);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
-    @Override
-    public void onPostPictureSuccess(RESP_Image resp_image) {
-        presenter.addPicture(resp_image);
-    }
+//    @Override
+//    public void onPostPictureSuccess(RESP_Image resp_image) {
+//        presenter.addPicture(resp_image);
+//    }
 
     @Override
     public void onAddPictureSuccess() {
@@ -300,11 +301,13 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
             @Override
             public void negativeClicked() {
                 closeDialog();
+                getDataAgain();
             }
 
             @Override
             public void positiveClicked() {
                 closeDialog();
+                getDataAgain();
             }
         });
     }
@@ -380,6 +383,9 @@ public class GalleryFragment extends BasicFragment implements IGalleryView {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == Activity.RESULT_OK) {
+            getImageResize(data);
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

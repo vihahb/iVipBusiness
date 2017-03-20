@@ -37,7 +37,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     private MenuItem menu_save_point, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
-    private final int REQUEST_CAMERA = 33;
+    private final int REQUEST_RESIZE_IMAGE = 8, REQUEST_ADD_STORE = 11, REQUEST_ADD_NEWS = 22, REQUEST_ADD_GALLERY = 33, REQUEST_CAMERA = 99;
     private final String STORE_TYPE = "STORE";
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", GALLERY = "gallery";
 
@@ -158,10 +158,6 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     public void setResp_store(RESP_Store resp_store) {
         this.resp_store = resp_store;
-    }
-
-    public void onUpdateStoreSuccess() {
-        menu_edi_storet.setIcon(R.drawable.ic_action_edit_line);
     }
 
     public void changeMenuIcon(int id) {
@@ -294,12 +290,22 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
         super.onActivityResult(requestCode, resultCode, data);
         debug(requestCode + "   " + resultCode);
 
-        StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
-        if (fragment != null)
-            fragment.onActivityResult(requestCode, resultCode, data);
-
-        GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
-        if (galleryFragment != null)
-            galleryFragment.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADD_STORE) {
+            StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
+            if (fragment != null)
+                fragment.onActivityResult(requestCode, resultCode, data);
+        } else if (requestCode == REQUEST_ADD_NEWS) {
+            NewsFragment fragment = (NewsFragment) getSupportFragmentManager().findFragmentByTag(LIST_NEWS);
+            if (fragment != null)
+                fragment.onActivityResult(requestCode, resultCode, data);
+        } else if (requestCode == REQUEST_ADD_GALLERY || requestCode == REQUEST_RESIZE_IMAGE) {
+            GalleryFragment galleryFragment = (GalleryFragment) getSupportFragmentManager().findFragmentByTag(GALLERY);
+            if (galleryFragment != null)
+                galleryFragment.onActivityResult(requestCode, resultCode, data);
+        } else {
+            StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
+            if (fragment != null)
+                fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

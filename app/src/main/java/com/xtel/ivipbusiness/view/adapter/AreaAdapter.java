@@ -25,7 +25,6 @@ public class AreaAdapter extends ArrayAdapter<Area> {
     private ArrayList<Area> items;
     private ArrayList<Area> itemsAll;
     private ArrayList<Area> suggestions;
-    private int viewResourceId;
     private LayoutInflater inflater;
 
     @SuppressWarnings("unchecked")
@@ -34,8 +33,6 @@ public class AreaAdapter extends ArrayAdapter<Area> {
         this.items = items;
         this.itemsAll = (ArrayList<Area>) items.clone();
         this.suggestions = new ArrayList<Area>();
-        this.viewResourceId = viewResourceId;
-
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

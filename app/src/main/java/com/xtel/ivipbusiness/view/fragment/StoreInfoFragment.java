@@ -371,12 +371,13 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     @Override
     public void onUpdateStoreInfoSuccess() {
         ((ViewStoreActivity) getActivity()).changeMenuIcon(R.drawable.ic_action_edit_line);
-        setEnableView(false);
-
         ((ViewStoreActivity) getActivity()).setResp_store(resp_store);
-        ((ViewStoreActivity) getActivity()).onUpdateStoreSuccess();
+
+        setEnableView(false);
         onGetStoreInfoSuccess(resp_store);
         closeProgressBar();
+
+        getActivity().setResult(Activity.RESULT_OK);
 
         showMaterialDialog(false, false, null, getString(R.string.success_update_store), null, getString(R.string.back), new DialogListener() {
             @Override
@@ -574,7 +575,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
                 PlaceModel placeModel = (PlaceModel) data.getSerializableExtra(Constants.MODEL);
                 setAddress(placeModel);
             }
-        } else if (requestCode == REQUEST_RESIZE_IMAGE) {
+        } else if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == Activity.RESULT_OK) {
             getImageResize(data);
         }  else
             presenter.onActivityResult(requestCode, resultCode, data);

@@ -422,6 +422,17 @@ public class WidgetHelper {
             view.setText(content);
     }
 
+    public void setTextViewType(TextView view, String type) {
+        if (type == null || type.isEmpty())
+            view.setText(MyApplication.context.getString(R.string.updating));
+        else {
+            if (type.equals("STORE"))
+                view.setText(MyApplication.context.getString(R.string.store));
+            else
+                view.setText(MyApplication.context.getString(R.string.chain));
+        }
+    }
+
     public void setTextViewHistoryDate(TextView textView, View view, String content) {
         if (!TextUnit.getInstance().validateText(content)) {
             textView.setText(MyApplication.context.getString(R.string.updating));

@@ -43,7 +43,7 @@ public class GalleryPresenter {
 
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private int TAKE_PICTURE_TYPE = 0;
-    private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
+    private final int REQUEST_CODE_CAMERA = 33, REQUEST_CAMERA = 100;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -180,28 +180,28 @@ public class GalleryPresenter {
         view.startActivityForResult(chooserIntent, REQUEST_CODE_CAMERA);
     }
 
-    public void postImage(Bitmap bitmap, final int type) {
-        boolean isBigImage;
-        isBigImage = type == 0;
+//    public void postImage(Bitmap bitmap, final int type) {
+//        boolean isBigImage;
+//        isBigImage = type == 0;
+//
+//        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
+//            @Override
+//            public void onSuccess(RESP_Image resp_image, File file) {
+//                view.onPostPictureSuccess(resp_image);
+//            }
+//
+//            @Override
+//            public void onError() {
+//                view.closeProgressBar();
+//                view.showShortToast(view.getActivity().getString(R.string.error_try_again));
+//            }
+//        });
+//    }
 
-        ImageManager.getInstance().postImage(view.getActivity(), bitmap, isBigImage, new CallbackImageListener() {
-            @Override
-            public void onSuccess(RESP_Image resp_image, File file) {
-                view.onPostPictureSuccess(resp_image);
-            }
-
-            @Override
-            public void onError() {
-                view.closeProgressBar();
-                view.showShortToast(view.getActivity().getString(R.string.error_try_again));
-            }
-        });
-    }
-
-    public void addPicture(RESP_Image resp_image) {
+    public void addPicture(String server_uri) {
         RESP_Picture resp_picture = new RESP_Picture();
         resp_picture.setId(Constants.SORT_STORE.getId());
-        resp_picture.setUrl(resp_image.getUri());
+        resp_picture.setUrl(server_uri);
 
         iCmd.execute(3, resp_picture);
     }

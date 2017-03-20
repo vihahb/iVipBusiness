@@ -1,5 +1,7 @@
 package com.xtel.ivipbusiness.view.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.News;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.presenter.NewsPresenter;
 import com.xtel.ivipbusiness.view.activity.AddNewsActivity;
 import com.xtel.ivipbusiness.view.activity.LoginActivity;
@@ -27,7 +28,6 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
-import com.xtel.sdk.commons.Constants;
 
 import java.util.ArrayList;
 
@@ -36,13 +36,15 @@ import java.util.ArrayList;
  */
 
 public class NewsFragment extends BasicFragment implements INewsView {
-    private NewsPresenter presenter;
-    private CallbackManager callbackManager;
+    protected NewsPresenter presenter;
+    protected CallbackManager callbackManager;
 
-    private NewsAdapter adapter;
-    private ArrayList<News> listData;
-    private ProgressView progressView;
-    private boolean isClearData = false;
+    protected NewsAdapter adapter;
+    protected ArrayList<News> listData;
+    protected ProgressView progressView;
+    protected boolean isClearData = false;
+    
+    protected final static int REQUEST_ADD_NEWS = 22;
 
     public static NewsFragment newInstance() {
         return new NewsFragment();
@@ -65,7 +67,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
     }
 
     //    Khởi tạo layout và recyclerview
-    private void initProgressView(View view) {
+    protected void initProgressView(View view) {
         progressView = new ProgressView(null, view);
         progressView.initData(-1, getString(R.string.no_news), getString(R.string.click_to_try_again));
 
@@ -86,12 +88,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
         progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                isClearData = true;
-                adapter.setLoadMore(false);
-                adapter.notifyDataSetChanged();
-                progressView.setRefreshing(true);
-                progressView.showData();
-                presenter.getNews(true);
+                getDataAgain();
             }
         });
 
@@ -105,8 +102,17 @@ public class NewsFragment extends BasicFragment implements INewsView {
         });
     }
 
+    protected void getDataAgain() {
+        isClearData = true;
+        adapter.setLoadMore(false);
+        adapter.notifyDataSetChanged();
+        progressView.setRefreshing(true);
+        progressView.showData();
+        presenter.getNews(true);
+    }
+
     //    Kiểm tra xem danh sách cửa hàng có trống không
-    private void checkListData() {
+    protected void checkListData() {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
@@ -126,7 +132,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(AddNewsActivity.class);
+                startActivityForResult(AddNewsActivity.class, REQUEST_ADD_NEWS);
             }
         });
     }
@@ -251,5 +257,13 @@ public class NewsFragment extends BasicFragment implements INewsView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_ADD_NEWS && resultCode == Activity.RESULT_OK)
+            getDataAgain();
     }
 }

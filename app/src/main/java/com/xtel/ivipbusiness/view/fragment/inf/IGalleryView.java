@@ -31,7 +31,7 @@ public interface IGalleryView {
 
     void onTakePictureGallary(int type, Uri uri);
     void onTakePictureCamera(int type, Bitmap bitmap);
-    void onPostPictureSuccess(RESP_Image resp_image);
+//    void onPostPictureSuccess(RESP_Image resp_image);
     void onAddPictureSuccess();
 
     void onDeleteGallery(int id, int position);

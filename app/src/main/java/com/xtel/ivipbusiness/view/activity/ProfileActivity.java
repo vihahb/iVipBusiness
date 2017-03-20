@@ -350,7 +350,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_RESIZE_IMAGE) {
+        if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == RESULT_OK) {
             getImageResize(data);
         } else
             presenter.onActivityResult(requestCode, resultCode, data);
