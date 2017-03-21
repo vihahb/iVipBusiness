@@ -25,11 +25,11 @@ import me.dm7.barcodescanner.core.IViewFinder;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class CheckInUserActivity extends BasicActivity implements ZXingScannerView.ResultHandler, ICheckInUserView {
-    private ZXingScannerView mScannerView;
-    private CallbackManager callbackManager;
-    private CheckInUserPresenter presenter;
+    protected ZXingScannerView mScannerView;
+    protected CallbackManager callbackManager;
+    protected CheckInUserPresenter presenter;
 
-    private ViewGroup contentFrame;
+    protected ViewGroup contentFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

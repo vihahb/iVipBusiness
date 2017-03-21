@@ -357,8 +357,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         WidgetHelper.getInstance().setImageURL(img_qr_code, resp_store.getQr_code());
         WidgetHelper.getInstance().setImageURL(img_bar_code, resp_store.getBar_code());
 
-        WidgetHelper.getInstance().setEditTextTime(edt_begin_time, (getString(R.string.open_time) + ": "), (resp_store.getBegin_time() * 1000));
-        WidgetHelper.getInstance().setEditTextTime(edt_end_time, (getString(R.string.close_time) + ": "), (resp_store.getEnd_time() * 1000));
+        WidgetHelper.getInstance().setEditTextTime(edt_begin_time, (getString(R.string.open_time) + ": "), resp_store.getBegin_time());
+        WidgetHelper.getInstance().setEditTextTime(edt_end_time, (getString(R.string.close_time) + ": "), resp_store.getEnd_time());
         WidgetHelper.getInstance().setEditTextNoResult(edt_name, resp_store.getName());
         WidgetHelper.getInstance().setEditTextNoResult(edt_address, resp_store.getAddress());
         WidgetHelper.getInstance().setEditTextNoResult(edt_phone, resp_store.getPhonenumber());

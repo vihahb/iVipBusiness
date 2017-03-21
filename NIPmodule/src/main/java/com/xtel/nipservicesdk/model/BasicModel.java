@@ -58,14 +58,14 @@ public abstract class BasicModel {
     protected final String ADD_GALLERY_STORE = "/v0.1/store/";
     protected final String ADD_GALLERY_END = "/gallery";
 
-//    Statistic
+    //    Statistic
     protected final String GET_STATISTIC_STORE_ID = "/v0.1/report?store_id=";
     protected final String GET_STATISTIC_CHAIN_ID = "/v0.1/report?chain_id=";
     protected final String GET_STATISTIC_TYPE = "&type=";
     protected final String GET_STATISTIC_ACTION = "&action=";
     protected final String GET_STATISTIC_DAY = "&day=";
 
-    //    Bản tin
+    //    News
     protected final String GET_NEWS_PAGE = "/v0.1/news?page=";
     protected final String GET_NEWS_PAGESISE = "&pagesize=";
     protected final String GET_NEWS_ID = "&id=";
@@ -74,6 +74,13 @@ public abstract class BasicModel {
     protected final String ADD_NEWS = "/v0.1/news";
     protected final String GET_NEWS = "/v0.1/news/";
     protected final String UPDATE_NEWS = "/v0.1/news";
+
+    protected final String VALID_CHECK_VOUCHER = "/v0.1/voucher/";
+    protected final String USE_VOUCHER = "/v0.1/voucher/used";
+
+    protected final String VOUCHER_CODE = "voucher_code";
+    protected final String LAT = "lat";
+    protected final String LNG = "lng";
 
     //    Member
     protected final String GET_MEMBER_INFO_ID = "/v0.1/store/";

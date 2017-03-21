@@ -456,16 +456,16 @@ public class WidgetHelper {
             view.setText((title + content));
     }
 
-    public void setTextViewDate(TextView view, String content, Long milliseconds) {
+    public void setTextViewDate(TextView view, String title, Long milliseconds) {
         if (milliseconds == null) {
-            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            view.setText((title + MyApplication.context.getString(R.string.updating)));
             return;
         }
 
         if (milliseconds == 0)
-            view.setText((content + MyApplication.context.getString(R.string.updating)));
+            view.setText((title + MyApplication.context.getString(R.string.updating)));
         else
-            view.setText((content + getDate(milliseconds)));
+            view.setText((title + getDate(milliseconds)));
     }
 
     public void setTextViewTime(TextView view, String content, Long milliseconds) {
@@ -568,7 +568,7 @@ public class WidgetHelper {
 
     public String getDate(long milliseconds) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliseconds);
+        calendar.setTimeInMillis((milliseconds * 1000));
 
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH) + 1;
@@ -579,7 +579,7 @@ public class WidgetHelper {
 
     public String getTime(long milliseconds) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliseconds);
+        calendar.setTimeInMillis((milliseconds * 1000));
 
         int mHour = calendar.get(Calendar.HOUR_OF_DAY) + 1;
         int mMinute = calendar.get(Calendar.MINUTE);
@@ -601,7 +601,7 @@ public class WidgetHelper {
 
     private String getDateTime(long milliseconds) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliseconds);
+        calendar.setTimeInMillis((milliseconds * 1000));
 
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH) + 1;

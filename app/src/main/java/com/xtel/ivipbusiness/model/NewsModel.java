@@ -2,6 +2,7 @@ package com.xtel.ivipbusiness.model;
 
 import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.xtel.nipservicesdk.LoginManager;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.BasicModel;
@@ -54,11 +55,42 @@ public class NewsModel extends BasicModel {
         requestServer.putApi(url, jsonObject, session, responseHandle);
     }
 
+    /*
+    * Xóa bản tin
+    * */
     public void deleteNews(int id, ResponseHandle responseHandle) {
         String url = API_BASE + GET_NEWS + id;
         String session = LoginManager.getCurrentSession();
 
         Log.e("deleteNews", url + "     " + session);
         requestServer.deleteApi(url, "", session, responseHandle);
+    }
+
+    /*
+    * Kiểm tra tính hợp lệ của voucher
+    * */
+    public void validCheckNews(String voucher_code, ResponseHandle responseHandle) {
+        String url = API_BASE + VALID_CHECK_VOUCHER + voucher_code;
+        String session = LoginManager.getCurrentSession();
+
+        Log.e("validCheckNews", url + "     " + session);
+        requestServer.getApi(url, session, responseHandle);
+    }
+
+    /*
+    * Sử dụng voucher
+    * */
+    public void useVoucher(String voucher_code, double lat, double lng, ResponseHandle responseHandle) {
+        String url = API_BASE + USE_VOUCHER;
+        String session = LoginManager.getCurrentSession();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(VOUCHER_CODE, voucher_code);
+        jsonObject.addProperty(LAT, lat);
+        jsonObject.addProperty(LNG, lng);
+
+        Log.e("useVoucher", url + "     " + session);
+        Log.e("useVoucher", jsonObject.toString());
+        requestServer.putApi(url, jsonObject.toString(), session, responseHandle);
     }
 }

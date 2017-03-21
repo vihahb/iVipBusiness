@@ -80,12 +80,7 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
         progressView.onRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                isClearData = true;
-//                adapter.setLoadMore(false);
-//                adapter.notifyDataSetChanged();
-                progressView.setRefreshing(true);
-                progressView.showData();
-                presenter.getListNotify();
+                getListNewsAgain();
             }
         });
 
@@ -114,6 +109,16 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
 //                presenter.getChains();
             }
         });
+    }
+
+    /*
+    * Load lại danh sách bản tin
+    * */
+    protected void getListNewsAgain() {
+        isClearData = true;
+        progressView.setRefreshing(true);
+        progressView.showData();
+        presenter.getListNotify();
     }
 
     //    Khởi tạo floating action button để lựa chọn gửi notify
@@ -215,10 +220,11 @@ public class NotifyActivity extends BasicActivity implements INotifyView {
     @Override
     public void onSendFcmSuccess() {
         closeProgressBar();
+        getListNewsAgain();
         showMaterialDialog(false, false, null, getString(R.string.success_send_fcm), null, getString(R.string.back), new DialogListener() {
             @Override
             public void negativeClicked() {
-                closeDialog();
+
             }
 
             @Override

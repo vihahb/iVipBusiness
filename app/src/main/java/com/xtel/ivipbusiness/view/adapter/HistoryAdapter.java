@@ -142,8 +142,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
 
             for (int i = arrayList.size() - 1; i >= 0; i--) {
-                arrayList.get(i).setDate(WidgetHelper.getInstance().getDate((arrayList.get(i).getAction_time() * 1000)));
-                arrayList.get(i).setTime(WidgetHelper.getInstance().getTime((arrayList.get(i).getAction_time() * 1000)));
+                arrayList.get(i).setDate(WidgetHelper.getInstance().getDate(arrayList.get(i).getAction_time()));
+                arrayList.get(i).setTime(WidgetHelper.getInstance().getTime(arrayList.get(i).getAction_time()));
             }
 
             for (int i = arrayList.size() - 1; i > 0; i--) {

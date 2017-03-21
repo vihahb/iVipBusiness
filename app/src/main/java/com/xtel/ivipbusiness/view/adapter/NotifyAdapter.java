@@ -48,7 +48,7 @@ public class NotifyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder instanceof ViewHolderPeople) {
             ViewHolderPeople viewHolderPeople = (ViewHolderPeople) holder;
 
-            WidgetHelper.getInstance().setTextViewDateTime(viewHolderPeople.txt_date, "", (notify.getCreate_time() * 1000));
+            WidgetHelper.getInstance().setTextViewDateTime(viewHolderPeople.txt_date, "", notify.getCreate_time());
         } else if (holder instanceof ViewHolderGroup) {
             ViewHolderGroup viewHolderGroup = (ViewHolderGroup) holder;
 
@@ -58,7 +58,7 @@ public class NotifyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 WidgetHelper.getInstance().setTextViewAgeFromTo(viewHolderGroup.txt_age, "", notify.getNotify_condition().getFrom_age(), notify.getNotify_condition().getTo_age());
             }
 
-            WidgetHelper.getInstance().setTextViewDateTime(viewHolderGroup.txt_date, "", (notify.getCreate_time() * 1000));
+            WidgetHelper.getInstance().setTextViewDateTime(viewHolderGroup.txt_date, "", notify.getCreate_time());
         } else if (holder instanceof ViewHolderMember) {
             ViewHolderMember viewHolderMember = (ViewHolderMember) holder;
 
@@ -69,7 +69,7 @@ public class NotifyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 WidgetHelper.getInstance().setTextViewAgeFromTo(viewHolderMember.txt_age, "", notify.getNotify_condition().getFrom_age(), notify.getNotify_condition().getTo_age());
             }
 
-            WidgetHelper.getInstance().setTextViewDateTime(viewHolderMember.txt_date, "", (notify.getCreate_time() * 1000));
+            WidgetHelper.getInstance().setTextViewDateTime(viewHolderMember.txt_date, "", notify.getCreate_time());
         }
     }
 

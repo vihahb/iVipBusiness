@@ -1,7 +1,9 @@
 package com.xtel.ivipbusiness.view.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,6 +31,8 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.commons.Constants;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -44,7 +48,7 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     protected MenuItem menu_avatar, menu_coupons;
 
     protected final String LIST_STORE = "list_store", STATISTIC = "statistic", POLICY = "policy", APP_INFO = "app_info", FAQ = "faq";
-    protected final int REQUEST_STORE_INFO = 11, REQUEST_PROFILE = 22, REQUEST_ADD_STORE = 33;
+    protected final int REQUEST_STORE_INFO = 11, REQUEST_PROFILE = 22, REQUEST_ADD_STORE = 33, REQUEST_CAMERA = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,13 +151,12 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     }
 
 
-
-
     /*
     * Lấy thông tin user thành công
     * Load avatar lên menu item
     * */
     protected ImageView img_avatar;
+
     @Override
     public void onGetShortUserDataSuccess(RESP_Full_Profile obj) {
         if (obj != null)
@@ -254,7 +257,8 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         if (id == R.id.action_home_user_info)
             startActivityForResult(ProfileActivity.class, REQUEST_PROFILE);
         else if (id == R.id.action_home_coupons) {
-            showShortToast("Dang xay dung");
+            if (PermissionHelper.checkOnlyPermission(Manifest.permission.CAMERA, this, REQUEST_CAMERA))
+                startActivity(CheckNewsActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -281,6 +285,18 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                startActivity(CheckNewsActivity.class);
+            else
+                showShortToast(getString(R.string.error_permission));
+        } else
+            callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_STORE_INFO || requestCode == REQUEST_ADD_STORE) {
@@ -290,11 +306,5 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
         } else if (requestCode == REQUEST_PROFILE && resultCode == RESULT_OK) {
             presenter.getFullUserData();
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

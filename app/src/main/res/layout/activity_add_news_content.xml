@@ -92,24 +92,22 @@
 
             <EditText
                 android:id="@+id/add_news.edt_begin_time"
-                style="@style/edittext_outline"
+                style="@style/edittext_outline_disable"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
                 android:layout_weight="1"
                 android:hint="@string/start_time"
-                android:inputType="textCapSentences"
                 android:longClickable="false" />
 
             <EditText
                 android:id="@+id/add_news.edt_end_time"
-                style="@style/edittext_outline"
+                style="@style/edittext_outline_disable"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_48"
                 android:layout_marginLeft="-1dp"
                 android:layout_marginStart="-1dp"
                 android:layout_weight="1"
                 android:hint="@string/end_time"
-                android:inputType="textCapSentences"
                 android:longClickable="false" />
         </LinearLayout>
 
@@ -126,7 +124,7 @@
                 android:layout_height="@dimen/size_48"
                 android:layout_weight="1"
                 android:hint="@string/time_take_effect"
-                android:inputType="textCapSentences"
+                android:inputType="number"
                 android:longClickable="false" />
 
             <EditText
@@ -138,7 +136,7 @@
                 android:layout_marginStart="-1dp"
                 android:layout_weight="1"
                 android:hint="@string/exchange_point"
-                android:inputType="textCapSentences" />
+                android:inputType="number" />
         </LinearLayout>
 
         <Spinner

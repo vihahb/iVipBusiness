@@ -131,9 +131,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 if (type == 0)
-                    WidgetHelper.getInstance().setEditTextDate(edt_begin_time, dayOfMonth, month, year);
+                    WidgetHelper.getInstance().setEditTextDate(edt_begin_time, dayOfMonth, (month + 1), year);
                 else
-                    WidgetHelper.getInstance().setEditTextDate(edt_end_time, dayOfMonth, month, year);
+                    WidgetHelper.getInstance().setEditTextDate(edt_end_time, dayOfMonth, (month + 1), year);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }

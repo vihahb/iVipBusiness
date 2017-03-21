@@ -160,9 +160,9 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 if (type == 0)
-                    WidgetHelper.getInstance().setEditTextDate(edt_begin_time, dayOfMonth, month, year);
+                    WidgetHelper.getInstance().setEditTextDate(edt_begin_time, dayOfMonth, (month + 1), year);
                 else
-                    WidgetHelper.getInstance().setEditTextDate(edt_end_time, dayOfMonth, month, year);
+                    WidgetHelper.getInstance().setEditTextDate(edt_end_time, dayOfMonth, (month + 1), year);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -325,8 +325,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             WidgetHelper.getInstance().setEditTextNoResult(edt_number_voucher, String.valueOf(voucher.getNumber_of_voucher()));
             WidgetHelper.getInstance().setEditTextNoResult(edt_sale, String.valueOf(voucher.getSales()));
             WidgetHelper.getInstance().setSpinnerVoucherType(sp_type_sale, voucher.getSales_type());
-            WidgetHelper.getInstance().setEditTextDate(edt_begin_time, (voucher.getBegin_time() * 1000));
-            WidgetHelper.getInstance().setEditTextDate(edt_end_time, (voucher.getFinish_time() * 1000));
+            WidgetHelper.getInstance().setEditTextDate(edt_begin_time, voucher.getBegin_time());
+            WidgetHelper.getInstance().setEditTextDate(edt_end_time, voucher.getFinish_time());
             WidgetHelper.getInstance().setEditTextNoResult(edt_alive, String.valueOf((voucher.getTime_alive() / 60)));
             WidgetHelper.getInstance().setEditTextNoResult(edt_point, String.valueOf(voucher.getPoint()));
         }
@@ -391,7 +391,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         closeProgressBar();
         menuItem.setIcon(R.drawable.ic_action_edit_line);
         setEnableView(false);
-        showMaterialDialog(false, false, null, getString(R.string.success_update_news), null, getString(R.string.back), new DialogListener() {
+        showMaterialDialog(false, false, null, getString(R.string.success_update_news), null, getString(R.string.ok), new DialogListener() {
             @Override
             public void negativeClicked() {
                 closeDialog();

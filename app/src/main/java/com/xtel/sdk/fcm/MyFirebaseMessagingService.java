@@ -14,6 +14,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.annotations.Expose;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.HomeActivity;
+import com.xtel.ivipbusiness.view.activity.ProfileActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 
 /**
@@ -58,8 +59,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void sendNotification(Message message) {
         Log.e("sendNotification", JsonHelper.toJson(message));
 
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent intent = new Intent(this, ProfileActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

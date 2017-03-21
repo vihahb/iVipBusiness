@@ -41,6 +41,7 @@
     <string name="title_activity_check_in_user">Chụp ảnh tích điểm</string>
     <string name="title_activity_calculator">Máy tính</string>
     <string name="title_activity_resize_image">Chọn ảnh</string>
+    <string name="title_activity_check_voucher">Kiểm tra mã khuyễn mãi</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -94,6 +95,8 @@
     <string name="doing_update_setting">Đang cập nhật cài đặt…</string>
     <string name="doing_save_point">Đang cập nhật cài đặt…</string>
     <string name="doing_check_in">Đang check in…</string>
+    <string name="doing_valid_check_voucher">Đang kiểm tra voucher…</string>
+    <string name="doing_use_voucher">Sử dụng voucher…</string>
     <string name="doing_create_member_card">Đang tạo thẻ thành viên…</string>
 
     <!-- Success -->
@@ -113,6 +116,7 @@
     <string name="success_save_point_name">Thành viên</string>
     <string name="success_save_point_addition">đã được cộng</string>
     <string name="success_save_point_point">điểm</string>
+    <string name="success_use_voucher">Voucher đã được sử dụng</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -182,6 +186,11 @@
     <string name="error_member_not_have_card">Thành viên chưa có thẻ. Bạn có muốn tạo thẻ cho thành viên này? </string>
     <string name="error_not_have_level">Chưa cài đặt cấp bậc cho cửa hàng</string>
     <string name="error_resize_image">Vui lòng chọn ảnh</string>
+    <string name="error_voucher_code_not_exists">Mã voucher không tồn tại</string>
+    <string name="error_used_voucher_code">Mã voucher đã được sử dụng</string>
+    <string name="error_voucher_code_is_end_time">Mã voucher đã hết thời gian sử dụng</string>
+    <string name="error_no_power_to_use_voucher">Bạn không có quyền hạn sử dụng voucher này</string>
+    <string name="error_get_location">Không thể lấy vị trí hiện tại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>
@@ -274,6 +283,12 @@
     <string name="seven_day">7 NGÀY</string>
     <string name="thirty_day">30 NGÀY</string>
     <string name="chain">Chuỗi cửa hàng</string>
+    <string name="put_qr_code_into_here">Đưa mã QR code vào Camera</string>
+
+    <string name="expired_tịme">Thời gian kết thúc</string>
+    <string name="used_time">Thời gian sử dụng</string>
+    <string name="user_voucher">Sử dụng</string>
+    <string name="setting">Cài đặt</string>
 
     <!-- message -->
     <string name="message_mandatory_level">Đây là cấp bậc bắt buộc</string>
@@ -299,7 +314,6 @@
     <string name="delete">Xóa ngay</string>
     <string name="cancel">Hủy bỏ</string>
     <string name="cancel_one">Hủy</string>
-    <string name="ask_delete_gallery">Bạn muốn xóa ảnh này?</string>
 
     <string name="not_update_name">Chưa cập nhật tên</string>
     <string name="not_update_phone">Chưa cập nhật số điện thoại</string>
@@ -310,6 +324,11 @@
     <string name="not_update_gender">Chưa cập nhật giới tính</string>
     <string name="not_update_des">Không có mô tả</string>
     <string name="not_update_store_name">Chưa cập nhật tên</string>
+
+    <!-- Ask -->
+    <string name="ask_delete_gallery">Bạn muốn xóa ảnh này?</string>
+    <string name="ask_gps_use_voucher">Để ứng dụng tính năng này xin vui lòng bật GPS?</string>
+    <string name="ask_gps">Để ứng dụng trợ giúp bạn một cách hiệu quả nhất xin vui lòng bật GPS?</string>
 
     <!-- Menu -->
     <string name="store">Cửa hàng</string>

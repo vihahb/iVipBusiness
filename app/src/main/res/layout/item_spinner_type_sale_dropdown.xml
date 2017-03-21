@@ -3,6 +3,7 @@
     android:id="@+id/item.spinner.type_news.txt_dropdown"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minHeight="@dimen/size_36"
     android:background="@color/colorPrimaryKey_80"
     android:gravity="center_vertical"
     android:paddingLeft="@dimen/size_8"

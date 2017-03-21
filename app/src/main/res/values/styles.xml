@@ -173,6 +173,20 @@
         <item name="android:paddingRight">0dp</item>
     </style>
 
+    <style name="edittext_outline_disable">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/size_4</item>
+        <item name="android:background">@drawable/edittext_des</item>
+        <item name="android:paddingLeft">@dimen/size_8</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:focusable">false</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
     <style name="edittext_outline_2">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/font_12</item>
@@ -370,7 +384,10 @@
     <style name="button_outline">
         <item name="android:background">@drawable/button_outline</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">@dimen/size_8</item>
+        <item name="android:paddingRight">@dimen/size_8</item>
     </style>
 </resources>
