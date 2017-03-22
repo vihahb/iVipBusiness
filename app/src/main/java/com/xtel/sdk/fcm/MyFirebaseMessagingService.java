@@ -13,7 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.annotations.Expose;
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.view.activity.HomeActivity;
+import com.xtel.ivipbusiness.view.MyApplication;
 import com.xtel.ivipbusiness.view.activity.ProfileActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 
@@ -22,7 +22,8 @@ import com.xtel.nipservicesdk.utils.JsonHelper;
  */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    private static final String TAG = "MyFirebaseMsgService";
+    protected final String TAG = "MyFirebaseMsgService";
+    protected final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
 
     /**
      * Called when message is received.
@@ -43,20 +44,43 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.e(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            String body = remoteMessage.getNotification().getBody();
+            Log.e(TAG, "Message Notification Body: " + body);
 
-            Message message = JsonHelper.getObjectNoException(remoteMessage.getNotification().getBody(), Message.class);
+            MessageObj messageObj = JsonHelper.getObject(body, MessageObj.class);
 
-            if (message != null)
-                sendNotification(message);
+            if (messageObj != null)
+                checkAction(messageObj);
         }
-
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
     }
     // [END receive_message]
 
-    private void sendNotification(Message message) {
+    /*
+    * Kiểm tra action của notifycation để hiển thị thông báo tương ứng
+    * */
+    protected void checkAction(MessageObj messageObj) {
+        switch (messageObj.getAction()) {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+                sendNotifycationUpdate(messageObj);
+                break;
+            case 5:
+                sendNotifycationDisplay(messageObj);
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void sendNotification(MessageObj message) {
         Log.e("sendNotification", JsonHelper.toJson(message));
 
         Intent intent = new Intent(this, ProfileActivity.class);
@@ -66,7 +90,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(message.getTitle())
+                .setContentTitle(MyApplication.context.getString(R.string.ivip_business))
                 .setContentText(message.getContent())
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
@@ -77,18 +101,74 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
-    private class Message {
+    protected void sendNotifycationUpdate(MessageObj messageObj) {
+        Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
+        int id = 0;
+
+        Intent noReceive = new Intent();
+        noReceive.setAction(null);
+        PendingIntent pendingIntentNo = PendingIntent.getBroadcast(getApplicationContext(), id, noReceive, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URL + messageObj.getContent()));
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), id /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(getString(R.string.ivip_business))
+                .setContentText(getString(R.string.ask_update_version))
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
+                .setColor(getResources().getColor(R.color.colorPrimary))
+                .addAction(R.drawable.ic_action_done, getString(R.string.cancel), pendingIntentNo)
+                .addAction(R.drawable.ic_action_done, getString(R.string.update_now), pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
+    }
+
+    protected void sendNotifycationDisplay(MessageObj messageObj) {
+        Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
+        int id = 0;
+
+//        Intent noReceive = new Intent();
+//        noReceive.setAction(null);
+//        PendingIntent pendingIntentNo = PendingIntent.getBroadcast(getApplicationContext(), id, noReceive, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URL + message.getContent()));
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), id /* Request code */, intent, PendingIntent.FLA1G_ONE_SHOT);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(getString(R.string.ivip_business))
+                .setContentText(messageObj.getContent())
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageObj.getContent()));
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
+    }
+
+    public class MessageObj {
         @Expose
-        private String title;
+        private Integer action;
         @Expose
         private String content;
 
-        public String getTitle() {
-            return title;
+        public MessageObj(Integer action, String content) {
+            this.action = action;
+            this.content = content;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public int getAction() {
+            return action;
+        }
+
+        public void setAction(int action) {
+            this.action = action;
         }
 
         public String getContent() {
