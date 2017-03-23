@@ -19,13 +19,16 @@ import com.xtel.ivipbusiness.view.activity.ProfileActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
 
+import java.util.Map;
+
 /**
  * Created by Lê Công Long Vũ on 1/4/2017
  */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     protected final String TAG = "MyFirebaseMsgService";
-//    protected final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
+    protected final String ACTION = "action";
+    protected final String CONTENT = "content";
 
     /**
      * Called when message is received.
@@ -37,26 +40,34 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.e(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            Log.e(TAG, "Message data payload: " + remoteMessage.getData());
+
+            Map<String, String> body = remoteMessage.getData();
+            MessageObj messageObj = new MessageObj(Integer.parseInt(body.get(ACTION)), body.get(CONTENT));
+//            messageObj.setAction(Integer.parseInt(body.get(ACTION)));
+//            messageObj.setContent(body.get(CONTENT));
+
+            if (messageObj.getAction() != 0 && messageObj.getContent() != null)
+                checkAction(messageObj);
         }
 
         // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            String body = remoteMessage.getNotification().getBody();
-            Log.e(TAG, "Message Notification Body: New " + System.currentTimeMillis() + "     " + body);
-
-            MessageObj messageObj = JsonHelper.getObject(body, MessageObj.class);
-//            MessageObj messageObj1 = getMessageObj(body);
-            Log.e(TAG, "Message Notification Json: New "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj));
-//            Log.e(TAG, "Message Notification Json: New 2 "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj1));
-
-            if (messageObj != null)
-                checkAction(messageObj);
-        }
+//        if (remoteMessage.getNotification() != null) {
+//            String body = remoteMessage.getNotification().getBody();
+//            Log.e(TAG, "Message Notification Body: New " + System.currentTimeMillis() + "     " + body);
+//
+//            MessageObj messageObj = JsonHelper.getObject(body, MessageObj.class);
+////            MessageObj messageObj1 = getMessageObj(body);
+//            Log.e(TAG, "Message Notification Json: New "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj));
+////            Log.e(TAG, "Message Notification Json: New 2 "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj1));
+//
+//            if (messageObj != null)
+//                checkAction(messageObj);
+//        }
     }
     // [END receive_message]
 
@@ -108,18 +119,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     protected void sendNotifycationUpdate(MessageObj messageObj) {
         Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
 
-        MessageObj messageObjNone = new MessageObj(messageObj.getAction(), null);
+        MessageObj messageObjNone = new MessageObj(4, null);
 
         Intent noReceive = new Intent(this, NotifycationManagerActivity.class);
         noReceive.putExtra(Constants.MODEL, messageObjNone);
-        PendingIntent pendingIntentNo = PendingIntent.getActivity(getApplicationContext(), messageObj.getAction() /* Request code */, noReceive, PendingIntent.FLAG_ONE_SHOT);
-
-//        String uri_app = GOOGLE_PLAY_URL + messageObj.getContent();
-//        Log.e("uri_app", uri_app);
+        PendingIntent pendingIntentNo = PendingIntent.getActivity(this, 1, noReceive, PendingIntent.FLAG_ONE_SHOT);
 
         Intent intent = new Intent(this, NotifycationManagerActivity.class);
         intent.putExtra(Constants.MODEL, messageObj);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), messageObj.getAction() /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 2, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
@@ -133,8 +141,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .addAction(R.drawable.ic_action_done, getString(R.string.cancel), pendingIntentNo)
                 .addAction(R.drawable.ic_action_done, getString(R.string.update_now), pendingIntent);
 
+        Log.e("sendNotifycationUpdate", "last " + JsonHelper.toJson(messageObj));
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(messageObj.getAction() /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(messageObj.getAction(), notificationBuilder.build());
     }
 
     protected void sendNotifycationDisplay(MessageObj messageObj) {

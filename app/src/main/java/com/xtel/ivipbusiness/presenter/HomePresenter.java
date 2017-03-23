@@ -70,7 +70,7 @@ public class HomePresenter {
                         @Override
                         public void onError(Error error) {
                             if (error.getCode() == 2)
-                                view.getNewSession(iCmd, 1);
+                                view.getNewSession(iCmd, 2);
                             else
                                 view.onRegisterFcmError();
                         }

@@ -14,12 +14,12 @@ public class MessageObj implements Serializable {
     @Expose
     private String content;
 
-    public MessageObj() {
-    }
-
     public MessageObj(Integer action, String content) {
         this.action = action;
         this.content = content;
+    }
+
+    public MessageObj() {
     }
 
     public int getAction() {

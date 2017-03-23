@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.MessageObj;
+import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
 
 public class NotifycationManagerActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class NotifycationManagerActivity extends AppCompatActivity {
         MessageObj messageObj = null;
 
         try {
-            messageObj = (MessageObj) getIntent().getSerializableExtra(Constants.MODEL);
+            messageObj = (MessageObj) getIntent().getExtras().getSerializable(Constants.MODEL);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +49,9 @@ public class NotifycationManagerActivity extends AppCompatActivity {
     }
 
     protected void checkMessage(MessageObj messageObj) {
-        if (messageObj.getContent() == null) {
+        Log.e("checkMessage", JsonHelper.toJson(messageObj));
+
+        if (messageObj.getContent() == null || messageObj.getContent().isEmpty()) {
             cancelNotifycation(messageObj.getAction());
             return;
         }
