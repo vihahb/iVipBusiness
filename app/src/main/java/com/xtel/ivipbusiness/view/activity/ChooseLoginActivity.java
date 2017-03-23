@@ -8,6 +8,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,6 +25,20 @@ public class ChooseLoginActivity extends BasicActivity {
         setContentView(R.layout.activity_choose);
 
         checkLoged();
+        testThoi();
+    }
+
+    protected void testThoi() {
+        try {
+            Bundle bundle = getIntent().getExtras();
+
+            for (String key : bundle.keySet()) {
+                Object value = bundle.get(key);
+                Log.d("testThoi", String.format("%s %s (%s)", key, value.toString(), value.getClass().getName()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*

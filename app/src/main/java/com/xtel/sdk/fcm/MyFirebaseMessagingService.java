@@ -11,11 +11,13 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.google.gson.annotations.Expose;
 import com.xtel.ivipbusiness.R;
+import com.xtel.ivipbusiness.model.entity.MessageObj;
 import com.xtel.ivipbusiness.view.MyApplication;
+import com.xtel.ivipbusiness.view.activity.NotifycationManagerActivity;
 import com.xtel.ivipbusiness.view.activity.ProfileActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
+import com.xtel.sdk.commons.Constants;
 
 /**
  * Created by Lê Công Long Vũ on 1/4/2017
@@ -23,7 +25,7 @@ import com.xtel.nipservicesdk.utils.JsonHelper;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     protected final String TAG = "MyFirebaseMsgService";
-    protected final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
+//    protected final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
 
     /**
      * Called when message is received.
@@ -45,9 +47,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             String body = remoteMessage.getNotification().getBody();
-            Log.e(TAG, "Message Notification Body: " + body);
+            Log.e(TAG, "Message Notification Body: New " + System.currentTimeMillis() + "     " + body);
 
             MessageObj messageObj = JsonHelper.getObject(body, MessageObj.class);
+//            MessageObj messageObj1 = getMessageObj(body);
+            Log.e(TAG, "Message Notification Json: New "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj));
+//            Log.e(TAG, "Message Notification Json: New 2 "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj1));
 
             if (messageObj != null)
                 checkAction(messageObj);
@@ -97,20 +102,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
     protected void sendNotifycationUpdate(MessageObj messageObj) {
         Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
-        int id = 0;
 
-        Intent noReceive = new Intent();
-        noReceive.setAction(null);
-        PendingIntent pendingIntentNo = PendingIntent.getBroadcast(getApplicationContext(), id, noReceive, PendingIntent.FLAG_UPDATE_CURRENT);
+        MessageObj messageObjNone = new MessageObj(messageObj.getAction(), null);
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URL + messageObj.getContent()));
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), id /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
+        Intent noReceive = new Intent(this, NotifycationManagerActivity.class);
+        noReceive.putExtra(Constants.MODEL, messageObjNone);
+        PendingIntent pendingIntentNo = PendingIntent.getActivity(getApplicationContext(), messageObj.getAction() /* Request code */, noReceive, PendingIntent.FLAG_ONE_SHOT);
+
+//        String uri_app = GOOGLE_PLAY_URL + messageObj.getContent();
+//        Log.e("uri_app", uri_app);
+
+        Intent intent = new Intent(this, NotifycationManagerActivity.class);
+        intent.putExtra(Constants.MODEL, messageObj);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), messageObj.getAction() /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
@@ -125,19 +134,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .addAction(R.drawable.ic_action_done, getString(R.string.update_now), pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(messageObj.getAction() /* ID of notification */, notificationBuilder.build());
     }
 
     protected void sendNotifycationDisplay(MessageObj messageObj) {
         Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
-        int id = 0;
-
-//        Intent noReceive = new Intent();
-//        noReceive.setAction(null);
-//        PendingIntent pendingIntentNo = PendingIntent.getBroadcast(getApplicationContext(), id, noReceive, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URL + message.getContent()));
-//        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), id /* Request code */, intent, PendingIntent.FLA1G_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
@@ -149,34 +150,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(messageObj.getContent()));
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(messageObj.getAction() /* ID of notification */, notificationBuilder.build());
     }
 
-    public class MessageObj {
-        @Expose
-        private Integer action;
-        @Expose
-        private String content;
-
-        public MessageObj(Integer action, String content) {
-            this.action = action;
-            this.content = content;
-        }
-
-        public int getAction() {
-            return action;
-        }
-
-        public void setAction(int action) {
-            this.action = action;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-    }
+//    protected MessageObj getMessageObj(String json) {
+//        Log.e("getMessageObj", "input " + json);
+//        try {
+//            JSONObject jsonObject = new JSONObject(json);
+//            Log.e("getMessageObj", "jsonObject " + jsonObject.toString());
+//
+//            MessageObj messageObj = new MessageObj();
+//            messageObj.setAction(jsonObject.getInt("action"));
+//            messageObj.setContent(jsonObject.getString("content"));
+//
+//            return messageObj;
+//        } catch (Exception e) {
+//            Log.e("getMessageObj", "error " + e.toString());
+//        }
+//
+//        return null;
+//    }
 }
