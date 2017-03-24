@@ -122,6 +122,8 @@ public class ChainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             txt_name = findTextView(R.id.item_chain_txt_name);
             txt_type = findTextView(R.id.item_chain_txt_type);
         }
+
+
     }
 
     private class ViewProgressBar extends RecyclerView.ViewHolder {

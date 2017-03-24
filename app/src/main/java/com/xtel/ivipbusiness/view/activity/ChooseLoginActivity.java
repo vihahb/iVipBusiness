@@ -25,20 +25,6 @@ public class ChooseLoginActivity extends BasicActivity {
         setContentView(R.layout.activity_choose);
 
         checkLoged();
-        testThoi();
-    }
-
-    protected void testThoi() {
-        try {
-            Bundle bundle = getIntent().getExtras();
-
-            for (String key : bundle.keySet()) {
-                Object value = bundle.get(key);
-                Log.d("testThoi", String.format("%s %s (%s)", key, value.toString(), value.getClass().getName()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /*

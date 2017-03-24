@@ -6,11 +6,12 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -29,8 +31,8 @@ import com.xtel.ivipbusiness.model.entity.RESP_News;
 import com.xtel.ivipbusiness.model.entity.Voucher;
 import com.xtel.ivipbusiness.presenter.UpdateNewsPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IUpdateNewsView;
-import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.ivipbusiness.view.adapter.TypeAdapter;
+import com.xtel.ivipbusiness.view.adapter.TypeSaleAdapter;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -42,8 +44,9 @@ import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
+
+import jp.wasabeef.richeditor.RichEditor;
 
 public class UpdateNewsActivity extends BasicActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, IUpdateNewsView {
     private UpdateNewsPresenter presenter;
@@ -51,7 +54,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ImageView img_banner, img_camera;
-    private EditText edt_title, edt_des, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
+    private EditText edt_title, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
     private TextView txt_public;
     private CheckBox chk_voucher;
     private Spinner sp_news_type, sp_type_sale;
@@ -60,7 +63,16 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
 
     private RESP_News resp_news;
     private MenuItem menuItem;
+
+    protected final int REQUEST_RESIZE_IMAGE = 8;
     private boolean isPublic = true;
+
+    protected RichEditor editor_des;
+    protected ImageButton img_undo, img_redo, img_bold, img_italic, img_subscript, img_superscript, img_strikethrough, img_underline,
+            img_heading1, img_heading2, img_heading3, img_heading4, img_heading5, img_heading6, img_txt_color, img_bg_color,
+            img_indent, img_outdent, img_align_left, img_align_center, img_align_right, img_blockquote, img_insertbullet,
+            img_insertnumber, img_insertimage, img_insertlink, img_insertcheckbox;
+    protected boolean isTxtChanged = false, isBgChanged = false, isEnable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +87,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         initType();
         initTypeSale();
         initListener();
+        initInputDescription();
         setEnableView(false);
         hideLayout();
         presenter.getData();
@@ -101,7 +114,6 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         edt_end_time = findEditText(R.id.add_news_edt_end_time);
         edt_alive = findEditText(R.id.add_news_edt_alive_time);
         edt_point = findEditText(R.id.add_news_edt_exchange_point);
-        edt_des = findEditText(R.id.add_news_edt_des);
 
         chk_voucher = findCheckBox(R.id.add_news_chk_create_news);
         layout_voucher = findLinearLayout(R.id.add_news_layout_voucher);
@@ -130,13 +142,78 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         edt_end_time.setOnClickListener(this);
     }
 
+    /*
+    * Khởi tạo view nhập vào miêu tả
+    * */
+    protected void initInputDescription() {
+        editor_des = (RichEditor) findViewById(R.id.add_news_editor_des);
+        editor_des.setPadding(8, 0, 8, 8);
+        editor_des.setEditorFontSize(13);
+
+        img_undo = findImageButton(R.id.action_undo);
+        img_undo.setOnClickListener(this);
+        img_redo = findImageButton(R.id.action_redo);
+        img_redo.setOnClickListener(this);
+        img_bold = findImageButton(R.id.action_bold);
+        img_bold.setOnClickListener(this);
+        img_italic = findImageButton(R.id.action_italic);
+        img_italic.setOnClickListener(this);
+        img_subscript = findImageButton(R.id.action_subscript);
+        img_subscript.setOnClickListener(this);
+        img_superscript = findImageButton(R.id.action_superscript);
+        img_superscript.setOnClickListener(this);
+        img_strikethrough = findImageButton(R.id.action_strikethrough);
+        img_strikethrough.setOnClickListener(this);
+        img_underline = findImageButton(R.id.action_underline);
+        img_underline.setOnClickListener(this);
+        img_heading1 = findImageButton(R.id.action_heading1);
+        img_heading1.setOnClickListener(this);
+        img_heading2 = findImageButton(R.id.action_heading2);
+        img_heading2.setOnClickListener(this);
+        img_heading3 = findImageButton(R.id.action_heading3);
+        img_heading3.setOnClickListener(this);
+        img_heading4 = findImageButton(R.id.action_heading4);
+        img_heading4.setOnClickListener(this);
+        img_heading5 = findImageButton(R.id.action_heading5);
+        img_heading5.setOnClickListener(this);
+        img_heading6 = findImageButton(R.id.action_heading6);
+        img_heading6.setOnClickListener(this);
+        img_txt_color = findImageButton(R.id.action_txt_color);
+        img_txt_color.setOnClickListener(this);
+        img_bg_color = findImageButton(R.id.action_bg_color);
+        img_bg_color.setOnClickListener(this);
+        img_indent = findImageButton(R.id.action_indent);
+        img_indent.setOnClickListener(this);
+        img_outdent = findImageButton(R.id.action_outdent);
+        img_outdent.setOnClickListener(this);
+        img_align_left = findImageButton(R.id.action_align_left);
+        img_align_left.setOnClickListener(this);
+        img_align_center = findImageButton(R.id.action_align_center);
+        img_align_center.setOnClickListener(this);
+        img_align_right = findImageButton(R.id.action_align_right);
+        img_align_right.setOnClickListener(this);
+        img_blockquote = findImageButton(R.id.action_blockquote);
+        img_blockquote.setOnClickListener(this);
+        img_insertbullet = findImageButton(R.id.action_insert_bullets);
+        img_insertbullet.setOnClickListener(this);
+        img_insertnumber = findImageButton(R.id.action_insert_numbers);
+        img_insertnumber.setOnClickListener(this);
+        img_insertimage = findImageButton(R.id.action_insert_image);
+        img_insertimage.setOnClickListener(this);
+        img_insertlink = findImageButton(R.id.action_insert_link);
+        img_insertlink.setOnClickListener(this);
+        img_insertcheckbox = findImageButton(R.id.action_insert_checkbox);
+        img_insertcheckbox.setOnClickListener(this);
+    }
+
     public void setEnableView(boolean isEnable) {
+        this.isEnable = isEnable;
         typeAdapter.setEnable(isEnable);
         img_camera.setEnabled(isEnable);
         txt_public.setEnabled(isEnable);
 
         edt_title.setEnabled(isEnable);
-        edt_des.setEnabled(isEnable);
+        editor_des.setEnabled(isEnable);
         edt_number_voucher.setEnabled(isEnable);
         edt_sale.setEnabled(isEnable);
         edt_begin_time.setEnabled(isEnable);
@@ -147,11 +224,6 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         chk_voucher.setEnabled(isEnable);
         sp_news_type.setEnabled(isEnable);
         sp_type_sale.setEnabled(isEnable);
-
-        if (isEnable)
-            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des));
-        else
-            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
     }
 
     private void selectDate(final int type) {
@@ -166,23 +238,6 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
-
-//    private void selectTime(final int type) {
-//        Calendar calendar = Calendar.getInstance();
-//        new TimePickerDialog(this, R.style.AppCompatAlertDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-//            @Override
-//            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                if (type == 0) {
-//                    WidgetHelper.getInstance().setEditTextTime(edt_begin_time, getString(R.string.start_time) + ": ", hourOfDay, minute);
-//                } else if (type == 1) {
-//                    WidgetHelper.getInstance().setEditTextTime(edt_end_time, getString(R.string.end_time) + ": ", hourOfDay, minute);
-////                    END_TIME = hourOfDay + ":" + minute;
-//                } else {
-//                    WidgetHelper.getInstance().setEditTextTime(edt_alive, "", hourOfDay, minute);
-//                }
-//            }
-//        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
-//    }
 
     private void setPublic(View view) {
         final PopupMenu popup = new PopupMenu(getApplicationContext(), view);
@@ -238,25 +293,53 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 });
     }
 
+    /*
+    * Lấy ảnh đã đưuọc resize
+    * */
+    protected void getImageResize(Intent data) {
+        try {
+            int type = data.getIntExtra(Constants.TYPE, -1);
+            String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            String server_uri = data.getStringExtra(Constants.URI);
+            File file = new File(data.getStringExtra(Constants.FILE));
 
+            if (type != -1 && server_path != null && file.exists()) {
+                if (type == 0) {
+                    presenter.getImageResise(server_path);
+                    onLoadPicture(file);
+                } else {
+                    server_uri = server_uri.replace("https", "http").replace("9191", "9190");
+                    Log.e("getImageResize", "uri " + server_uri);
+                    if (!editor_des.isFocused()) {
+                        String content;
+                        if (editor_des.getHtml() == null)
+                            content = "";
+                        else
+                            content = editor_des.getHtml();
+                        content += "<img src=\"" + server_uri + "\" alt=\"" + getString(R.string.ivip_business) + "\">";
+                        editor_des.setHtml(content);
+                        Log.e("getImageResize", "content " + content);
+                    } else
+                        editor_des.insertImage(server_uri, getString(R.string.ivip_business));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    protected void selectAlign(int position) {
+        img_align_left.setSelected(false);
+        img_align_center.setSelected(false);
+        img_align_right.setSelected(false);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if (position == 1)
+            img_align_left.setSelected(true);
+        else if (position == 2)
+            img_align_center.setSelected(true);
+        else
+            img_align_right.setSelected(true);
+    }
 
 
     @Override
@@ -274,7 +357,112 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 setPublic(v);
                 break;
             case R.id.add_news_img_camera:
-                presenter.takePicture();
+                presenter.takePicture(0);
+                break;
+
+            case R.id.action_undo:
+                img_undo.setSelected(!img_undo.isSelected());
+                editor_des.undo();
+                break;
+            case R.id.action_redo:
+                img_redo.setSelected(!img_redo.isSelected());
+                editor_des.redo();
+                break;
+            case R.id.action_bold:
+                img_bold.setSelected(!img_bold.isSelected());
+                editor_des.setBold();
+                break;
+            case R.id.action_italic:
+                img_italic.setSelected(!img_italic.isSelected());
+                editor_des.setItalic();
+                break;
+            case R.id.action_subscript:
+                img_redo.setSelected(!img_redo.isSelected());
+                editor_des.setSubscript();
+                break;
+            case R.id.action_superscript:
+                img_superscript.setSelected(!img_superscript.isSelected());
+                editor_des.setSuperscript();
+                break;
+            case R.id.action_strikethrough:
+                img_strikethrough.setSelected(!img_strikethrough.isSelected());
+                editor_des.setStrikeThrough();
+                break;
+            case R.id.action_underline:
+                img_underline.setSelected(!img_underline.isSelected());
+                editor_des.setUnderline();
+                break;
+            case R.id.action_heading1:
+                img_heading1.setSelected(!img_heading1.isSelected());
+                editor_des.setHeading(1);
+                break;
+            case R.id.action_heading2:
+                img_heading2.setSelected(!img_heading2.isSelected());
+                editor_des.setHeading(2);
+                break;
+            case R.id.action_heading3:
+                img_heading3.setSelected(!img_heading3.isSelected());
+                editor_des.setHeading(3);
+                break;
+            case R.id.action_heading4:
+                img_heading4.setSelected(!img_heading4.isSelected());
+                editor_des.setHeading(4);
+                break;
+            case R.id.action_heading5:
+                img_heading5.setSelected(!img_heading5.isSelected());
+                editor_des.setHeading(5);
+                break;
+            case R.id.action_heading6:
+                img_heading6.setSelected(!img_heading6.isSelected());
+                editor_des.setHeading(6);
+                break;
+            case R.id.action_txt_color:
+                editor_des.setTextColor(isTxtChanged ? Color.BLACK : Color.RED);
+                isTxtChanged = !isTxtChanged;
+                img_txt_color.setSelected(isTxtChanged);
+                break;
+            case R.id.action_bg_color:
+                editor_des.setTextBackgroundColor(isBgChanged ? Color.TRANSPARENT : Color.YELLOW);
+                isBgChanged = !isBgChanged;
+                img_bg_color.setSelected(isBgChanged);
+                break;
+            case R.id.action_indent:
+                img_indent.setSelected(!img_indent.isSelected());
+                editor_des.setIndent();
+                break;
+            case R.id.action_outdent:
+                img_outdent.setSelected(!img_outdent.isSelected());
+                editor_des.setOutdent();
+                break;
+            case R.id.action_align_left:
+                selectAlign(1);
+                editor_des.setAlignLeft();
+                break;
+            case R.id.action_align_center:
+                selectAlign(2);
+                editor_des.setAlignCenter();
+                break;
+            case R.id.action_align_right:
+                selectAlign(3);
+                editor_des.setAlignRight();
+                break;
+            case R.id.action_blockquote:
+                editor_des.setBlockquote();
+                break;
+            case R.id.action_insert_bullets:
+                editor_des.setBullets();
+                break;
+            case R.id.action_insert_numbers:
+                editor_des.setNumbers();
+                break;
+            case R.id.action_insert_image:
+                presenter.takePicture(2);
+                break;
+            case R.id.action_insert_link:
+                editor_des.insertLink("https://github.com/wasabeef", "wasabeef");
+                break;
+            case R.id.action_insert_checkbox:
+                editor_des.insertTodo();
                 break;
             default:
                 break;
@@ -315,7 +503,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         WidgetHelper.getInstance().setImageURL(img_banner, obj.getBanner());
         WidgetHelper.getInstance().setEditTextWithResult(edt_title, obj.getTitle(), getString(R.string.not_update_title));
         WidgetHelper.getInstance().setSpinnerNewsType(sp_news_type, obj.getNews_type());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_des, obj.getDescription());
+//        WidgetHelper.getInstance().setEditTextNoResult(edt_des, obj.getDescription());
+        editor_des.setHtml(obj.getDescription());
 
         if (obj.getVoucher() != null) {
             chk_voucher.setChecked(true);
@@ -342,7 +531,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     }
 
     @Override
-    public void onTakePictureGallary(Uri uri) {
+    public void onTakePictureGallary(int type, Uri uri) {
         if (!NetWorkInfo.isOnline(this)) {
             showShortToast(getString(R.string.error_no_internet));
             return;
@@ -351,23 +540,19 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.URI, uri);
+        intent.putExtra(Constants.TYPE, type);
 
-        Bitmap bitmap = null;
-
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (bitmap != null) {
-            presenter.postImage(bitmap);
-        }
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
+    /*
+    * Chọn ảnh từ Camera thành công
+    * Bắt đầu resize ảnh đã chọn
+    * */
     @Override
-    public void onTakePictureCamera(Bitmap bitmap) {
+    public void onTakePictureCamera(int type, Bitmap bitmap) {
         if (!NetWorkInfo.isOnline(this)) {
             showShortToast(getString(R.string.error_no_internet));
             return;
@@ -376,8 +561,11 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             return;
         }
 
-        showProgressBar(false, false, null, getString(R.string.uploading_file));
-        presenter.postImage(bitmap);
+        Intent intent = new Intent(this, ResizeImageActivity.class);
+        intent.putExtra(Constants.BITMAP, bitmap);
+        intent.putExtra(Constants.TYPE, type);
+
+        startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
 
     @Override
@@ -498,7 +686,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                     menuItem.setIcon(R.drawable.ic_action_done_2);
                     setEnableView(true);
                 } else {
-                    presenter.updateNews(edt_title.getText().toString(), (sp_news_type.getSelectedItemPosition() + 2), edt_des.getText().toString(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
+                    presenter.updateNews(edt_title.getText().toString(), (sp_news_type.getSelectedItemPosition() + 2), editor_des.getHtml(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
                             edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),
                             edt_sale.getText().toString(), sp_type_sale.getSelectedItemPosition());
                 }
@@ -530,6 +718,9 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == RESULT_OK) {
+            getImageResize(data);
+        } else
+            presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

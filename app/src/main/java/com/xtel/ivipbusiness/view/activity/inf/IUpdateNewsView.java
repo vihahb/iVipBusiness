@@ -19,8 +19,8 @@ public interface IUpdateNewsView {
 
     void onGetDataError();
     void onGetNewsInfoSuccess(RESP_News obj);
-    void onTakePictureGallary(Uri uri);
-    void onTakePictureCamera(Bitmap bitmap);
+    void onTakePictureGallary(int type, Uri uri);
+    void onTakePictureCamera(int type, Bitmap bitmap);
     void onLoadPicture(File url);
     void onUpdateSuccess();
     void getNewSession(ICmd iCmd, Object... params);

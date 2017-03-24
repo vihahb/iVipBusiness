@@ -40,6 +40,7 @@ public class AddNewsPresenter extends BasicPresenter {
     private String[] permission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private final int REQUEST_CODE_CAMERA = 101, REQUEST_CAMERA = 100;
 
+    private int type = -1;
     private final String CHAIN = "CHAIN";
     private String PATH_BANNER;
 
@@ -85,10 +86,11 @@ public class AddNewsPresenter extends BasicPresenter {
             view.onGetDataError();
     }
 
-    public void takePicture() {
+    public void takePicture(int type) {
         if (!PermissionHelper.checkListPermission(permission, view.getActivity(), REQUEST_CAMERA))
             return;
 
+        this.type = type;
         takePictureNow();
     }
 
@@ -218,10 +220,10 @@ public class AddNewsPresenter extends BasicPresenter {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
                 if (uri != null) {
-                    view.onTakePictureGallary(uri);
+                    view.onTakePictureGallary(type, uri);
                 } else {
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                    view.onTakePictureCamera(bitmap);
+                    view.onTakePictureCamera(type, bitmap);
                 }
             }
         }

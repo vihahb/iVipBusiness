@@ -111,11 +111,10 @@ dependencies {
         transitive = true;
     }
     //  End Fabric
-    //  Listen keyboard show or hide
-    compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
-    //  End listen keyboard show or hide
+    compile 'jp.wasabeef:richeditor-android:1.2.2'
     compile project(':NIPmodule')
     compile project(':MPChartLib')
+    compile project(':LVListenKeyboardEvent')
 }
 
 apply plugin: 'com.google.gms.google-services'

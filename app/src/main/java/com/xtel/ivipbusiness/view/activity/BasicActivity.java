@@ -92,7 +92,10 @@ public abstract class BasicActivity extends IActivity {
     * Hiển thị tiến trình (đang thực hiện)
     * */
     protected void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {
-        progressDialog = new ProgressDialog(BasicActivity.this, R.style.AppCompatAlertDialogStyle);
+        if (progressDialog == null)
+            progressDialog = new ProgressDialog(BasicActivity.this, R.style.AppCompatAlertDialogStyle);
+        else
+            progressDialog.dismiss();
         progressDialog.setCanceledOnTouchOutside(isTouchOutside);
         progressDialog.setCancelable(isCancel);
 
@@ -223,10 +226,6 @@ public abstract class BasicActivity extends IActivity {
         Intent intent = new Intent(this, clazz);
         intent.putExtra(key, (Serializable) object);
         startActivity(intent);
-        finish();
-    }
-
-    protected void finishActivity() {
         finish();
     }
 

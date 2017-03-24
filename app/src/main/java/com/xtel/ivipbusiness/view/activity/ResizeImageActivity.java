@@ -144,7 +144,7 @@ public class ResizeImageActivity extends BasicActivity {
         * */
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();
+//            super.onPreExecute();
             showProgressBar(false, false, null, getString(R.string.uploading_file));
         }
 
@@ -160,6 +160,8 @@ public class ResizeImageActivity extends BasicActivity {
                 bitmap = getBigBitmap(bitmap);
             } else if (type == 1) {
                 bitmap = getSmallBitmap(bitmap);
+            } else if (type == 2) {
+                bitmap = getLogoBitmap(bitmap);
             }
 
             if (bitmap == null)
@@ -200,6 +202,7 @@ public class ResizeImageActivity extends BasicActivity {
 
                     @Override
                     public void onError() {
+                        closeProgressBar();
                         showShortToast(getString(R.string.error_try_again));
                         finish();
                     }
@@ -228,6 +231,29 @@ public class ResizeImageActivity extends BasicActivity {
 
                 if (width > 300 || height > 300) {
                     while (width > 300 || height > 300) {
+                        width = width * 0.9;
+                        height = height * 0.9;
+                    }
+
+                    return Bitmap.createScaledBitmap(bitmap, (int) width, (int) height, false);
+                }
+
+                return cropImageView.getCroppedImage();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        /*
+        * Resize ảnh nhỏ
+        * */
+        Bitmap getLogoBitmap(Bitmap bitmap) {
+            try {
+                double width = bitmap.getWidth(), height = bitmap.getHeight();
+
+                if (width > 120 || height > 120) {
+                    while (width > 120 || height > 120) {
                         width = width * 0.9;
                         height = height * 0.9;
                     }

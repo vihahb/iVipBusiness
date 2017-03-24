@@ -9,6 +9,7 @@
 
         <!--<item name="colorAccent">@color/colorAccent</item>-->
         <!--<item name="android:windowAnimationStyle">@null</item>-->
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.MyAppTheme</item>
         <item name="android:windowBackground">@mipmap/background_window</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

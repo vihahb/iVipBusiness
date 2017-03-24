@@ -16,8 +16,8 @@ import java.io.File;
 public interface IAddNewsView {
 
     void onGetDataError();
-    void onTakePictureGallary(Uri uri);
-    void onTakePictureCamera(Bitmap bitmap);
+    void onTakePictureGallary(int type, Uri uri);
+    void onTakePictureCamera(int type, Bitmap bitmap);
     void onAddNewsSuccess();
     void getNewSession(ICmd iCmd);
 

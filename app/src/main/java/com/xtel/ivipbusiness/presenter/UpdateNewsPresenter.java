@@ -42,6 +42,8 @@ public class UpdateNewsPresenter extends BasicPresenter {
     private RESP_News resp_news;
     private News news;
     private String PATH_BANNER;
+
+    private int type = -1;
     private boolean isExists = true;
 
     private ICmd iCmd = new ICmd() {
@@ -118,10 +120,11 @@ public class UpdateNewsPresenter extends BasicPresenter {
             iCmd.execute(1, news.getId());
     }
 
-    public void takePicture() {
+    public void takePicture(int type) {
         if (!PermissionHelper.checkListPermission(permission, view.getActivity(), REQUEST_CAMERA))
             return;
 
+        this.type = type;
         takePictureNow();
     }
 
@@ -230,6 +233,9 @@ public class UpdateNewsPresenter extends BasicPresenter {
         iCmd.execute(2, JsonHelper.toJson(resp_news));
     }
 
+    public void getImageResise(String server_path) {
+        PATH_BANNER = server_path;
+    }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA) {
@@ -253,10 +259,10 @@ public class UpdateNewsPresenter extends BasicPresenter {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
                 if (uri != null) {
-                    view.onTakePictureGallary(uri);
+                    view.onTakePictureGallary(type, uri);
                 } else {
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                    view.onTakePictureCamera(bitmap);
+                    view.onTakePictureCamera(type, bitmap);
                 }
             }
         }

@@ -7,21 +7,19 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -43,22 +41,28 @@ import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
-
 import java.io.File;
 import java.util.Calendar;
 
-public class AddNewsActivity extends BasicActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, ViewTreeObserver.OnGlobalLayoutListener, IAddNewsView {
+import jp.wasabeef.richeditor.RichEditor;
+
+public class AddNewsActivity extends BasicActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, IAddNewsView {
     protected AddNewsPresenter presenter;
     protected CallbackManager callbackManager;
 
     protected ImageView img_banner, img_camera;
-    protected EditText edt_title, edt_des, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
+    protected EditText edt_title, edt_number_voucher, edt_sale, edt_begin_time, edt_end_time, edt_alive, edt_point;
     protected TextView txt_public;
     protected CheckBox chk_voucher;
     protected Spinner sp_news_type, sp_type_sale;
     protected LinearLayout layout_voucher;
+
+    protected RichEditor editor_des;
+    protected ImageButton img_undo, img_redo, img_bold, img_italic, img_subscript, img_superscript, img_strikethrough, img_underline,
+            img_heading1, img_heading2, img_heading3, img_heading4, img_heading5, img_heading6, img_txt_color, img_bg_color,
+            img_indent, img_outdent, img_align_left, img_align_center, img_align_right, img_blockquote, img_insertbullet,
+            img_insertnumber, img_insertimage, img_insertlink, img_insertcheckbox;
+    protected boolean isTxtChanged = false, isBgChanged = false;
 
     protected final int REQUEST_RESIZE_IMAGE = 8;
     protected boolean isPublic = true;
@@ -75,8 +79,8 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         initType();
         initTypeSale();
         initListener();
+        initInputDescription();
         presenter.getData();
-        hideLayout();
     }
 
     /*
@@ -87,7 +91,6 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         img_camera = findImageButton(R.id.add_news_img_camera);
 
         txt_public = findTextView(R.id.add_news_txt_public);
-
         edt_title = findEditText(R.id.add_news_edt_title);
         edt_number_voucher = findEditText(R.id.add_news_edt_number_of_voucher);
         edt_sale = findEditText(R.id.add_news_edt_sale);
@@ -95,10 +98,13 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         edt_end_time = findEditText(R.id.add_news_edt_end_time);
         edt_alive = findEditText(R.id.add_news_edt_alive_time);
         edt_point = findEditText(R.id.add_news_edt_exchange_point);
-        edt_des = findEditText(R.id.add_news_edt_des);
+//        edt_des = findEditText(R.id.add_news_edt_des);
 
         chk_voucher = findCheckBox(R.id.add_news_chk_create_news);
         layout_voucher = findLinearLayout(R.id.add_news_layout_voucher);
+
+//        layout_style = findView(R.id.add_news_layout_style);
+//        hideView(layout_style);
     }
 
     /*
@@ -123,20 +129,6 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     * Lắng nghe sự kiện khi view được click
     * */
     protected void initListener() {
-//        Lắng nghe khi key board hiển thị hay ẩn đi
-        KeyboardVisibilityEvent.setEventListener(
-                getActivity(),
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        // some code depending on keyboard visiblity status
-                        if (isOpen)
-                            showShortToast("show");
-                        else
-                            showShortToast("hide");
-                    }
-                });
-
         img_camera.setOnClickListener(this);
         chk_voucher.setOnCheckedChangeListener(this);
 
@@ -189,6 +181,70 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     /*
+    * Khởi tạo view nhập vào miêu tả
+    * */
+    protected void initInputDescription() {
+        editor_des = (RichEditor) findViewById(R.id.add_news_editor_des);
+        editor_des.setPadding(8, 0, 8, 8);
+        editor_des.setEditorFontSize(13);
+
+        img_undo = findImageButton(R.id.action_undo);
+        img_undo.setOnClickListener(this);
+        img_redo = findImageButton(R.id.action_redo);
+        img_redo.setOnClickListener(this);
+        img_bold = findImageButton(R.id.action_bold);
+        img_bold.setOnClickListener(this);
+        img_italic = findImageButton(R.id.action_italic);
+        img_italic.setOnClickListener(this);
+        img_subscript = findImageButton(R.id.action_subscript);
+        img_subscript.setOnClickListener(this);
+        img_superscript = findImageButton(R.id.action_superscript);
+        img_superscript.setOnClickListener(this);
+        img_strikethrough = findImageButton(R.id.action_strikethrough);
+        img_strikethrough.setOnClickListener(this);
+        img_underline = findImageButton(R.id.action_underline);
+        img_underline.setOnClickListener(this);
+        img_heading1 = findImageButton(R.id.action_heading1);
+        img_heading1.setOnClickListener(this);
+        img_heading2 = findImageButton(R.id.action_heading2);
+        img_heading2.setOnClickListener(this);
+        img_heading3 = findImageButton(R.id.action_heading3);
+        img_heading3.setOnClickListener(this);
+        img_heading4 = findImageButton(R.id.action_heading4);
+        img_heading4.setOnClickListener(this);
+        img_heading5 = findImageButton(R.id.action_heading5);
+        img_heading5.setOnClickListener(this);
+        img_heading6 = findImageButton(R.id.action_heading6);
+        img_heading6.setOnClickListener(this);
+        img_txt_color = findImageButton(R.id.action_txt_color);
+        img_txt_color.setOnClickListener(this);
+        img_bg_color = findImageButton(R.id.action_bg_color);
+        img_bg_color.setOnClickListener(this);
+        img_indent = findImageButton(R.id.action_indent);
+        img_indent.setOnClickListener(this);
+        img_outdent = findImageButton(R.id.action_outdent);
+        img_outdent.setOnClickListener(this);
+        img_align_left = findImageButton(R.id.action_align_left);
+        img_align_left.setOnClickListener(this);
+        img_align_center = findImageButton(R.id.action_align_center);
+        img_align_center.setOnClickListener(this);
+        img_align_right = findImageButton(R.id.action_align_right);
+        img_align_right.setOnClickListener(this);
+        img_blockquote = findImageButton(R.id.action_blockquote);
+        img_blockquote.setOnClickListener(this);
+        img_insertbullet = findImageButton(R.id.action_insert_bullets);
+        img_insertbullet.setOnClickListener(this);
+        img_insertnumber = findImageButton(R.id.action_insert_numbers);
+        img_insertnumber.setOnClickListener(this);
+        img_insertimage = findImageButton(R.id.action_insert_image);
+        img_insertimage.setOnClickListener(this);
+        img_insertlink = findImageButton(R.id.action_insert_link);
+        img_insertlink.setOnClickListener(this);
+        img_insertcheckbox = findImageButton(R.id.action_insert_checkbox);
+        img_insertcheckbox.setOnClickListener(this);
+    }
+
+    /*
     * Hiển thị layout thêm voucher
     * */
     protected void showLayout() {
@@ -231,15 +287,45 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         try {
             int type = data.getIntExtra(Constants.TYPE, -1);
             String server_path = data.getStringExtra(Constants.SERVER_PATH);
+            String server_uri = data.getStringExtra(Constants.URI);
             File file = new File(data.getStringExtra(Constants.FILE));
 
             if (type != -1 && server_path != null && file.exists()) {
-                presenter.getImageResise(server_path);
-                onLoadPicture(file);
+                if (type == 0) {
+                    presenter.getImageResise(server_path);
+                    onLoadPicture(file);
+                } else {
+                    server_uri = server_uri.replace("https", "http").replace("9191", "9190");
+                    Log.e("getImageResize", "uri " + server_uri);
+                    if (!editor_des.isFocused()) {
+                        String content;
+                        if (editor_des.getHtml() == null)
+                            content = "";
+                        else
+                            content = editor_des.getHtml();
+                        content += "<img src=\"" + server_uri + "\" alt=\"" + getString(R.string.ivip_business) + "\">";
+                        editor_des.setHtml(content);
+                        Log.e("getImageResize", "content " + content);
+                    } else
+                        editor_des.insertImage(server_uri, getString(R.string.ivip_business));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void selectAlign(int position) {
+        img_align_left.setSelected(false);
+        img_align_center.setSelected(false);
+        img_align_right.setSelected(false);
+
+        if (position == 1)
+            img_align_left.setSelected(true);
+        else if (position == 2)
+            img_align_center.setSelected(true);
+        else
+            img_align_right.setSelected(true);
     }
 
     /*
@@ -260,7 +346,112 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 setPublic(v);
                 break;
             case R.id.add_news_img_camera:
-                presenter.takePicture();
+                presenter.takePicture(0);
+                break;
+
+            case R.id.action_undo:
+                img_undo.setSelected(!img_undo.isSelected());
+                editor_des.undo();
+                break;
+            case R.id.action_redo:
+                img_redo.setSelected(!img_redo.isSelected());
+                editor_des.redo();
+                break;
+            case R.id.action_bold:
+                img_bold.setSelected(!img_bold.isSelected());
+                editor_des.setBold();
+                break;
+            case R.id.action_italic:
+                img_italic.setSelected(!img_italic.isSelected());
+                editor_des.setItalic();
+                break;
+            case R.id.action_subscript:
+                img_redo.setSelected(!img_redo.isSelected());
+                editor_des.setSubscript();
+                break;
+            case R.id.action_superscript:
+                img_superscript.setSelected(!img_superscript.isSelected());
+                editor_des.setSuperscript();
+                break;
+            case R.id.action_strikethrough:
+                img_strikethrough.setSelected(!img_strikethrough.isSelected());
+                editor_des.setStrikeThrough();
+                break;
+            case R.id.action_underline:
+                img_underline.setSelected(!img_underline.isSelected());
+                editor_des.setUnderline();
+                break;
+            case R.id.action_heading1:
+                img_heading1.setSelected(!img_heading1.isSelected());
+                editor_des.setHeading(1);
+                break;
+            case R.id.action_heading2:
+                img_heading2.setSelected(!img_heading2.isSelected());
+                editor_des.setHeading(2);
+                break;
+            case R.id.action_heading3:
+                img_heading3.setSelected(!img_heading3.isSelected());
+                editor_des.setHeading(3);
+                break;
+            case R.id.action_heading4:
+                img_heading4.setSelected(!img_heading4.isSelected());
+                editor_des.setHeading(4);
+                break;
+            case R.id.action_heading5:
+                img_heading5.setSelected(!img_heading5.isSelected());
+                editor_des.setHeading(5);
+                break;
+            case R.id.action_heading6:
+                img_heading6.setSelected(!img_heading6.isSelected());
+                editor_des.setHeading(6);
+                break;
+            case R.id.action_txt_color:
+                editor_des.setTextColor(isTxtChanged ? Color.BLACK : Color.RED);
+                isTxtChanged = !isTxtChanged;
+                img_txt_color.setSelected(isTxtChanged);
+                break;
+            case R.id.action_bg_color:
+                editor_des.setTextBackgroundColor(isBgChanged ? Color.TRANSPARENT : Color.YELLOW);
+                isBgChanged = !isBgChanged;
+                img_bg_color.setSelected(isBgChanged);
+                break;
+            case R.id.action_indent:
+                img_indent.setSelected(!img_indent.isSelected());
+                editor_des.setIndent();
+                break;
+            case R.id.action_outdent:
+                img_outdent.setSelected(!img_outdent.isSelected());
+                editor_des.setOutdent();
+                break;
+            case R.id.action_align_left:
+                selectAlign(1);
+                editor_des.setAlignLeft();
+                break;
+            case R.id.action_align_center:
+                selectAlign(2);
+                editor_des.setAlignCenter();
+                break;
+            case R.id.action_align_right:
+                selectAlign(2);
+                editor_des.setAlignRight();
+                break;
+            case R.id.action_blockquote:
+                editor_des.setBlockquote();
+                break;
+            case R.id.action_insert_bullets:
+                editor_des.setBullets();
+                break;
+            case R.id.action_insert_numbers:
+                editor_des.setNumbers();
+                break;
+            case R.id.action_insert_image:
+                presenter.takePicture(2);
+                break;
+            case R.id.action_insert_link:
+                editor_des.insertLink("https://github.com/wasabeef", "wasabeef");
+                break;
+            case R.id.action_insert_checkbox:
+                editor_des.insertTodo();
                 break;
             default:
                 break;
@@ -304,7 +495,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     * Bắt đầu resize ảnh đã chọn
     * */
     @Override
-    public void onTakePictureGallary(Uri uri) {
+    public void onTakePictureGallary(int type, Uri uri) {
         if (!NetWorkInfo.isOnline(this)) {
             showShortToast(getString(R.string.error_no_internet));
             return;
@@ -315,7 +506,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
 
         Intent intent = new Intent(this, ResizeImageActivity.class);
         intent.putExtra(Constants.URI, uri);
-        intent.putExtra(Constants.TYPE, 0);
+        intent.putExtra(Constants.TYPE, type);
 
         startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
@@ -325,7 +516,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     * Bắt đầu resize ảnh đã chọn
     * */
     @Override
-    public void onTakePictureCamera(Bitmap bitmap) {
+    public void onTakePictureCamera(int type, Bitmap bitmap) {
         if (!NetWorkInfo.isOnline(this)) {
             showShortToast(getString(R.string.error_no_internet));
             return;
@@ -336,7 +527,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
 
         Intent intent = new Intent(this, ResizeImageActivity.class);
         intent.putExtra(Constants.BITMAP, bitmap);
-        intent.putExtra(Constants.TYPE, 0);
+        intent.putExtra(Constants.TYPE, type);
 
         startActivityForResult(intent, REQUEST_RESIZE_IMAGE);
     }
@@ -443,7 +634,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Log.e("onConfigurationChanged", "show");
             showShortToast("show");
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             showShortToast("hide");
             Log.e("onConfigurationChanged", "hide");
         }
@@ -465,7 +656,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.action_add_news_done:
-                presenter.addNews(edt_title.getText().toString(), sp_news_type.getSelectedItemPosition(), edt_des.getText().toString(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
+                presenter.addNews(edt_title.getText().toString(), sp_news_type.getSelectedItemPosition(), editor_des.getHtml(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
                         edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),
                         edt_sale.getText().toString(), sp_type_sale.getSelectedItemPosition());
                 break;
@@ -490,17 +681,5 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             getImageResize(data);
         } else
             presenter.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onGlobalLayout() {
-        int heightDiff = edt_des.getRootView().getHeight() - edt_des.getHeight();
-        int contentViewTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
-
-        if(heightDiff <= contentViewTop){
-            showShortToast("KeyboardWillHide");
-        } else {
-            showShortToast("KeyboardWillShow");
-        }
     }
 }

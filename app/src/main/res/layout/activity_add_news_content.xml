@@ -24,19 +24,44 @@
         android:gravity="center_vertical"
         android:text="@string/news_des" />
 
-    <EditText
-        android:id="@+id/add_news.edt_des"
-        style="@style/edittext_des"
+    <include
+        layout="@layout/activity_add_news_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
-        android:layout_marginTop="@dimen/size_10"
-        android:background="@drawable/edittext_des"
-        android:inputType="textMultiLine"
-        android:minLines="10"
-        android:padding="@dimen/size_8"
-        android:paddingBottom="@dimen/size_8" />
+        android:layout_marginTop="@dimen/size_16" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
+        android:background="@android:color/transparent"
+        android:minHeight="@dimen/size_150"
+        android:orientation="vertical">
+
+        <jp.wasabeef.richeditor.RichEditor
+            android:id="@+id/add_news.editor_des"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_des" />
+    </LinearLayout>
+
+    <!--<EditText-->
+        <!--android:id="@+id/add_news.edt_des"-->
+        <!--style="@style/edittext_des"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/size_4"-->
+        <!--android:layout_marginRight="@dimen/size_4"-->
+        <!--android:layout_marginTop="@dimen/size_10"-->
+        <!--android:background="@drawable/edittext_des"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:minLines="10"-->
+        <!--android:padding="@dimen/size_8"-->
+        <!--android:paddingBottom="@dimen/size_8" />-->
 
     <CheckBox
         android:id="@+id/add_news.chk_create_news"
