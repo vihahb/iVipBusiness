@@ -111,6 +111,9 @@ dependencies {
         transitive = true;
     }
     //  End Fabric
+    //  Listen keyboard show or hide
+    compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
+    //  End listen keyboard show or hide
     compile project(':NIPmodule')
     compile project(':MPChartLib')
 }

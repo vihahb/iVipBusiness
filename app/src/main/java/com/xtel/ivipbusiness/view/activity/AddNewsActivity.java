@@ -5,13 +5,19 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -37,10 +43,13 @@ import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 import java.io.File;
 import java.util.Calendar;
 
-public class AddNewsActivity extends BasicActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, IAddNewsView {
+public class AddNewsActivity extends BasicActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, ViewTreeObserver.OnGlobalLayoutListener, IAddNewsView {
     protected AddNewsPresenter presenter;
     protected CallbackManager callbackManager;
 
@@ -114,6 +123,20 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     * Lắng nghe sự kiện khi view được click
     * */
     protected void initListener() {
+//        Lắng nghe khi key board hiển thị hay ẩn đi
+        KeyboardVisibilityEvent.setEventListener(
+                getActivity(),
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        // some code depending on keyboard visiblity status
+                        if (isOpen)
+                            showShortToast("show");
+                        else
+                            showShortToast("hide");
+                    }
+                });
+
         img_camera.setOnClickListener(this);
         chk_voucher.setOnCheckedChangeListener(this);
 
@@ -412,6 +435,21 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.e("onConfigurationChanged", "change 1");
+        super.onConfigurationChanged(newConfig);
+        Log.e("onConfigurationChanged", "change 2");
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.e("onConfigurationChanged", "show");
+            showShortToast("show");
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            showShortToast("hide");
+            Log.e("onConfigurationChanged", "hide");
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_news, menu);
         menu.findItem(R.id.action_add_news_send_fcm).setVisible(false);
@@ -452,5 +490,17 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             getImageResize(data);
         } else
             presenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onGlobalLayout() {
+        int heightDiff = edt_des.getRootView().getHeight() - edt_des.getHeight();
+        int contentViewTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
+
+        if(heightDiff <= contentViewTop){
+            showShortToast("KeyboardWillHide");
+        } else {
+            showShortToast("KeyboardWillShow");
+        }
     }
 }

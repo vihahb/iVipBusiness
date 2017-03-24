@@ -85,6 +85,7 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".view.activity.AddNewsActivity"
+            android:windowSoftInputMode="adjustResize"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:label="@string/title_activity_add_news" />
         <activity

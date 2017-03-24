@@ -1,51 +1,35 @@
 {
   "project_info": {
-    "project_number": "186392832842",
-    "firebase_url": "https://xtel-5c0c5.firebaseio.com",
-    "project_id": "xtel-5c0c5",
-    "storage_bucket": "xtel-5c0c5.appspot.com"
+    "project_number": "746445450024",
+    "firebase_url": "https://ivipu-31b5d.firebaseio.com",
+    "project_id": "ivipu-31b5d",
+    "storage_bucket": "ivipu-31b5d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:186392832842:android:0409ded1e94f67c3",
+        "mobilesdk_app_id": "1:746445450024:android:b2fffaecbe4de727",
         "android_client_info": {
-          "package_name": "com.xtel.ivipbusiness"
+          "package_name": "com.xtel.ivipu"
         }
       },
       "oauth_client": [
         {
-          "client_id": "186392832842-25ihp5r5mml37gslt23d1ehpnuv7qtvh.apps.googleusercontent.com",
+          "client_id": "746445450024-82sb89jp2bvq4cd7f98sbf6et50hea8c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.xtel.ivipbusiness",
-            "certificate_hash": "8a3ea64006dd81de35c2d81962b384130969b6f0"
+            "package_name": "com.xtel.ivipu",
+            "certificate_hash": "1df3fa3b44993f36f9c3ba1d2beccfe7d87a0fad"
           }
         },
         {
-          "client_id": "186392832842-9kltjgtcg697bntcv55d473te1sutr5n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.xtel.ivipbusiness",
-            "certificate_hash": "978195a753c1d9508fc983e1aa0f9e39495d5fed"
-          }
-        },
-        {
-          "client_id": "186392832842-g4d4nvmio760tmltf2nhm8o5g91o6q5q.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.xtel.ivipbusiness",
-            "certificate_hash": "54875b6b5aa8089dc16c333209c79eeea26c3244"
-          }
-        },
-        {
-          "client_id": "186392832842-m1ns7dthpa0bksmu89bsi6i6mmvp0pqj.apps.googleusercontent.com",
+          "client_id": "746445450024-1vcrgbmdnm4ckt3bp91fol7vo0a8gqol.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCoQJYk9eqvtcIaFNagy7O_QHp24RUKDJM"
+          "current_key": "AIzaSyC0706yEkdJZrNU-RoWIHcraupcP5kFrFU"
         }
       ],
       "services": {
@@ -56,7 +40,111 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "186392832842-m1ns7dthpa0bksmu89bsi6i6mmvp0pqj.apps.googleusercontent.com",
+              "client_id": "746445450024-1vcrgbmdnm4ckt3bp91fol7vo0a8gqol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746445450024:android:161f5a7de552f162",
+        "android_client_info": {
+          "package_name": "com.example.td.demofcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746445450024-h6sforgnc8jbs7nc0mgk7brq2584v6tg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.td.demofcm",
+            "certificate_hash": "ddd26aad9fe80c7cf33a6761d8f8288b3e5252a0"
+          }
+        },
+        {
+          "client_id": "746445450024-1vcrgbmdnm4ckt3bp91fol7vo0a8gqol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0706yEkdJZrNU-RoWIHcraupcP5kFrFU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746445450024-1vcrgbmdnm4ckt3bp91fol7vo0a8gqol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746445450024:android:0409ded1e94f67c3",
+        "android_client_info": {
+          "package_name": "com.xtel.ivipbusiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746445450024-uf98985vadg0kuhfb7r6r44ansoc5ksj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xtel.ivipbusiness",
+            "certificate_hash": "978195a753c1d9508fc983e1aa0f9e39495d5fed"
+          }
+        },
+        {
+          "client_id": "746445450024-lmor3vn9eokinm8jsfpqiikquo916j9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xtel.ivipbusiness",
+            "certificate_hash": "54875b6b5aa8089dc16c333209c79eeea26c3244"
+          }
+        },
+        {
+          "client_id": "746445450024-7lqo2tsrlgmc3gr8qscoi3vev9itjtvp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xtel.ivipbusiness",
+            "certificate_hash": "8a3ea64006dd81de35c2d81962b384130969b6f0"
+          }
+        },
+        {
+          "client_id": "746445450024-1vcrgbmdnm4ckt3bp91fol7vo0a8gqol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0706yEkdJZrNU-RoWIHcraupcP5kFrFU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746445450024-1vcrgbmdnm4ckt3bp91fol7vo0a8gqol.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

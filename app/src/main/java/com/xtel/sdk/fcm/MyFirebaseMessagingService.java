@@ -19,8 +19,6 @@ import com.xtel.ivipbusiness.view.activity.ProfileActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
 
-import java.util.Map;
-
 /**
  * Created by Lê Công Long Vũ on 1/4/2017
  */
@@ -29,6 +27,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     protected final String TAG = "MyFirebaseMsgService";
     protected final String ACTION = "action";
     protected final String CONTENT = "content";
+    protected final String BODY = "body";
 
     /**
      * Called when message is received.
@@ -44,30 +43,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.e(TAG, "Message data payload: " + remoteMessage.getData());
+            String body = JsonHelper.toJson(remoteMessage.getData());
+            Log.e(TAG, "Message data payload: " + body);
 
-            Map<String, String> body = remoteMessage.getData();
-            MessageObj messageObj = new MessageObj(Integer.parseInt(body.get(ACTION)), body.get(CONTENT));
-//            messageObj.setAction(Integer.parseInt(body.get(ACTION)));
-//            messageObj.setContent(body.get(CONTENT));
-
-            if (messageObj.getAction() != 0 && messageObj.getContent() != null)
-                checkAction(messageObj);
+            MessageObj messageObj = JsonHelper.getObject(body, MessageObj.class);
+            checkAction(messageObj);
         }
-
-        // Check if message contains a notification payload.
-//        if (remoteMessage.getNotification() != null) {
-//            String body = remoteMessage.getNotification().getBody();
-//            Log.e(TAG, "Message Notification Body: New " + System.currentTimeMillis() + "     " + body);
-//
-//            MessageObj messageObj = JsonHelper.getObject(body, MessageObj.class);
-////            MessageObj messageObj1 = getMessageObj(body);
-//            Log.e(TAG, "Message Notification Json: New "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj));
-////            Log.e(TAG, "Message Notification Json: New 2 "  + System.currentTimeMillis() + "     " + JsonHelper.toJson(messageObj1));
-//
-//            if (messageObj != null)
-//                checkAction(messageObj);
-//        }
     }
     // [END receive_message]
 
@@ -75,6 +56,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     * Kiểm tra action của notifycation để hiển thị thông báo tương ứng
     * */
     protected void checkAction(MessageObj messageObj) {
+
         switch (messageObj.getAction()) {
             case 1:
 
@@ -96,50 +78,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-    protected void sendNotification(MessageObj message) {
-        Log.e("sendNotification", JsonHelper.toJson(message));
-
-        Intent intent = new Intent(this, ProfileActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
-
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(MyApplication.context.getString(R.string.ivip_business))
-                .setContentText(message.getContent())
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-    }
-
     protected void sendNotifycationUpdate(MessageObj messageObj) {
         Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
-
-        MessageObj messageObjNone = new MessageObj(4, null);
+        MessageObj messageObjNone = new MessageObj(null, null, 4, null);
 
         Intent noReceive = new Intent(this, NotifycationManagerActivity.class);
         noReceive.putExtra(Constants.MODEL, messageObjNone);
-        PendingIntent pendingIntentNo = PendingIntent.getActivity(this, 1, noReceive, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntentNo = PendingIntent.getActivity(this, 41, noReceive, PendingIntent.FLAG_ONE_SHOT);
 
         Intent intent = new Intent(this, NotifycationManagerActivity.class);
         intent.putExtra(Constants.MODEL, messageObj);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 2, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 42, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(getString(R.string.ivip_business))
-                .setContentText(getString(R.string.ask_update_version))
+                .setContentTitle(messageObj.getTitle())
+                .setContentText(messageObj.getBody())
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)
                 .setColor(getResources().getColor(R.color.colorPrimary))
                 .addAction(R.drawable.ic_action_done, getString(R.string.cancel), pendingIntentNo)
-                .addAction(R.drawable.ic_action_done, getString(R.string.update_now), pendingIntent);
+                .addAction(R.drawable.ic_action_done, getString(R.string.update_now), pendingIntent)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageObj.getBody()));
 
         Log.e("sendNotifycationUpdate", "last " + JsonHelper.toJson(messageObj));
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -147,36 +109,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     protected void sendNotifycationDisplay(MessageObj messageObj) {
-        Log.e("sendNotifycationUpdate", JsonHelper.toJson(messageObj));
+        Log.e("sendNotifycationDisplay", JsonHelper.toJson(messageObj));
+
+        Intent intent = new Intent(this, NotifycationManagerActivity.class);
+        intent.putExtra(Constants.MODEL, messageObj);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 5, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(getString(R.string.ivip_business))
-                .setContentText(messageObj.getContent())
+                .setContentTitle(messageObj.getTitle())
+                .setContentText(messageObj.getBody())
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageObj.getContent()));
+                .setContentIntent(pendingIntent)
+                .setColor(getResources().getColor(R.color.colorPrimary))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageObj.getBody()));
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(messageObj.getAction() /* ID of notification */, notificationBuilder.build());
     }
-
-//    protected MessageObj getMessageObj(String json) {
-//        Log.e("getMessageObj", "input " + json);
-//        try {
-//            JSONObject jsonObject = new JSONObject(json);
-//            Log.e("getMessageObj", "jsonObject " + jsonObject.toString());
-//
-//            MessageObj messageObj = new MessageObj();
-//            messageObj.setAction(jsonObject.getInt("action"));
-//            messageObj.setContent(jsonObject.getString("content"));
-//
-//            return messageObj;
-//        } catch (Exception e) {
-//            Log.e("getMessageObj", "error " + e.toString());
-//        }
-//
-//        return null;
-//    }
 }

@@ -4,16 +4,16 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.MessageObj;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
 
 public class NotifycationManagerActivity extends AppCompatActivity {
+    protected final String TAG = "NotifycationMNG";
     protected final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
     protected final String MARKET = "market://details?id=";
     protected NotificationManager notificationManager;
@@ -36,6 +36,8 @@ public class NotifycationManagerActivity extends AppCompatActivity {
 
         if (messageObj != null)
             checkMessage(messageObj);
+        else
+            Log.e(TAG, "get data: null");
     }
 
     protected void cancelNotifycation(int id) {
@@ -51,11 +53,6 @@ public class NotifycationManagerActivity extends AppCompatActivity {
     protected void checkMessage(MessageObj messageObj) {
         Log.e("checkMessage", JsonHelper.toJson(messageObj));
 
-        if (messageObj.getContent() == null || messageObj.getContent().isEmpty()) {
-            cancelNotifycation(messageObj.getAction());
-            return;
-        }
-
         switch (messageObj.getAction()) {
             case 1:
 
@@ -69,15 +66,20 @@ public class NotifycationManagerActivity extends AppCompatActivity {
             case 4:
                 goToGooglePlay(messageObj);
                 break;
-//            case 5:
-//
-//                break;
+            case 5:
+                cancelNotifycation(messageObj.getAction());
+                break;
             default:
                 break;
         }
     }
 
     protected void goToGooglePlay(MessageObj messageObj) {
+        if (messageObj.getContent() == null || messageObj.getContent().isEmpty()) {
+            cancelNotifycation(messageObj.getAction());
+            return;
+        }
+
         String uri_app = GOOGLE_PLAY_URL + messageObj.getContent();
         Log.e("uri_app", uri_app);
 

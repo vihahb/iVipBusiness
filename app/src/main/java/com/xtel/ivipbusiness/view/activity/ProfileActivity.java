@@ -121,7 +121,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
         new DatePickerDialog(this, R.style.AppCompatAlertDialogStyle, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                WidgetHelper.getInstance().setEditTextDate(edt_birthday, dayOfMonth, month, year);
+                WidgetHelper.getInstance().setEditTextDate(edt_birthday, dayOfMonth, (month + 1), year);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -217,7 +217,8 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
     public void onRequestError(Error error) {
         closeProgressBar();
         menuItem.setIcon(R.drawable.ic_action_edit_line);
-        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.can_not_load_data)));
+        setEnableView(false);
+        showShortToast(JsonParse.getCodeMessage(error.getCode(), getString(R.string.error_try_again)));
     }
 
     @Override
