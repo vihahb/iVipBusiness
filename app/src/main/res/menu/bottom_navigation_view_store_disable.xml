@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav.view_store.info"
+        android:id="@+id/nav.view_store.news"
         android:checkable="true"
         android:enabled="true"
-        android:icon="@mipmap/ic_store_info"
-        android:title="@string/action_store_info" />
-    <item
-        android:id="@+id/nav.view_store.list_store"
-        android:enabled="true"
-        android:icon="@mipmap/ic_list_store_gray"
-        android:title="@string/action_stores" />
+        android:icon="@mipmap/ic_news"
+        android:title="@string/action_news" />
     <item
         android:id="@+id/nav.view_store.member"
         android:enabled="true"
         android:icon="@mipmap/ic_member"
         android:title="@string/action_member" />
     <item
-        android:id="@+id/nav.view_store.news"
-        android:enabled="true"
-        android:icon="@mipmap/ic_news"
-        android:title="@string/action_news" />
-    <item
         android:id="@+id/nav.view_store.gallery"
         android:enabled="true"
         android:icon="@mipmap/ic_gallery_white"
         android:title="@string/action_galeery" />
+    <item
+        android:id="@+id/nav.view_store.list_store"
+        android:enabled="true"
+        android:icon="@mipmap/ic_list_store_gray"
+        android:title="@string/action_stores" />
+    <item
+        android:id="@+id/nav.view_store.info"
+        android:enabled="true"
+        android:icon="@mipmap/ic_store_info"
+        android:title="@string/action_store_info" />
 </menu>

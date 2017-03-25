@@ -9,8 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,7 +70,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Hiện menu của tab thông tin cửa hàng
     private void showMenuStoreInfo() {
-        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_edi_storet != null && menu_setting != null) {
             menu_setting.setVisible(true);
             menu_edi_storet.setVisible(true);
 
@@ -83,36 +81,36 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
 
     //    Hiện menu của tab danh sách cửa hàng của chuỗi cửa hàng
     private void showMenuListNew() {
-        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
-            menu_save_point.setVisible(false);
+//            menu_save_point.setVisible(false);
             menu_setting.setVisible(false);
         }
     }
 
     //    Hiện menu của tab bản tin
     private void showMenuNews() {
-        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
-            menu_save_point.setVisible(false);
+//            menu_save_point.setVisible(false);
             menu_setting.setVisible(false);
         }
     }
 
     //    Hiện menu của tab bản tin
     private void showMenuGallery() {
-        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
-            menu_save_point.setVisible(false);
+//            menu_save_point.setVisible(false);
             menu_setting.setVisible(false);
         }
     }
 
     //    Ản toàn bộ item trong menu
     private void hideMenuItem() {
-        if (menu_save_point != null && menu_edi_storet != null && menu_setting != null) {
+        if (menu_edi_storet != null && menu_setting != null) {
             menu_edi_storet.setVisible(false);
-            menu_save_point.setVisible(false);
+//            menu_save_point.setVisible(false);
             menu_setting.setVisible(false);
         }
     }

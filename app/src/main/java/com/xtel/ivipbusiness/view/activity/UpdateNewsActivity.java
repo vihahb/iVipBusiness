@@ -328,6 +328,9 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         }
     }
 
+    /*
+    * Chọn 1 trong 3 kiểu sắp xếp text
+    * */
     protected void selectAlign(int position) {
         img_align_left.setSelected(false);
         img_align_center.setSelected(false);
@@ -341,6 +344,14 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             img_align_right.setSelected(true);
     }
 
+    /*
+    * Kiểm tra xem editor nhập mô tả có được focus
+    * Nếu chưa thì focus vào editor
+    * */
+    protected void checkFocus() {
+        if (!editor_des.isFocused())
+            editor_des.focusEditor();
+    }
 
     @Override
     public void onClick(View v) {
@@ -361,107 +372,130 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
 
             case R.id.action_undo:
-                img_undo.setSelected(!img_undo.isSelected());
                 editor_des.undo();
                 break;
             case R.id.action_redo:
-                img_redo.setSelected(!img_redo.isSelected());
                 editor_des.redo();
                 break;
             case R.id.action_bold:
+                checkFocus();
                 img_bold.setSelected(!img_bold.isSelected());
                 editor_des.setBold();
                 break;
             case R.id.action_italic:
+                checkFocus();
                 img_italic.setSelected(!img_italic.isSelected());
                 editor_des.setItalic();
                 break;
             case R.id.action_subscript:
+                checkFocus();
                 img_redo.setSelected(!img_redo.isSelected());
                 editor_des.setSubscript();
                 break;
             case R.id.action_superscript:
+                checkFocus();
                 img_superscript.setSelected(!img_superscript.isSelected());
                 editor_des.setSuperscript();
                 break;
             case R.id.action_strikethrough:
+                checkFocus();
                 img_strikethrough.setSelected(!img_strikethrough.isSelected());
                 editor_des.setStrikeThrough();
                 break;
             case R.id.action_underline:
+                checkFocus();
                 img_underline.setSelected(!img_underline.isSelected());
                 editor_des.setUnderline();
                 break;
             case R.id.action_heading1:
+                checkFocus();
                 img_heading1.setSelected(!img_heading1.isSelected());
                 editor_des.setHeading(1);
                 break;
             case R.id.action_heading2:
+                checkFocus();
                 img_heading2.setSelected(!img_heading2.isSelected());
                 editor_des.setHeading(2);
                 break;
             case R.id.action_heading3:
+                checkFocus();
                 img_heading3.setSelected(!img_heading3.isSelected());
                 editor_des.setHeading(3);
                 break;
             case R.id.action_heading4:
+                checkFocus();
                 img_heading4.setSelected(!img_heading4.isSelected());
                 editor_des.setHeading(4);
                 break;
             case R.id.action_heading5:
+                checkFocus();
                 img_heading5.setSelected(!img_heading5.isSelected());
                 editor_des.setHeading(5);
                 break;
             case R.id.action_heading6:
+                checkFocus();
                 img_heading6.setSelected(!img_heading6.isSelected());
                 editor_des.setHeading(6);
                 break;
             case R.id.action_txt_color:
+                checkFocus();
                 editor_des.setTextColor(isTxtChanged ? Color.BLACK : Color.RED);
                 isTxtChanged = !isTxtChanged;
                 img_txt_color.setSelected(isTxtChanged);
                 break;
             case R.id.action_bg_color:
+                checkFocus();
                 editor_des.setTextBackgroundColor(isBgChanged ? Color.TRANSPARENT : Color.YELLOW);
                 isBgChanged = !isBgChanged;
                 img_bg_color.setSelected(isBgChanged);
                 break;
             case R.id.action_indent:
+                checkFocus();
                 img_indent.setSelected(!img_indent.isSelected());
                 editor_des.setIndent();
                 break;
             case R.id.action_outdent:
+                checkFocus();
                 img_outdent.setSelected(!img_outdent.isSelected());
                 editor_des.setOutdent();
                 break;
             case R.id.action_align_left:
+                checkFocus();
                 selectAlign(1);
                 editor_des.setAlignLeft();
                 break;
             case R.id.action_align_center:
+                checkFocus();
                 selectAlign(2);
                 editor_des.setAlignCenter();
                 break;
             case R.id.action_align_right:
-                selectAlign(3);
+                checkFocus();
+                selectAlign(2);
                 editor_des.setAlignRight();
                 break;
             case R.id.action_blockquote:
+                checkFocus();
                 editor_des.setBlockquote();
                 break;
             case R.id.action_insert_bullets:
+                checkFocus();
                 editor_des.setBullets();
                 break;
             case R.id.action_insert_numbers:
+                checkFocus();
                 editor_des.setNumbers();
                 break;
             case R.id.action_insert_image:
+                checkFocus();
                 presenter.takePicture(2);
                 break;
             case R.id.action_insert_link:
+                checkFocus();
                 editor_des.insertLink("https://github.com/wasabeef", "wasabeef");
                 break;
             case R.id.action_insert_checkbox:
+                checkFocus();
                 editor_des.insertTodo();
                 break;
             default:
