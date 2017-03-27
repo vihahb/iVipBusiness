@@ -1,6 +1,5 @@
 package com.xtel.ivipbusiness.view.adapter;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import com.xtel.ivipbusiness.view.activity.ShowImageActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 

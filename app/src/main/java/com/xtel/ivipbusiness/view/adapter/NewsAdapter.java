@@ -1,6 +1,5 @@
 package com.xtel.ivipbusiness.view.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +16,7 @@ import com.xtel.ivipbusiness.model.entity.News;
 import com.xtel.ivipbusiness.view.activity.UpdateNewsActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -37,10 +36,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private boolean isLoadMore = true;
     private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
 
-    public NewsAdapter(Context context, INewsView view, ArrayList<News> arrayList) {
+    public NewsAdapter(INewsView view, ArrayList<News> arrayList) {
         this.arrayList = arrayList;
         this._view = view;
-        background_item = context.getResources().getIntArray(R.array.news_background);
+        background_item = new int[]{R.drawable.item_news_1, R.drawable.item_news_2, R.drawable.item_news_3, R.drawable.item_news_4, R.drawable.item_news_5,
+                R.drawable.item_news_6, R.drawable.item_news_7, R.drawable.item_news_8, R.drawable.item_news_9};
     }
 
     @Override
@@ -54,19 +54,21 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (position == arrayList.size())
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final int _position = position;
+
+        if (_position == arrayList.size())
             _view.onLoadMore();
 
         if (holder instanceof ViewHolder) {
             if (bg_pos == 9)
                 bg_pos = 0;
 
-            if (arrayList.get(position).getBg_id() == 0)
-                arrayList.get(position).setBg_id(background_item[bg_pos]);
+            if (arrayList.get(_position).getBg_id() == 0)
+                arrayList.get(_position).setBg_id(background_item[bg_pos]);
 
             ViewHolder viewHolder = (ViewHolder) holder;
-            final News news = arrayList.get(position);
+            final News news = arrayList.get(_position);
 
             if (news.is_public())
                 WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_world_white_18);
@@ -74,7 +76,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 WidgetHelper.getInstance().setTextViewDrawable(viewHolder.txt_date_create, 2, R.mipmap.ic_private_gray_18);
 
             WidgetHelper.getInstance().setImageURL(viewHolder.img_banner, news.getBanner());
-            WidgetHelper.getInstance().setViewBackgroundColor(viewHolder.img_background, news.getBg_id());
+            WidgetHelper.getInstance().setViewBackground(viewHolder.img_background, news.getBg_id());
 
             WidgetHelper.getInstance().setTextViewWithResult(viewHolder.txt_title, news.getTitle(), _view.getActivity().getString(R.string.not_update_title));
             WidgetHelper.getInstance().setTextViewDate(viewHolder.txt_date_create, _view.getActivity().getString(R.string.day_create) + ": ", (news.getCreate_time() * 1000));
@@ -92,7 +94,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         return;
                     }
 
-                    _view.deleteNews(news.getId(), position);
+                    _view.deleteNews(news.getId(), _position);
                 }
             });
 

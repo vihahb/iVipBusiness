@@ -73,7 +73,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         listData = new ArrayList<>();
-        adapter = new NewsAdapter(getContext().getApplicationContext(), this, listData);
+        adapter = new NewsAdapter(this, listData);
         progressView.setUpRecyclerView(layoutManager, adapter);
 
         progressView.onLayoutClicked(new View.OnClickListener() {
@@ -168,7 +168,7 @@ public class NewsFragment extends BasicFragment implements INewsView {
 
     @Override
     public void deleteNews(final int id,final int position) {
-        showMaterialDialog(false, false, null, getString(R.string.delete_this_news), getString(R.string.delete), getString(R.string.cancel), new DialogListener() {
+        showMaterialDialog(true, true, null, getString(R.string.delete_this_news), getString(R.string.delete), getString(R.string.cancel), new DialogListener() {
             @Override
             public void negativeClicked() {
                 closeDialog();

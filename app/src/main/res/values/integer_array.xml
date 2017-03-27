@@ -2,16 +2,17 @@
 <resources>
 
     <integer-array name="news_background">
-        <item>@color/background_1</item>
-        <item>@color/background_2</item>
-        <item>@color/background_3</item>
-        <item>@color/background_4</item>
-        <item>@color/background_5</item>
-        <item>@color/background_6</item>
-        <item>@color/background_7</item>
-        <item>@color/background_8</item>
-        <item>@color/background_9</item>
+        <item>@drawable/item_news_1</item>
+        <item>@drawable/item_news_2</item>
+        <item>@drawable/item_news_3</item>
+        <item>@drawable/item_news_4</item>
+        <item>@drawable/item_news_5</item>
+        <item>@drawable/item_news_6</item>
+        <item>@drawable/item_news_7</item>
+        <item>@drawable/item_news_8</item>
+        <item>@drawable/item_news_9</item>
     </integer-array>
+
     <integer-array name="fab_menu_item_colors">
         <item>@color/mini_red</item>
         <item>@color/mini_pink</item>

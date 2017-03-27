@@ -99,6 +99,8 @@
     <string name="doing_valid_check_voucher">Đang kiểm tra voucher…</string>
     <string name="doing_use_voucher">Sử dụng voucher…</string>
     <string name="doing_create_member_card">Đang tạo thẻ thành viên…</string>
+    <string name="input_url_web">Nhập vào địa chỉ web</string>
+    <string name="done">Xong</string>
 
     <!-- Success -->
     <string name="success_register">Đăng ký tài khoản thành công</string>

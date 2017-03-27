@@ -9,7 +9,7 @@ import com.xtel.ivipbusiness.view.fragment.inf.IStatisticView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Vulcl on 3/10/2017

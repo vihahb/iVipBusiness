@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,7 +31,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 import java.util.ArrayList;
 

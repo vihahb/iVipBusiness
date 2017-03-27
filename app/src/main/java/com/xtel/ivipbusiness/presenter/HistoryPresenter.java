@@ -1,9 +1,6 @@
 package com.xtel.ivipbusiness.presenter;
 
-import android.os.AsyncTask;
-
 import com.xtel.ivipbusiness.model.StoresModel;
-import com.xtel.ivipbusiness.model.entity.History;
 import com.xtel.ivipbusiness.model.entity.Member;
 import com.xtel.ivipbusiness.model.entity.RESP_History;
 import com.xtel.ivipbusiness.view.activity.inf.IHistoryView;
@@ -11,12 +8,7 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
-import com.xtel.sdk.utils.WidgetHelper;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Vulcl on 1/19/2017

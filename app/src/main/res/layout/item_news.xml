@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_70"
                 android:layout_gravity="bottom"
-                android:background="#B3F44437" />
+                android:background="@drawable/item_news_1" />
 
             <ImageButton
                 android:id="@+id/item.news.img_delete"

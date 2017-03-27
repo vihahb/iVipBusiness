@@ -18,11 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xtel.ivipbusiness.R;
-import com.xtel.ivipbusiness.model.entity.History;
 import com.xtel.ivipbusiness.model.entity.LevelObject;
 import com.xtel.ivipbusiness.view.activity.SettingActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 import com.xtel.sdk.utils.ViewHolderHelper;
 import com.xtel.sdk.utils.WidgetHelper;
 

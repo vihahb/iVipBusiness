@@ -32,6 +32,13 @@
         android:layout_marginRight="@dimen/size_4"
         android:layout_marginTop="@dimen/size_16" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
+        android:background="@color/line_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,18 +57,18 @@
     </LinearLayout>
 
     <!--<EditText-->
-        <!--android:id="@+id/add_news.edt_des"-->
-        <!--style="@style/edittext_des"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="@dimen/size_4"-->
-        <!--android:layout_marginRight="@dimen/size_4"-->
-        <!--android:layout_marginTop="@dimen/size_10"-->
-        <!--android:background="@drawable/edittext_des"-->
-        <!--android:inputType="textMultiLine"-->
-        <!--android:minLines="10"-->
-        <!--android:padding="@dimen/size_8"-->
-        <!--android:paddingBottom="@dimen/size_8" />-->
+    <!--android:id="@+id/add_news.edt_des"-->
+    <!--style="@style/edittext_des"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/size_4"-->
+    <!--android:layout_marginRight="@dimen/size_4"-->
+    <!--android:layout_marginTop="@dimen/size_10"-->
+    <!--android:background="@drawable/edittext_des"-->
+    <!--android:inputType="textMultiLine"-->
+    <!--android:minLines="10"-->
+    <!--android:padding="@dimen/size_8"-->
+    <!--android:paddingBottom="@dimen/size_8" />-->
 
     <CheckBox
         android:id="@+id/add_news.chk_create_news"

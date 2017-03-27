@@ -167,7 +167,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     public void onGetDataSuccess() {
         Log.e(this.getClass().getSimpleName(), "sortStore " + JsonHelper.toJson(Constants.SORT_STORE));
 
-        replaceStoreInfo();
+        replaceListNews();
         bottomNavigationView.setEnabled(true);
         if (Constants.SORT_STORE.getStore_type().equals(STORE_TYPE))
             bottomNavigationView.getMenu().findItem(R.id.nav_view_store_list_store).setEnabled(false);

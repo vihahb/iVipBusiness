@@ -36,9 +36,11 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.sdk.callback.CallbackStringListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.DialogManager;
+import com.xtel.sdk.commons.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
@@ -467,7 +469,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 break;
             case R.id.action_align_right:
                 checkFocus();
-                selectAlign(2);
+                selectAlign(3);
                 editor_des.setAlignRight();
                 break;
             case R.id.action_blockquote:
@@ -487,8 +489,18 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 presenter.takePicture(2);
                 break;
             case R.id.action_insert_link:
-                checkFocus();
-                editor_des.insertLink("https://github.com/wasabeef", "wasabeef");
+                DialogManager.getInstance().enterUrl(AddNewsActivity.this, new CallbackStringListener() {
+                    @Override
+                    public void negativeClicked(String url) {
+                        checkFocus();
+                        editor_des.insertLink(url, url);
+                    }
+
+                    @Override
+                    public void positiveClicked() {
+
+                    }
+                });
                 break;
             case R.id.action_insert_checkbox:
                 checkFocus();

@@ -255,6 +255,10 @@ public class WidgetHelper {
         view.setBackgroundColor(resource);
     }
 
+    public void setViewBackgroundDrawable(View view, int resource) {
+        view.setBackground(MyApplication.context.getResources().getDrawable(resource));
+    }
+
     public void setEditTextNoResult(EditText view, int content) {
         view.setText(String.valueOf(content));
     }

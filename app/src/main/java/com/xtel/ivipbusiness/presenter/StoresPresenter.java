@@ -7,7 +7,7 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Mr. M.2 on 1/13/2017

@@ -13,7 +13,7 @@ import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Vulcl on 3/3/2017

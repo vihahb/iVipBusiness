@@ -12,21 +12,15 @@ import android.support.annotation.NonNull;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.GalleryModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Gallery;
-import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.model.entity.RESP_Picture;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.fragment.inf.IGalleryView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
-import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.ImageManager;
-import com.xtel.sdk.utils.NetWorkInfo;
-
-import java.io.File;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Mr. M.2 on 1/13/2017

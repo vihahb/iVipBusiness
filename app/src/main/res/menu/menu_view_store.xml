@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action.view_store.setting_store"
-        android:icon="@drawable/ic_action_setting"
-        android:orderInCategory="100"
-        android:title="@string/setting_store"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/action.view_store.edit_store"
         android:icon="@drawable/ic_action_edit_line"
         android:orderInCategory="100"
         android:title="@string/edit_store"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action.view_store.setting_store"
+        android:icon="@drawable/ic_action_setting"
+        android:orderInCategory="100"
+        android:title="@string/setting_store"
         app:showAsAction="always" />
 
     <item

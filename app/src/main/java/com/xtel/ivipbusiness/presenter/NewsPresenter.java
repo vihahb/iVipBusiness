@@ -2,14 +2,13 @@ package com.xtel.ivipbusiness.presenter;
 
 import com.xtel.ivipbusiness.model.NewsModel;
 import com.xtel.ivipbusiness.model.entity.RESP_List_News;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.fragment.inf.INewsView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Vulcl on 1/21/2017

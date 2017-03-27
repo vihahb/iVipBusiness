@@ -294,6 +294,12 @@
         <item name="android:theme">@style/Theme_Edittext</item>
     </style>
 
+    <style name="Theme_Edittext_Gray" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/line_gray</item>
+        <item name="colorControlActivated">@color/line_gray</item>
+        <item name="colorControlHighlight">@color/line_gray</item>
+    </style>
+
     <style name="Theme_Edittext" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>

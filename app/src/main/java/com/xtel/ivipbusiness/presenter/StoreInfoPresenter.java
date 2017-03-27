@@ -11,9 +11,7 @@ import android.support.annotation.NonNull;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.StoresModel;
-import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.model.entity.RESP_Store;
-import com.xtel.ivipbusiness.model.entity.SortStore;
 import com.xtel.ivipbusiness.view.activity.ViewStoreActivity;
 import com.xtel.ivipbusiness.view.fragment.inf.IStoreInfoView;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -22,13 +20,9 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
-import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.ImageManager;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 import com.xtel.sdk.utils.TextUnit;
-
-import java.io.File;
 
 /**
  * Created by Vulcl on 1/21/2017

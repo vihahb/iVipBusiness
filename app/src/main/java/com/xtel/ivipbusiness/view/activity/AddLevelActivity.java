@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +16,6 @@ import android.widget.EditText;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.Card;
-import com.xtel.ivipbusiness.model.entity.RESP_Image;
 import com.xtel.ivipbusiness.presenter.AddLevelPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IAddLevelView;
 import com.xtel.ivipbusiness.view.adapter.MemberCardAdapter;
@@ -29,10 +27,8 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddLevelActivity extends BasicActivity implements IAddLevelView {

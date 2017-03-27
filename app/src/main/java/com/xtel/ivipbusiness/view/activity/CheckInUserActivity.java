@@ -19,7 +19,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 import me.dm7.barcodescanner.core.IViewFinder;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;

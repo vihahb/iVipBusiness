@@ -21,7 +21,7 @@ import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -9,9 +9,8 @@ import com.xtel.ivipbusiness.view.activity.inf.ICheckNewsView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
-import com.xtel.sdk.utils.NetWorkInfo;
+import com.xtel.sdk.commons.NetWorkInfo;
 
 /**
  * Created by Vulcl on 3/20/2017
