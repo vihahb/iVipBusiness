@@ -56,19 +56,15 @@
             android:background="@drawable/edittext_des" />
     </LinearLayout>
 
-    <!--<EditText-->
-    <!--android:id="@+id/add_news.edt_des"-->
-    <!--style="@style/edittext_des"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="@dimen/size_4"-->
-    <!--android:layout_marginRight="@dimen/size_4"-->
-    <!--android:layout_marginTop="@dimen/size_10"-->
-    <!--android:background="@drawable/edittext_des"-->
-    <!--android:inputType="textMultiLine"-->
-    <!--android:minLines="10"-->
-    <!--android:padding="@dimen/size_8"-->
-    <!--android:paddingBottom="@dimen/size_8" />-->
+    <com.xtel.ivipbusiness.view.widget.ZoomTextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
+        android:layout_marginTop="@dimen/size_16"
+        android:background="@android:color/white"
+        android:padding="@dimen/size_8" />
 
     <CheckBox
         android:id="@+id/add_news.chk_create_news"

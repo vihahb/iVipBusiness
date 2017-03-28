@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +37,7 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.sdk.callback.CallbackIntListener;
 import com.xtel.sdk.callback.CallbackStringListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
@@ -74,7 +74,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             img_heading1, img_heading2, img_heading3, img_heading4, img_heading5, img_heading6, img_txt_color, img_bg_color,
             img_indent, img_outdent, img_align_left, img_align_center, img_align_right, img_blockquote, img_insertbullet,
             img_insertnumber, img_insertimage, img_insertlink, img_insertcheckbox;
-    protected boolean isTxtChanged = false, isBgChanged = false, isEnable = false;
+    protected boolean isEnable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,6 +190,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         img_outdent.setOnClickListener(this);
         img_align_left = findImageButton(R.id.action_align_left);
         img_align_left.setOnClickListener(this);
+        img_align_left.setSelected(true);
         img_align_center = findImageButton(R.id.action_align_center);
         img_align_center.setOnClickListener(this);
         img_align_right = findImageButton(R.id.action_align_right);
@@ -214,8 +215,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
         img_camera.setEnabled(isEnable);
         txt_public.setEnabled(isEnable);
 
+        editor_des.setInputEnabled(isEnable);
         edt_title.setEnabled(isEnable);
-        editor_des.setEnabled(isEnable);
         edt_number_voucher.setEnabled(isEnable);
         edt_sale.setEnabled(isEnable);
         edt_begin_time.setEnabled(isEnable);
@@ -296,6 +297,19 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     }
 
     /*
+    * Xóa file trong bộ nhớ để tránh tạo ra nhiều ảnh
+    * */
+    protected boolean deleteImageFile(String file_path) {
+        try {
+            File file = new File(file_path);
+            return file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /*
     * Lấy ảnh đã đưuọc resize
     * */
     protected void getImageResize(Intent data) {
@@ -323,6 +337,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                         Log.e("getImageResize", "content " + content);
                     } else
                         editor_des.insertImage(server_uri, getString(R.string.ivip_business));
+
+                    deleteImageFile(server_path);
                 }
             }
         } catch (Exception e) {
@@ -331,19 +347,35 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
     }
 
     /*
-    * Chọn 1 trong 3 kiểu sắp xếp text
-    * */
+     * Chọn 1 trong 3 kiểu sắp xếp text
+     * */
     protected void selectAlign(int position) {
-        img_align_left.setSelected(false);
-        img_align_center.setSelected(false);
-        img_align_right.setSelected(false);
-
-        if (position == 1)
+        if (position == 1) {
+            img_align_center.setSelected(false);
+            img_align_right.setSelected(false);
             img_align_left.setSelected(true);
-        else if (position == 2)
+        } else if (position == 2) {
+            img_align_left.setSelected(false);
+            img_align_right.setSelected(false);
             img_align_center.setSelected(true);
-        else
+        } else {
+            img_align_left.setSelected(false);
+            img_align_center.setSelected(false);
             img_align_right.setSelected(true);
+        }
+    }
+
+    /*
+    * Chọn 1 trong 2 kiểu gạch đầu dòng
+    * */
+    protected void selectBulleted(int position) {
+        if (position == 1) {
+            img_insertnumber.setSelected(false);
+            img_insertbullet.setSelected(!img_insertbullet.isSelected());
+        } else if (position == 2) {
+            img_insertbullet.setSelected(false);
+            img_insertnumber.setSelected(!img_insertnumber.isSelected());
+        }
     }
 
     /*
@@ -355,9 +387,46 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             editor_des.focusEditor();
     }
 
+    /*
+    * Chọn màu của text
+    * */
+    protected void chooseTextColor(View view) {
+        DialogManager.getInstance().chooseColor(UpdateNewsActivity.this, view, new CallbackIntListener() {
+            @Override
+            public void negativeClicked(int resource) {
+                //noinspection deprecation
+                editor_des.setTextColor(getResources().getColor(resource));
+            }
+
+            @Override
+            public void positiveClicked() {
+
+            }
+        });
+    }
+
+    /*
+    * Chọn màu background của text
+    * */
+    protected void chooseBackgroundColor(View view) {
+        DialogManager.getInstance().chooseColor(UpdateNewsActivity.this, view, new CallbackIntListener() {
+            @Override
+            public void negativeClicked(int resource) {
+                //noinspection deprecation
+                editor_des.setTextBackgroundColor(getResources().getColor(resource));
+            }
+
+            @Override
+            public void positiveClicked() {
+
+            }
+        });
+    }
+
+
     @Override
-    public void onClick(View v) {
-        int id = v.getId();
+    public void onClick(View view) {
+        int id = view.getId();
 
         switch (id) {
             case R.id.add_news_edt_begin_time:
@@ -367,7 +436,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 selectDate(1);
                 break;
             case R.id.add_news_txt_public:
-                setPublic(v);
+                setPublic(view);
                 break;
             case R.id.add_news_img_camera:
                 presenter.takePicture(0);
@@ -391,7 +460,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
             case R.id.action_subscript:
                 checkFocus();
-                img_redo.setSelected(!img_redo.isSelected());
+                img_subscript.setSelected(!img_redo.isSelected());
                 editor_des.setSubscript();
                 break;
             case R.id.action_superscript:
@@ -441,24 +510,18 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
             case R.id.action_txt_color:
                 checkFocus();
-                editor_des.setTextColor(isTxtChanged ? Color.BLACK : Color.RED);
-                isTxtChanged = !isTxtChanged;
-                img_txt_color.setSelected(isTxtChanged);
+                chooseTextColor(view);
                 break;
             case R.id.action_bg_color:
                 checkFocus();
-                editor_des.setTextBackgroundColor(isBgChanged ? Color.TRANSPARENT : Color.YELLOW);
-                isBgChanged = !isBgChanged;
-                img_bg_color.setSelected(isBgChanged);
+                chooseBackgroundColor(view);
                 break;
             case R.id.action_indent:
                 checkFocus();
-                img_indent.setSelected(!img_indent.isSelected());
                 editor_des.setIndent();
                 break;
             case R.id.action_outdent:
                 checkFocus();
-                img_outdent.setSelected(!img_outdent.isSelected());
                 editor_des.setOutdent();
                 break;
             case R.id.action_align_left:
@@ -482,10 +545,12 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
                 break;
             case R.id.action_insert_bullets:
                 checkFocus();
+                selectBulleted(1);
                 editor_des.setBullets();
                 break;
             case R.id.action_insert_numbers:
                 checkFocus();
+                selectBulleted(2);
                 editor_des.setNumbers();
                 break;
             case R.id.action_insert_image:
@@ -728,6 +793,7 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             case R.id.action_add_news_done:
                 if (swipeRefreshLayout.isRefreshing())
                     break;
+                //noinspection deprecation
                 if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
                     menuItem.setIcon(R.drawable.ic_action_done_2);
                     setEnableView(true);

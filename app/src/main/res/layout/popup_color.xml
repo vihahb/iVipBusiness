@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_color.viewgroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size_36"
+    android:layout_marginTop="@dimen/size_50"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_2">
+
+        <View
+            android:id="@+id/popup_color.one"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_1" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.two"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_2" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.three"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_3" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.four"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_4" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.five"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/size_2"
+        android:paddingRight="@dimen/size_2">
+
+        <View
+            android:id="@+id/popup_color.six"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_6" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.seven"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_7" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.eight"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_8" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.nine"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_9" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.ten"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_2">
+
+        <View
+            android:id="@+id/popup_color.eleven"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_11" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.twelve"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_12" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.thirteen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_13" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.forteen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_14" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.fifteen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size_2"
+        android:paddingLeft="@dimen/size_2"
+        android:paddingRight="@dimen/size_2">
+
+        <View
+            android:id="@+id/popup_color.sixteen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_16" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.seventeen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_17" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.eighteen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_18" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.nineteen"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_19" />
+
+        <View
+            android:layout_width="@dimen/size_2"
+            android:layout_height="@dimen/size_36"
+            android:background="@android:color/white" />
+
+        <View
+            android:id="@+id/popup_color.twenty"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_36"
+            android:background="@color/color_20" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/popup_color.btn_positive"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_36"
+        android:layout_gravity="right|end"
+        android:layout_margin="@dimen/size_8"
+        android:background="@drawable/button_transparent"
+        android:minWidth="@dimen/size_64"
+        android:paddingLeft="@dimen/size_8"
+        android:paddingRight="@dimen/size_8"
+        android:text="@string/cancel"
+        android:textColor="#2196F3"
+        android:textSize="@dimen/font_13"
+        android:visibility="gone" />
+</LinearLayout>

@@ -45,15 +45,45 @@
     <color name="fab_orange">#f79521</color>
 
     <color name="background_1">#B3F44437</color>
-    <color name="background_1_2">#B3f9a19b</color>
+    <color name="background_1_2">#B3FCD9D7</color>
     <color name="background_2">#B3E92064</color>
+    <color name="background_2_2">#B3FAD2E0</color>
     <color name="background_3">#B39D29B0</color>
+    <color name="background_3_2">#B3EBD4EF</color>
     <color name="background_4">#B3683BB7</color>
+    <color name="background_4_2">#B3E0D7F0</color>
     <color name="background_5">#B305A9F4</color>
+    <color name="background_5_2">#B3CDEDFC</color>
     <color name="background_6">#B34DAF51</color>
+    <color name="background_6_2">#B3DBEFDC</color>
     <color name="background_7">#B3FF9902</color>
+    <color name="background_7_2">#B3FFEACC</color>
     <color name="background_8">#B3FF5824</color>
+    <color name="background_8_2">#B3FFDDD3</color>
     <color name="background_9">#B3617E8C</color>
+    <color name="background_9_2">#B3DFE5E8</color>
+
+    <color name="color_1">#E93F34</color>
+    <color name="color_2">#E9414E</color>
+    <color name="color_3">#B143AF</color>
+    <color name="color_4">#7A3CB9</color>
+    <color name="color_5">#483BB7</color>
+    <color name="color_6">#5FB94F</color>
+    <color name="color_7">#6ACC3F</color>
+    <color name="color_8">#55BDD8</color>
+    <color name="color_9">#39A2FA</color>
+    <color name="color_10">#238BF9</color>
+    <color name="color_11">#1F7E5C</color>
+    <color name="color_12">#C0E51E</color>
+    <color name="color_13">#FCF231</color>
+    <color name="color_14">#FDC702</color>
+    <color name="color_15">#EF9033</color>
+    <color name="color_16">#000001</color>
+    <color name="color_17">#FFFFFF</color>
+    <color name="color_18">#7A7A7A</color>
+    <color name="color_19">#567C8B</color>
+    <color name="color_20">#7F5344</color>
+    <color name="color_21">#C02E32</color>
 
     <!-- A light Holo shade of green -->
     <color name="holo_green_light">#ff99cc00</color>

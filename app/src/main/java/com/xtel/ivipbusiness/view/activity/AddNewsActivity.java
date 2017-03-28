@@ -5,12 +5,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,11 +36,13 @@ import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
+import com.xtel.sdk.callback.CallbackIntListener;
 import com.xtel.sdk.callback.CallbackStringListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.commons.DialogManager;
 import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.PicassoImageGetter;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
@@ -64,10 +66,11 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             img_heading1, img_heading2, img_heading3, img_heading4, img_heading5, img_heading6, img_txt_color, img_bg_color,
             img_indent, img_outdent, img_align_left, img_align_center, img_align_right, img_blockquote, img_insertbullet,
             img_insertnumber, img_insertimage, img_insertlink, img_insertcheckbox;
-    protected boolean isTxtChanged = false, isBgChanged = false;
 
     protected final int REQUEST_RESIZE_IMAGE = 8;
     protected boolean isPublic = true;
+
+    protected TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,10 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         initListener();
         initInputDescription();
         presenter.getData();
+        hideLayout();
+
+        textView = findTextView(R.id.textview);
+        textView.setMovementMethod(new LinkMovementMethod());
     }
 
     /*
@@ -100,13 +107,9 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         edt_end_time = findEditText(R.id.add_news_edt_end_time);
         edt_alive = findEditText(R.id.add_news_edt_alive_time);
         edt_point = findEditText(R.id.add_news_edt_exchange_point);
-//        edt_des = findEditText(R.id.add_news_edt_des);
 
         chk_voucher = findCheckBox(R.id.add_news_chk_create_news);
         layout_voucher = findLinearLayout(R.id.add_news_layout_voucher);
-
-//        layout_style = findView(R.id.add_news_layout_style);
-//        hideView(layout_style);
     }
 
     /*
@@ -187,14 +190,15 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     * */
     protected void initInputDescription() {
         editor_des = (RichEditor) findViewById(R.id.add_news_editor_des);
-        editor_des.setPadding(8, 0, 8, 8);
+        editor_des.setPadding(8, 8, 8, 8);
         editor_des.setEditorFontSize(13);
         editor_des.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
             @Override
             public void onTextChange(String text) {
-                Log.e("onTextChange", "content " + text);
+                Log.e("onTextChange", "text " + text);
             }
         });
+
 
         img_undo = findImageButton(R.id.action_undo);
         img_undo.setOnClickListener(this);
@@ -234,6 +238,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         img_outdent.setOnClickListener(this);
         img_align_left = findImageButton(R.id.action_align_left);
         img_align_left.setOnClickListener(this);
+        img_align_left.setSelected(true);
         img_align_center = findImageButton(R.id.action_align_center);
         img_align_center.setOnClickListener(this);
         img_align_right = findImageButton(R.id.action_align_right);
@@ -289,6 +294,19 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     /*
+    * Xóa file trong bộ nhớ để tránh tạo ra nhiều ảnh
+    * */
+    protected boolean deleteImageFile(String file_path) {
+        try {
+            File file = new File(file_path);
+            return file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /*
     * Lấy ảnh đã đưuọc resize
     * */
     protected void getImageResize(Intent data) {
@@ -316,6 +334,8 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                         Log.e("getImageResize", "content " + content);
                     } else
                         editor_des.insertImage(server_uri, getString(R.string.ivip_business));
+
+                    deleteImageFile(server_path);
                 }
             }
         } catch (Exception e) {
@@ -327,16 +347,32 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     * Chọn 1 trong 3 kiểu sắp xếp text
     * */
     protected void selectAlign(int position) {
-        img_align_left.setSelected(false);
-        img_align_center.setSelected(false);
-        img_align_right.setSelected(false);
-
-        if (position == 1)
+        if (position == 1) {
+            img_align_center.setSelected(false);
+            img_align_right.setSelected(false);
             img_align_left.setSelected(true);
-        else if (position == 2)
+        } else if (position == 2) {
+            img_align_left.setSelected(false);
+            img_align_right.setSelected(false);
             img_align_center.setSelected(true);
-        else
+        } else {
+            img_align_left.setSelected(false);
+            img_align_center.setSelected(false);
             img_align_right.setSelected(true);
+        }
+    }
+
+    /*
+    * Chọn 1 trong 2 kiểu gạch đầu dòng
+    * */
+    protected void selectBulleted(int position) {
+        if (position == 1) {
+            img_insertnumber.setSelected(false);
+            img_insertbullet.setSelected(!img_insertbullet.isSelected());
+        } else if (position == 2) {
+            img_insertbullet.setSelected(false);
+            img_insertnumber.setSelected(!img_insertnumber.isSelected());
+        }
     }
 
     /*
@@ -349,11 +385,48 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     /*
+    * Chọn màu của text
+    * */
+    protected void chooseTextColor(View view) {
+        DialogManager.getInstance().chooseColor(AddNewsActivity.this, view, new CallbackIntListener() {
+            @Override
+            public void negativeClicked(int resource) {
+                //noinspection deprecation
+                editor_des.setTextColor(getResources().getColor(resource));
+            }
+
+            @Override
+            public void positiveClicked() {
+
+            }
+        });
+    }
+
+    /*
+    * Chọn màu background của text
+    * */
+    protected void chooseBackgroundColor(View view) {
+        DialogManager.getInstance().chooseColor(AddNewsActivity.this, view, new CallbackIntListener() {
+            @Override
+            public void negativeClicked(int resource) {
+                //noinspection deprecation
+                editor_des.setTextBackgroundColor(getResources().getColor(resource));
+            }
+
+            @Override
+            public void positiveClicked() {
+
+            }
+        });
+    }
+
+
+    /*
     * Lắng nghe khi có view được click
     * */
     @Override
-    public void onClick(View v) {
-        int id = v.getId();
+    public void onClick(View view) {
+        int id = view.getId();
 
         switch (id) {
             case R.id.add_news_edt_begin_time:
@@ -363,7 +436,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 selectDate(1);
                 break;
             case R.id.add_news_txt_public:
-                setPublic(v);
+                setPublic(view);
                 break;
             case R.id.add_news_img_camera:
                 presenter.takePicture(0);
@@ -387,7 +460,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 break;
             case R.id.action_subscript:
                 checkFocus();
-                img_redo.setSelected(!img_redo.isSelected());
+                img_subscript.setSelected(!img_redo.isSelected());
                 editor_des.setSubscript();
                 break;
             case R.id.action_superscript:
@@ -408,7 +481,11 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
             case R.id.action_heading1:
                 checkFocus();
                 img_heading1.setSelected(!img_heading1.isSelected());
-                editor_des.setHeading(1);
+
+                if (img_heading1.isSelected())
+                    editor_des.setHeading(0);
+                else
+                    editor_des.setHeading(1);
                 break;
             case R.id.action_heading2:
                 checkFocus();
@@ -437,24 +514,18 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 break;
             case R.id.action_txt_color:
                 checkFocus();
-                editor_des.setTextColor(isTxtChanged ? Color.BLACK : Color.RED);
-                isTxtChanged = !isTxtChanged;
-                img_txt_color.setSelected(isTxtChanged);
+                chooseTextColor(view);
                 break;
             case R.id.action_bg_color:
                 checkFocus();
-                editor_des.setTextBackgroundColor(isBgChanged ? Color.TRANSPARENT : Color.YELLOW);
-                isBgChanged = !isBgChanged;
-                img_bg_color.setSelected(isBgChanged);
+                chooseBackgroundColor(view);
                 break;
             case R.id.action_indent:
                 checkFocus();
-                img_indent.setSelected(!img_indent.isSelected());
                 editor_des.setIndent();
                 break;
             case R.id.action_outdent:
                 checkFocus();
-                img_outdent.setSelected(!img_outdent.isSelected());
                 editor_des.setOutdent();
                 break;
             case R.id.action_align_left:
@@ -478,10 +549,12 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 break;
             case R.id.action_insert_bullets:
                 checkFocus();
+                selectBulleted(1);
                 editor_des.setBullets();
                 break;
             case R.id.action_insert_numbers:
                 checkFocus();
+                selectBulleted(2);
                 editor_des.setNumbers();
                 break;
             case R.id.action_insert_image:
@@ -679,21 +752,6 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        Log.e("onConfigurationChanged", "change 1");
-        super.onConfigurationChanged(newConfig);
-        Log.e("onConfigurationChanged", "change 2");
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Log.e("onConfigurationChanged", "show");
-            showShortToast("show");
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            showShortToast("hide");
-            Log.e("onConfigurationChanged", "hide");
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_news, menu);
         menu.findItem(R.id.action_add_news_send_fcm).setVisible(false);
@@ -709,6 +767,11 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.action_add_news_done:
+                Log.e("addNews", "body: " + editor_des.getHtml());
+
+                //noinspection deprecation
+                textView.setText(Html.fromHtml(editor_des.getHtml(), new PicassoImageGetter(textView), null));
+
                 presenter.addNews(edt_title.getText().toString(), sp_news_type.getSelectedItemPosition(), editor_des.getHtml(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
                         edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),
                         edt_sale.getText().toString(), sp_type_sale.getSelectedItemPosition());

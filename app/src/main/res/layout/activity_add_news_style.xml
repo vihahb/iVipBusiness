@@ -2,8 +2,8 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="none"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -58,7 +58,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/subscript" />
+            android:src="@drawable/subscript"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_superscript"
@@ -68,7 +69,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/superscript" />
+            android:src="@drawable/superscript"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_strikethrough"
@@ -108,7 +110,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/h2" />
+            android:src="@drawable/h2"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_heading3"
@@ -118,7 +121,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/h3" />
+            android:src="@drawable/h3"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_heading4"
@@ -128,7 +132,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/h4" />
+            android:src="@drawable/h4"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_heading5"
@@ -138,7 +143,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/h5" />
+            android:src="@drawable/h5"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_heading6"
@@ -148,7 +154,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/h6" />
+            android:src="@drawable/h6"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_txt_color"
@@ -249,7 +256,8 @@
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/blockquote" />
+            android:src="@drawable/blockquote"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/action_insert_image"
