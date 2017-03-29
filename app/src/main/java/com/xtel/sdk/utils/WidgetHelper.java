@@ -48,6 +48,7 @@ public class WidgetHelper {
                     @Override
                     public void onSuccess() {
                         Log.e("WidgetHelper", "load ok " + file.getPath());
+                        Picasso.with(MyApplication.context).invalidate(file);
                         deleteFile(file);
                     }
 
@@ -73,6 +74,7 @@ public class WidgetHelper {
                     @Override
                     public void onSuccess() {
                         Log.e("WidgetHelper", "load ok " + finalUrl);
+                        Picasso.with(MyApplication.context).invalidate(finalUrl);
                     }
 
                     @Override
@@ -96,7 +98,7 @@ public class WidgetHelper {
     }
 
     public void setImageBlurURL(final ImageView imageBlur, String url) {
-        String finalUrl = url.replace("https", "http").replace("9191", "9190");
+        final String finalUrl = url.replace("https", "http").replace("9191", "9190");
         Picasso.with(MyApplication.context)
                 .load(finalUrl)
                 .noPlaceholder()
@@ -106,9 +108,8 @@ public class WidgetHelper {
                     public void onSuccess() {
                         Log.e("setImageBlurURL", "success");
                         Bitmap bitmap = ((BitmapDrawable) imageBlur.getDrawable()).getBitmap();
-
                         Blurry.with(MyApplication.context).from(bitmap).into(imageBlur);
-
+                        Picasso.with(MyApplication.context).invalidate(finalUrl);
 //                        Bitmap blurredBitmap = BlurBuilder.blur(MyApplication.context, bitmap);
 //                        imageBlur.setImageDrawable(new BitmapDrawable(MyApplication.context.getResources(), blurredBitmap));
                     }

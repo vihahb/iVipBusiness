@@ -43,8 +43,8 @@ public class NewsFragment extends BasicFragment implements INewsView {
     protected ArrayList<News> listData;
     protected ProgressView progressView;
     protected boolean isClearData = false;
-    
-    protected final static int REQUEST_ADD_NEWS = 22;
+
+    protected final int REQUEST_ADD_NEWS = 22, REQUEST_UPDATE = 8;
 
     public static NewsFragment newInstance() {
         return new NewsFragment();
@@ -263,7 +263,12 @@ public class NewsFragment extends BasicFragment implements INewsView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_ADD_NEWS && resultCode == Activity.RESULT_OK)
-            getDataAgain();
+        if (requestCode == REQUEST_ADD_NEWS) {
+            if (resultCode == Activity.RESULT_OK)
+                getDataAgain();
+        } else if (requestCode == REQUEST_UPDATE) {
+            if (resultCode == Activity.RESULT_OK)
+                getDataAgain();
+        }
     }
 }

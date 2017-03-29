@@ -92,19 +92,23 @@ public abstract class BasicActivity extends IActivity {
     * Hiển thị tiến trình (đang thực hiện)
     * */
     protected void showProgressBar(boolean isTouchOutside, boolean isCancel, String title, String message) {
-        if (progressDialog == null)
-            progressDialog = new ProgressDialog(BasicActivity.this, R.style.AppCompatAlertDialogStyle);
-        else
-            progressDialog.dismiss();
-        progressDialog.setCanceledOnTouchOutside(isTouchOutside);
-        progressDialog.setCancelable(isCancel);
+        try {
+            if (progressDialog == null)
+                progressDialog = new ProgressDialog(BasicActivity.this, R.style.AppCompatAlertDialogStyle);
+            else
+                progressDialog.dismiss();
+            progressDialog.setCanceledOnTouchOutside(isTouchOutside);
+            progressDialog.setCancelable(isCancel);
 
-        if (title != null)
-            progressDialog.setTitle(title);
-        if (message != null)
-            progressDialog.setMessage(message);
+            if (title != null)
+                progressDialog.setTitle(title);
+            if (message != null)
+                progressDialog.setMessage(message);
 
-        progressDialog.show();
+            progressDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*

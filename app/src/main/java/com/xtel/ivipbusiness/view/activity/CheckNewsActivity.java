@@ -35,6 +35,7 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.commons.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -59,7 +60,8 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
 
     protected boolean isChecked = false;
     protected String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-    protected final int REQUEST_LOCATION = 1;
+    protected final int REQUEST_LOCATION = 1, REQUEST_UPDATE = 8;
+    protected int news_id = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +160,13 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
                 mScannerView.startCamera();
             }
         });
+
+        img_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(DetailNewsActivity.class, Constants.MODEL, news_id);
+            }
+        });
     }
 
     /*
@@ -242,6 +251,7 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
     @Override
     public void onValidCheckSuccess(RESP_Valid_Check_News obj) {
         closeProgressBar();
+        news_id = obj.getNews_id();
         isChecked = true;
         mScannerView.stopCamera();
         showOrHideNewsInfo(true);

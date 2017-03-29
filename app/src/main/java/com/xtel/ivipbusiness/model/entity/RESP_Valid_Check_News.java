@@ -21,7 +21,7 @@ public class RESP_Valid_Check_News extends RESP_Basic {
     @Expose
     private String banner;
     @Expose
-    private String news_id;
+    private Integer news_id;
 
     public Long getCreate_time() {
         return create_time;
@@ -71,11 +71,11 @@ public class RESP_Valid_Check_News extends RESP_Basic {
         this.banner = banner;
     }
 
-    public String getNews_id() {
+    public Integer getNews_id() {
         return news_id;
     }
 
-    public void setNews_id(String news_id) {
+    public void setNews_id(Integer news_id) {
         this.news_id = news_id;
     }
 }

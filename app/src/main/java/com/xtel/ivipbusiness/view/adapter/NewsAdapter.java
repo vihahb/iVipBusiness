@@ -1,6 +1,7 @@
 package com.xtel.ivipbusiness.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int[] background_item;
 
     private boolean isLoadMore = true;
-    private final int TYPE_VIEW = 1, TYPE_LOAD = 2;
+    private final int TYPE_VIEW = 1, TYPE_LOAD = 2, REQUEST_UPDATE = 8;
 
     public NewsAdapter(INewsView view, ArrayList<News> arrayList) {
         this.arrayList = arrayList;
@@ -106,7 +107,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         return;
                     }
 
-                    _view.startActivity(UpdateNewsActivity.class, Constants.MODEL, news);
+                    Intent intent = new Intent(_view.getActivity(), UpdateNewsActivity.class);
+                    intent.putExtra(Constants.MODEL, news);
+                    _view.getActivity().startActivityForResult(intent, REQUEST_UPDATE);
                 }
             });
         } else {

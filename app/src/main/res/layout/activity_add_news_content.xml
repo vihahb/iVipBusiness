@@ -25,6 +25,7 @@
         android:text="@string/news_des" />
 
     <include
+        android:id="@+id/add_news.layout_style"
         layout="@layout/activity_add_news_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -694,11 +694,13 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             @Override
             public void negativeClicked() {
                 closeDialog();
+                setResult(RESULT_OK);
             }
 
             @Override
             public void positiveClicked() {
                 closeDialog();
+                setResult(RESULT_OK);
             }
         });
     }
