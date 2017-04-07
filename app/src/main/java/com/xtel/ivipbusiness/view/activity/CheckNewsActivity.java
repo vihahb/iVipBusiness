@@ -26,7 +26,7 @@ import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Valid_Check_News;
 import com.xtel.ivipbusiness.presenter.CheckNewsPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ICheckNewsView;
-import com.xtel.ivipbusiness.view.widget.CustomViewFinderView;
+import com.xtel.ivipbusiness.view.adapter.CustomViewFinderView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -36,7 +36,7 @@ import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import me.dm7.barcodescanner.core.IViewFinder;
@@ -47,7 +47,7 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
     protected CheckNewsPresenter presenter;
 
     protected GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
+    protected LocationRequest mLocationRequest;
 
     protected ZXingScannerView mScannerView;
     protected ViewGroup contentFrame;
@@ -57,10 +57,12 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
     protected Button btn_use_voucher;
     protected ImageView img_banner;
     protected ImageButton img_valid_again;
+//    , img_valid_status;
 
     protected boolean isChecked = false;
     protected String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-    protected final int REQUEST_LOCATION = 1, REQUEST_UPDATE = 8;
+    protected final int REQUEST_LOCATION = 1;
+//    , REQUEST_UPDATE = 8;
     protected int news_id = -1;
 
     @Override
@@ -79,6 +81,15 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
         initListenLocation();
     }
 
+    protected void createLocationRequest() {
+        if (mLocationRequest == null) {
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(10000);
+            mLocationRequest.setFastestInterval(5000);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        }
+    }
+
     protected void initListenLocation() {
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
@@ -87,15 +98,6 @@ public class CheckNewsActivity extends BasicActivity implements ZXingScannerView
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
-        }
-    }
-
-    protected void createLocationRequest() {
-        if (mLocationRequest == null) {
-            mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(10000);
-            mLocationRequest.setFastestInterval(5000);
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         }
     }
 

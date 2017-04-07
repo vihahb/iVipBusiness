@@ -41,8 +41,8 @@ import com.xtel.sdk.callback.CallbackIntListener;
 import com.xtel.sdk.callback.CallbackStringListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.DialogManager;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.DialogManager;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;

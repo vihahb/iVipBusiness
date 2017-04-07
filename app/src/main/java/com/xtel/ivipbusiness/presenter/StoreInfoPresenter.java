@@ -21,7 +21,7 @@ import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.TextUnit;
 
 /**

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xtel.ivipbusiness.R;
+import com.xtel.sdk.utils.RecyclerOnScrollListener;
 
 /**
  * Created by Lê Công Long Vũ on 11/1/2016

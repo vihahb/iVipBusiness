@@ -20,7 +20,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 /**
  * Created by Mr. M.2 on 1/13/2017

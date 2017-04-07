@@ -11,7 +11,7 @@ import com.google.zxing.Result;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.presenter.CheckInUserPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.ICheckInUserView;
-import com.xtel.ivipbusiness.view.widget.CustomViewFinderView;
+import com.xtel.ivipbusiness.view.adapter.CustomViewFinderView;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
@@ -19,7 +19,7 @@ import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import me.dm7.barcodescanner.core.IViewFinder;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;

@@ -30,7 +30,7 @@ import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import java.util.ArrayList;
 

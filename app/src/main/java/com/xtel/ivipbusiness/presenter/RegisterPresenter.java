@@ -10,7 +10,7 @@ import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.activity.inf.IRegisterView;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.TextUnit;
 
 /**

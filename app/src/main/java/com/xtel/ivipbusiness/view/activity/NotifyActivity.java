@@ -18,7 +18,7 @@ import com.xtel.ivipbusiness.presenter.NotifyPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.INotifyView;
 import com.xtel.ivipbusiness.view.adapter.NotifyAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.ivipbusiness.view.widget.RecyclerOnScrollListener;
+import com.xtel.sdk.utils.RecyclerOnScrollListener;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;

@@ -2,16 +2,13 @@ package com.xtel.ivipbusiness.presenter;
 
 import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.xtel.ivipbusiness.model.NotifyModel;
 import com.xtel.ivipbusiness.model.UserModel;
 import com.xtel.ivipbusiness.model.entity.RESP_Full_Profile;
-import com.xtel.ivipbusiness.model.entity.RESP_Short_Profile;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.callback.ResponseHandle;
 import com.xtel.nipservicesdk.model.entity.Error;
-import com.xtel.nipservicesdk.model.entity.RESP_Basic;
 import com.xtel.nipservicesdk.model.entity.RESP_None;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.SharedPreferencesUtils;
@@ -24,7 +21,8 @@ public class HomePresenter {
     private IHomeView view;
 
     //    Business
-    protected final String IS_REGISTER_FCM = "is_register_fcm";
+    private final String IS_REGISTER_FCM = "is_register_fcm";
+    private boolean isExista = true;
 
     private ICmd iCmd = new ICmd() {
         @Override
@@ -36,8 +34,10 @@ public class HomePresenter {
                     UserModel.getInstance().getFulllUserInfo(new ResponseHandle<RESP_Full_Profile>(RESP_Full_Profile.class) {
                         @Override
                         public void onSuccess(RESP_Full_Profile obj) {
-                            UserModel.getInstance().saveFullUserInfo(obj);
-                            view.onGetShortUserDataSuccess(obj);
+                            if (isExista) {
+                                UserModel.getInstance().saveFullUserInfo(obj);
+                                view.onGetShortUserDataSuccess(obj);
+                            }
                         }
 
                         @Override
@@ -47,10 +47,12 @@ public class HomePresenter {
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd, 1);
-                            else
-                                view.onGetUserDataError();
+                            if (isExista) {
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd, 1);
+                                else
+                                    view.onGetUserDataError();
+                            }
                         }
                     });
                 } else if (type == 2) {
@@ -58,21 +60,25 @@ public class HomePresenter {
                         @Override
                         public void onSuccess(RESP_None obj) {
                             Log.e("registerFCM", "ok");
-                            SharedPreferencesUtils.getInstance().putBooleanValue(IS_REGISTER_FCM, true);
+                            if (isExista)
+                                SharedPreferencesUtils.getInstance().putBooleanValue(IS_REGISTER_FCM, true);
                         }
 
                         @Override
                         public void onSuccess() {
                             Log.e("registerFCM", "ok");
-                            SharedPreferencesUtils.getInstance().putBooleanValue(IS_REGISTER_FCM, true);
+                            if (isExista)
+                                SharedPreferencesUtils.getInstance().putBooleanValue(IS_REGISTER_FCM, true);
                         }
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd, 2);
-                            else
-                                view.onRegisterFcmError();
+                            if (isExista) {
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd, 2);
+                                else
+                                    view.onRegisterFcmError();
+                            }
                         }
                     });
                 }
@@ -98,5 +104,9 @@ public class HomePresenter {
         view.onGetShortUserDataSuccess(resp_full_profile);
 
         iCmd.execute(1);
+    }
+
+    public void setExista(boolean isExista) {
+        this.isExista = isExista;
     }
 }

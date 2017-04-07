@@ -15,7 +15,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.view.MyApplication;
-import com.xtel.ivipbusiness.view.widget.CircleTransform;
 
 import java.io.File;
 import java.util.Calendar;
@@ -462,15 +461,12 @@ public class WidgetHelper {
     }
 
     public void setTextViewDate(TextView view, String title, Long milliseconds) {
-        if (milliseconds == null) {
+        if (milliseconds == null || milliseconds == 0) {
             view.setText((title + MyApplication.context.getString(R.string.updating)));
             return;
         }
 
-        if (milliseconds == 0)
-            view.setText((title + MyApplication.context.getString(R.string.updating)));
-        else
-            view.setText((title + getDate(milliseconds)));
+        view.setText((title + getDate(milliseconds)));
     }
 
     public void setTextViewTime(TextView view, String content, Long milliseconds) {

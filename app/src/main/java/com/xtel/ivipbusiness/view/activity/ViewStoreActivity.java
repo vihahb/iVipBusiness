@@ -35,7 +35,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     private MenuItem menu_save_point, menu_setting, menu_edi_storet;
 
     private RESP_Store resp_store = null;
-    private final int REQUEST_RESIZE_IMAGE = 8, REQUEST_ADD_STORE = 11, REQUEST_ADD_NEWS = 22, REQUEST_ADD_GALLERY = 33, REQUEST_CAMERA = 99;
+    private final int REQUEST_RESIZE_IMAGE = 8, REQUEST_ADD_STORE = 11, REQUEST_ADD_NEWS = 22, REQUEST_ADD_GALLERY = 33, REQUEST_CAMERA = 99, REQUEST_UPDATE = 8;
     private final String STORE_TYPE = "STORE";
     private final String STORE_INFO = "store_info", LIST_STORE = "list_store", LIST_MENBER = "list_member", LIST_NEWS = "list_news", GALLERY = "gallery";
 
@@ -199,14 +199,9 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_view_store, menu);
-
         menu_save_point = menu.findItem(R.id.action_view_store_save_point);
         menu_setting = menu.findItem(R.id.action_view_store_setting_store);
         menu_edi_storet = menu.findItem(R.id.action_view_store_edit_store);
-
-        menu_save_point.setVisible(true);
-        menu_edi_storet.setVisible(true);
-
         return true;
     }
 
@@ -292,7 +287,7 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             StoresFragment fragment = (StoresFragment) getSupportFragmentManager().findFragmentByTag(LIST_STORE);
             if (fragment != null)
                 fragment.onActivityResult(requestCode, resultCode, data);
-        } else if (requestCode == REQUEST_ADD_NEWS) {
+        } else if (requestCode == REQUEST_ADD_NEWS || requestCode == REQUEST_UPDATE) {
             NewsFragment fragment = (NewsFragment) getSupportFragmentManager().findFragmentByTag(LIST_NEWS);
             if (fragment != null)
                 fragment.onActivityResult(requestCode, resultCode, data);

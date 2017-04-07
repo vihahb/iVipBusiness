@@ -25,14 +25,13 @@ import com.xtel.ivipbusiness.presenter.HomePresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IHomeView;
 import com.xtel.ivipbusiness.view.fragment.ChainsFragment;
 import com.xtel.ivipbusiness.view.fragment.StatisticFragment;
-import com.xtel.ivipbusiness.view.widget.CircleTransform;
+import com.xtel.sdk.utils.CircleTransform;
 import com.xtel.nipservicesdk.CallbackManager;
 import com.xtel.nipservicesdk.callback.CallbacListener;
 import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
-import com.xtel.sdk.commons.Constants;
 
 /**
  * Created by Lê Công Long Vũ on 12/2/2016
@@ -227,6 +226,12 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     @Override
     public Activity getActivity() {
         return this;
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.setExista(false);
+        super.onDestroy();
     }
 
     @Override

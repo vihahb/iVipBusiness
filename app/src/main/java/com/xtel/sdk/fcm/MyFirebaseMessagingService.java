@@ -13,9 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.MessageObj;
-import com.xtel.ivipbusiness.view.MyApplication;
 import com.xtel.ivipbusiness.view.activity.NotifycationManagerActivity;
-import com.xtel.ivipbusiness.view.activity.ProfileActivity;
 import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.sdk.commons.Constants;
 
@@ -25,9 +23,6 @@ import com.xtel.sdk.commons.Constants;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     protected final String TAG = "MyFirebaseMsgService";
-    protected final String ACTION = "action";
-    protected final String CONTENT = "content";
-    protected final String BODY = "body";
 
     /**
      * Called when message is received.
@@ -43,6 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
+            Log.e(TAG, "Message data: " + remoteMessage.getData());
             String body = JsonHelper.toJson(remoteMessage.getData());
             Log.e(TAG, "Message data payload: " + body);
 

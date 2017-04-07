@@ -40,8 +40,8 @@ import com.xtel.sdk.callback.CallbackIntListener;
 import com.xtel.sdk.callback.CallbackStringListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.DialogManager;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.DialogManager;
+import com.xtel.sdk.utils.NetWorkInfo;
 import com.xtel.sdk.utils.PicassoImageGetter;
 import com.xtel.sdk.utils.WidgetHelper;
 
@@ -70,7 +70,7 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
     protected final int REQUEST_RESIZE_IMAGE = 8;
     protected boolean isPublic = true;
 
-    protected TextView textView;
+//    protected TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +88,8 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
         presenter.getData();
         hideLayout();
 
-        textView = findTextView(R.id.textview);
-        textView.setMovementMethod(new LinkMovementMethod());
+//        textView = findTextView(R.id.textview);
+//        textView.setMovementMethod(new LinkMovementMethod());
     }
 
     /*
@@ -767,10 +767,10 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.action_add_news_done:
-                Log.e("addNews", "body: " + editor_des.getHtml());
+//                Log.e("addNews", "body: " + editor_des.getHtml());
 
                 //noinspection deprecation
-                textView.setText(Html.fromHtml(editor_des.getHtml(), new PicassoImageGetter(textView), null));
+//                textView.setText(Html.fromHtml(editor_des.getHtml(), new PicassoImageGetter(textView), null));
 
                 presenter.addNews(edt_title.getText().toString(), sp_news_type.getSelectedItemPosition(), editor_des.getHtml(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
                         edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),

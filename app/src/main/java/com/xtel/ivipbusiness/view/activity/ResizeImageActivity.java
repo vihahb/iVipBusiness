@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.entity.RESP_Image;
@@ -22,7 +21,7 @@ import com.xtel.nipservicesdk.utils.JsonHelper;
 import com.xtel.nipservicesdk.utils.JsonParse;
 import com.xtel.sdk.callback.CallbackImageListener;
 import com.xtel.sdk.commons.Constants;
-import com.xtel.sdk.commons.NetWorkInfo;
+import com.xtel.sdk.utils.NetWorkInfo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -126,6 +125,8 @@ public class ResizeImageActivity extends BasicActivity {
                     showShortToast(getString(R.string.error_no_internet));
                     break;
                 }
+
+                showProgressBar(false, false, null, getString(R.string.uploading_file));
                 new TakePicture().execute(cropImageView.getCroppedImage());
                 break;
             default:
@@ -139,15 +140,6 @@ public class ResizeImageActivity extends BasicActivity {
     * Resize image và up lên server
     * */
     protected class TakePicture extends AsyncTask<Bitmap, Integer, File> {
-
-        /*
-        * Hiển thị progress thông báo đang up ảnh
-        * */
-        @Override
-        protected void onPreExecute() {
-//            super.onPreExecute();
-            showProgressBar(false, false, null, getString(R.string.uploading_file));
-        }
 
         /*
         * Bắt đầu resize ảnh và up lên server
@@ -213,15 +205,6 @@ public class ResizeImageActivity extends BasicActivity {
                 showShortToast(getString(R.string.error_resize_image));
             }
         }
-
-//        Bitmap getBitmap() {
-//            if (type == 0) {
-//                return getBigBitmap();
-//            } else if (type == 1) {
-//                return getSmallBitmap();
-//            } else
-//                return null;
-//        }
 
         /*
         * Resize ảnh nhỏ

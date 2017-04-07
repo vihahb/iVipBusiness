@@ -174,7 +174,7 @@ public class AddNewsPresenter extends BasicPresenter {
         else
             resp_news.setStore_id(Constants.SORT_STORE.getId());
 
-        resp_news.setNews_type((news_type + 1));
+        resp_news.setNews_type((news_type + 2));
         resp_news.setBanner(PATH_BANNER);
         resp_news.setDescription(des);
         resp_news.setTitle(title);
@@ -187,7 +187,7 @@ public class AddNewsPresenter extends BasicPresenter {
             voucher.setTime_alive(((long) (Integer.parseInt(time_alive) * 60)));
             voucher.setNumber_of_voucher(Integer.parseInt(number));
             voucher.setSales(Double.parseDouble(sale));
-            voucher.setSales_type((sale_type + 1));
+            voucher.setSales_type((sale_type + 2));
             voucher.setPoint(Integer.parseInt(point));
 
             resp_news.setVoucher(voucher);
