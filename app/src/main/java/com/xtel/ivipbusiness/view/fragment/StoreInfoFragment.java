@@ -42,12 +42,17 @@ import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
 import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.PermissionHelper;
+import com.xtel.sdk.callback.CallbackIntListener;
+import com.xtel.sdk.callback.CallbackStringListener;
 import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.DialogManager;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
 import java.util.Calendar;
+
+import jp.wasabeef.richeditor.RichEditor;
 
 /**
  * Created by Vulcl on 1/16/2017
@@ -58,13 +63,19 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
     protected ImageView img_banner, img_logo, img_qr_code, img_bar_code;
     protected ImageButton img_camera, img_location;
-    protected EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone, edt_des;
+    protected EditText edt_begin_time, edt_end_time, edt_name, edt_address, edt_phone;
+
+    protected RichEditor editor_des;
+    protected ImageButton img_undo, img_redo, img_bold, img_italic, img_subscript, img_superscript, img_strikethrough, img_underline,
+            img_heading1, img_heading2, img_heading3, img_heading4, img_heading5, img_heading6, img_txt_color, img_bg_color,
+            img_indent, img_outdent, img_align_left, img_align_center, img_align_right, img_blockquote, img_insertbullet,
+            img_insertnumber, img_insertimage, img_insertlink, img_insertcheckbox;
 
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected CallbackManager callbackManager;
 
     protected RESP_Store resp_store;
-    protected final int REQUEST_LOCATION = 99, REQUEST_RESIZE_IMAGE = 8;
+    protected final int REQUEST_LOCATION = 99, REQUEST_RESIZE_IMAGE = 9;
 
     public static StoreInfoFragment newInstance() {
         return new StoreInfoFragment();
@@ -85,6 +96,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         initSwwipe();
         initView();
         initListener();
+        initInputDescription(view);
         setEnableView(false);
 //        initAnimationHideImage(view);
         presenter.getData();
@@ -111,7 +123,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         edt_name = findEditText(R.id.store_info_edt_fullname);
         edt_address = findEditText(R.id.store_info_edt_address);
         edt_phone = findEditText(R.id.store_info_edt_phone);
-        edt_des = findEditText(R.id.store_info_edt_des);
+//        edt_des = findEditText(R.id.store_info_edt_des);
     }
 
     protected void initListener() {
@@ -125,23 +137,95 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         img_location.setOnClickListener(this);
     }
 
+    /*
+    * Khởi tạo view nhập vào miêu tả
+    * */
+    protected void initInputDescription(View view) {
+        editor_des = (RichEditor) view.findViewById(R.id.add_news_editor_des);
+        editor_des.setPadding(8, 8, 8, 8);
+        editor_des.setEditorFontSize(13);
+        editor_des.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
+            @Override
+            public void onTextChange(String text) {
+                Log.e("onTextChange", "text " + text);
+            }
+        });
+
+
+        img_undo = findImageButton(R.id.action_undo);
+        img_undo.setOnClickListener(this);
+        img_redo = findImageButton(R.id.action_redo);
+        img_redo.setOnClickListener(this);
+        img_bold = findImageButton(R.id.action_bold);
+        img_bold.setOnClickListener(this);
+        img_italic = findImageButton(R.id.action_italic);
+        img_italic.setOnClickListener(this);
+        img_subscript = findImageButton(R.id.action_subscript);
+        img_subscript.setOnClickListener(this);
+        img_superscript = findImageButton(R.id.action_superscript);
+        img_superscript.setOnClickListener(this);
+        img_strikethrough = findImageButton(R.id.action_strikethrough);
+        img_strikethrough.setOnClickListener(this);
+        img_underline = findImageButton(R.id.action_underline);
+        img_underline.setOnClickListener(this);
+        img_heading1 = findImageButton(R.id.action_heading1);
+        img_heading1.setOnClickListener(this);
+        img_heading2 = findImageButton(R.id.action_heading2);
+        img_heading2.setOnClickListener(this);
+        img_heading3 = findImageButton(R.id.action_heading3);
+        img_heading3.setOnClickListener(this);
+        img_heading4 = findImageButton(R.id.action_heading4);
+        img_heading4.setOnClickListener(this);
+        img_heading5 = findImageButton(R.id.action_heading5);
+        img_heading5.setOnClickListener(this);
+        img_heading6 = findImageButton(R.id.action_heading6);
+        img_heading6.setOnClickListener(this);
+        img_txt_color = findImageButton(R.id.action_txt_color);
+        img_txt_color.setOnClickListener(this);
+        img_bg_color = findImageButton(R.id.action_bg_color);
+        img_bg_color.setOnClickListener(this);
+        img_indent = findImageButton(R.id.action_indent);
+        img_indent.setOnClickListener(this);
+        img_outdent = findImageButton(R.id.action_outdent);
+        img_outdent.setOnClickListener(this);
+        img_align_left = findImageButton(R.id.action_align_left);
+        img_align_left.setOnClickListener(this);
+        img_align_left.setSelected(true);
+        img_align_center = findImageButton(R.id.action_align_center);
+        img_align_center.setOnClickListener(this);
+        img_align_right = findImageButton(R.id.action_align_right);
+        img_align_right.setOnClickListener(this);
+        img_blockquote = findImageButton(R.id.action_blockquote);
+        img_blockquote.setOnClickListener(this);
+        img_insertbullet = findImageButton(R.id.action_insert_bullets);
+        img_insertbullet.setOnClickListener(this);
+        img_insertnumber = findImageButton(R.id.action_insert_numbers);
+        img_insertnumber.setOnClickListener(this);
+        img_insertimage = findImageButton(R.id.action_insert_image);
+        img_insertimage.setOnClickListener(this);
+        img_insertlink = findImageButton(R.id.action_insert_link);
+        img_insertlink.setOnClickListener(this);
+        img_insertcheckbox = findImageButton(R.id.action_insert_checkbox);
+        img_insertcheckbox.setOnClickListener(this);
+    }
+
     public void setEnableView(boolean isEnable) {
         edt_begin_time.setEnabled(isEnable);
         edt_end_time.setEnabled(isEnable);
         edt_name.setEnabled(isEnable);
         edt_address.setEnabled(isEnable);
         edt_phone.setEnabled(isEnable);
-        edt_des.setEnabled(isEnable);
+        editor_des.setInputEnabled(isEnable);
 
         img_camera.setEnabled(isEnable);
         img_location.setEnabled(isEnable);
         img_banner.setEnabled(isEnable);
         img_logo.setEnabled(isEnable);
 
-        if (isEnable)
-            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des));
-        else
-            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
+//        if (isEnable)
+//            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des));
+//        else
+//            edt_des.setBackground(getActivity().getResources().getDrawable(R.drawable.edittext_des_disable));
     }
 
 //    protected void initAnimationHideImage(View view) {
@@ -281,7 +365,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     public void updateStore() {
         resp_store.setName(edt_name.getText().toString());
         resp_store.setPhonenumber(edt_phone.getText().toString());
-        resp_store.setDescription(edt_des.getText().toString());
+        resp_store.setDescription(editor_des.getHtml());
 
         presenter.updateStore(resp_store);
     }
@@ -314,15 +398,122 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
             Log.e("getImageResize", "server_path " + server_path);
 
             if (type != -1 && server_path != null && file.exists()) {
-                presenter.getImageResise(server_path, server_uri, type);
-                onLoadPicture(file, type);
+                if (type != 2) {
+                    presenter.getImageResise(server_path, server_uri, type);
+                    onLoadPicture(file, type);
+                } else {
+                    server_uri = server_uri.replace("https", "http").replace("9191", "9190");
+                    Log.e("getImageResize", "uri " + server_uri);
+                    if (!editor_des.isFocused()) {
+                        String content;
+                        if (editor_des.getHtml() == null)
+                            content = "";
+                        else
+                            content = editor_des.getHtml();
+                        content += "<img src=\"" + server_uri + "\" alt=\"" + getString(R.string.ivip_business) + "\">";
+                        editor_des.setHtml(content);
+                        Log.e("getImageResize", "content " + content);
+                    } else
+                        editor_des.insertImage(server_uri, getString(R.string.ivip_business));
+
+                    deleteImageFile(server_path);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("getImageResize", "error " + e.getMessage());
         }
     }
 
+    /*
+    * Xóa file trong bộ nhớ để tránh tạo ra nhiều ảnh
+    * */
+    protected boolean deleteImageFile(String file_path) {
+        try {
+            File file = new File(file_path);
+            return file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    /*
+    * Kiểm tra xem editor nhập mô tả có được focus
+    * Nếu chưa thì focus vào editor
+    * */
+    protected void checkFocus() {
+        if (!editor_des.isFocused())
+            editor_des.focusEditor();
+    }
+
+    /*
+    * Chọn màu của text
+    * */
+    protected void chooseTextColor(View view) {
+        DialogManager.getInstance().chooseColor(getActivity(), view, new CallbackIntListener() {
+            @Override
+            public void negativeClicked(int resource) {
+                //noinspection deprecation
+                editor_des.setTextColor(getResources().getColor(resource));
+            }
+
+            @Override
+            public void positiveClicked() {
+
+            }
+        });
+    }
+
+    /*
+    * Chọn màu background của text
+    * */
+    protected void chooseBackgroundColor(View view) {
+        DialogManager.getInstance().chooseColor(getActivity(), view, new CallbackIntListener() {
+            @Override
+            public void negativeClicked(int resource) {
+                //noinspection deprecation
+                editor_des.setTextBackgroundColor(getResources().getColor(resource));
+            }
+
+            @Override
+            public void positiveClicked() {
+
+            }
+        });
+    }
+
+    /*
+     * Chọn 1 trong 3 kiểu sắp xếp text
+     * */
+    protected void selectAlign(int position) {
+        if (position == 1) {
+            img_align_center.setSelected(false);
+            img_align_right.setSelected(false);
+            img_align_left.setSelected(true);
+        } else if (position == 2) {
+            img_align_left.setSelected(false);
+            img_align_right.setSelected(false);
+            img_align_center.setSelected(true);
+        } else {
+            img_align_left.setSelected(false);
+            img_align_center.setSelected(false);
+            img_align_right.setSelected(true);
+        }
+    }
+
+    /*
+    * Chọn 1 trong 2 kiểu gạch đầu dòng
+    * */
+    protected void selectBulleted(int position) {
+        if (position == 1) {
+            img_insertnumber.setSelected(false);
+            img_insertbullet.setSelected(!img_insertbullet.isSelected());
+        } else if (position == 2) {
+            img_insertbullet.setSelected(false);
+            img_insertnumber.setSelected(!img_insertnumber.isSelected());
+        }
+    }
 
 
 
@@ -362,7 +553,9 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         WidgetHelper.getInstance().setEditTextNoResult(edt_name, resp_store.getName());
         WidgetHelper.getInstance().setEditTextNoResult(edt_address, resp_store.getAddress());
         WidgetHelper.getInstance().setEditTextNoResult(edt_phone, resp_store.getPhonenumber());
-        WidgetHelper.getInstance().setEditTextNoResult(edt_des, resp_store.getDescription());
+
+        editor_des.setHtml(resp_store.getDescription());
+//        WidgetHelper.getInstance().setEditTextNoResult(edt_des, resp_store.getDescription());
 
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
@@ -510,8 +703,8 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
-        int id = v.getId();
+    public void onClick(View view) {
+        int id = view.getId();
 
         if (id == R.id.store_info_img_qrCode)
             showQrCode();
@@ -536,6 +729,146 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
 
                 startActivityForResult(ChooseMapsActivity.class, Constants.MODEL, placeModel, REQUEST_LOCATION);
             }
+        }
+
+        switch (id) {
+
+            case R.id.action_undo:
+                editor_des.undo();
+                break;
+            case R.id.action_redo:
+                editor_des.redo();
+                break;
+            case R.id.action_bold:
+                checkFocus();
+                img_bold.setSelected(!img_bold.isSelected());
+                editor_des.setBold();
+                break;
+            case R.id.action_italic:
+                checkFocus();
+                img_italic.setSelected(!img_italic.isSelected());
+                editor_des.setItalic();
+                break;
+            case R.id.action_subscript:
+                checkFocus();
+                img_subscript.setSelected(!img_redo.isSelected());
+                editor_des.setSubscript();
+                break;
+            case R.id.action_superscript:
+                checkFocus();
+                img_superscript.setSelected(!img_superscript.isSelected());
+                editor_des.setSuperscript();
+                break;
+            case R.id.action_strikethrough:
+                checkFocus();
+                img_strikethrough.setSelected(!img_strikethrough.isSelected());
+                editor_des.setStrikeThrough();
+                break;
+            case R.id.action_underline:
+                checkFocus();
+                img_underline.setSelected(!img_underline.isSelected());
+                editor_des.setUnderline();
+                break;
+            case R.id.action_heading1:
+                checkFocus();
+                img_heading1.setSelected(!img_heading1.isSelected());
+                editor_des.setHeading(1);
+                break;
+            case R.id.action_heading2:
+                checkFocus();
+                img_heading2.setSelected(!img_heading2.isSelected());
+                editor_des.setHeading(2);
+                break;
+            case R.id.action_heading3:
+                checkFocus();
+                img_heading3.setSelected(!img_heading3.isSelected());
+                editor_des.setHeading(3);
+                break;
+            case R.id.action_heading4:
+                checkFocus();
+                img_heading4.setSelected(!img_heading4.isSelected());
+                editor_des.setHeading(4);
+                break;
+            case R.id.action_heading5:
+                checkFocus();
+                img_heading5.setSelected(!img_heading5.isSelected());
+                editor_des.setHeading(5);
+                break;
+            case R.id.action_heading6:
+                checkFocus();
+                img_heading6.setSelected(!img_heading6.isSelected());
+                editor_des.setHeading(6);
+                break;
+            case R.id.action_txt_color:
+                checkFocus();
+                chooseTextColor(view);
+                break;
+            case R.id.action_bg_color:
+                checkFocus();
+                chooseBackgroundColor(view);
+                break;
+            case R.id.action_indent:
+                checkFocus();
+                editor_des.setIndent();
+                break;
+            case R.id.action_outdent:
+                checkFocus();
+                editor_des.setOutdent();
+                break;
+            case R.id.action_align_left:
+                checkFocus();
+                selectAlign(1);
+                editor_des.setAlignLeft();
+                break;
+            case R.id.action_align_center:
+                checkFocus();
+                selectAlign(2);
+                editor_des.setAlignCenter();
+                break;
+            case R.id.action_align_right:
+                checkFocus();
+                selectAlign(3);
+                editor_des.setAlignRight();
+                break;
+            case R.id.action_blockquote:
+                checkFocus();
+                editor_des.setBlockquote();
+                break;
+            case R.id.action_insert_bullets:
+                checkFocus();
+                selectBulleted(1);
+                editor_des.setBullets();
+                break;
+            case R.id.action_insert_numbers:
+                checkFocus();
+                selectBulleted(2);
+                editor_des.setNumbers();
+                break;
+            case R.id.action_insert_image:
+                checkFocus();
+                presenter.takePicture(2);
+                break;
+            case R.id.action_insert_link:
+                DialogManager.getInstance().enterUrl(getContext(), new CallbackStringListener() {
+                    @Override
+                    public void negativeClicked(String url) {
+                        checkFocus();
+                        editor_des.insertLink(url, url);
+                    }
+
+                    @Override
+                    public void positiveClicked() {
+
+                    }
+                });
+                break;
+            case R.id.action_insert_checkbox:
+                checkFocus();
+                editor_des.insertTodo();
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -569,6 +902,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         debug(requestCode + "   " + resultCode);
+        debug("ù á ó ào ồi " + requestCode + "   " + resultCode);
 
         if (requestCode == REQUEST_LOCATION && resultCode == Activity.RESULT_OK) {
             if (data != null) {
@@ -576,6 +910,7 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
                 setAddress(placeModel);
             }
         } else if (requestCode == REQUEST_RESIZE_IMAGE && resultCode == Activity.RESULT_OK) {
+            debug("ù á ó ạy ồi " + requestCode + "   " + resultCode);
             getImageResize(data);
         }  else
             presenter.onActivityResult(requestCode, resultCode, data);

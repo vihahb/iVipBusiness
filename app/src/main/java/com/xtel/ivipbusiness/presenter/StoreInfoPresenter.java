@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.xtel.ivipbusiness.R;
 import com.xtel.ivipbusiness.model.StoresModel;
@@ -188,19 +189,13 @@ public class StoreInfoPresenter {
             return;
         }
 
-        if (resp_store.getBanner().isEmpty()) {
-            view.onValidateError(view.getActivity().getString(R.string.error_input_banner));
-            return;
-        } else if (resp_store.getLogo().isEmpty()) {
-            view.onValidateError(view.getActivity().getString(R.string.error_input_logo));
-            return;
-        } else if (!TextUnit.getInstance().validateText(resp_store.getName())) {
+        if (TextUtils.isEmpty(resp_store.getName())) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_store_name));
             return;
         } else if (resp_store.getAddress() == null) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_address));
             return;
-        } else if (!TextUnit.getInstance().validatePhone(resp_store.getPhonenumber())) {
+        } else if (TextUtils.isEmpty(resp_store.getPhonenumber())) {
             view.onValidateError(view.getActivity().getString(R.string.error_input_phone));
             return;
         }

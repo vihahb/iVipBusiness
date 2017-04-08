@@ -97,17 +97,36 @@
         android:paddingStart="-2dp"
         android:text="@string/store_des" />
 
-    <EditText
-        android:id="@+id/add_store.edt_des"
-        style="@style/edittext_des"
+    <include
+        android:id="@+id/add_news.layout_style"
+        layout="@layout/activity_add_news_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_4"
         android:layout_marginRight="@dimen/size_4"
-        android:layout_marginTop="@dimen/size_8"
-        android:background="@drawable/edittext_des"
-        android:inputType="textMultiLine|textCapSentences"
-        android:minLines="6"
-        android:padding="@dimen/size_8"
-        android:paddingBottom="@dimen/size_8" />
+        android:layout_marginTop="@dimen/size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
+        android:background="@color/line_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_4"
+        android:layout_marginRight="@dimen/size_4"
+        android:background="@android:color/transparent"
+        android:minHeight="@dimen/size_150"
+        android:orientation="vertical">
+
+        <jp.wasabeef.richeditor.RichEditor
+            android:id="@+id/add_news.editor_des"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_des" />
+    </LinearLayout>
 </LinearLayout>

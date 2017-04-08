@@ -9,8 +9,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +40,6 @@ import com.xtel.sdk.callback.DialogListener;
 import com.xtel.sdk.commons.Constants;
 import com.xtel.sdk.utils.DialogManager;
 import com.xtel.sdk.utils.NetWorkInfo;
-import com.xtel.sdk.utils.PicassoImageGetter;
 import com.xtel.sdk.utils.WidgetHelper;
 
 import java.io.File;
@@ -767,11 +764,6 @@ public class AddNewsActivity extends BasicActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.action_add_news_done:
-//                Log.e("addNews", "body: " + editor_des.getHtml());
-
-                //noinspection deprecation
-//                textView.setText(Html.fromHtml(editor_des.getHtml(), new PicassoImageGetter(textView), null));
-
                 presenter.addNews(edt_title.getText().toString(), sp_news_type.getSelectedItemPosition(), editor_des.getHtml(), isPublic, chk_voucher.isChecked(), edt_begin_time.getText().toString(),
                         edt_end_time.getText().toString(), edt_alive.getText().toString(), edt_point.getText().toString(), edt_number_voucher.getText().toString(),
                         edt_sale.getText().toString(), sp_type_sale.getSelectedItemPosition());
