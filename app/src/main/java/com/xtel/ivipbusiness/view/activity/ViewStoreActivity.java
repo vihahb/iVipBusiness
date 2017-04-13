@@ -216,11 +216,14 @@ public class ViewStoreActivity extends BasicActivity implements BottomNavigation
             StoreInfoFragment fragment = (StoreInfoFragment) getSupportFragmentManager().findFragmentByTag(STORE_INFO);
 
             if (fragment != null) {
-                if (menu_edi_storet.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                //noinspection ConstantConditions
+//                if (menu_edi_storet.getIcon().getConstantState().equals(getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                    debug("chay vào đây mà");
                     fragment.enableToEdit();
-                } else {
-                    fragment.updateStore();
-                }
+//                } else {
+//                    debug("chay vào update");
+//                    fragment.updateStore();
+//                }
             }
         } else if (id == R.id.action_view_store_save_point) {
             if (PermissionHelper.checkOnlyPermission(Manifest.permission.CAMERA, this, REQUEST_CAMERA))

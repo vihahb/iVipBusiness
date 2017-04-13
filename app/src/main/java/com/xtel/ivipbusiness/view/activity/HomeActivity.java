@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -271,19 +272,24 @@ public class HomeActivity extends BasicActivity implements NavigationView.OnNavi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
-        if (id == R.id.nav_home_store) {
-            replaceListStore();
-        } else if (id == R.id.nav_home_statistic) {
-            replaceStatistic();
-        } else if (id == R.id.nav_home_policy) {
-            replacePolicy();
-        } else if (id == R.id.nav_home_app_info) {
-            replaceAppInfo();
-        } else if (id == R.id.nav_home_faq) {
-            replaceFaq();
-        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (id == R.id.nav_home_store) {
+                    replaceListStore();
+                } else if (id == R.id.nav_home_statistic) {
+                    replaceStatistic();
+                } else if (id == R.id.nav_home_policy) {
+                    replacePolicy();
+                } else if (id == R.id.nav_home_app_info) {
+                    replaceAppInfo();
+                } else if (id == R.id.nav_home_faq) {
+                    replaceFaq();
+                }
+            }
+        }, 500);
 
         drawer.closeDrawer(GravityCompat.START);
         return true;

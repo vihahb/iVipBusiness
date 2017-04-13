@@ -301,6 +301,11 @@ public class StatisticFragment extends BasicFragment implements View.OnClickList
         return this;
     }
 
+    @Override
+    public void onDestroy() {
+        presenter.setExists(false);
+        super.onDestroy();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

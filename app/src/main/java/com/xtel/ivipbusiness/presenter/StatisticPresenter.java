@@ -21,6 +21,8 @@ public class StatisticPresenter {
     private final String TYPE = "ALL";
     private int PAGE = 1;
 
+    private boolean isExists = true;
+
     protected ICmd iCmd = new ICmd() {
         @Override
         public void execute(final Object... params) {
@@ -32,8 +34,10 @@ public class StatisticPresenter {
                         StoresModel.getInstance().getListChains(TYPE, PAGE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
                             @Override
                             public void onSuccess(RESP_List_Sort_Store obj) {
-                                PAGE++;
-                                view.onGetStoresSuccess(obj.getData());
+                                if (isExists) {
+                                    PAGE++;
+                                    view.onGetStoresSuccess(obj.getData());
+                                }
                             }
 
                             @Override
@@ -43,10 +47,12 @@ public class StatisticPresenter {
 
                             @Override
                             public void onError(Error error) {
-                                if (error.getCode() == 2)
-                                    view.getNewSession(iCmd, params);
-                                else
-                                    view.onRequestError(error);
+                                if (isExists) {
+                                    if (error.getCode() == 2)
+                                        view.getNewSession(iCmd, params);
+                                    else
+                                        view.onRequestError(error);
+                                }
                             }
                         });
                         break;
@@ -54,7 +60,9 @@ public class StatisticPresenter {
                         StatisticModel.getInstance().getStatistic((SortStore) params[1], (int) params[2], (int) params[3], new ResponseHandle<RESP_Statistic>(RESP_Statistic.class) {
                             @Override
                             public void onSuccess(RESP_Statistic obj) {
-                                view.onGetStatistic((int) params[2], obj.getData());
+                                if (isExists) {
+                                    view.onGetStatistic((int) params[2], obj.getData());
+                                }
                             }
 
                             @Override
@@ -64,10 +72,12 @@ public class StatisticPresenter {
 
                             @Override
                             public void onError(Error error) {
-                                if (error.getCode() == 2)
-                                    view.getNewSession(iCmd, params);
-                                else
-                                    view.onRequestError(error);
+                                if (isExists) {
+                                    if (error.getCode() == 2)
+                                        view.getNewSession(iCmd, params);
+                                    else
+                                        view.onRequestError(error);
+                                }
                             }
                         });
                         break;
@@ -97,5 +107,9 @@ public class StatisticPresenter {
             iCmd.execute(2, sortStore, 2, day);
             iCmd.execute(2, sortStore, 3, day);
         }
+    }
+
+    public void setExists(boolean isExists) {
+        this.isExists = isExists;
     }
 }

@@ -120,6 +120,7 @@
     <string name="success_save_point_addition">đã được cộng</string>
     <string name="success_save_point_point">điểm</string>
     <string name="success_use_voucher">Voucher đã được sử dụng</string>
+    <string name="success_add_list_store">Thêm cửa hàng vào chuỗi cửa hàng thành công</string>
 
     <!-- Error -->
     <string name="have_error">Có lỗi xảy ra</string>
@@ -194,6 +195,8 @@
     <string name="error_voucher_code_is_end_time">Mã voucher đã hết thời gian sử dụng</string>
     <string name="error_no_power_to_use_voucher">Bạn không có quyền hạn sử dụng voucher này</string>
     <string name="error_get_location">Không thể lấy vị trí hiện tại</string>
+
+    <string name="error_add_list_store">Thêm cửa hàng vào chuỗi cửa hàng thất bại</string>
 
     <!-- Layout -->
     <string name="login_by_phone">Đăng nhập bằng số điện thoại</string>

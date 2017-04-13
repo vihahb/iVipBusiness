@@ -95,7 +95,6 @@ public class ActivePresenter extends BasicPresenter {
     * */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ACCOUNT_KIT_REQUEST_CODE) { // confirm that this response matches your request
-            debug("mịa nó chạy rồi mà");
             AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
             if (loginResult.getError() != null) {
                 debug(loginResult.getError().getErrorType().getMessage());
@@ -103,10 +102,9 @@ public class ActivePresenter extends BasicPresenter {
             } else if (loginResult.wasCancelled()) {
                 debug("Login Cancelled");
             } else {
-                debug("vao chưa");
                 if (loginResult.getAccessToken() == null) {
                     String authorization_code = loginResult.getAuthorizationCode();
-                    Log.e("Authorization Id: ", authorization_code);
+//                    Log.e("Authorization Id: ", authorization_code);
 
                     view.onValidatePhoneToActiveSuccess(authorization_code);
                 }

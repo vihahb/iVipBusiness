@@ -2,7 +2,7 @@ package com.xtel.ivipbusiness.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
@@ -15,14 +15,21 @@ import com.xtel.ivipbusiness.presenter.ListStoresPresenter;
 import com.xtel.ivipbusiness.view.activity.inf.IListStoreView;
 import com.xtel.ivipbusiness.view.adapter.ListStoreAdapter;
 import com.xtel.ivipbusiness.view.widget.ProgressView;
-import com.xtel.sdk.utils.RecyclerOnScrollListener;
+import com.xtel.nipservicesdk.CallbackManager;
+import com.xtel.nipservicesdk.callback.CallbacListener;
+import com.xtel.nipservicesdk.callback.ICmd;
 import com.xtel.nipservicesdk.model.entity.Error;
+import com.xtel.nipservicesdk.model.entity.RESP_Login;
 import com.xtel.nipservicesdk.utils.JsonParse;
+import com.xtel.sdk.callback.DialogListener;
+import com.xtel.sdk.commons.Constants;
+import com.xtel.sdk.utils.RecyclerOnScrollListener;
 
 import java.util.ArrayList;
 
 public class ListStoresActivity extends BasicActivity implements IListStoreView {
     private ListStoresPresenter presenter;
+    private CallbackManager callbackManager;
 
     private ProgressView progressView;
     private ArrayList<SortStore> listData;
@@ -33,10 +40,28 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_stores);
+        callbackManager = CallbackManager.create(this);
 
         presenter = new ListStoresPresenter(this);
         initToolbar(R.id.list_store_toolbar, null);
-        initProgressView();
+        getData();
+    }
+
+    protected void getData() {
+        if (Constants.SORT_STORE == null) {
+            showMaterialDialog(false, false, null, getString(R.string.have_error), null, getString(R.string.back), new DialogListener() {
+                @Override
+                public void negativeClicked() {
+
+                }
+
+                @Override
+                public void positiveClicked() {
+                    finish();
+                }
+            });
+        } else
+            initProgressView();
     }
 
     //    Khởi tạo layout và recyclerview
@@ -54,7 +79,7 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
             public void onClick(View v) {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getListStores();
+                presenter.getListStores(true);
             }
         });
 
@@ -66,7 +91,7 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
                 adapter.notifyDataSetChanged();
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getListStores();
+                presenter.getListStores(true);
             }
         });
 
@@ -75,7 +100,7 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
             public void run() {
                 progressView.setRefreshing(true);
                 progressView.showData();
-                presenter.getListStores();
+                presenter.getListStores(true);
             }
         });
 
@@ -98,16 +123,13 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
         });
     }
 
-//    Kiểm tra xem danh sách cửa hàng có trống không
+    //    Kiểm tra xem danh sách cửa hàng có trống không
     private void checkListData() {
         progressView.setRefreshing(false);
 
         if (listData.size() > 0) {
-            if (listData.size() < 20)
-                adapter.setLoadMore(false);
-
-            adapter.notifyDataSetChanged();
             progressView.showData();
+            adapter.notifyDataSetChanged();
         } else {
             progressView.initData(-1, getString(R.string.no_stores), getString(R.string.click_to_try_again));
             progressView.hideData();
@@ -116,24 +138,22 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
 
     @Override
     public void onLoadMore() {
-        presenter.getListStores();
+        presenter.getListStores(false);
     }
 
     @Override
     public void onGetListStoresSuccess(final ArrayList<SortStore> arrayList) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (isClearData) {
-                    listData.clear();
-                    adapter.setLoadMore(true);
-                    isClearData = false;
-                }
-                listData.addAll(arrayList);
+        if (isClearData) {
+            listData.clear();
+            adapter.setLoadMore(true);
+            isClearData = false;
+        }
 
-                checkListData();
-            }
-        }, 1000);
+        if (arrayList.size() < 10)
+            adapter.setLoadMore(false);
+
+        listData.addAll(arrayList);
+        checkListData();
     }
 
     @Override
@@ -150,6 +170,55 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
             if (isClearData)
                 isClearData = false;
         }
+    }
+
+    @Override
+    public void onChooseSuccess() {
+        showMaterialDialog(false, false, null, getString(R.string.success_add_list_store), null, getString(R.string.ok), new DialogListener() {
+            @Override
+            public void negativeClicked() {
+
+            }
+
+            @Override
+            public void positiveClicked() {
+                closeDialog();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void onChooseError() {
+        showMaterialDialog(false, false, null, getString(R.string.error_add_list_store), null, getString(R.string.back), new DialogListener() {
+            @Override
+            public void negativeClicked() {
+
+            }
+
+            @Override
+            public void positiveClicked() {
+                closeDialog();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void getNewSession(final ICmd iCmd) {
+        callbackManager.getNewSesion(new CallbacListener() {
+            @Override
+            public void onSuccess(RESP_Login success) {
+                iCmd.execute();
+            }
+
+            @Override
+            public void onError(Error error) {
+                showShortToast(getString(R.string.error_end_of_session));
+                getActivity().finishAffinity();
+                startActivity(LoginActivity.class);
+            }
+        });
     }
 
     @Override
@@ -183,5 +252,11 @@ public class ListStoresActivity extends BasicActivity implements IListStoreView 
         else if (id == R.id.action_list_store_done)
             presenter.chooseList(listData);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        callbackManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

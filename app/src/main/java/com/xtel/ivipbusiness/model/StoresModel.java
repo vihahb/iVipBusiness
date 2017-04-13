@@ -65,26 +65,12 @@ public class StoresModel extends BasicModel {
         requestServer.postApi(url, null, session, responseHandle);
     }
 
-    public void getListStoreNotInChain(ResponseHandle responseHandle) {
-        RESP_List_Sort_Store resp_list_sort_store = new RESP_List_Sort_Store();
+    public void getListStoreNotInChain(String type, int page, ResponseHandle responseHandle) {
+        String url = API_BASE + GET_LIST_CHAIN_TYPE + type + GET_LIST_CHAIN_PAGE + page + GET_LIST_CHAIN_PAGE_SIZE;
+        String session = LoginManager.getCurrentSession();
 
-        ArrayList<SortStore> arrayList = new ArrayList<>();
-        for (int i = 1; i <= 21; i++) {
-            SortStore stores = new SortStore();
-            stores.setId(i);
-            stores.setBanner("http://cuonghungthinh.com/imagesup/banner%20coffee.png");
-            stores.setLogo("https://www.merryallcenter.org/wp-content/uploads/2016/04/cup-150x150.png");
-            stores.setName("Store " + i);
-            stores.setStore_type("STYPE");
-            stores.setAddress("Toa nha Phuong Nga, ngo 84 Tran Thai Tong, Ha Noi");
-            stores.setBg_id(0);
-            stores.setDate_create(1456765200000L);
-
-            arrayList.add(stores);
-        }
-
-        resp_list_sort_store.setData(arrayList);
-        responseHandle.onSuccess(JsonHelper.toJson(resp_list_sort_store));
+        Log.e("GET_LIST_CHAIN", "url " + url + "     session " + session);
+        requestServer.getApi(url, session, responseHandle);
     }
 
     public void getStoreSetting(int id, String type, ResponseHandle responseHandle) {

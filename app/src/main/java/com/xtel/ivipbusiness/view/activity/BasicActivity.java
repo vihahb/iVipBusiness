@@ -188,6 +188,15 @@ public abstract class BasicActivity extends IActivity {
     * */
     protected void replaceFragment(int id, Fragment fragment, String tag) {
         if (getSupportFragmentManager().findFragmentByTag(tag) == null) {
+
+            //  Xóa bỏ fragment cũ
+            try {
+                if (getFragmentManager().getBackStackEntryCount() > 0)
+                    getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(id)).commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(id, fragment, tag);
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

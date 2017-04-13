@@ -795,8 +795,8 @@ public class UpdateNewsActivity extends BasicActivity implements View.OnClickLis
             case R.id.action_add_news_done:
                 if (swipeRefreshLayout.isRefreshing())
                     break;
-                //noinspection deprecation
-                if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                //noinspection deprecation,ConstantConditions
+                if (!edt_title.isEnabled()) {
                     menuItem.setIcon(R.drawable.ic_action_done_2);
                     setEnableView(true);
                 } else {

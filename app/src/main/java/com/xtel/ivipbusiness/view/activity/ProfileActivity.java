@@ -326,7 +326,7 @@ public class ProfileActivity extends BasicActivity implements View.OnClickListen
             case R.id.action_profile_edit:
                 if (swipeRefreshLayout.isRefreshing())
                     break;
-                if (menuItem.getIcon().getConstantState() == (getResources().getDrawable(R.drawable.ic_action_edit_line).getConstantState())) {
+                if (!edt_fullname.isEnabled()) {
                     menuItem.setIcon(R.drawable.ic_action_done_2);
                     setEnableView(true);
                 } else {

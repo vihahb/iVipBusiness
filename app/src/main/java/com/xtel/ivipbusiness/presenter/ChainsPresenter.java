@@ -18,6 +18,8 @@ public class ChainsPresenter extends BasicPresenter {
     private final String TYPE = "ALL";
     private int PAGE = 1;
 
+    private boolean isExists = true;
+
     private ICmd iCmd = new ICmd() {
         @Override
         public void execute(Object... params) {
@@ -26,8 +28,10 @@ public class ChainsPresenter extends BasicPresenter {
                     StoresModel.getInstance().getListChains(TYPE, PAGE, new ResponseHandle<RESP_List_Sort_Store>(RESP_List_Sort_Store.class) {
                         @Override
                         public void onSuccess(RESP_List_Sort_Store obj) {
-                            PAGE++;
-                            view.onGetStoresSuccess(obj.getData());
+                            if (isExists) {
+                                PAGE++;
+                                view.onGetStoresSuccess(obj.getData());
+                            }
                         }
 
                         @Override
@@ -37,10 +41,12 @@ public class ChainsPresenter extends BasicPresenter {
 
                         @Override
                         public void onError(Error error) {
-                            if (error.getCode() == 2)
-                                view.getNewSession(iCmd);
-                            else
-                                view.onGetStoresError(error);
+                            if (isExists) {
+                                if (error.getCode() == 2)
+                                    view.getNewSession(iCmd);
+                                else
+                                    view.onGetStoresError(error);
+                            }
                         }
                     });
             }
@@ -61,5 +67,9 @@ public class ChainsPresenter extends BasicPresenter {
             PAGE = 1;
 
         iCmd.execute(1);
+    }
+
+    public void setExists(boolean isExists) {
+        this.isExists = isExists;
     }
 }

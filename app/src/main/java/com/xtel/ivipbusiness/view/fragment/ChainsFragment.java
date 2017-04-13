@@ -227,6 +227,12 @@ public class ChainsFragment extends BasicFragment implements IChainsView {
     }
 
     @Override
+    public void onDestroy() {
+        presenter.setExists(false);
+        super.onDestroy();
+    }
+
+    @Override
     public void startActivityForResult(Class clazz, String key, Object object, int requestCode) {
         super.startActivityForResult(clazz, key, object, requestCode);
     }

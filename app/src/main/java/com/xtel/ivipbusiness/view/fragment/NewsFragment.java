@@ -249,8 +249,8 @@ public class NewsFragment extends BasicFragment implements INewsView {
 
     @Override
     public void onDestroy() {
+        presenter.setExists(false);
         super.onDestroy();
-        presenter.setExists(true);
     }
 
     @Override

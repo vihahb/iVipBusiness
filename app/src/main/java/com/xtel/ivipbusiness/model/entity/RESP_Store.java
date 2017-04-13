@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class RESP_Store extends RESP_Basic implements Serializable {
     @Expose
-    private int id;
+    private Integer id;
     @Expose
     private Integer chain_store_id;
     @Expose
@@ -23,15 +23,15 @@ public class RESP_Store extends RESP_Basic implements Serializable {
     @Expose
     private String store_type;
     @Expose
-    private long create_time;
+    private Long create_time;
     @Expose
-    private int news_number;
+    private Integer news_number;
     @Expose
     private String address;
     @Expose
-    private double location_lat;
+    private Double location_lat;
     @Expose
-    private double location_lng;
+    private Double location_lng;
     @Expose
     private String phonenumber;
     @Expose
@@ -45,7 +45,7 @@ public class RESP_Store extends RESP_Basic implements Serializable {
     @Expose
     private Long end_time;
     @Expose
-    private int type;
+    private Integer type;
 
     public int getId() {
         return id;

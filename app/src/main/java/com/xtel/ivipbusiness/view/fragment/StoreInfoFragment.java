@@ -382,8 +382,12 @@ public class StoreInfoFragment extends BasicFragment implements View.OnClickList
         if (swipeRefreshLayout.isRefreshing())
             return;
 
-        setEnableView(true);
-        ((ViewStoreActivity) getActivity()).changeMenuIcon(R.drawable.ic_action_done_2);
+        if (!edt_name.isEnabled()) {
+            setEnableView(true);
+            ((ViewStoreActivity) getActivity()).changeMenuIcon(R.drawable.ic_action_done_2);
+        } else {
+            updateStore();
+        }
     }
 
     protected void getImageResize(Intent data) {
