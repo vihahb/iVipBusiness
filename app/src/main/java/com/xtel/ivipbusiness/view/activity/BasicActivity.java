@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -187,20 +188,14 @@ public abstract class BasicActivity extends IActivity {
     * Khởi tạo fragment vào 1 view layout (FrameLayout)
     * */
     protected void replaceFragment(int id, Fragment fragment, String tag) {
-        if (getSupportFragmentManager().findFragmentByTag(tag) == null) {
+        FragmentManager manager = getSupportFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(tag, 0);
 
-            //  Xóa bỏ fragment cũ
-            try {
-                if (getFragmentManager().getBackStackEntryCount() > 0)
-                    getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(id)).commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(id, fragment, tag);
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            fragmentTransaction.commit();
+        if (!fragmentPopped) { //fragment not in back stack, create it.
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(id, fragment, tag);
+            ft.addToBackStack(null);
+            ft.commit();
         }
     }
 
